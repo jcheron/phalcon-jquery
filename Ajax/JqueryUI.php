@@ -23,10 +23,32 @@ require_once 'components/Autocomplete.php';
 class JqueryUI{
 	protected $libraryFiles;
 	protected $_di;
+	protected $autoCompile;
+	protected $components;
 	/**
 	 * @var JsUtils
 	 */
 	protected $js;
+	public function __construct($autoCompile=true){
+		$this->autoCompile=$autoCompile;
+		$this->components=array();
+	}
+
+	public function isAutoCompile() {
+		return $this->autoCompile;
+	}
+
+	public function setAutoCompile($autoCompile) {
+		$this->autoCompile = $autoCompile;
+		return $this;
+	}
+
+	public function compile($internal=false){
+		if($internal===false && $this->autoCompile===true)
+			throw new \Exception("Impossible to compile if autoCompile is set to 'true'");
+		foreach ($this->components as $component)
+			$component->compile();
+	}
 
 	public function getLibraryScripts(){
 
@@ -49,13 +71,17 @@ class JqueryUI{
 		$this->_di=$js->getDi();
 	}
 
+	protected function addComponent($component){
+		if($this->autoCompile)
+			$this->components[]=$component;
+		return $component;
+	}
 	/**
 	 * Retourne un composant Dialog
 	 * @return \Ajax\Components\Dialog
 	 */
 	public function dialog(){
-		$result=new Dialog($this->js);
-		return $result;
+		return $this->addComponent(new Dialog($this->js));
 	}
 
 	/**
@@ -63,8 +89,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Accordion
 	 */
 	public function accordion(){
-		$result=new \Accordion($this->js);
-		return $result;
+		return $this->addComponent(new \Accordion($this->js));
 	}
 
 	/**
@@ -72,8 +97,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Menu
 	 */
 	public function menu(){
-		$result=new \Menu($this->js);
-		return $result;
+		return $this->addComponent(new \Menu($this->js));
 	}
 
 	/**
@@ -81,8 +105,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Progressbar
 	 */
 	public function progressbar(){
-		$result=new \Progressbar($this->js);
-		return $result;
+		return $this->addComponent(new \Progressbar($this->js));
 	}
 
 	/**
@@ -90,8 +113,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Selectmenu
 	 */
 	public function selectmenu(){
-		$result=new \Selectmenu($this->js);
-		return $result;
+		return $this->addComponent(new \Selectmenu($this->js));
 	}
 
 	/**
@@ -99,8 +121,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Slider
 	 */
 	public function slider(){
-		$result=new \Slider($this->js);
-		return $result;
+		return $this->addComponent(new \Slider($this->js));
 	}
 
 	/**
@@ -108,8 +129,7 @@ class JqueryUI{
 	 * @return \Ajax\Components\Spinner
 	 */
 	public function spinner(){
-		$result=new \Spinner($this->js);
-		return $result;
+		return $this->addComponent(new \Spinner($this->js));
 	}
 
 	/**
@@ -117,7 +137,6 @@ class JqueryUI{
 	 * @return \Ajax\Components\Autocomplete
 	 */
 	public function autocomplete(){
-		$result=new \Autocomplete($this->js);
-		return $result;
+		return $this->addComponent(new \Autocomplete($this->js));
 	}
 }

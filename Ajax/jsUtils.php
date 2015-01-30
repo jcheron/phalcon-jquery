@@ -15,12 +15,19 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	var $_javascript_location = 'js';
 	protected $_di;
 	protected $js;
+
+	/**
+	 * @var JqueryUI
+	 */
 	protected $_ui;
 
 	public function ui($ui=NULL){
 		if($ui!==NULL){
 			$this->_ui=$ui;
-			$this->_ui->setJs($this);
+			if($this->js!=null){
+				$this->js->ui($ui);
+				$ui->setJs($this);
+			}
 		}
 		return $this->_ui;
 	}

@@ -30,6 +30,7 @@ class Jquery extends JsUtils{
 	public function __construct($params=array()){
 
 	}
+
 	public function getLibraryScript(){
 		$assets=$this->_di->get('assets');
 		$assets->addJs($this->libraryFile);
@@ -934,6 +935,13 @@ class Jquery extends JsUtils{
 	 */
 	function _compile($view=NULL, $view_var = 'script_foot', $script_tags = TRUE)
 	{
+		//Components UI
+		$ui=$this->ui();
+		if($this->ui()!=NULL){
+			if($ui->isAutoCompile()){
+				$ui->compile(true);
+			}
+		}
 		// External references
 		$external_scripts = implode('', $this->jquery_code_for_load);
 		extract(array('library_src' => $external_scripts));
