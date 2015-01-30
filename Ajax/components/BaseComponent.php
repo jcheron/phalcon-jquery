@@ -16,7 +16,9 @@ class BaseComponent{
 		$this->js=$js;
 	}
 	protected function getParamsAsJSON($params){
-		return json_encode($params,JSON_UNESCAPED_SLASHES);
+		$result= json_encode($params,JSON_UNESCAPED_SLASHES);
+		$result=str_ireplace("%quote%", "\"", $result);
+		return $result;
 	}
 
 	public function setParam($key,$value){

@@ -9,6 +9,7 @@ require_once 'components/Progressbar.php';
 require_once 'components/Selectmenu.php';
 require_once 'components/Slider.php';
 require_once 'components/Spinner.php';
+require_once 'components/Autocomplete.php';
 /**
  * JQuery Phalcon library
  *
@@ -108,6 +109,15 @@ class JqueryUI{
 	 */
 	public function spinner(){
 		$result=new \Spinner($this->js);
+		return $result;
+	}
+
+	/**
+	 * Retourne un composant Autocomplete
+	 * @return \Ajax\Components\Autocomplete
+	 */
+	public function autocomplete(){
+		$result=new \Autocomplete($this->js);
 		return $result;
 	}
 }

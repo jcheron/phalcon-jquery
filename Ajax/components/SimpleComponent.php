@@ -15,8 +15,9 @@ class SimpleComponent extends BaseComponent {
 		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
-		$result=str_ireplace("\\n", "", $result);
-		$result=str_ireplace("\\t", "", $result);
+		//$result=str_ireplace("\\n", "", $result);
+		//$result=str_ireplace("\\t", "", $result);
+		$result = str_replace(array("\\n", "\\r","\\t"), '', $result);
 		return $result;
 	}
 
