@@ -1,6 +1,10 @@
 <?php
 namespace Ajax\Components;
 use Ajax\JsUtils;
+/**
+ * @author jc
+ *
+ */
 class BaseComponent{
 
 	protected $jquery_code_for_compile = array();

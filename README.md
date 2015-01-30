@@ -63,7 +63,7 @@ $di->set("jquery",function(){
 
 ###JS files
 
-Copy all necessary JS and CSS files from the JQuery and copy them to the public/assets directory of your project
+Copy all necessary JS and CSS files from the JQuery official web site and copy them to public/assets and public/js directories of your project
 
 For JQuery (download at http://jquery.com/download/ or use the CDN)
 * jquery.min.js

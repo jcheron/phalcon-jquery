@@ -1,6 +1,11 @@
 <?php
 use Ajax\Components\BaseComponent;
 use Ajax\JsUtils;
+/**
+ * Base component for JQuery UI visuals components
+ * @author jc
+ * @version 1.001
+ */
 class SimpleComponent extends BaseComponent {
 	protected $attachTo;
 	protected $uiName;
@@ -15,8 +20,6 @@ class SimpleComponent extends BaseComponent {
 		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
-		//$result=str_ireplace("\\n", "", $result);
-		//$result=str_ireplace("\\t", "", $result);
 		$result = str_replace(array("\\n", "\\r","\\t"), '', $result);
 		return $result;
 	}
@@ -30,5 +33,12 @@ class SimpleComponent extends BaseComponent {
 
 	public function addEvent($event,$jsCode){
 		$this->setParam($event, "%function( event, ui ) {".$jsCode."}%");
+	}
+
+	protected function setParamCtrl($key,$value,$typeCtrl){
+		if(!$typeCtrl($value)){
+			throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key." au composant ".$this->uiName);
+		}else
+			$this->setParam($key, $value);
 	}
 }

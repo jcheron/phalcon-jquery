@@ -4,7 +4,7 @@ use Ajax\JsUtils;
 require_once 'BaseComponent.php';
 require_once 'Button.php';
 /**
- * Composant JQuery UI Dialog
+ * JQuery UI Dialog Component
  * @author jc
  * @version 1.001
  */

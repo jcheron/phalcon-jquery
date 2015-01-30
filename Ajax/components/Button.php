@@ -3,6 +3,11 @@ namespace Ajax\Components;
 use Phalcon\Text;
 use Ajax\JsUtils;
 require_once 'BaseComponent.php';
+/**
+ * Base component for JQuery UI components
+ * @author jc
+ * @version 1.001
+ */
 class Button extends BaseComponent{
 	private function addFunction($jsCode){
 		if(!Text::startsWith($jsCode, "function"))
