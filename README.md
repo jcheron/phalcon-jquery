@@ -145,16 +145,17 @@ a volt view (ajaxSample.view): the **script_foot** variable contains JQuery scri
 {{script_foot}}
 ```
 
-an action in controller (associated to the view) : the click on the **#btn** element must realize the ajax request
+an action in controller (associated to the view) : the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
 ```php
-	public function ajaxAction(){
-		$jquery=$this->jquery;
-		$jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
-		$jquery->compile($this->view);
+	public function ajaxSampleAction(){
+		$this->jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
+		$this->jquery->compile($this->view);
 	}
 ```
 
 The action for the response URL :
+This is an ajax request, so the view is disabled.
+If the action is associated with an existing view, use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
 
 ```php
 	public function responseURLAction(){
