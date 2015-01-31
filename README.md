@@ -4,7 +4,7 @@ JQuery and JQuery UI library for Phalcon MVC framework
 ##What's Phalcon-jquery ?
 phalcon-jquery is a php library for the Phalcon framework.
 
-The library can be injected as a service in **$di** object, and permit to generate JQuery commands in Phalcon controllers
+The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers
 
 ##Installation
 ###Manual
@@ -109,14 +109,15 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 
 ##Usage
 
-###JQuery example
+###JQuery samples
 
-a volt view (hide.view): the **script_foot** variable contains JQuery scripts generated in controller
+####hiding an element on click
+a volt view (hideSample.view): the **script_foot** variable contains JQuery scripts generated in controller
 ```html
-<input id="btn" type="button" class="btn btn-primary" value="click to hide/show pannel">
-<div class="panel panel-default">
-  <div class="panel-body">
-    Basic panel example
+<input id="btn" type="button" value="click to hide pannel">
+<div class="panel">
+  <div>
+    panel to hide
   </div>
 </div>
 {{script_foot}}
@@ -124,8 +125,46 @@ a volt view (hide.view): the **script_foot** variable contains JQuery scripts ge
 
 an action in controller (associated to the view) : the click on the **#btn** element must hide the panel with css class **panel**
 ```php
-	public function hideAction(){
-		$this->jquery->doJQueryAndBindTo("#btn", "click", ".panel", "hide");
-		$this->jquery->compile($this->view);
+	public function hideSampleAction(){
+		$jquery=$this->jquery;
+		$jquery->click("#btn",$jquery->hide(".panel",2000));
+		$jquery->compile($this->view);
+	}
+```
+
+####Ajax request on click
+
+a volt view (ajaxSample.view): the **script_foot** variable contains JQuery scripts generated in controller
+```html
+<input id="btn" type="button" value="click to make ajax request">
+<div id="response">
+  <div>
+    Response panel
+  </div>
+</div>
+{{script_foot}}
+```
+
+an action in controller (associated to the view) : the click on the **#btn** element must realize the ajax request
+```php
+	public function ajaxAction(){
+		$jquery=$this->jquery;
+		$jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
+		$jquery->compile($this->view);
+	}
+```
+
+The action for the response URL :
+
+```php
+	public function ajaxAction(){
+		$jquery=$this->jquery;
+		$jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
+		$jquery->compile($this->view);
+	}
+```php
+	public function responseURLAction(){
+		echo "Request terminated";
+		$this->view->disable();
 	}
 ```
