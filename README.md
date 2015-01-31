@@ -38,7 +38,7 @@ app
 * JQuery UI >= 1.10 [optional]
 
 ##II - Project configuration
-###Library directory
+###1 - Library directory
 Define the library directory in phalcon bootstrap file(s) (index.php or loader.php)
 ```php
     $loader = new \Phalcon\Loader();
@@ -50,7 +50,7 @@ Define the library directory in phalcon bootstrap file(s) (index.php or loader.p
 ```
 Copy all files from the phalcon-jquery library folder to your project libraries folder
 
-###Injection
+###2 - Injection
 Inject Jquery service in the **$di** project :
 ```php
 $di->set("jquery",function(){
@@ -60,7 +60,7 @@ $di->set("jquery",function(){
 });
 ```
 
-###JS files
+###3 - JS files
 ####DCN
 For DCN using (From Google Api or MaxCDN)
 In Phalcon controller, implements the initialize method and pass a variable to the view
@@ -167,3 +167,39 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 ###2 - JQuery UI samples
 
 ####Accordion
+
+a simple view with structured elements :
+```html accordionSample.phtml
+<div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget.
+    Integer ut neque. Vivamus nisi metus, molestie vel, gravida in,
+    condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros.
+    Nam mi. Proin viverra leo ut odio.</p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus.
+    Vivamus hendrerit, dolor aliquet laoreet, mauris turpis velit,
+    faucibus interdum tellus libero ac justo.</p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
+    Quisque lobortis.Phasellus pellentesque purus in massa.</p>
+  </div>
+</div>
+```
+
+The associated controller/action : **accordionSampleAction**
+
+```php
+	public function accordionAction(){
+		$this->jquery->ui()->accordion("#accordion");
+		$this->jquery->compile($this->view);
+	}
+```
+
+The result :
+!http://angular.kobject.net/git/phalconist/accordionSample.png
