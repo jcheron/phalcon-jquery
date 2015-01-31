@@ -6,7 +6,7 @@ phalcon-jquery is a php library for the Phalcon framework.
 
 The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers
 
-##Installation
+##I - Installation
 ###Manual
 
 * Download project at https://github.com/jcheron/phalcon-jquery/archive/master.zip
@@ -37,7 +37,7 @@ app
 * JQuery >= 2.0.3
 * JQuery UI >= 1.10 [optional]
 
-##Project configuration
+##II - Project configuration
 ###Library directory
 Define the library directory in phalcon bootstrap file(s) (index.php or loader.php)
 ```php
@@ -107,12 +107,12 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 * minified : jquery-ui.min.js
 * theme : jquery-ui.css
 
-##Usage
+##III - Usage
 
-###JQuery samples
+###1 - JQuery samples
 
-####hiding an element on click
-a volt view (hideSample.view): the **script_foot** variable contains JQuery scripts generated in controller
+####a - hiding an element on click
+**a volt view (hideSample.view):** the **script_foot** variable contains JQuery scripts generated in controller
 ```html
 <input id="btn" type="button" value="click to hide pannel">
 <div class="panel">
@@ -123,7 +123,7 @@ a volt view (hideSample.view): the **script_foot** variable contains JQuery scri
 {{script_foot}}
 ```
 
-an action in controller (associated to the view) : the click on the **#btn** element must hide the panel with css class **panel**
+**an action in controller (associated to the view) :** the click on the **#btn** element must hide the panel with css class **panel**
 ```php
 	public function hideSampleAction(){
 		$jquery=$this->jquery;
@@ -132,9 +132,9 @@ an action in controller (associated to the view) : the click on the **#btn** ele
 	}
 ```
 
-####Ajax request on click
+####b - Ajax request on click
 
-a volt view (ajaxSample.view): the **script_foot** variable contains JQuery scripts generated in controller
+**a volt view (ajaxSample.view):** the **script_foot** variable contains JQuery scripts generated in controller
 ```html
 <input id="btn" type="button" value="click to make ajax request">
 <div id="response">
@@ -145,7 +145,7 @@ a volt view (ajaxSample.view): the **script_foot** variable contains JQuery scri
 {{script_foot}}
 ```
 
-an action in controller (associated to the view) : the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
+**an action in controller (associated to the view) :** the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
 ```php
 	public function ajaxSampleAction(){
 		$this->jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
@@ -153,11 +153,10 @@ an action in controller (associated to the view) : the click on the **#btn** ele
 	}
 ```
 
-The action for the response URL :
+**The action for the response URL :**
 
-This is an ajax request, so the view is disabled.
-
-If the action is associated with an existing view, use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
+* This is an ajax request, so the view is disabled.
+* If the action is associated with an existing view, use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
 
 ```php
 	public function responseURLAction(){
@@ -165,3 +164,6 @@ If the action is associated with an existing view, use **disableLevel(View::LEVE
 		$this->view->disable();
 	}
 ```
+###2 - JQuery UI samples
+
+####Accordion
