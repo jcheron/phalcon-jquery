@@ -106,7 +106,9 @@ For JQuery (download at http://jquery.com/download/ or use the CDN)
 For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 * minified : jquery-ui.min.js
 * theme : jquery-ui.css
+
 ##Usage
+
 ###JQuery example
 
 a volt view (hide.view): the **script_foot** variable contains JQuery scripts generated in controller
