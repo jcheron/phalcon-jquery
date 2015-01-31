@@ -91,6 +91,12 @@ In the corresponding view, insert the jquery variable for stylesheets and javasc
 	</head>
 ```
 
+All JQuery files are inserted in the result, with Google CDN (default) and last JQuery versions
+```
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/humanity/jquery-ui.css" />
+```
 ####Local files
 Copy all necessary JS and CSS files from the JQuery official web site and copy them to **public/assets** and **public/js** directories in your project
 
@@ -100,3 +106,24 @@ For JQuery (download at http://jquery.com/download/ or use the CDN)
 For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 * minified : jquery-ui.min.js
 * theme : jquery-ui.css
+##Usage
+###JQuery example
+
+a volt view (hide.view): the **script_foot** variable contains JQuery scripts generated in controller
+```html
+<input id="btn" type="button" class="btn btn-primary" value="click to hide/show pannel">
+<div class="panel panel-default">
+  <div class="panel-body">
+    Basic panel example
+  </div>
+</div>
+{{script_foot}}
+```
+
+an action in controller (associated to the view) : the click on the **#btn** element must hide the panel with css class **panel**
+```php
+	public function hideAction(){
+		$this->jquery->doJQueryAndBindTo("#btn", "click", ".panel", "hide");
+		$this->jquery->compile($this->view);
+	}
+```
