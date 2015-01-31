@@ -1,6 +1,11 @@
 <?php
 namespace Ajax\Properties;
 use Ajax\Components\BaseComponent;
+/**
+ * Composant JQuery UI Position property
+ * @author jc
+ * @version 1.001
+ */
 class Position extends BaseComponent{
 	public function __construct($my="left top",$at="left bottom",$collision="none",$within="window"){
 		$this->setParam("my", $my);

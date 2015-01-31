@@ -43,4 +43,16 @@ class BaseComponent{
 			$js=$this->js;
 		$js->addToCompile($this->__toString());
 	}
+
+	protected function setParamCtrl($key,$value,$typeCtrl){
+		if(is_array($typeCtrl)){
+			if(array_search($value, $typeCtrl)===false)
+				throw new \Exception("La valeur passée a propriété `".$key. "` ne fait pas partie des valeurs possibles : {".implode(",", $typeCtrl)."}");
+		}else{
+			if(!$typeCtrl($value)){
+				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key);
+			}
+		}
+		$this->setParam($key, $value);
+	}
 }

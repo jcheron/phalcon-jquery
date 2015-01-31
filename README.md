@@ -154,7 +154,9 @@ an action in controller (associated to the view) : the click on the **#btn** ele
 ```
 
 The action for the response URL :
+
 This is an ajax request, so the view is disabled.
+
 If the action is associated with an existing view, use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
 
 ```php
