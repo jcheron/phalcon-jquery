@@ -157,12 +157,6 @@ an action in controller (associated to the view) : the click on the **#btn** ele
 The action for the response URL :
 
 ```php
-	public function ajaxAction(){
-		$jquery=$this->jquery;
-		$jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
-		$jquery->compile($this->view);
-	}
-```php
 	public function responseURLAction(){
 		echo "Request terminated";
 		$this->view->disable();
