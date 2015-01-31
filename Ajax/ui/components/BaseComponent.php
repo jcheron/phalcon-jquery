@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\Components;
+namespace Ajax\ui\Components;
 use Ajax\JsUtils;
 /**
  * @author jc
@@ -19,14 +19,19 @@ class BaseComponent{
 	public function __construct(JsUtils $js=NULL){
 		$this->js=$js;
 	}
+
 	protected function getParamsAsJSON($params){
-		$result= json_encode($params,JSON_UNESCAPED_SLASHES);
-		$result=str_ireplace("%quote%", "\"", $result);
+		$result="";
+		if(sizeof($params)>0){
+			$result= json_encode($params,JSON_UNESCAPED_SLASHES);
+			$result=str_ireplace("%quote%", "\"", $result);
+		}
 		return $result;
 	}
 
 	public function setParam($key,$value){
 		$this->params[$key]=$value;
+		return $this;
 	}
 
 	public function getParam($key){
@@ -55,4 +60,17 @@ class BaseComponent{
 		}
 		$this->setParam($key, $value);
 	}
+	public function setParams($params) {
+		foreach ($params as $k=>$v){
+			$method="set".ucfirst($k);
+			if(method_exists($this, $method))
+				$this->$method($v);
+			else {
+				$this->setParam($k, $v);
+				trigger_error("`".$k. "` property n'existe pas",E_USER_NOTICE);
+			}
+		}
+		return $this;
+	}
+
 }

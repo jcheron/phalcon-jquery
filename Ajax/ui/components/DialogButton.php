@@ -1,14 +1,16 @@
 <?php
-namespace Ajax\Components;
+namespace Ajax\ui\Components;
 use Phalcon\Text;
 use Ajax\JsUtils;
+use Ajax;
 require_once 'BaseComponent.php';
+
 /**
- * Base component for JQuery UI components
+ * JQuery UI Button for the Dialog Component
  * @author jc
  * @version 1.001
  */
-class Button extends BaseComponent{
+class DialogButton extends BaseComponent{
 	private function addFunction($jsCode){
 		if(!Text::startsWith($jsCode, "function"))
 			$jsCode="%function(){".$jsCode."}%";
@@ -25,9 +27,9 @@ class Button extends BaseComponent{
 	}
 
 	public static function cancelButton($caption="Annuler"){
-		return new Button($caption,"$( this ).dialog( 'close' );");
+		return new DialogButton($caption,"$( this ).dialog( 'close' );");
 	}
 	public static function submitButton(JsUtils $js,$url,$form,$responseElement,$caption="Okay"){
-		return new Button($caption,$js->postForm($url, $form, $responseElement).";$( this ).dialog( 'close' );");
+		return new DialogButton($caption,$js->postForm($url, $form, $responseElement).";$( this ).dialog( 'close' );");
 	}
 }

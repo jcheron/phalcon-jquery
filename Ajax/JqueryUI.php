@@ -1,18 +1,32 @@
 <?php
 namespace Ajax;
 use Phalcon\Text;
-use Ajax\Components\Dialog;
-require_once 'components/Dialog.php';
-require_once 'components/Accordion.php';
-require_once 'components/Menu.php';
-require_once 'components/Progressbar.php';
-require_once 'components/Selectmenu.php';
-require_once 'components/Slider.php';
-require_once 'components/Spinner.php';
-require_once 'components/Autocomplete.php';
-require_once 'components/Tabs.php';
+use Ajax\ui\Components\SimpleComponent;
+use Ajax\ui\Components\Dialog;
+use Ajax\ui\Components\Accordion;
+use Ajax\ui\Components\Menu;
+use Ajax\ui\Components\Progressbar;
+use Ajax\ui\Components\Selectmenu;
+use Ajax\ui\Components\Slider;
+use Ajax\ui\Components\Spinner;
+use Ajax\ui\Components\Autocomplete;
+use Ajax\ui\Components\Tabs;
+use Ajax\ui\Components\Button;
+use Ajax\ui\Components\Buttonset;
+require_once 'ui/components/Dialog.php';
+require_once 'ui/components/Accordion.php';
+require_once 'ui/components/Menu.php';
+require_once 'ui/components/Progressbar.php';
+require_once 'ui/components/Selectmenu.php';
+require_once 'ui/components/Slider.php';
+require_once 'ui/components/Spinner.php';
+require_once 'ui/components/Autocomplete.php';
+require_once 'ui/components/Tabs.php';
+require_once 'ui/components/Button.php';
+require_once 'ui/components/Buttonset.php';
+
 /**
- * JQuery Phalcon library
+ * JQuery UI Phalcon library
  *
  * @author		jcheron
  * @version 	1.001
@@ -72,80 +86,101 @@ class JqueryUI{
 		$this->_di=$js->getDi();
 	}
 
-	protected function addComponent($component){
+	public function addComponent(SimpleComponent $component,$attachTo,$params){
 		if($this->autoCompile)
 			$this->components[]=$component;
+		if(isset($attachTo))
+			$component->attach($attachTo);
+		if(isset($params))
+			if(is_array($params))
+				$component->setParams($params);
 		return $component;
 	}
 	/**
 	 * Retourne un composant Dialog
 	 * @return \Ajax\Components\Dialog
 	 */
-	public function dialog(){
-		return $this->addComponent(new Dialog($this->js));
+	public function dialog($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Dialog($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Accordion
 	 * @return \Ajax\Components\Accordion
 	 */
-	public function accordion(){
-		return $this->addComponent(new \Accordion($this->js));
+	public function accordion($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Accordion($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Menu
 	 * @return \Ajax\Components\Menu
 	 */
-	public function menu(){
-		return $this->addComponent(new \Menu($this->js));
+	public function menu($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Menu($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Progressbar
 	 * @return \Ajax\Components\Progressbar
 	 */
-	public function progressbar(){
-		return $this->addComponent(new \Progressbar($this->js));
+	public function progressbar($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Progressbar($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Selectmenu
 	 * @return \Ajax\Components\Selectmenu
 	 */
-	public function selectmenu(){
-		return $this->addComponent(new \Selectmenu($this->js));
+	public function selectmenu($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Selectmenu($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Slider
 	 * @return \Ajax\Components\Slider
 	 */
-	public function slider(){
-		return $this->addComponent(new \Slider($this->js));
+	public function slider($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Slider($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Spinner
 	 * @return \Ajax\Components\Spinner
 	 */
-	public function spinner(){
-		return $this->addComponent(new \Spinner($this->js));
+	public function spinner($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Spinner($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Retourne un composant Autocomplete
 	 * @return \Ajax\Components\Autocomplete
 	 */
-	public function autocomplete(){
-		return $this->addComponent(new \Autocomplete($this->js));
+	public function autocomplete($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Autocomplete($this->js),$attachTo,$params);
 	}
 
 	/**
 	 * Create and return a Tabs component
 	 * @return \Ajax\Components\Tabs
 	 */
-	public function tabs(){
-		return $this->addComponent(new \Tabs($this->js));
+	public function tabs($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Tabs($this->js),$attachTo,$params);
+	}
+
+	/**
+	 * Create and return a Button component
+	 * @return \Ajax\Components\Button
+	 */
+	public function button($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Button($this->js),$attachTo,$params);
+	}
+
+	/**
+	 * Create and return a ButtonSet component
+	 * @return \Ajax\Components\ButtonSet
+	 */
+	public function buttonSet($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Buttonset($this->js),$attachTo,$params);
 	}
 }

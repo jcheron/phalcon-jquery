@@ -1,5 +1,6 @@
 <?php
-use Ajax\Components\BaseComponent;
+namespace Ajax\ui\Components;
+
 use Ajax\JsUtils;
 /**
  * Base component for JQuery UI visuals components

@@ -1,5 +1,5 @@
 <?php
-use Ajax\Components\BaseComponent;
+namespace Ajax\ui\Components;
 use Ajax\JsUtils;
 require_once 'SimpleComponent.php';
 /**

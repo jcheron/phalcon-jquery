@@ -4,10 +4,10 @@ JQuery and JQuery UI library for Phalcon MVC framework
 ##What's Phalcon-jquery ?
 phalcon-jquery is a php library for the Phalcon framework.
 
-The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers
+The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers, respecting the MVC design patern.
 
 ##I - Installation
-###Manual
+###Manual installation
 
 * Download project at https://github.com/jcheron/phalcon-jquery/archive/master.zip
 * or just clone the repo and checkout the current branch
@@ -27,7 +27,8 @@ app
 		  JqueryUI.php
 		  jsUtils.php
 		  Components
-					...
+		  lib
+				...
 ```
 
 ##Requirements
@@ -134,7 +135,7 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 
 ####b - Ajax request on click
 
-**a volt view (ajaxSample.view):** the **script_foot** variable contains JQuery scripts generated in controller
+**a volt view (ajaxSample.volt):** the **script_foot** variable contains JQuery scripts generated in controller
 ```html
 <input id="btn" type="button" value="click to make ajax request">
 <div id="response">
@@ -191,12 +192,13 @@ a simple view (**sampleAccordion.phtml**) with structured elements :
     Quisque lobortis.Phasellus pellentesque purus in massa.</p>
   </div>
 </div>
+<?=$script_foot ?>
 ```
 
-The associated controller/action : **accordionSampleAction**
+The associated controller/action : **sampleAccordionAction**
 
 ```php
-	public function accordionAction(){
+	public function sampleAccordionAction(){
 		$this->jquery->ui()->accordion("#accordion");
 		$this->jquery->compile($this->view);
 	}
@@ -209,7 +211,7 @@ The result :
 The same with initial parameters :
 
 ```php
-	public function accordionAction(){
+	public function sampleAccordionAction(){
 		$this->jquery->ui()->accordion("#accordion",array("collapsible"=>true,"animate"=>"linear"));
 		$this->jquery->compile($this->view);
 	}

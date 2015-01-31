@@ -1,14 +1,13 @@
 <?php
-namespace Ajax\Components;
+namespace Ajax\ui\Components;
 use Ajax\JsUtils;
-require_once 'BaseComponent.php';
-require_once 'Button.php';
+require_once 'DialogButton.php';
 /**
  * JQuery UI Dialog Component
  * @author jc
  * @version 1.001
  */
-class Dialog extends BaseComponent{
+class Dialog extends SimpleComponent{
 	protected $attachTo;
 	protected $buttons=array();
 
@@ -41,13 +40,13 @@ class Dialog extends BaseComponent{
 		$this->attachTo=$identifier;
 	}
 	public function addCancelBtn($caption="Annuler",$position=NULL){
-		$this->insertBtn(Button::cancelButton($caption),$position);
+		$this->insertBtn(DialogButton::cancelButton($caption),$position);
 	}
 	public function addSubmitBtn(JsUtils $js,$url,$form,$responseElement,$caption="Valider",$position=NULL){
-		$this->insertBtn(Button::submitButton($js, $url, $form, $responseElement,$caption),$position);
+		$this->insertBtn(DialogButton::submitButton($js, $url, $form, $responseElement,$caption),$position);
 	}
 	public function addButton($caption,$jsCode,$position=NULL){
-		$this->insertBtn(new Button($caption, $jsCode),$position);
+		$this->insertBtn(new DialogButton($caption, $jsCode),$position);
 	}
 	private function insertBtn($insert,$position=NULL)
 	{
