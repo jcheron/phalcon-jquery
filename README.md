@@ -169,6 +169,7 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 ####Accordion
 
 a simple view with structured elements :
+
 ```html accordionSample.phtml
 <div id="accordion">
   <h3>Section 1</h3>
@@ -202,4 +203,5 @@ The associated controller/action : **accordionSampleAction**
 ```
 
 The result :
-!http://angular.kobject.net/git/phalconist/accordionSample.png
+
+![ScreenShot](http://angular.kobject.net/git/phalconist/accordionSample.png)
