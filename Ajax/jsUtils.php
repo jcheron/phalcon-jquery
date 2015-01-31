@@ -1,6 +1,9 @@
 <?php
 namespace Ajax;
 use Phalcon\Text;
+require_once 'lib/DCNJQueryGenerator.php';
+require_once 'lib/DCNJQueryUIGenerator.php';
+
 /**
  * JQuery Phalcon library
  *
@@ -12,9 +15,9 @@ use Phalcon\Text;
  * JsUtils Class : Phalcon service to be injected
  **/
 class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
-	var $_javascript_location = 'js';
 	protected $_di;
 	protected $js;
+	protected $dcns;
 
 	/**
 	 * @var JqueryUI
@@ -67,6 +70,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 		extract($defaults);
 		$this->js=new Jquery();
+		$this->dcns=array();
 	}
 	public function addToCompile($jsScript){
 		$this->js->_addToCompile($jsScript);
@@ -654,33 +658,6 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @return	string
 	 */
 	function external($external_file = '', $relative = FALSE){
-		/*if ($external_file !== '')
-		{
-			$this->_javascript_location = $external_file;
-		}
-		else
-		{
-			if ($this->CI->config->item('javascript_location') != '')
-			{
-				$this->_javascript_location = $this->CI->config->item('javascript_location');
-			}
-		}
-
-		if ($relative === TRUE OR strncmp($external_file, 'http://', 7) == 0 OR strncmp($external_file, 'https://', 8) == 0)
-		{
-			$str = $this->_open_script($external_file);
-		}
-		elseif (strpos($this->_javascript_location, 'http://') !== FALSE)
-		{
-			$str = $this->_open_script($this->_javascript_location.$external_file);
-		}
-		else
-		{
-			$str = $this->_open_script($this->CI->config->slash_item('base_url').$this->_javascript_location.$external_file);
-		}
-
-		$str .= $this->_close_script();
-		return $str;*/
 		$assets=$this->_di->get('assets');
 		$assets->addJs($external_file);
 		return $assets->outputJs();
@@ -1016,6 +993,30 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	public function execAndBindTo($element,$event,$js){
 		$script= $this->js->_execAndBindTo($element,$event,$js);
 		return $script;
+	}
+	public function getDCNs(){
+		return $this->dcns;
+	}
+
+	public function setDCNs($dcns){
+		$this->dcns=$dcns;
+	}
+	public function genDCNs($template=NULL){
+		$hasJQuery=false;
+		$hasJQueryUI=false;
+		$result="";
+		foreach ($this->dcns as $dcn){
+			if($dcn instanceof \DCNJQueryGenerator)
+				$hasJQuery=true;
+			if($dcn instanceof \DCNJQueryUIGenerator)
+				$hasJQueryUI=true;
+			$result.="\n".$dcn;
+		}
+		if($hasJQuery===false)
+			$result.="\n".new \DCNJQueryGenerator("x");
+		if($hasJQueryUI===false && isset($this->_ui))
+			$result.="\n".new \DCNJQueryUIGenerator("x",$template);
+		return $result;
 	}
 }
 // END Javascript Class

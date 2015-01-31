@@ -10,6 +10,7 @@ require_once 'components/Selectmenu.php';
 require_once 'components/Slider.php';
 require_once 'components/Spinner.php';
 require_once 'components/Autocomplete.php';
+require_once 'components/Tabs.php';
 /**
  * JQuery Phalcon library
  *
@@ -138,5 +139,13 @@ class JqueryUI{
 	 */
 	public function autocomplete(){
 		return $this->addComponent(new \Autocomplete($this->js));
+	}
+
+	/**
+	 * Create and return a Tabs component
+	 * @return \Ajax\Components\Tabs
+	 */
+	public function tabs(){
+		return $this->addComponent(new \Tabs($this->js));
 	}
 }

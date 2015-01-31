@@ -1187,7 +1187,10 @@ class Jquery extends JsUtils{
 		if(is_array($param)){
 			$param=implode(",", $param);
 		}
-		$script= "$(".$this->_prep_element($element).").".$jqueryCall."(".$param.");\n".$function;
+		$callback="";
+		if($function!="")
+			$callback = ", function(event){\n{$function}\n}";
+		$script= "$(".$this->_prep_element($element).").".$jqueryCall."(".$param.$callback.");\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $script;
 		return $script;

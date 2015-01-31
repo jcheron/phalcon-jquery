@@ -4,7 +4,7 @@ JQuery and JQuery UI library for Phalcon MVC framework
 ##What's Phalcon-jquery ?
 phalcon-jquery is a php library for the Phalcon framework.
 
-The library can be injected as a service in $di object, and permit to generate JQuery commands in Phalcon controllers
+The library can be injected as a service in **$di** object, and permit to generate JQuery commands in Phalcon controllers
 
 ##Installation
 ###Manual
@@ -51,19 +51,48 @@ Define the library directory in phalcon bootstrap file(s) (index.php or loader.p
 Copy all files from the phalcon-jquery library folder to your project libraries folder
 
 ###Injection
-Inject Jquery service in the $di project :
+Inject Jquery service in the **$di** project :
 ```php
 $di->set("jquery",function(){
 	$jquery= new JsUtils(array("driver"=>"Jquery"));
-	$jquery->setLibraryFile("public/js/jquery-2.0.3.js");
 	$jquery->ui(new JqueryUI());//optional for JQuery UI
 	return $jquery;
 });
 ```
 
 ###JS files
+####DCN
+For DCN using (From Google Api or MaxCDN)
+In Phalcon controller, implements the initialize method and pass a variable to the view
+```php
+use Phalcon\Mvc\Controller;
+class ExController extends Controller{
+	public function initialize(){
+		$this->view->setVar("jquery", $this->jquery->genDCNs("humanity"));//humanity template file for JqueryUI
+	}
+```
+In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
+#####volt
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{{jquery}}
+	</head>
+```
+#####phtml
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<?=jquery?>
+	</head>
+```
 
-Copy all necessary JS and CSS files from the JQuery official web site and copy them to public/assets and public/js directories of your project
+####Local files
+Copy all necessary JS and CSS files from the JQuery official web site and copy them to **public/assets** and **public/js** directories in your project
 
 For JQuery (download at http://jquery.com/download/ or use the CDN)
 * jquery.min.js
