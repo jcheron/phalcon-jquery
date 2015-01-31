@@ -168,9 +168,9 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 
 ####Accordion
 
-a simple view with structured elements :
+a simple view (**sampleAccordion.phtml**) with structured elements :
 
-```html accordionSample.phtml
+```html
 <div id="accordion">
   <h3>Section 1</h3>
   <div>
@@ -205,3 +205,12 @@ The associated controller/action : **accordionSampleAction**
 The result :
 
 ![ScreenShot](http://angular.kobject.net/git/phalconist/accordionSample.png)
+
+The same with initial parameters :
+
+```php
+	public function accordionAction(){
+		$this->jquery->ui()->accordion("#accordion",array("collapsible"=>true,"animate"=>"linear"));
+		$this->jquery->compile($this->view);
+	}
+```
