@@ -13,6 +13,7 @@ use Ajax\ui\Components\Autocomplete;
 use Ajax\ui\Components\Tabs;
 use Ajax\ui\Components\Button;
 use Ajax\ui\Components\Buttonset;
+use Ajax\ui\Components\Tooltip;
 require_once 'ui/components/Dialog.php';
 require_once 'ui/components/Accordion.php';
 require_once 'ui/components/Menu.php';
@@ -24,6 +25,7 @@ require_once 'ui/components/Autocomplete.php';
 require_once 'ui/components/Tabs.php';
 require_once 'ui/components/Button.php';
 require_once 'ui/components/Buttonset.php';
+require_once 'ui/components/Tooltip.php';
 
 /**
  * JQuery UI Phalcon library
@@ -170,6 +172,8 @@ class JqueryUI{
 
 	/**
 	 * Create and return a Button component
+	 * @param $attachTo css/jquery selector attached to the component
+	 * @param $params php array of parameters
 	 * @return \Ajax\Components\Button
 	 */
 	public function button($attachTo=NULL,$params=NULL){
@@ -178,9 +182,21 @@ class JqueryUI{
 
 	/**
 	 * Create and return a ButtonSet component
+	 * @param $attachTo css/jquery selector attached to the component
+	 * @param $params php array of parameters
 	 * @return \Ajax\Components\ButtonSet
 	 */
 	public function buttonSet($attachTo=NULL,$params=NULL){
 		return $this->addComponent(new Buttonset($this->js),$attachTo,$params);
+	}
+
+	/**
+	 * Create and return a Tooltip component
+	 * @param $attachTo css/jquery selector attached to the component
+	 * @param $params php array of parameters
+	 * @return \Ajax\Components\Tooltip
+	 */
+	public function tooltip($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Tooltip($this->js),$attachTo,$params);
 	}
 }

@@ -15,10 +15,10 @@ class Slider extends SimpleComponent {
 		$this->setParam("value", 0);
 	}
 	public function onChange($jsCode){
-		$this->addEvent("change", $jsCode);
+		return $this->addEvent("change", $jsCode);
 	}
 
 	public function onSlide($jsCode){
-		$this->addEvent("slide", $jsCode);
+		return $this->addEvent("slide", $jsCode);
 	}
 }

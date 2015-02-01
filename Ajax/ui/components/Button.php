@@ -1,5 +1,6 @@
 <?php
 namespace Ajax\ui\Components;
+use Phalcon\Text;
 require_once 'SimpleComponent.php';
 /**
  * Composant JQuery UI Button
@@ -17,9 +18,10 @@ class Button extends SimpleComponent {
 	 * Disables the button if set to true.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setDisabled($value){
-		$this->setParamCtrl("disabled", $value, "is_bool");
+		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
 	/**
@@ -30,13 +32,14 @@ class Button extends SimpleComponent {
 	 * For using only one icon: icons: { primary: "ui-icon-locked" }. For using two icons: icons: { primary: "ui-icon-gear", secondary: "ui-icon-triangle-1-s" }.
 	 * @param String $value
 	 * default : { primary: null, secondary: null }
+	 * @return $this
 	 */
 	public function setIcons($value){
 		if(is_string($value)){
 			if(Text::startsWith($value,"{"));
 			$value="%".$value."%";
 		}
-		$this->setParam("icons", $value);
+		return $this->setParam("icons", $value);
 	}
 
 	/**
@@ -44,19 +47,21 @@ class Button extends SimpleComponent {
 	 * When set to false no text will be displayed, but the icons option must be enabled, otherwise the text option will be ignored.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setText($value){
-		$this->setParamCtrl("text", $value, "is_bool");
+		return $this->setParamCtrl("text", $value, "is_bool");
 	}
 
 	/**
 	 * Text to show in the button.
 	 * When not specified (null), the element's HTML content is used, or its value attribute if the element is an input element of type submit or reset,
-	 *  or the HTML content of the associated label element if the element is an input of type radio or checkbox.
+	 * or the HTML content of the associated label element if the element is an input of type radio or checkbox.
 	 * @param string $value
 	 * default : null
+	 * @return $this
 	 */
 	public function setLabel($value){
-		$this->setParam("label", $value);
+		return $this->setParam("label", $value);
 	}
 }

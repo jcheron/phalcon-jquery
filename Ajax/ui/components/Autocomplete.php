@@ -23,6 +23,7 @@ class Autocomplete extends SimpleComponent {
 	 * Define source property with an ajax request based on $url
 	 * $url must return a JSON array of values
 	 * @param String $url
+	 * @return $this
 	 */
 	public function setAjaxSource($url){
 		if(Text::startsWith($url, "/")){
@@ -37,7 +38,7 @@ class Autocomplete extends SimpleComponent {
 				success: function(data) {response(data);}
 			});
 		}%";
-		$this->setParam("source", $ajax);
+		return $this->setParam("source", $ajax);
 	}
 
 	/**
@@ -46,19 +47,21 @@ class Autocomplete extends SimpleComponent {
 	 * Example : ["Bordeaux","Alsace","Bourgogne"]
 	 * Example : [{value : "BO", label : "Bordeaux"}, {value : "AL", label : "Alsace"}, {value : "BOU", label : "Bourgogne"}]
 	 * @param String $source
+	 * @return $this
 	 */
 	public function setSource($source){
 		$source=str_ireplace(array("\"","'"), "%quote%", $source);
-		$this->setParam("source", "%".$source."%");
+		return $this->setParam("source", "%".$source."%");
 	}
 
 	/**
 	 * If set to true the first item will automatically be focused when the menu is shown.
 	 * default : false
 	 * @param Boolean $value
+	 * @return $this
 	 */
 	public function setAutofocus($value){
-		$this->setParamCtrl("autoFocus", $value,"is_bool");
+		return $this->setParamCtrl("autoFocus", $value,"is_bool");
 	}
 
 	/**
@@ -67,18 +70,20 @@ class Autocomplete extends SimpleComponent {
 	 * while being less responsive.
 	 * default : 300
 	 * @param int $value
+	 * @return $this
 	 */
 	public function setDelay($value){
-		$this->setParamCtrl("delay", $value,"is_int");
+		return $this->setParamCtrl("delay", $value,"is_int");
 	}
 
 	/**
 	 * Disables the autocomplete if set to true.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setDisabled($value){
-		$this->setParamCtrl("disabled", $value, "is_bool");
+		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
 	/**
@@ -87,9 +92,10 @@ class Autocomplete extends SimpleComponent {
 	 * but a higher value should be used when a single character search could match a few thousand items.
 	 * @param int $value
 	 * default : 1
+	 * @return $this
 	 */
 	public function setMinLength($value){
-		$this->setParamCtrl("minLength", $value, "is_int");
+		return $this->setParamCtrl("minLength", $value, "is_int");
 	}
 
 	/**
@@ -98,25 +104,28 @@ class Autocomplete extends SimpleComponent {
 	 * You can refer to the jQuery UI Position utility for more details about the various options.
 	 * @param int $position
 	 * default : { my: "left top", at: "left bottom", collision: "none" }
+	 * @return $this
 	 */
 	public function setPosition(Position $position){
-		$this->setParam("position", $position->getParams());
+		return $this->setParam("position", $position->getParams());
 	}
 
 	/**
 	 * Triggered when the field is blurred, if the value has changed.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onChange($jsCode){
-		$this->addEvent("change", $jsCode);
+		return $this->addEvent("change", $jsCode);
 	}
 
 	/**
 	 * Triggered when the menu is hidden. Not every close event will be accompanied by a change event.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onClose($jsCode){
-		$this->addEvent("close", $jsCode);
+		return $this->addEvent("close", $jsCode);
 	}
 
 	/**
@@ -125,17 +134,19 @@ class Autocomplete extends SimpleComponent {
 	 * though only if the event was triggered by a keyboard interaction.
 	 * Canceling this event prevents the value from being updated, but does not prevent the menu item from being focused.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onFocus($jsCode){
-		$this->addEvent("focus", $jsCode);
+		return $this->addEvent("focus", $jsCode);
 	}
 
 	/**
 	 * Triggered when the suggestion menu is opened or updated.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onOpen($jsCode){
-		$this->addEvent("open", $jsCode);
+		return $this->addEvent("open", $jsCode);
 	}
 
 	/**
@@ -143,18 +154,20 @@ class Autocomplete extends SimpleComponent {
 	 * Useful for local manipulation of suggestion data, where a custom source option callback is not required.
 	 * This event is always triggered when a search completes, even if the menu will not be shown because there are no results or the Autocomplete is disabled.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onResponse($jsCode){
-		$this->addEvent("response", $jsCode);
+		return $this->addEvent("response", $jsCode);
 	}
 
 	/**
 	 * Triggered before a search is performed, after minLength and delay are met.
 	 * If canceled, then no request will be started and no items suggested.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onSearch($jsCode){
-		$this->addEvent("search", $jsCode);
+		return $this->addEvent("search", $jsCode);
 	}
 
 	/**
@@ -162,8 +175,9 @@ class Autocomplete extends SimpleComponent {
 	 * The default action is to replace the text field's value with the value of the selected item.
 	 * Canceling this event prevents the value from being updated, but does not prevent the menu from closing.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onSelect($jsCode){
-		$this->addEvent("select", $jsCode);
+		return $this->addEvent("select", $jsCode);
 	}
 }

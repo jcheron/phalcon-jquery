@@ -17,7 +17,7 @@ class SimpleComponent extends BaseComponent {
 
 	public function __toString(){
 		$allParams=$this->params;
-		$this->jquery_code_for_compile[]="$( '".$this->attachTo."' ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
+		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
 		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
@@ -33,7 +33,7 @@ class SimpleComponent extends BaseComponent {
 	}
 
 	public function addEvent($event,$jsCode){
-		$this->setParam($event, "%function( event, ui ) {".$jsCode."}%");
+		return $this->setParam($event, "%function( event, ui ) {".$jsCode."}%");
 	}
 
 	protected function setParamCtrl($key,$value,$typeCtrl){
@@ -45,6 +45,6 @@ class SimpleComponent extends BaseComponent {
 				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key." au composant ".$this->uiName);
 			}
 		}
-		$this->setParam($key, $value);
+		return $this->setParam($key, $value);
 	}
 }

@@ -19,17 +19,19 @@ class Buttonset extends SimpleComponent {
 	 * Disables the buttonSet if set to true.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setDisabled($value){
-		$this->setParamCtrl("disabled", $value, "is_bool");
+		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
 	/**
 	 * Which descendant elements to convert manage as buttons.
 	 * default : "button, input[type=button], input[type=submit], input[type=reset], input[type=checkbox], input[type=radio], a, :data(ui-button)"
 	 * @param String $value
+	 * @return $this
 	 */
 	public function setItems($value){
-		$this->setParam("items", $value);
+		return $this->setParam("items", $value);
 	}
 }

@@ -2,9 +2,16 @@
 JQuery and JQuery UI library for Phalcon MVC framework
 
 ##What's Phalcon-jquery ?
-phalcon-jquery is a php library for the Phalcon framework.
+phalcon-jquery is a PHP library for the Phalcon framework : Phalcon PHP wrapper for JQuery and JQuery UI components.
 
 The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers, respecting the MVC design patern.
+
+##Requirements
+
+* PHP >= 5.3.9
+* Phalcon >= 0.7.0
+* JQuery >= 2.0.3
+* JQuery UI >= 1.10 [optional]
 
 ##I - Installation
 ###Manual installation
@@ -31,14 +38,7 @@ app
 				...
 ```
 
-##Requirements
-
-* PHP >= 5.3.9
-* Phalcon >= 0.7.0
-* JQuery >= 2.0.3
-* JQuery UI >= 1.10 [optional]
-
-##II - Project configuration
+##II - Phalcon project configuration
 ###1 - Library directory
 Define the library directory in phalcon bootstrap file(s) (index.php or loader.php)
 ```php

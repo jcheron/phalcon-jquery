@@ -27,10 +27,10 @@ class Accordion extends SimpleComponent {
 	 * A negative value selects panels going backward from the last panel.
 	 * @param Boolean $value
 	 * default : 0
+	 * @return $this
 	 */
 	public function setActive($value){
-		$this->setParam("active", $value);
-		return $this;
+		return $this->setParam("active", $value);
 	}
 
 	/**
@@ -44,6 +44,7 @@ class Accordion extends SimpleComponent {
 	 * "Down" animations occur when the panel being activated has a lower index than the currently active panel.
 	 * @param mixed $value
 	 * default : {}
+	 * @return $this
 	 */
 	public function setAnimate($value){
 		if($value instanceof Animation)
@@ -62,18 +63,20 @@ class Accordion extends SimpleComponent {
 	 * Allows collapsing the active section.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setCollapsible($value){
-		$this->setParamCtrl("collapsible", $value, "is_bool");
+		return $this->setParamCtrl("collapsible", $value, "is_bool");
 	}
 
 	/**
 	 * Disables the accordion if set to true.
 	 * @param Boolean $value
 	 * default : false
+	 * @return $this
 	 */
 	public function setDisabled($value){
-		$this->setParamCtrl("disabled", $value, "is_bool");
+		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
 	/**
@@ -81,9 +84,11 @@ class Accordion extends SimpleComponent {
 	 * Multiple events can be specified, separated by a space.
 	 * @param string $value
 	 * default : click
+	 * @return $this
 	 */
 	public function setEvent($value){
 		$this->setParam("event", $value);
+		return $this;
 	}
 
 	/**
@@ -91,9 +96,10 @@ class Accordion extends SimpleComponent {
 	 * Content panels must be the sibling immediately after their associated headers.
 	 * @param string $value css/JQuery Selector
 	 * default : "> li > :first-child,> :not(li):even"
+	 * @return $this
 	 */
 	public function setHeader($value){
-		$this->setParam("header", $value);
+		return $this->setParam("header", $value);
 	}
 
 	/**
@@ -103,9 +109,10 @@ class Accordion extends SimpleComponent {
 	 * "content": Each panel will be only as tall as its content.
 	 * @param String $value
 	 * default : content
+	 * @return $this
 	 */
 	public function setHeightStyle($value){
-		$this->setParamCtrl("heightStyle", $value, array("auto","fill","content"));
+		return $this->setParamCtrl("heightStyle", $value, array("auto","fill","content"));
 	}
 
 	/**
@@ -114,6 +121,7 @@ class Accordion extends SimpleComponent {
 	 * activeHeader (string, default: "ui-icon-triangle-1-s")
 	 * @param String $value
 	 * default : { "header": "ui-icon-triangle-1-e", "activeHeader": "ui-icon-triangle-1-s" }
+	 * @return $this
 	 */
 	public function setIcons($value){
 		if(is_string($value)){
@@ -121,6 +129,7 @@ class Accordion extends SimpleComponent {
 				$value="%".$value."%";
 		}
 		$this->setParam("icons", $value);
+		return $this;
 	}
 
 	/**
@@ -128,9 +137,10 @@ class Accordion extends SimpleComponent {
 	 * If the accordion was previously collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
 	 * If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onActivate($jsCode){
-		$this->addEvent("activate", $jsCode);
+		return $this->addEvent("activate", $jsCode);
 	}
 
 	/**
@@ -138,18 +148,20 @@ class Accordion extends SimpleComponent {
 	 * If the accordion is currently collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
 	 * If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onBeforeActivate($jsCode){
-		$this->addEvent("beforeActivate", $jsCode);
+		return $this->addEvent("beforeActivate", $jsCode);
 	}
 
 	/**
 	 * Triggered when the accordion is created.
 	 * If the accordion is collapsed, ui.header and ui.panel will be empty jQuery objects.
 	 * @param string $jsCode
+	 * @return $this
 	 */
 	public function onCreate($jsCode){
-		$this->addEvent("create", $jsCode);
+		return $this->addEvent("create", $jsCode);
 	}
 
 }
