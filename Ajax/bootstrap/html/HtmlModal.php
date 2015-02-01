@@ -65,6 +65,14 @@ class HtmlModal extends \BaseHtml {
 	}
 
 	/**
+	 * set the title of the modal
+	 * @param string $content
+	 */
+	public function setTitle($title){
+		$this->title=$title;
+	}
+
+	/**
 	 * render the content of $controller::$action and set the response to the modal content
 	 * @param View $view
 	 * @param string $controller a Phalcon controller
@@ -81,7 +89,7 @@ class HtmlModal extends \BaseHtml {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
+		return $js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
 	}
 
 }

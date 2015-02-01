@@ -15,7 +15,7 @@ class CDNBootstrap extends CDNBase{
 		$version=$this->version;
 		if(array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();
-		return $this->replaceVersion($this->data[$this->provider]["url"],$version);
+		return $this->replaceVersion($this->data[$this->provider]["core"],$version);
 	}
 
 	public function __toString(){
