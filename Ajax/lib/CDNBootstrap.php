@@ -1,12 +1,12 @@
 <?php
 use Phalcon\Tag;
-require_once 'DCN.php';
-require_once 'DCNGenerator.php';
-class DCNJQueryGenerator extends DCNGenerator{
+require_once 'CDN.php';
+require_once 'CDNBase.php';
+class CDNBootstrap extends CDNBase{
 
-	public function __construct($version,$provider="Google") {
+	public function __construct($version,$provider="MaxCDN") {
 		parent::__construct($version,$provider);
-		$this->data=$this->data["JQuery"];
+		$this->data=$this->data["Bootstrap"];
 	}
 
 	public function getUrl() {

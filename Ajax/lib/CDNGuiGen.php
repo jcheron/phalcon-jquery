@@ -1,9 +1,9 @@
 <?php
 use Phalcon\Tag;
-require_once 'DCN.php';
-require_once 'DCNGenerator.php';
+require_once 'CDN.php';
+require_once 'CDNBase.php';
 
-class DCNJQueryUIGenerator extends DCNGenerator{
+class CDNGuiGen extends CDNBase{
 	protected $theme;
 	protected $cssUrl;
 
@@ -15,7 +15,7 @@ class DCNJQueryUIGenerator extends DCNGenerator{
 			if(sizeof($themes)>$theme-1)
 				$this->theme=$themes[$theme-1];
 			else
-				throw New Exception("DCNJQueryUIGenerator : Le numéro de thème demandé n'existe pas");
+				throw New Exception("CDNGuiGen : Le numéro de thème demandé n'existe pas");
 		}
 		$this->theme=$theme;
 		$this->cssUrl=null;
@@ -39,7 +39,10 @@ class DCNJQueryUIGenerator extends DCNGenerator{
 	}
 
 	public function getFirstTheme($provider=NULL){
-		return $this->getThemes($provider)[0];
+		$themes=$this->getThemes($provider);
+		if(sizeof($themes)>0)
+			return $themes[0];
+		return "";
 	}
 
 	public function getUrl() {

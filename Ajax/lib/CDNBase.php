@@ -1,5 +1,5 @@
 <?php
-abstract class DCNGenerator {
+abstract class CDNBase {
 	protected $version;
 	protected $provider;
 	protected $data;
@@ -7,7 +7,7 @@ abstract class DCNGenerator {
 	protected $jsUrl;
 
 	public function __construct($version,$provider){
-		$this->data=include 'DCN.php';
+		$this->data=include 'CDN.php';
 		$this->version=$version;
 		$this->provider=$provider;
 		$this->local=false;
@@ -21,7 +21,7 @@ abstract class DCNGenerator {
 	public function setJsUrl($jsUrl) {
 		$this->jsUrl = $jsUrl;
 		return $this;
-	}	
+	}
 
 	public function isLocal() {
 		return $this->local;
@@ -40,7 +40,10 @@ abstract class DCNGenerator {
 		return str_ireplace("%theme%", $theme, $url);
 	}
 	protected function replaceVersionAndTheme($url,$version,$theme){
-		return str_ireplace(array("%theme%","%version%"), array($theme,$version), $url);
+		if(isset($theme))
+			return str_ireplace(array("%theme%","%version%"), array($theme,$version), $url);
+		else
+			return $this->replaceVersion($url, $version);
 	}
 
 	public function getProviders(){

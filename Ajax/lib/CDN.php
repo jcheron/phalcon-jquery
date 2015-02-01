@@ -26,5 +26,13 @@ return array(
 						)
 				)
 
-		)
+		),
+		"Bootstrap"=>array(
+				"MaxCDN"=>array(
+						"core"=>"http://maxcdn.bootstrapcdn.com/bootstrap/%version%/js/bootstrap.min.js",
+						"css"=>"http://maxcdn.bootstrapcdn.com/bootstrap/%version%/css/bootstrap.min.css",
+						"versions"=>array("3.3.2"),
+						"themes"=>array()
+				)
+			)
 	);
