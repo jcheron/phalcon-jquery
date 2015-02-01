@@ -167,10 +167,10 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 ```
 ###2 - Twitter Bootstrap samples
 ####Modal component
-A modal defined in a controller action
+A small dialog modal defined in controller action
 
 ```php
-	public function modalAction(){
+public function modalAction(){
 	$b=new HtmlModal("boite1");
 	$b->setTitle("Titre de la boîte de dialogue");
 	$b->setContent("test");
@@ -178,6 +178,19 @@ A modal defined in a controller action
 	echo $b->compile();
 	echo $this->jquery->compile($this->view);
 	$this->view->setRenderLevel(View::LEVEL_MAIN_LAYOUT);
+}
+```
+a bigger dialog defined in controller, rendering a view and passed to another view
+
+```php
+	public function modalAction(){
+		$b=new HtmlModal("boite2");
+		$b->renderContent($this->view,"aController","anAction");
+		$b->addOkayButton();
+		$b->run($this->jquery);
+		$this->view->setVar("modal",$b->compile());
+		$this->jquery->compile($this->view);
+	}
 ```
 
 ###3 - JQuery UI samples
