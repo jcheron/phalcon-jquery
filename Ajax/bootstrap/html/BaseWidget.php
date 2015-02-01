@@ -1,10 +1,10 @@
 <?php
 /**
- * Composant Twitter Bootstrap BaseWidget
+ * BaseWidget for Twitter Bootstrap components
  * @author jc
  * @version 1.001
  */
-class BaseWidget {
+abstract class BaseWidget {
 	protected $identifier;
 
 	public function __construct($identifier){
