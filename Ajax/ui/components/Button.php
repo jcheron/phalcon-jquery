@@ -1,7 +1,8 @@
 <?php
 namespace Ajax\ui\Components;
 use Phalcon\Text;
-require_once 'SimpleComponent.php';
+use Ajax\common\SimpleComponent;
+use Ajax\JsUtils;
 /**
  * Composant JQuery UI Button
  * @author jc

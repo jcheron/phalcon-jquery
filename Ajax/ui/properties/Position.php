@@ -1,6 +1,6 @@
 <?php
 namespace Ajax\ui\Properties;
-use Ajax\ui\Components\BaseComponent;
+use Ajax\common\BaseComponent;
 /**
  * Composant JQuery UI Position property
  * @author jc

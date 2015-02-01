@@ -4,13 +4,24 @@ abstract class DCNGenerator {
 	protected $provider;
 	protected $data;
 	protected $local;
+	protected $jsUrl;
 
 	public function __construct($version,$provider){
 		$this->data=include 'DCN.php';
 		$this->version=$version;
 		$this->provider=$provider;
 		$this->local=false;
+		$this->jsUrl=null;
 	}
+
+	public function getJsUrl() {
+		return $this->jsUrl;
+	}
+
+	public function setJsUrl($jsUrl) {
+		$this->jsUrl = $jsUrl;
+		return $this;
+	}	
 
 	public function isLocal() {
 		return $this->local;

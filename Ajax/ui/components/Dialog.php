@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\ui\Components;
 use Ajax\JsUtils;
+use Ajax\common\SimpleComponent;
 require_once 'DialogButton.php';
 /**
  * JQuery UI Dialog Component

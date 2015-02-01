@@ -5,6 +5,7 @@ require_once 'DCNGenerator.php';
 
 class DCNJQueryUIGenerator extends DCNGenerator{
 	protected $theme;
+	protected $cssUrl;
 
 	public function __construct($version,$theme=NULL,$provider="Google") {
 		parent::__construct($version,$provider);
@@ -17,7 +18,18 @@ class DCNJQueryUIGenerator extends DCNGenerator{
 				throw New Exception("DCNJQueryUIGenerator : Le numéro de thème demandé n'existe pas");
 		}
 		$this->theme=$theme;
+		$this->cssUrl=null;
 	}
+
+	public function getCssUrl() {
+		return $this->cssUrl;
+	}
+
+	public function setCssUrl($cssUrl) {
+		$this->cssUrl = $cssUrl;
+		return $this;
+	}
+
 
 	public function getThemes($provider=NULL){
 		if(isset($provider))
@@ -31,6 +43,8 @@ class DCNJQueryUIGenerator extends DCNGenerator{
 	}
 
 	public function getUrl() {
+		if(isset($this->jsUrl))
+			return $this->jsUrl;
 		$version=$this->version;
 		if(array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();
@@ -38,6 +52,8 @@ class DCNJQueryUIGenerator extends DCNGenerator{
 	}
 
 	public function getCss() {
+		if(isset($this->cssUrl))
+			return $this->cssUrl;
 		$version=$this->version;
 		if(array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();

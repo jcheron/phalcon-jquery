@@ -10,11 +10,12 @@ class DCNJQueryGenerator extends DCNGenerator{
 	}
 
 	public function getUrl() {
+		if(isset($this->jsUrl))
+			return $this->jsUrl;
 		$version=$this->version;
 		if(array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();
 		return $this->replaceVersion($this->data[$this->provider]["url"],$version);
-
 	}
 
 	public function __toString(){

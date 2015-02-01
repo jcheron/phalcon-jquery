@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\ui\Components;
+namespace Ajax\common;
 use Ajax\JsUtils;
 /**
  * @author jc

@@ -4,7 +4,7 @@ namespace Ajax\ui\Components;
 use Ajax\JsUtils;
 use Phalcon\Text;
 use Ajax\ui\Properties\Animation;
-require_once 'SimpleComponent.php';
+use Ajax\common\SimpleComponent;
 /**
  * Composant JQuery UI Accordion
  * @author jc

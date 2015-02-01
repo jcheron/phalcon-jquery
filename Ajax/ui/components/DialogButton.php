@@ -3,7 +3,7 @@ namespace Ajax\ui\Components;
 use Phalcon\Text;
 use Ajax\JsUtils;
 use Ajax;
-require_once 'BaseComponent.php';
+use Ajax\common\BaseComponent;
 
 /**
  * JQuery UI Button for the Dialog Component

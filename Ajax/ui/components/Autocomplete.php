@@ -5,7 +5,7 @@ use Ajax\JsUtils;
 use Phalcon\Text;
 use Phalcon\Mvc\Url;
 use Ajax\ui\Properties\Position;
-require_once 'SimpleComponent.php';
+use Ajax\common\SimpleComponent;
 /**
  * JQuery UI Autocomplete component
  * @author jc

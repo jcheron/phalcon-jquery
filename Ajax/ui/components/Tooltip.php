@@ -2,7 +2,7 @@
 namespace Ajax\ui\Components;
 use Ajax\JsUtils;
 use Ajax\ui\Properties\Position;
-require_once 'SimpleComponent.php';
+use Ajax\common\SimpleComponent;
 /**
  * Composant JQuery UI Menu
  * @author jc
