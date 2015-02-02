@@ -194,22 +194,25 @@ a bigger dialog defined in controller, rendering a view and passed to another vi
 	}
 ```
 ####Tooltip component
-tooltips displayed on a view buttons, the title attribute will be use for content
+Tool tips associated with buttons, the title property is used to display the content
 
-The view : tooltip.phtml
+**The view : tooltip.phtml**
+
+* the **$script_foot** variable is generated during the JQuery compilation 
 
 ```html
 <button type="button" class="btn btn-default" title="Tooltip on left">Tooltip on left</button>
 <button type="button" class="btn btn-default" title="Tooltip on top">Tooltip on top</button>
 <button type="button" class="btn btn-default" title="Tooltip on bottom">Tooltip on bottom</button>
 <button type="button" class="btn btn-default" title="Tooltip on right">Tooltip on right</button>
+<?=$script_foot?>
 ```
 
 The associated action in controller
 ```php
 	public function tooltipAction(){
 		$this->jquery->bootstrap()->tooltip("button");
-		$this->jquery->compile($this->view);
+		$this->jquery->compile($this->view);//script_generation
 	}
 ```
 
