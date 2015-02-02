@@ -9,11 +9,11 @@ class SimpleBsComponent extends SimpleComponent{
 	}
 
 	public function getScript(){
-		$result=parent::getScript();
+		parent::getScript();
 		foreach ($this->events as $event=>$jsCode){
 			$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function (e) {".$jsCode."});";
 		}
-		$result.= implode("", $this->jquery_code_for_compile);
+		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
 		$result = str_replace(array("\\n", "\\r","\\t"), '', $result);
