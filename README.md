@@ -193,6 +193,10 @@ a bigger dialog defined in controller, rendering a view and passed to another vi
 		$this->jquery->compile($this->view);
 	}
 ```
+
+The modal result :
+
+![ScreenShot](http://angular.kobject.net/git/phalconist/bsModalSample.png)
 ####Tooltip component
 Tool tips associated with buttons, the title property is used to display the content
 
