@@ -77,4 +77,12 @@ class Position extends BaseComponent{
 		}else
 			$this->setParam($key, $value);
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\common\BaseComponent::getScript()
+	 */
+	public function getScript() {
+		// TODO: Auto-generated method stub
+	}
+
 }

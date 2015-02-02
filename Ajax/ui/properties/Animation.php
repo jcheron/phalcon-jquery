@@ -45,4 +45,13 @@ class Animation extends BaseComponent{
 	public function setQueue($value){
 		$this->setParamCtrl("queue", $value, "is_bool");
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\common\BaseComponent::getScript()
+	 */
+	public function getScript() {
+		// TODO: Auto-generated method stub
+
+	}
+
 }

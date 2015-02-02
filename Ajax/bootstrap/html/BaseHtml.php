@@ -13,6 +13,16 @@ abstract class BaseHtml extends \BaseWidget {
 	protected $_template;
 	protected $tagName;
 	protected $properties=array();
+	protected $_bsComponent;
+
+	public function getBsComponent() {
+		return $this->_bsComponent;
+	}
+	public function setBsComponent($bsComponent) {
+		$this->_bsComponent = $bsComponent;
+		return $this;
+	}
+
 
 	public function getProperties() {
 		return $this->properties;

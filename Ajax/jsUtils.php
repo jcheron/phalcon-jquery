@@ -1,9 +1,9 @@
 <?php
 namespace Ajax;
 use Phalcon\Text;
-require_once 'lib/DCNJQueryGenerator.php';
-require_once 'lib/DCNJQueryUIGenerator.php';
-
+require_once 'lib/CDNJQueryUI.php';
+require_once 'lib/CDNGuiGen.php';
+require_once 'lib/CDNBootstrap.php';
 /**
  * JQuery Phalcon library
  *
@@ -24,6 +24,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 */
 	protected $_ui;
 
+	/**
+	 * @var Bootstrap
+	 */
+	protected $_bootstrap;
+
 	public function ui($ui=NULL){
 		if($ui!==NULL){
 			$this->_ui=$ui;
@@ -33,6 +38,17 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 			}
 		}
 		return $this->_ui;
+	}
+
+	public function bootstrap($bootstrap=NULL){
+		if($bootstrap!==NULL){
+			$this->_bootstrap=$bootstrap;
+			if($this->js!=null){
+				$this->js->bootstrap($bootstrap);
+				$bootstrap->setJs($this);
+			}
+		}
+		return $this->_bootstrap;
 	}
 
 	public function setDi($di)
@@ -414,11 +430,22 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @access	public
 	 * @param	string	- element
 	 * @param	string	- Class to add
+	 * @param string $immediatly diffère l'exécution si false
 	 * @return	string
 	 */
-	function addClass($element = 'this', $class = '')
-	{
-		return $this->js->_addClass($element, $class);
+	function addClass($element = 'this', $class = '',$immediatly=false){
+		return $this->js->_addClass($element, $class,$immediatly);
+	}
+
+		/**
+	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
+	 * @param string $element
+	 * @param string $attributeName
+	 * @param string $value
+	 * @param string $immediatly diffère l'exécution si false
+	 */
+	function attr($element = 'this' , $attributeName,$value='',$immediatly=false){
+		return $this->js->_attr($element, $attributeName,$value,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -1004,18 +1031,23 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	public function genDCNs($template=NULL){
 		$hasJQuery=false;
 		$hasJQueryUI=false;
+		$hasBootstrap=false;
 		$result="";
 		foreach ($this->dcns as $dcn){
-			if($dcn instanceof \DCNJQueryGenerator)
+			if($dcn instanceof \CDNJQueryUI)
 				$hasJQuery=true;
-			if($dcn instanceof \DCNJQueryUIGenerator)
+			if($dcn instanceof \CDNGuiGen)
 				$hasJQueryUI=true;
+			if($dcn instanceof \CDNBootsrap)
+				$hasBootstrap=true;
 			$result.="\n".$dcn;
 		}
 		if($hasJQuery===false)
-			$result.="\n".new \DCNJQueryGenerator("x");
+			$result.="\n".new \CDNJQueryUI("x");
 		if($hasJQueryUI===false && isset($this->_ui))
-			$result.="\n".new \DCNJQueryUIGenerator("x",$template);
+			$result.="\n".new \CDNGuiGen("x",$template);
+		if($hasBootstrap===false && isset($this->_bootstrap))
+			$result.="\n".new \CDNBootstrap("x");
 		return $result;
 	}
 }

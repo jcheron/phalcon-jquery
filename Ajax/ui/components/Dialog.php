@@ -18,7 +18,7 @@ class Dialog extends SimpleComponent{
 		$this->addCancelBtn("Annuler");
 	}
 
-	public function __toString(){
+	public function getScript(){
 		$allParams=$this->params;
 		$jsonButtons=array();
 		foreach ($this->buttons as $button){

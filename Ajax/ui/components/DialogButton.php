@@ -23,8 +23,17 @@ class DialogButton extends BaseComponent{
 	}
 
 	public function __toString(){
+		return $this->getScript();
+	}
+
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\common\BaseComponent::getScript()
+	 */
+	public function getScript() {
 		return json_encode($this->params,JSON_UNESCAPED_SLASHES);
 	}
+
 
 	public static function cancelButton($caption="Annuler"){
 		return new DialogButton($caption,"$( this ).dialog( 'close' );");

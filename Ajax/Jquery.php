@@ -383,12 +383,32 @@ class Jquery extends JsUtils{
 	 *
 	 * @access	private
 	 * @param	string	- element
+	 * @param string $immediatly diffère l'exécution si false
 	 * @return	string
 	 */
-	function _addClass($element = 'this', $class='')
-	{
+	function _addClass($element = 'this', $class='',$immediatly=false){
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).addClass(\"$class\");";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
+		return $str;
+	}
+
+	/**
+	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
+	 * @param string $element
+	 * @param string $attributeName
+	 * @param string $value
+	 * @param string $immediatly diffère l'exécution si false
+	 */
+	function _attr($element = 'this' , $attributeName,$value="",$immediatly=false){
+		$element = $this->_prep_element($element);
+		if(isset($value))
+			$str  = "$({$element}).attr(\"$attributeName\",\"$value\");";
+		else
+			$str  = "$({$element}).attr(\"$attributeName\");";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -942,6 +962,15 @@ class Jquery extends JsUtils{
 				$ui->compile(true);
 			}
 		}
+
+		//Components UI
+		$bootstrap=$this->bootstrap();
+		if($this->bootstrap()!=NULL){
+			if($bootstrap->isAutoCompile()){
+				$bootstrap->compile(true);
+			}
+		}
+
 		// External references
 		$external_scripts = implode('', $this->jquery_code_for_load);
 		extract(array('library_src' => $external_scripts));

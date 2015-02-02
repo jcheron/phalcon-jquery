@@ -89,7 +89,8 @@ class HtmlModal extends \BaseHtml {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		return $js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
+		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
+		return $this->_bsComponent;
 	}
 
 }
