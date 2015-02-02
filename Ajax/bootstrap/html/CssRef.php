@@ -12,4 +12,8 @@ class CssRef {
 	public static function buttonSizes(){
 		return array("btn-lg","btn-sm","btn-xs");
 	}
+
+	public static function position(){
+		return array("top","left","right","bottom","auto");
+	}
 }

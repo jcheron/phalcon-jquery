@@ -193,6 +193,28 @@ a bigger dialog defined in controller, rendering a view and passed to another vi
 		$this->jquery->compile($this->view);
 	}
 ```
+####Tooltip component
+tooltips displayed on a view buttons, the title attribute will be use for content
+
+The view : tooltip.phtml
+
+```html
+<button type="button" class="btn btn-default" title="Tooltip on left">Tooltip on left</button>
+<button type="button" class="btn btn-default" title="Tooltip on top">Tooltip on top</button>
+<button type="button" class="btn btn-default" title="Tooltip on bottom">Tooltip on bottom</button>
+<button type="button" class="btn btn-default" title="Tooltip on right">Tooltip on right</button>
+```
+
+The associated action in controller
+```php
+	public function tooltipAction(){
+		$this->jquery->bootstrap()->tooltip("button");
+		$this->jquery->compile($this->view);
+	}
+```
+
+Pretty result :
+![ScreenShot](http://angular.kobject.net/git/phalconist/bsTooltipSample.png)
 
 ###3 - JQuery UI samples
 

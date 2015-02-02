@@ -23,6 +23,7 @@ class BaseGui{
 	 * @var Ajax\JsUtils
 	 */
 	protected $js;
+
 	public function __construct($autoCompile=true){
 		$this->autoCompile=$autoCompile;
 		$this->components=array();
@@ -40,8 +41,9 @@ class BaseGui{
 	public function compile($internal=false){
 		if($internal===false && $this->autoCompile===true)
 			throw new \Exception("Impossible to compile if autoCompile is set to 'true'");
-		foreach ($this->components as $component)
+		foreach ($this->components as $component){
 			$component->compile();
+		}
 	}
 
 	public function setJs(JsUtils $js){

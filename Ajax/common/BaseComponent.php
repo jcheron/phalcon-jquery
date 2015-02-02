@@ -5,9 +5,9 @@ use Ajax\JsUtils;
  * @author jc
  *
  */
-class BaseComponent{
+abstract class BaseComponent{
 
-	protected $jquery_code_for_compile = array();
+	public $jquery_code_for_compile = array();
 
 	protected $params=array();
 
@@ -46,7 +46,8 @@ class BaseComponent{
 	public function compile(JsUtils $js=NULL){
 		if($js==NULL)
 			$js=$this->js;
-		$js->addToCompile($this->__toString());
+		$script=$this->getScript();
+		$js->addToCompile($script);
 	}
 
 	protected function setParamCtrl($key,$value,$typeCtrl){
@@ -72,5 +73,7 @@ class BaseComponent{
 		}
 		return $this;
 	}
+
+	public abstract function getScript();
 
 }

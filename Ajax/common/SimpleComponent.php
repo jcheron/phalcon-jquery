@@ -7,7 +7,7 @@ use Ajax\JsUtils;
  * @author jc
  * @version 1.001
  */
-class SimpleComponent extends BaseComponent {
+abstract class SimpleComponent extends BaseComponent {
 	protected $attachTo;
 	protected $uiName;
 
@@ -15,8 +15,9 @@ class SimpleComponent extends BaseComponent {
 		parent::__construct($js);
 	}
 
-	public function __toString(){
+	public function getScript(){
 		$allParams=$this->params;
+		$this->jquery_code_for_compile=array();
 		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
 		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);

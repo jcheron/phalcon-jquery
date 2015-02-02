@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\bootstrap\Components;
 use Ajax\JsUtils;
+use Ajax\bootstrap\Components\js\Draggable;
 /**
  * Composant Twitter Bootstrap Modal
  * @author jc
@@ -52,6 +53,16 @@ class Modal extends SimpleBsComponent {
 		return $this->setParam("keyboard", $value);
 	}
 
+	public function setDraggable($value){
+		if($value){
+			$this->jsCodes["draggable"]=new Draggable();
+			$this->setBackdrop(false);
+		}
+		else if(array_key_exists("draggable", $this->jsCodes)){
+			unset($this->jsCodes["draggable"]);
+			unset($this->params["backdrop"]);
+		}
+	}
 	/**
 	 * This event fires immediately when the show instance method is called.
 	 * If caused by a click, the clicked element is available as the relatedTarget property of the event.
