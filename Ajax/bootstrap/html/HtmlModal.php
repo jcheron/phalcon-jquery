@@ -2,7 +2,7 @@
 use Phalcon\Mvc\View;
 use Ajax\JsUtils;
 /**
- * Twitter Bootstrap Modal component
+ * Twitter Bootstrap HTML Modal component
  * @author jc
  * @version 1.001
  */

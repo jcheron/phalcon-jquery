@@ -16,4 +16,8 @@ class CssRef {
 	public static function position(){
 		return array("top","left","right","bottom","auto");
 	}
+
+	public static function navbarZoneClasses(){
+		return array("navbar-nav","navbar-left","navbar-right","navbar-form");
+	}
 }

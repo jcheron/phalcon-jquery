@@ -1,7 +1,7 @@
 <?php
 return
-'<div id="%identifier%">
-		<div class="modal-dialog">
+'<div id="%identifier%" tabindex="-1">
+	<div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

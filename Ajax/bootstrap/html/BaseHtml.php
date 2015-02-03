@@ -86,23 +86,46 @@ abstract class BaseHtml extends \BaseWidget {
 		return $this;
 	}
 
-	protected function addToPropertyCtrl($name,$value,$typeCtrl){
+	protected function setMemberCtrl(&$name,$value,$typeCtrl){
+		if($this->ctrl($name, $value, $typeCtrl)===true)
+			return $name=$value;
+		return $this;
+	}
+
+	protected function addToMemberCtrl(&$name,$value,$typeCtrl){
 		if($this->ctrl($name, $value, $typeCtrl)===true){
 			if(is_array($typeCtrl)){
 				$this->removeOldValues($name, $typeCtrl);
+			}
+			$name=$value;
+		}
+		return $this;
+	}
+	protected function addToPropertyCtrl($name,$value,$typeCtrl){
+		if($this->ctrl($name, $value, $typeCtrl)===true){
+			if(is_array($typeCtrl)){
+				$this->removeOldValues($this->properties[$name], $typeCtrl);
 			}
 			return $this->addToProperty($name, $value);
 		}
 		return $this;
 	}
 
-	protected function removeOldValues($name,$allValues){
-		$result=$this->properties[$name];
+	protected function removeOldValues(&$oldValue,$allValues){
+		$result=$oldValue;
 		foreach ($allValues as $value){
 			$result=str_ireplace($value, "", $result);
 		}
-		$this->properties[$name]=$result;
+		$oldValue=$result;
 	}
 
 	public abstract function run(JsUtils $js);
+	public function getTagName() {
+		return $this->tagName;
+	}
+	public function setTagName($tagName) {
+		$this->tagName = $tagName;
+		return $this;
+	}
+
 }
