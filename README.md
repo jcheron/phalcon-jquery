@@ -62,15 +62,16 @@ $di->set("jquery",function(){
 });
 ```
 
+
 ###3 - JS files
-####DCN
-For DCN using (From Google Api or MaxCDN)
+####CDN
+For CDN using (From Google Api or MaxCDN)
 In Phalcon controller, implements the initialize method and pass a variable to the view
 ```php
 use Phalcon\Mvc\Controller;
 class ExController extends Controller{
 	public function initialize(){
-		$this->view->setVar("jquery", $this->jquery->genDCNs("humanity"));//humanity template file for JqueryUI
+		$this->view->setVar("jquery", $this->jquery->genCDNs("humanity"));//humanity template file for JqueryUI
 	}
 ```
 In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
