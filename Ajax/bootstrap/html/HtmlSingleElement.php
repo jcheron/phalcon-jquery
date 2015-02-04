@@ -29,4 +29,15 @@ class HtmlSingleElement extends BaseHtml {
 	public function __toString(){
 		return $this->compile();
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\BaseHtml::fromArray()
+	 */
+	public function fromArray($array) {
+		$array=parent::fromArray($array);
+		foreach ($array as $key=>$value){
+			$this->setProperty($key, $value);
+		}
+		return $array;
+	}
 }

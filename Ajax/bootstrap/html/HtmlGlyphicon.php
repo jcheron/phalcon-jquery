@@ -21,7 +21,7 @@ class HtmlGlyphicon extends HtmlSingleElement {
 	public function setGlyphicon($glyphicon){
 		if(is_int($glyphicon))
 			$glyphicon=CssRef::glyphIcons()[$glyphicon];
-		return $this->setMemberCtrl("glyphicon", $glyphicon, CssRef::glyphIcons());
+		return $this->setMemberCtrl($this->glyphicon, $glyphicon, CssRef::glyphIcons());
 	}
 
 	/**

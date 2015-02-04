@@ -76,12 +76,7 @@ class HtmlNavbar extends BaseHtml {
 	 * @see BaseHtml::addProperties()
 	 */
 	public function fromArray($array) {
-		foreach($this as $key=>$value){
-			if(array_key_exists($key, $array)){
-				$setter="set".ucfirst($key);
-				$this->$setter($array[$key]);
-			}
-		}
+		return parent::fromArray($array);
 	}
 
 	public function setNavZones($navZones){

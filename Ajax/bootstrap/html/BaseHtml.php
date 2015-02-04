@@ -102,6 +102,12 @@ abstract class BaseHtml extends BaseWidget {
 		}
 		return $this;
 	}
+
+	protected function addToMember(&$name,$value,$separator=" "){
+		$name=str_ireplace($value, "", $name).$separator.$value;
+		return $this;
+	}
+
 	protected function addToPropertyCtrl($name,$value,$typeCtrl){
 		if($this->ctrl($name, $value, $typeCtrl)===true){
 			if(is_array($typeCtrl)){
@@ -130,7 +136,16 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function fromArray($array){
-
+		foreach($this as $key=>$value){
+			if(array_key_exists($key, $array)){
+				if(!Text::startsWith($key, "_")){
+					$setter="set".ucfirst($key);
+					$this->$setter($array[$key]);
+				}
+				unset($array[$key]);
+			}
+		}
+		return $array;
 	}
 
 }

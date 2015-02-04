@@ -37,16 +37,16 @@ class HtmlButton extends HtmlDoubleElement {
 
 	/**
 	 * define the button size
-	 * avaible values : "btn-lg","","btn-sm","btn-xs"
+	 * available values : "btn-lg","","btn-sm","btn-xs"
 	 * @param string/int $size
 	 * @return \Ajax\bootstrap\html\HtmlButton
 	 * default : ""
 	 */
 	public function setSize($size){
 		if(is_int($size)){
-			return $this->addToProperty("class", CssRef::buttonSizes()[$size]);
+			return $this->addToProperty("class", CssRef::sizes()[$size]);
 		}
-		return $this->addToPropertyCtrl("class", $size, CssRef::buttonSizes());
+		return $this->addToPropertyCtrl("class", $size, CssRef::sizes());
 	}
 
 	/**
@@ -74,5 +74,16 @@ class HtmlButton extends HtmlDoubleElement {
 	 */
 	public function run(JsUtils $js) {
 	}
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\BaseHtml::fromArray()
+	 */
+	public function fromArray($array) {
+		$array=parent::fromArray($array);
+		foreach ($array as $key=>$value){
+			$this->setProperty($key, $value);
+		}
+		return $array;
+	}
+
 
 }

@@ -11,12 +11,16 @@ class CssRef {
 		return array("btn-default","btn-primary","btn-success","btn-info","btn-warning","btn-danger");
 	}
 
-	public static function buttonSizes(){
-		return array("btn-lg","","btn-sm","btn-xs");
+	public static function sizes($prefix="btn"){
+		return array($prefix."-lg","",$prefix."-sm",$prefix."-xs");
 	}
 
 	public static function position(){
 		return array("top","left","right","bottom","auto");
+	}
+
+	public static function alignment(){
+		return array("","left","right");
 	}
 
 	public static function navbarZoneClasses(){

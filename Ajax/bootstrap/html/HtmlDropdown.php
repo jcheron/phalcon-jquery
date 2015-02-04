@@ -10,9 +10,10 @@ include_once 'content/HtmlDropdownItem.php';
  * @author jc
  * @version 1.001
  */
-class HtmlDropdown extends BaseHtml {
+class HtmlDropdown extends HtmlButton {
 	protected $btnCaption="Dropdown button";
 	protected $class="dropdown-toggle";
+	protected $mClass="dropdown";
 	protected $mTagName="div";
 	protected $items=array();
 	/**
@@ -97,6 +98,19 @@ class HtmlDropdown extends BaseHtml {
 		$this->class=$value;
 	}
 
+	public function setmClass($value){
+		//$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
+		$this->mClass=$value;
+	}
+
+	public function addBtnClass($value){
+		$this->addToMember($this->class, $value);
+	}
+
+	public function addmClass($value){
+		$this->addToMember($this->mClass, $value);
+	}
+
 	/* (non-PHPdoc)
 	 * @see BaseHtml::run()
 	 */
@@ -105,6 +119,10 @@ class HtmlDropdown extends BaseHtml {
 		return $this->_bsComponent;
 	}
 
+	/**
+	 * Sets the tagName's dropdown
+	 * @see \Ajax\bootstrap\html\BaseHtml::setTagName()
+	 */
 	public function setTagName($tagName) {
 		if($tagName=="button")
 			$this->class="btn";
@@ -121,6 +139,12 @@ class HtmlDropdown extends BaseHtml {
 
 	public function getItemsCount(){
 		return sizeof($this->items);
+	}
+
+	public function setAlignment($alignment){
+		if(is_int($alignment))
+			$alignment="dropdown-menu-".CssRef::alignment()[$alignment];
+		return $this->addToMemberCtrl("class", $alignment,CssRef::alignment());
 	}
 
 }
