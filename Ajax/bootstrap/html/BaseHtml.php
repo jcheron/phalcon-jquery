@@ -14,6 +14,8 @@ abstract class BaseHtml extends BaseWidget {
 	protected $_template;
 	protected $tagName;
 	protected $properties=array();
+	protected $wrapBefore="";
+	protected $wrapAfter="";
 	protected $_bsComponent;
 
 	public function getBsComponent() {
@@ -23,7 +25,9 @@ abstract class BaseHtml extends BaseWidget {
 		$this->_bsComponent = $bsComponent;
 		return $this;
 	}
-
+	protected function getTemplate(){
+		return $this->wrapBefore.$this->_template.$this->wrapAfter;
+	}
 
 	public function getProperties() {
 		return $this->properties;
@@ -54,7 +58,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	function compile() {
-		$result=$this->_template;
+		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
 			if(!Text::startsWith($key, "_")){
 				if(is_array($value))
@@ -147,5 +151,8 @@ abstract class BaseHtml extends BaseWidget {
 		}
 		return $array;
 	}
-
+	public function wrap($before,$after=""){
+		$this->wrapBefore=$before;
+		$this->wrapAfter=$after;
+	}
 }

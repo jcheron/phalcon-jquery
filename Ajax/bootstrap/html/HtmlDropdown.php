@@ -75,7 +75,13 @@ class HtmlDropdown extends HtmlButton {
 	 * @see BaseHtml::fromArray()
 	 */
 	public function fromArray($array) {
-		return $this->addItems($array);
+		function isAssoc($arr){
+			return array_keys($arr) !== range(0, count($arr) - 1);
+		}
+		if(isAssoc($array))
+			return parent::fromArray($array);
+		else
+			return $this->addItems($array);
 	}
 
 

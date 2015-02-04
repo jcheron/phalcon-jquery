@@ -19,8 +19,8 @@ class CssRef {
 		return array("top","left","right","bottom","auto");
 	}
 
-	public static function alignment(){
-		return array("","left","right");
+	public static function alignment($prefix=""){
+		return array($prefix."",$prefix."left",$prefix."right",$prefix."vertical",$prefix."justified");
 	}
 
 	public static function navbarZoneClasses(){
