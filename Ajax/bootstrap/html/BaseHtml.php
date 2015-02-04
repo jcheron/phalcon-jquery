@@ -128,4 +128,8 @@ abstract class BaseHtml extends \BaseWidget {
 		return $this;
 	}
 
+	public function fromArray($array){
+
+	}
+
 }

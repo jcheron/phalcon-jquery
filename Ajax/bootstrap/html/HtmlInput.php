@@ -1,11 +1,19 @@
 <?php
-class HtmlInput extends \HtmlButton {
-	protected $inputType;
+include_once 'HtmlSingleElement.php';
+
+class HtmlInput extends \HtmlSingleElement {
 	public function __construct($identifier) {
-		$this->identifier=$identifier;
-		$this->_template="<input type='%inputType%' id='%identifier%' %properties% value='%value%'/>";
+		parent::__construct($identifier,"input");
 		$this->setProperty("class", "form-control");
 		$this->setProperty("role", "input");
-		$this->inputType="text";
+		$this->setProperty("value", "");
+		$this->setProperty("type", "text");
+	}
+	public function setValue($value){
+		$this->setProperty("value", $value);
+	}
+
+	public function setInputType($value){
+		$this->setProperty("type", $value);
 	}
 }

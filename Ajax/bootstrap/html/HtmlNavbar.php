@@ -1,5 +1,6 @@
 <?php
 use Ajax\JsUtils;
+use Phalcon\Tag;
 include_once 'content/HtmlNavzone.php';
 
 /**
@@ -12,6 +13,7 @@ class HtmlNavbar extends \BaseHtml {
 	protected $class="navbar-default";
 	protected $brand="Brand";
 	protected $brandHref="#";
+	protected $brandImage="";
 
 	/**
 	 * @param string $identifier the id
@@ -24,6 +26,27 @@ class HtmlNavbar extends \BaseHtml {
 		$this->brand="Brand";
 		$this->brandHref="#";
 	}
+	public function setClass($class) {
+		$this->class = $class;
+		return $this;
+	}
+
+	public function setBrand($brand) {
+		$this->brand = $brand;
+		return $this;
+	}
+
+	public function setBrandHref($brandHref) {
+		$this->brandHref = $brandHref;
+		return $this;
+	}
+
+	public function setBrandImage($imageSrc) {
+		$this->brandImage = Tag::image(array($imageSrc,"alt"=>$this->brand));
+		$this->brand="";
+		return $this;
+	}
+
 
 	public function addZone($type="nav",$identifier=NULL){
 		if(!isset($identifier)){
@@ -35,6 +58,46 @@ class HtmlNavbar extends \BaseHtml {
 		return $zone;
 	}
 	public function addElement($element,HtmlNavzone $zone=NULL){
+		$zone=$this->getZoneToInsertIn($zone);
+		if($element instanceof HtmlDropdown)
+			$element->setMTagName("li");
+		$zone->addElement($element);
+	}
+
+	public function addElements($elements,HtmlNavzone $zone=NULL){
+		$zone=$this->getZoneToInsertIn($zone);
+		$zone->addElements($elements);
+	}
+
+
+	/**
+	/* (non-PHPdoc)
+	 * @see BaseHtml::addProperties()
+	 */
+	public function fromArray($array) {
+		foreach($this as $key=>$value){
+			if(array_key_exists($key, $array)){
+				$setter="set".ucfirst($key);
+				$this->$setter($array[$key]);
+			}
+		}
+	}
+
+	public function setNavZones($navZones){
+		if(is_array($navZones)){
+			foreach ($navZones as $zoneType=>$zoneArray){
+				if(is_string($zoneType)){
+					$zone=$this->addZone($zoneType);
+					$zone->fromArray($zoneArray);
+				}else if(is_string($zoneArray))
+					$this->addElement($zoneArray);
+				else
+					$this->addElements($zoneArray);
+			}
+		}
+	}
+
+	public function getZoneToInsertIn($zone=NULL){
 		if(!isset($zone)){
 			$nb=sizeof($this->navZones);
 			if($nb<1)
@@ -42,10 +105,9 @@ class HtmlNavbar extends \BaseHtml {
 			else
 				$zone=$this->navZones[$nb-1];
 		}
-		if($element instanceof HtmlDropdown)
-			$element->setMTagName("li");
-		$zone->addElement($element);
+		return $zone;
 	}
+
 	public function getZone($index){
 		$zone=null;
 		$nb=sizeof($this->navZones);

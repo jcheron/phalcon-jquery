@@ -21,12 +21,23 @@ class HtmlDropdown extends \BaseHtml {
 		$this->tagName="a";
 		$this->items=array();
 	}
+	/**
+	 * Define the tagName of the main element
+	 * @param string $value
+	 * default : div
+	 */
 	public function setMTagName($value){
 		$this->mTagName=$value;
 	}
+	/**
+	 * add an HtmlDropdownitem
+	 * @param string $caption
+	 * @param string $href
+	 * @return HtmlDropdown
+	 */
 	public function addItem($caption,$href="#"){
-		$nb=sizeof($this->items)+1;
-		$item=new HtmlDropdownItem($this->identifier."-mnitem-".$nb);
+		$iid=$this->getItemsCount()+1;
+		$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 		$item->setCaption($caption)->setHref($href);
 		$this->items[]=$item;
 		return $this;
@@ -37,23 +48,49 @@ class HtmlDropdown extends \BaseHtml {
 	}
 
 	public function addItems($items){
+		$iid=$this->getItemsCount()+1;
 		if(is_array($items)){
 			foreach ($items as $item){
-				if($item instanceof HtmlDropdownItem)
-					$this->items[]=$item;
-				else if(is_string($item))
+				if(is_string($item)){
 					$this->addItem($item);
+				}else if(is_array($item)){
+					$dropDownItem=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
+					$dropDownItem->fromArray($item);
+					$this->items[]=$dropDownItem;
+				}else if($item instanceof HtmlDropdownItem){
+					$this->items[]=$item;
+				}
 			}
 		}
+		return $this;
 	}
+
+
+	/* (non-PHPdoc)
+	 * @see BaseHtml::fromArray()
+	 */
+	public function fromArray($array) {
+		return $this->addItems($array);
+	}
+
 
 	public function setItems($items){
 		$this->items=array();
 		$this->addItems($items);
 	}
 
+	/**
+	 * Return the item at $index
+	 * @param int $index
+	 * @return HtmlDropdownItem
+	 */
+	public function getItem($index){
+		return $this->items[$index];
+	}
+
 	public function setBtnClass($value){
-		$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
+		//$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
+		$this->class=$value;
 	}
 
 	/* (non-PHPdoc)
@@ -76,6 +113,10 @@ class HtmlDropdown extends \BaseHtml {
 	public function setBtnCaption($btnCaption) {
 		$this->btnCaption = $btnCaption;
 		return $this;
+	}
+
+	public function getItemsCount(){
+		return sizeof($this->items);
 	}
 
 }
