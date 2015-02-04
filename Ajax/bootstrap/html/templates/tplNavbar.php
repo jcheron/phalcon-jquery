@@ -10,7 +10,7 @@ return '
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="%brandHref%">%brand%</a>
+      <a class="navbar-brand" href="%brandHref%">%brand%%brandImage%</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

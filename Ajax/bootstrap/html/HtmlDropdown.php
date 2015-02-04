@@ -1,5 +1,8 @@
 <?php
+namespace Ajax\bootstrap\html;
+
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\content\HtmlDropdownItem;
 include_once 'content/HtmlDropdownItem.php';
 
 /**
@@ -7,7 +10,7 @@ include_once 'content/HtmlDropdownItem.php';
  * @author jc
  * @version 1.001
  */
-class HtmlDropdown extends \BaseHtml {
+class HtmlDropdown extends BaseHtml {
 	protected $btnCaption="Dropdown button";
 	protected $class="dropdown-toggle";
 	protected $mTagName="div";
@@ -29,6 +32,7 @@ class HtmlDropdown extends \BaseHtml {
 	public function setMTagName($value){
 		$this->mTagName=$value;
 	}
+
 	/**
 	 * add an HtmlDropdownitem
 	 * @param string $caption

@@ -1,12 +1,14 @@
 <?php
+namespace Ajax\bootstrap\html\content;
 use Ajax\JsUtils;
 use Phalcon\Text;
+use Ajax\bootstrap\html\BaseHtml;
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
  * @version 1.001
  */
-class HtmlDropdownItem extends \BaseHtml {
+class HtmlDropdownItem extends BaseHtml {
 	protected $_htmlDropdown;
 	protected $class;
 	protected $itemClass;

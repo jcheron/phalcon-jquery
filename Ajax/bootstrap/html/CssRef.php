@@ -1,4 +1,6 @@
 <?php
+namespace Ajax\bootstrap\html;
+
 /**
  * Default HTML values for Twitter Bootstrap HTML components
  * @author jc
@@ -10,7 +12,7 @@ class CssRef {
 	}
 
 	public static function buttonSizes(){
-		return array("btn-lg","btn-sm","btn-xs");
+		return array("btn-lg","","btn-sm","btn-xs");
 	}
 
 	public static function position(){

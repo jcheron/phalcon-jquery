@@ -1,5 +1,6 @@
 <?php
-class HtmlLink extends \HtmlDoubleElement {
+namespace Ajax\bootstrap\html;
+class HtmlLink extends HtmlDoubleElement {
 	public function __construct($identifier,$href="#",$content="Link") {
 		parent::__construct ( $identifier,"a");
 		$this->setHref($href);

@@ -1,4 +1,5 @@
 <?php
+namespace Ajax\bootstrap\html;
 use Phalcon\Mvc\View;
 use Ajax\JsUtils;
 /**
@@ -6,7 +7,7 @@ use Ajax\JsUtils;
  * @author jc
  * @version 1.001
  */
-class HtmlModal extends \BaseHtml {
+class HtmlModal extends BaseHtml {
 	protected $title="Titre de ma boîte";
 	protected $content="ok";
 	protected $buttons=array();
@@ -80,7 +81,7 @@ class HtmlModal extends \BaseHtml {
 	 */
 	public function renderContent($view,$controller,$action){
 		 $template = $view->getRender($controller, $action, null, function($view) {
-			$view->setRenderLevel(Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 		});
 		$this->content= $template;
 	}

@@ -1,4 +1,5 @@
 <?php
+namespace Ajax\bootstrap\html;
 use Phalcon\Text;
 use Ajax\JsUtils;
 include_once 'BaseWidget.php';
@@ -9,7 +10,7 @@ include_once 'PropertyWrapper.php';
  * @author jc
  * @version 1.001
  */
-abstract class BaseHtml extends \BaseWidget {
+abstract class BaseHtml extends BaseWidget {
 	protected $_template;
 	protected $tagName;
 	protected $properties=array();

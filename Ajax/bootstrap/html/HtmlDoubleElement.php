@@ -1,7 +1,9 @@
 <?php
+namespace Ajax\bootstrap\html;
+
 include_once 'HtmlSingleElement.php';
 
-class HtmlDoubleElement extends \HtmlSingleElement {
+class HtmlDoubleElement extends HtmlSingleElement {
 	protected $content;
 	public function __construct($identifier,$tagName="p") {
 		parent::__construct($identifier,$tagName);

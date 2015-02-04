@@ -1,11 +1,13 @@
 <?php
+namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
+
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component
  * @author jc
  * @version 1.001
  */
-class HtmlNavzone extends \BaseHtml {
+class HtmlNavzone extends BaseHtml {
 	protected $class="navbar-nav";
 	protected $elements;
 

@@ -1,7 +1,8 @@
 <?php
+namespace Ajax\bootstrap\html;
 include_once 'HtmlSingleElement.php';
 
-class HtmlInput extends \HtmlSingleElement {
+class HtmlInput extends HtmlSingleElement {
 	public function __construct($identifier) {
 		parent::__construct($identifier,"input");
 		$this->setProperty("class", "form-control");

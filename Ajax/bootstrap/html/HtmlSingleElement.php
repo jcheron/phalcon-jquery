@@ -1,8 +1,9 @@
 <?php
+namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 include_once 'BaseHtml.php';
 
-class HtmlSingleElement extends \BaseHtml {
+class HtmlSingleElement extends BaseHtml {
 
 	public function __construct($identifier,$tagName="br") {
 		parent::__construct($identifier);

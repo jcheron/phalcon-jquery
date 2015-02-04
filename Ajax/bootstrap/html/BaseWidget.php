@@ -1,4 +1,6 @@
 <?php
+namespace Ajax\bootstrap\html;
+
 /**
  * BaseWidget for Twitter Bootstrap components
  * @author jc

@@ -1,4 +1,6 @@
 <?php
+namespace Ajax\bootstrap\html;
+
 class PropertyWrapper {
 	public static function wrap($input,$separator=' ',$valueQuote = '"'){
 		$output="";

@@ -1,4 +1,5 @@
 <?php
+namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Phalcon\Tag;
 include_once 'content/HtmlNavzone.php';
@@ -8,7 +9,7 @@ include_once 'content/HtmlNavzone.php';
  * @author jc
  * @version 1.001
  */
-class HtmlNavbar extends \BaseHtml {
+class HtmlNavbar extends BaseHtml {
 	protected $navZones;
 	protected $class="navbar-default";
 	protected $brand="Brand";
