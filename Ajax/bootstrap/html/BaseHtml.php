@@ -97,12 +97,12 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	protected function addToMemberCtrl(&$name,$value,$typeCtrl){
+	protected function addToMemberCtrl(&$name,$value,$typeCtrl,$separator=" "){
 		if($this->ctrl($name, $value, $typeCtrl)===true){
 			if(is_array($typeCtrl)){
 				$this->removeOldValues($name, $typeCtrl);
 			}
-			$name=$value;
+			$name.=$separator.$value;
 		}
 		return $this;
 	}
