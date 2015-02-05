@@ -49,7 +49,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 					$bt=new HtmlDropdown($this->identifier."-dropdown-".$iid);
 				$bt->setMTagName("div");
 				$bt->setRole("group");
-				$bt->setmClass("btn-group");
+				$bt->setMClass("btn-group");
 				$bt->setTagName("button");
 				$bt->addBtnClass("dropdown-toogle");
 				$bt->addBtnClass("btn-default");

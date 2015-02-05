@@ -41,6 +41,7 @@ class HtmlInputgroup extends HtmlInput {
 	protected function addButton_($button,$value="",$position="left"){
 		$span=$this->createSpan("",$position);
 		$span->setClass("input-group-btn");
+		$span->setTagName("div");
 		$button->setValue($value);
 		$span->setContent($button);
 		return $span;
@@ -59,23 +60,28 @@ class HtmlInputgroup extends HtmlInput {
 	}
 	protected function addDropdown_(HtmlDropdown $dropdown,$caption="",$position="left",$items=array()){
 		$dropdown->setBtnCaption($caption);
-		$dropdown->setMTagName("button");
 		$dropdown->fromArray($items);
-		$dropdown->setmClass("btn btn-default");
-		$dropdown->setTagName("span");
-		$span=$this->createSpan("",$position);
-		$span->setClass("input-group-btn");
-		$span->setContent($dropdown);
-		return $span;
+
+		if(strtolower($position)==="left")
+			$this->addonLeft=$dropdown;
+		else
+			$this->addonRight=$dropdown;
+		return $dropdown;
 	}
 
 	public function createDropdown($identifier,$caption="",$position="left",$items=array()){
 		$dropdown=new HtmlDropdown($identifier);
+		$dropdown->setMTagName("div");
+		$dropdown->setTagName("button");
+		$dropdown->setMClass("input-group-btn");
 		return $this->addDropdown_($dropdown,$caption,$position,$items);
 	}
 
 	public function createSplitButton($identifier,$caption="",$position="left",$items=array()){
 		$dropdown=new HtmlSplitbutton($identifier);
+		$dropdown->setTagName("button");
+		$dropdown->setMClass("input-group-btn");
+		$dropdown->setMTagName("div");
 		return $this->addDropdown_($dropdown,$caption,$position,$items);
 	}
 

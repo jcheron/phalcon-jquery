@@ -43,10 +43,10 @@ class HtmlDropdown extends HtmlButton {
 	 * default : "btn-default"
 	 */
 	public function setStyle($cssStyle){
-		if(is_int($cssStyle)){
-			return $this->addToMember($this->mClass, CssRef::buttonStyles()[$cssStyle]);
-		}
-		return $this->addToMemberCtrl($this->mClass, $cssStyle, CssRef::buttonStyles());
+ 		if(is_int($cssStyle)){
+ 			return $this->addToMember($this->class, CssRef::buttonStyles()[$cssStyle]);
+ 		}
+ 		return $this->addToMemberCtrl($this->class, $cssStyle, CssRef::buttonStyles());
 	}
 
 
@@ -117,7 +117,7 @@ class HtmlDropdown extends HtmlButton {
 		$this->class=$value;
 	}
 
-	public function setmClass($value){
+	public function setMClass($value){
 		//$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
 		$this->mClass=$value;
 	}
