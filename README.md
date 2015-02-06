@@ -1,5 +1,5 @@
-<div style="display: inline-block;align:right"><img src="http://angular.kobject.net/git/phalconist/phalcon-jquery.png)" alt="Phalcon-jquery logo"></div>
-# phalcon-jquery
+#phalcon-jquery
+![alt Phalcon-logo](http://angular.kobject.net/git/phalconist/phalcon-jquery.png "Essai")
 JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
 ##What's Phalcon-jquery ?
