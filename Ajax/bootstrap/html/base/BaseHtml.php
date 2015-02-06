@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\base;
 use Phalcon\Text;
 use Ajax\JsUtils;
 include_once 'BaseWidget.php';
@@ -40,6 +40,11 @@ abstract class BaseHtml extends BaseWidget {
 	public function setProperty($name,$value){
 		$this->properties[$name]=$value;
 		return $this;
+	}
+
+	public function getProperty($name){
+		if(array_key_exists($name, $this->properties))
+			return $this->properties[$name];
 	}
 
 	public function addToProperty($name,$value,$separator=" "){
@@ -113,21 +118,19 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	protected function addToPropertyCtrl($name,$value,$typeCtrl){
-		if($this->ctrl($name, $value, $typeCtrl)===true){
+		//if($this->ctrl($name, $value, $typeCtrl)===true){
+			if(@class_exists($typeCtrl,true))
+				$typeCtrl=$typeCtrl::getConstants();
 			if(is_array($typeCtrl)){
 				$this->removeOldValues($this->properties[$name], $typeCtrl);
 			}
 			return $this->addToProperty($name, $value);
-		}
+		//}
 		return $this;
 	}
 
 	protected function removeOldValues(&$oldValue,$allValues){
-		$result=$oldValue;
-		foreach ($allValues as $value){
-			$result=str_ireplace($value, "", $result);
-		}
-		$oldValue=$result;
+		$oldValue=str_ireplace($allValues, "", $oldValue);
 	}
 
 	public abstract function run(JsUtils $js);

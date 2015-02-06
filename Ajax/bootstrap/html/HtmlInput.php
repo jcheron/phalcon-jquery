@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\bootstrap\html;
-include_once 'HtmlSingleElement.php';
+use Ajax\bootstrap\html\base\HtmlSingleElement;
+include_once 'base/HtmlSingleElement.php';
 /**
  * Twitter Bootstrap simple Input component
  * @author jc

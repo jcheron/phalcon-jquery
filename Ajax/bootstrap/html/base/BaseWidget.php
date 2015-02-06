@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\base;
 
 /**
  * BaseWidget for Twitter Bootstrap components
@@ -10,7 +10,7 @@ abstract class BaseWidget {
 	protected $identifier;
 
 	public function __construct($identifier){
-		$this->identifier=$identifier;
+		$this->identifier=$this->cleanIdentifier($identifier);
 	}
 
 	public function getIdentifier() {

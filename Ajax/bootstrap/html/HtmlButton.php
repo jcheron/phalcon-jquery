@@ -2,7 +2,9 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-include_once 'HtmlDoubleElement.php';
+use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\CssRef;
+include_once 'base/HtmlDoubleElement.php';
 /**
  * Twitter Bootstrap Button component
  * @author jc
@@ -29,10 +31,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 * default : "btn-default"
 	 */
 	public function setStyle($cssStyle){
-		if(is_int($cssStyle)){
-			return $this->addToProperty("class", CssRef::buttonStyles()[$cssStyle]);
-		}
-		return $this->addToPropertyCtrl("class", $cssStyle, CssRef::buttonStyles());
+		return $this->addToPropertyCtrl("class", $cssStyle,"Ajax\bootstrap\html\CssButton");
 	}
 
 	/**

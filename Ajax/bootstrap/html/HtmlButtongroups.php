@@ -1,6 +1,8 @@
 <?php
 namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\base\CssRef;
+use Ajax\bootstrap\html\base\HtmlDoubleElement;
 /**
  * Composant Twitter Bootstrap Buttongroups
  * @author jc

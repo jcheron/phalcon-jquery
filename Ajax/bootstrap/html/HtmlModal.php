@@ -2,6 +2,7 @@
 namespace Ajax\bootstrap\html;
 use Phalcon\Mvc\View;
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\base\BaseHtml;
 /**
  * Twitter Bootstrap HTML Modal component
  * @author jc

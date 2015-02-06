@@ -1,6 +1,8 @@
 <?php
 namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\base\BaseHtml;
+use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component

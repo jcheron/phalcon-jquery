@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\base;
 
 class PropertyWrapper {
 	public static function wrap($input,$separator=' ',$valueQuote = '"'){

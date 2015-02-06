@@ -2,6 +2,8 @@
 namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Phalcon\Tag;
+use Ajax\bootstrap\html\base\BaseHtml;
+use Ajax\bootstrap\html\base\CssNavbar;
 include_once 'content/HtmlNavzone.php';
 
 /**
@@ -123,5 +125,8 @@ class HtmlNavbar extends BaseHtml {
 	public function run(JsUtils $js) {
 		foreach ($this->navZones as $zone)
 			$zone->run($js);
+	}
+	public function cssInverse(){
+		$this->addToMember($this->class, CssNavbar::NAVBAR_INVERSE);
 	}
 }

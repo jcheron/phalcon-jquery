@@ -3,6 +3,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
+use Ajax\bootstrap\html\base\CssRef;
 include_once 'content/HtmlDropdownItem.php';
 
 /**
@@ -134,6 +135,11 @@ class HtmlDropdown extends HtmlButton {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
+		if($this->getProperty("role")==="nav"){
+			foreach ($this->items as $dropdownItem){
+				$dropdownItem->runNav($js);
+			}
+		}
 		$this->_bsComponent=$js->bootstrap()->dropdown("#".$this->identifier);
 		return $this->_bsComponent;
 	}
@@ -151,6 +157,7 @@ class HtmlDropdown extends HtmlButton {
 	public function __toString(){
 		return $this->compile();
 	}
+
 	public function setBtnCaption($btnCaption) {
 		$this->btnCaption = $btnCaption;
 		return $this;
@@ -169,5 +176,9 @@ class HtmlDropdown extends HtmlButton {
 	public function dropup(){
 		$this->addToMember($this->mClass, "dropup");
 	}
+	public function getItems() {
+		return $this->items;
+	}
+
 
 }

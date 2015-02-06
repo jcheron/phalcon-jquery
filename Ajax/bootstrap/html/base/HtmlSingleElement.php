@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\base;
 use Ajax\JsUtils;
 include_once 'BaseHtml.php';
 

@@ -2,7 +2,8 @@
 namespace Ajax\bootstrap\html\content;
 use Ajax\JsUtils;
 use Phalcon\Text;
-use Ajax\bootstrap\html\BaseHtml;
+use Ajax\bootstrap\html\base\BaseHtml;
+use Ajax\bootstrap\html\HtmlBadge;
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
@@ -119,5 +120,20 @@ class HtmlDropdownItem extends BaseHtml {
 
 	}
 
+	/**
+	 * Js component creation when dropdownItem is in Navs/Pills
+	 * @param JsUtils $js
+	 */
+	public function runNav(JsUtils $js){
+		$js->bootstrap()->tab("#".$this->identifier);
+	}
 
+	public function getHref() {
+		return $this->href;
+	}
+	public function addBadge($caption,$leftSeparator="&nbsp;"){
+		$badge=new HtmlBadge("badge-".$this->identifier);
+		$badge->setContent($caption);
+		$this->caption.=$leftSeparator.$badge->compile();
+	}
 }

@@ -1,7 +1,9 @@
 <?php
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\base;
 
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\HtmlBadge;
+use Ajax\bootstrap\html\HtmlLabel;
 include_once 'HtmlSingleElement.php';
 
 class HtmlDoubleElement extends HtmlSingleElement {
@@ -13,6 +15,7 @@ class HtmlDoubleElement extends HtmlSingleElement {
 
 	public function setContent($content){
 		$this->content=$content;
+		return $this;
 	}
 	public function getContent() {
 		return $this->content;
@@ -24,7 +27,16 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	public function run(JsUtils $js) {
 		if($this->content instanceof HtmlDoubleElement)
 			$this->content->run($js);
+	}
 
+	public function addBadge($caption,$leftSeparator="&nbsp;"){
+		$badge=new HtmlBadge("badge-".$this->identifier,$caption);
+		$this->content.=$leftSeparator.$badge->compile();
+	}
+
+	public function addLabel($caption,$style="label-default",$leftSeparator="&nbsp;"){
+		$label=new HtmlLabel("label-".$this->identifier,$caption,$style);
+		$this->content.=$leftSeparator.$label->compile();
 	}
 
 }

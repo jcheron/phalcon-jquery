@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\base\HtmlDoubleElement;
 /**
  * Twitter Bootstrap HTML Modal component
  * @author jc

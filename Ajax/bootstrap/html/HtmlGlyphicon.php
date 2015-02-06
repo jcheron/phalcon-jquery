@@ -1,6 +1,8 @@
 <?php
 namespace Ajax\bootstrap\html;
 
+use Ajax\bootstrap\html\base\CssGlyphicon;
+use Ajax\bootstrap\html\base\HtmlSingleElement;
 /**
  * Composant Twitter Bootstrap Glyphicon
  * @author jc
@@ -19,9 +21,7 @@ class HtmlGlyphicon extends HtmlSingleElement {
 	 * @return \Ajax\bootstrap\html\HtmlGlyphicon
 	 */
 	public function setGlyphicon($glyphicon){
-		if(is_int($glyphicon))
-			$glyphicon=CssRef::glyphIcons()[$glyphicon];
-		return $this->setMemberCtrl($this->glyphicon, $glyphicon, CssRef::glyphIcons());
+		$this->glyphicon=$glyphicon;
 	}
 
 	/**
@@ -31,6 +31,12 @@ class HtmlGlyphicon extends HtmlSingleElement {
 	 */
 	public static function getGlyphicon($glyph){
 		$result=new HtmlGlyphicon("");
+		if(is_int($glyph)){
+			$glyphs=CssGlyphicon::getConstants();
+			if($glyph<sizeof($glyphs)){
+				$glyph=array_values($glyphs)[$glyph];
+			}
+		}
 		$result->setGlyphicon($glyph);
 		return $result;
 	}
