@@ -1,4 +1,4 @@
-![alt tag](http://angular.kobject.net/git/phalconist/phalcon-jquery.png)
+<div style="display: inline-block;align:right">![alt tag](http://angular.kobject.net/git/phalconist/phalcon-jquery.png)</div>
 # phalcon-jquery
 JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
