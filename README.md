@@ -1,4 +1,4 @@
-![alt tag]((http://angular.kobject.net/git/phalconist/phalcon-jquery.png)
+![alt tag](http://angular.kobject.net/git/phalconist/phalcon-jquery.png)
 # phalcon-jquery
 JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
