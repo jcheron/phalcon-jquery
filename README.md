@@ -1,4 +1,4 @@
-# ![phalcon-jquery](http://angular.kobject.net/git/phalconist/phalcon-jquery-git.png)
+### ![phalcon-jquery](http://angular.kobject.net/git/phalconist/phalcon-jquery-git.png)
 #phalcon-jquery
 JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
