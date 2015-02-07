@@ -13,6 +13,9 @@ The library can be injected as a service in **$di** object, and permit to genera
 * JQuery >= 2.0.3
 * JQuery UI >= 1.10 [optional]
 * Twitter Bootstrap >= 3.3.2 [optional]
+##Resources
+* [API](http://api.kobject.net/phalcon-jquery/) : in progress
+* [Documentation]() : in progress
 
 ##I - Installation
 ###Manual installation
