@@ -1,6 +1,6 @@
 <?php
 return
-'<div class="%class%">
+'<div %properties%>
   %header%
   <div class="panel-body">
     %content%

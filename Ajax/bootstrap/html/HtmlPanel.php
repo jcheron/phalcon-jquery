@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Phalcon\Text;
-			/**
+/**
  * Composant Twitter Bootstrap panel
  * @see http://getbootstrap.com/components/#panels
  * @author jc
@@ -13,11 +13,10 @@ use Phalcon\Text;
  class HtmlPanel extends HtmlDoubleElement {
  	protected $header;
  	protected $footer;
- 	protected $class;
 	public function __construct($identifier) {
 		parent::__construct ( $identifier, "div");
 		$this->_template=include 'templates/tplPanel.php';
-		$this->class="panel panel-default";
+		$this->setProperty("class","panel panel-default");
 	}
 	public function getHeader() {
 		return $this->header;
@@ -69,6 +68,6 @@ use Phalcon\Text;
 	public function setStyle($cssStyle){
 		if(!Text::startsWith($cssStyle, "panel"))
 			$cssStyle="panel".$cssStyle;
-		return $this->addToMemberCtrl($this->class,$cssStyle,CssRef::Styles("panel"));
+		return $this->addToPropertyCtrl("class",$cssStyle,CssRef::Styles("panel"));
 	}
 }

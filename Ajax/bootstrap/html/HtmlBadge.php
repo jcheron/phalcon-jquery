@@ -10,6 +10,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 class HtmlBadge extends HtmlDoubleElement {
 	public function __construct($identifier, $caption="") {
 		parent::__construct ( $identifier, "span");
+		$this->content=$caption;
 		$this->setProperty("class", "badge");
 	}
 }
