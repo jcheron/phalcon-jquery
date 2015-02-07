@@ -16,7 +16,7 @@ The library can be injected as a service in **$di** object, and permit to genera
 
 ##Resources
 * [API](http://api.kobject.net/phalcon-jquery/) : in progress
-* [Documentation]() : in progress
+* [Documentation](http://slamwiki.kobject.net/en/slam4/php/phalcon/jquery) : in progress
 
 ##I - Installation
 ###Manual installation
