@@ -2,11 +2,13 @@
 namespace Ajax\common;
 
 use Ajax\JsUtils;
+
 /**
  * Base component for JQuery UI visuals components
  * @author jc
  * @version 1.001
  */
+
 abstract class SimpleComponent extends BaseComponent {
 	protected $attachTo;
 	protected $uiName;
@@ -15,15 +17,19 @@ abstract class SimpleComponent extends BaseComponent {
 		parent::__construct($js);
 	}
 
-	public function getScript(){
-		$allParams=$this->params;
-		$this->jquery_code_for_compile=array();
-		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
+	protected function compileJQueryCode(){
 		$result= implode("", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
 		$result = str_replace(array("\\n", "\\r","\\t"), '', $result);
 		return $result;
+	}
+
+	public function getScript(){
+		$allParams=$this->params;
+		$this->jquery_code_for_compile=array();
+		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
+		return $this->compileJQueryCode();
 	}
 
 	/**
@@ -48,4 +54,8 @@ abstract class SimpleComponent extends BaseComponent {
 		}
 		return $this->setParam($key, $value);
 	}
+	public function getAttachTo() {
+		return $this->attachTo;
+	}
+
 }

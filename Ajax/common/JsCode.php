@@ -1,6 +1,10 @@
 <?php
 namespace Ajax\common;
-
+/**
+ * Base class for js code
+ * @author jc
+ * @version 1.001
+ */
 class JsCode {
 	protected $mask;
 

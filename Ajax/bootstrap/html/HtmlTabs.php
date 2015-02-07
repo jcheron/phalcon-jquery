@@ -73,9 +73,9 @@ class HtmlTabs extends HtmlDoubleElement {
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
-	public function compile() {
+	public function compile(JsUtils $js=NULL) {
 		$this->setProperty("class", "nav nav-".$this->_tabsType);
-		return parent::compile();
+		return parent::compile($js);
 	}
 
 

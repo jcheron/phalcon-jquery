@@ -7,7 +7,6 @@ require_once 'SimpleComponent.php';
 
 /**
  * BaseGui Phalcon library
- *
  * @author		jcheron
  * @version 	1.001
  */

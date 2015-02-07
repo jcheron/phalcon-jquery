@@ -2,8 +2,9 @@
 namespace Ajax\common;
 use Ajax\JsUtils;
 /**
+ * Base component for JQuery UI visuals components
  * @author jc
- *
+ * @version 1.001
  */
 abstract class BaseComponent{
 

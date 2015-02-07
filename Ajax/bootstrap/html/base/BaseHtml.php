@@ -62,7 +62,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	function compile() {
+	function compile(JsUtils $js=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
 			if(!Text::startsWith($key, "_")){
@@ -73,6 +73,8 @@ abstract class BaseHtml extends BaseWidget {
 				$result=str_ireplace("%".$key."%", $v, $result);
 			}
 		}
+		if(isset($js))
+			$this->run($js);
 		return $result;
 	}
 	protected function ctrl($name,$value,$typeCtrl){

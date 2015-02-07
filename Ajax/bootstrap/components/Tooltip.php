@@ -2,6 +2,7 @@
 namespace Ajax\bootstrap\Components;
 use Ajax\bootstrap\Components\SimpleBsComponent;
 use Ajax\JsUtils;
+use Ajax\bootstrap\html\base\CssRef;
 /**
  * Composant Twitter Bootstrap Tooltip
  * @author jc
