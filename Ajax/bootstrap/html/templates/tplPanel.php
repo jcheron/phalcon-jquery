@@ -1,9 +1,11 @@
 <?php
 return
-'<div %properties%>
+'<div id="%identifier%" %properties%>
   %header%
-  <div class="panel-body">
+%collapseBegin%
+  <div id="panel-body-%identifier%" class="panel-body">
     %content%
   </div>
 %footer%
+%collapseEnd%
 </div>';

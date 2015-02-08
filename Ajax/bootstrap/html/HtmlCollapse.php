@@ -41,6 +41,11 @@ class HtmlCollapse extends HtmlElementAsContent {
 		return $id;
 	}
 
+	public function setAttachedZone(HtmlDoubleElement $element){
+		$this->attachTo($element->getIdentifier());
+		$this->collapse=$element;
+	}
+
 	public function createCollapsedZone($content="",$attachTo=NULL){
 		if(isset($attachTo))
 			$this->attachTo($attachTo);
@@ -62,6 +67,10 @@ class HtmlCollapse extends HtmlElementAsContent {
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->collapse("#".$this->element->getIdentifier());
 		return $this->_bsComponent;
+	}
+
+	public function __toString(){
+		return $this->compile();
 	}
 
 }

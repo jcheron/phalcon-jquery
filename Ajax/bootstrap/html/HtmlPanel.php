@@ -4,7 +4,8 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Phalcon\Text;
-/**
+use Ajax\JsUtils;
+	/**
  * Composant Twitter Bootstrap panel
  * @see http://getbootstrap.com/components/#panels
  * @author jc
@@ -13,10 +14,17 @@ use Phalcon\Text;
  class HtmlPanel extends HtmlDoubleElement {
  	protected $header;
  	protected $footer;
+ 	protected $_collapsable;
+ 	protected $collapseBegin;
+ 	protected $collapseEnd;
+ 	protected $_showOnStartup;
+
 	public function __construct($identifier) {
 		parent::__construct ( $identifier, "div");
 		$this->_template=include 'templates/tplPanel.php';
 		$this->setProperty("class","panel panel-default");
+		$this->_collapsable=false;
+		$this->_showOnStartup=false;
 	}
 	public function getHeader() {
 		return $this->header;
@@ -42,11 +50,15 @@ use Phalcon\Text;
 		$header->setClass("panel-heading");
 		$header->setContent($content);
 		$this->header=$header;
-		return $this;
+		return $header;
 	}
 
 	public function addHeaderH($content,$niveau="1"){
-		return $this->addHeader("<h".$niveau." class='panel-title'>".$content."</h".$niveau.">");
+		$headerH=new HtmlDoubleElement("header-h-".$this->identifier);
+		$headerH->setContent($content);
+		$headerH->setTagName("h".$niveau);
+		$headerH->setClass("panel-title");
+		return $this->addHeader($headerH);
 	}
 
 	public function addFooter($content){
@@ -69,5 +81,42 @@ use Phalcon\Text;
 		if(!Text::startsWith($cssStyle, "panel"))
 			$cssStyle="panel".$cssStyle;
 		return $this->addToPropertyCtrl("class",$cssStyle,CssRef::Styles("panel"));
+	}
+
+	/* (non-PHPdoc)
+	 * @see BaseHtml::run()
+	 */
+	public function run(JsUtils $js) {
+		if($this->_collapsable){
+			$this->_bsComponent=$js->bootstrap()->collapse("#lnk-".$this->identifier);
+			$this->_bsComponent->setCollapsed("#collapse-".$this->identifier);
+			if($this->_showOnStartup===true){
+				$this->_bsComponent->show();
+			}
+		}
+		return $this->_bsComponent;
+	}
+	public function setCollapsable($_collapsable) {
+		$this->_collapsable = $_collapsable;
+		if($_collapsable){
+			$this->header->setRole("tab");
+			$this->collapseBegin='<div id="collapse-'.$this->identifier.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-'.$this->identifier.'">';
+			$this->collapseEnd="</div>";
+		}else{
+			$this->collapseBegin="";
+			$this->collapseEnd="";
+		}
+		return $this;
+	}
+
+	/**
+	 * Shows the panel body on startup if panel is collapsable.
+	 * @param boolean $value
+	 * @return $this
+	 * default : false
+	 */
+	public function show($value){
+		if($this->_collapsable)
+			$this->_showOnStartup=$value;
 	}
 }

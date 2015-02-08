@@ -20,8 +20,7 @@ use Ajax\bootstrap\html\base\HtmlElementAsContent;
 		$this->setProperty("class", "list-group");
 	}
 
-	public function addItem($text){
-		$element;
+	public function addItem($text=""){
 		switch ($this->tagName){
 			case "ul":
 				$element=new HtmlDoubleElement("list-gi-".$this->identifier);
@@ -31,8 +30,13 @@ use Ajax\bootstrap\html\base\HtmlElementAsContent;
 				$element=new HtmlLink("list-gi-".$this->identifier);
 				break;
 		}
-		$element->setContent($text);
+		if(is_string($text)===true)
+			$element->setContent($text);
+
 		$item=new HtmlListgroupItem($element);
+		if(is_array($text)===true){
+			$item->setHeadingAndContent($text);
+		}
 		$this->content[]=$item;
 		return $item;
 	}
