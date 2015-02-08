@@ -30,7 +30,7 @@ class Collapse extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onShow($jsCode){
-		$this->addEvent("show.bs.collapse", $jsCode);
+		return $this->addEvent("show.bs.collapse", $jsCode);
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Collapse extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onShown($jsCode){
-		$this->addEvent("shown.bs.collapse", $jsCode);
+		return $this->addEvent("shown.bs.collapse", $jsCode);
 	}
 
 	/**

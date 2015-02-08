@@ -14,6 +14,7 @@ abstract class BaseHtml extends BaseWidget {
 	protected $_template;
 	protected $tagName;
 	protected $properties=array();
+	protected $events=array();
 	protected $wrapBefore="";
 	protected $wrapAfter="";
 	protected $_bsComponent;
@@ -156,8 +157,23 @@ abstract class BaseHtml extends BaseWidget {
 		}
 		return $array;
 	}
+
 	public function wrap($before,$after=""){
 		$this->wrapBefore=$before;
 		$this->wrapAfter=$after;
+		return $this;
+	}
+
+	public function addEvent($event,$jsCode){
+		$this->events[$event]=$jsCode;
+		return $this;
+	}
+
+	public function addEventsOnRun(){
+		if(isset($this->_bsComponent)){
+			foreach ($this->events as $event=>$jsCode){
+				$this->_bsComponent->addEvent($event,$jsCode);
+			}
+		}
 	}
 }

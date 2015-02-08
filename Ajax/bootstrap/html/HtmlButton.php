@@ -64,6 +64,10 @@ class HtmlButton extends HtmlDoubleElement {
 		return $this->addToPropertyCtrl("class", "disabled",array("disabled"));
 	}
 
+	public function setToggled(){
+		return $this->setProperty("data-toggle", "button");
+	}
+
 	public function __toString(){
 		return $this->compile();
 	}
@@ -72,6 +76,12 @@ class HtmlButton extends HtmlDoubleElement {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
+		if(array_key_exists("data-toggle", $this->properties)){
+			$this->_bsComponent->addCode("$.fn.toggled=function(){return this.hasClass('active');};");
+		}
+		$this->addEventsOnRun();
+		return $this->_bsComponent;
 	}
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::fromArray()
@@ -84,5 +94,8 @@ class HtmlButton extends HtmlDoubleElement {
 		return $array;
 	}
 
-
+	public function onClick($jsCode){
+		$this->events["click"]=$jsCode;
+		return $this;
+	}
 }

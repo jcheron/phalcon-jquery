@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\bootstrap\Components;
 use Ajax\common\SimpleComponent;
+use Ajax\common\JsCode;
 class SimpleBsComponent extends SimpleComponent{
 	protected $events=array();
 	protected $jsCodes=array();
@@ -21,5 +22,9 @@ class SimpleBsComponent extends SimpleComponent{
 			$this->jquery_code_for_compile[]=$jsCode->compile(array("identifier"=>$this->attachTo));
 		}
 		return $this->compileJQueryCode();
+	}
+
+	public function addCode($jsCode){
+		$this->jsCodes[]=new JsCode($jsCode);
 	}
 }

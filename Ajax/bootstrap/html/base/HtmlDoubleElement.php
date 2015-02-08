@@ -25,6 +25,7 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	 * @see \Ajax\bootstrap\html\HtmlSingleElement::run()
 	 */
 	public function run(JsUtils $js) {
+
 		if($this->content instanceof HtmlDoubleElement)
 			$this->content->run($js);
 	}

@@ -4,6 +4,7 @@ use Phalcon\Text;
 require_once 'lib/CDNJQueryUI.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
+require_once 'service/JArray.php';
 /**
  * JQuery Phalcon library
  *

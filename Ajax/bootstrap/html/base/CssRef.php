@@ -8,6 +8,7 @@ use Ajax\common\BaseEnum;
  * @version 1.001
  */
 class CssRef {
+	const CSS_DEFAULT="-default",CSS_PRIMARY="-primary",CSS_SUCCESS="-success",CSS_INFO="-info",CSS_WARNING="-warning",CSS_DANGER="-danger";
 	public static function buttonStyles(){
 		return array("btn-default","btn-primary","btn-success","btn-info","btn-warning","btn-danger");
 	}
