@@ -25,8 +25,7 @@ class HtmlInput extends HtmlSingleElement {
 	}
 
 	public function onClick($jsCode){
-		$this->events["click"]=$jsCode;
-		return $this;
+		return $this->addEvent("click", $jsCode);
 	}
 
 

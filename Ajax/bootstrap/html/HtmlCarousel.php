@@ -37,6 +37,7 @@ class HtmlCarousel extends BaseHtml {
 
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->carousel("#".$this->identifier);
+		$this->addEventsOnRun();
 		return $this->_bsComponent;
 	}
 

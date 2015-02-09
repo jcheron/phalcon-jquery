@@ -2,11 +2,11 @@
 JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
 ##What's Phalcon-jquery ?
-phalcon-jquery is a PHP library for the Phalcon framework : Phalcon PHP wrapper for JQuery and UI components.
+phalcon-jquery is a PHP library for the Phalcon framework : a Phalcon PHP wrapper for JQuery and UI components (JQuery UI and Twitter Bootstrap).
 
 The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers, respecting the MVC design patern.
 
-##Requirements
+##Requirements/Dependencies
 
 * PHP >= 5.3.9
 * Phalcon >= 0.7.0
@@ -105,7 +105,7 @@ All JQuery files are inserted in the result, with Google CDN (default) and last 
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/humanity/jquery-ui.css" />
 ```
 ####Local files
-Copy all necessary JS and CSS files from the JQuery official web site and copy them to **public/assets** and **public/js** directories in your project
+Download all necessary JS and CSS files from the JQuery official web site and copy them to **public/assets** and **public/js** directories in your project
 
 For JQuery (download at http://jquery.com/download/ or use the CDN)
 * jquery.min.js
@@ -119,7 +119,9 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 ###1 - JQuery samples
 
 ####a - hiding an element on click
-**a volt view (hideSample.view):** the **script_foot** variable contains JQuery scripts generated in controller
+**a volt view (hideSample.view):**
+
+the **script_foot** variable contains JQuery scripts generated in controller
 ```html
 <input id="btn" type="button" value="click to hide pannel">
 <div class="panel">
@@ -130,7 +132,9 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 {{script_foot}}
 ```
 
-**an action in controller (associated to the view) :** the click on the **#btn** element must hide the panel with css class **panel**
+**an action in controller (associated to the view) :**
+
+the click on the **#btn** element must hide the panel with css class **panel**
 ```php
 	public function hideSampleAction(){
 		$jquery=$this->jquery;
@@ -141,7 +145,9 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 
 ####b - Ajax request on click
 
-**a volt view (ajaxSample.volt):** the **script_foot** variable contains JQuery scripts generated in controller
+**a volt view (ajaxSample.volt):**
+
+the **script_foot** variable contains JQuery scripts generated in controller
 ```html
 <input id="btn" type="button" value="click to make ajax request">
 <div id="response">
@@ -152,7 +158,9 @@ For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 {{script_foot}}
 ```
 
-**an action in controller (associated to the view) :** the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
+**an action in controller (associated to the view) :**
+
+the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
 ```php
 	public function ajaxSampleAction(){
 		$this->jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");

@@ -34,6 +34,7 @@ class HtmlTabItem extends HtmlDoubleElement {
 	 */
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->tab("#".$this->identifier);
+		$this->addEventsOnRun();
 		return $this->_bsComponent;
 	}
 

@@ -66,6 +66,7 @@ class HtmlCollapse extends HtmlElementAsContent {
 	 */
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->collapse("#".$this->element->getIdentifier());
+		$this->addEventsOnRun();
 		return $this->_bsComponent;
 	}
 
