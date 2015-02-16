@@ -10,6 +10,7 @@ use Ajax\bootstrap\Components\Carousel;
 use Ajax\bootstrap\Components\GenericComponent;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
+
 class Bootstrap extends BaseGui{
 
 	public function __construct($autoCompile = true) {

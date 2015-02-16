@@ -12,13 +12,15 @@ use Ajax\JsUtils;
 abstract class SimpleComponent extends BaseComponent {
 	protected $attachTo;
 	protected $uiName;
+	protected $events;
 
 	public function __construct(JsUtils $js){
 		parent::__construct($js);
+		$this->events=array();
 	}
 
 	protected function compileJQueryCode(){
-		$result= implode("", $this->jquery_code_for_compile);
+		$result= implode("\n", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
 		$result=str_ireplace("%\"", "", $result);
 		$result = str_replace(array("\\n", "\\r","\\t"), '', $result);
@@ -29,6 +31,9 @@ abstract class SimpleComponent extends BaseComponent {
 		$allParams=$this->params;
 		$this->jquery_code_for_compile=array();
 		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
+		foreach ($this->events as $event=>$jsCode){
+			$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"{$event}\",function( event, data ) {".$jsCode."});";
+		}
 		return $this->compileJQueryCode();
 	}
 
@@ -41,6 +46,11 @@ abstract class SimpleComponent extends BaseComponent {
 
 	public function addEvent($event,$jsCode){
 		return $this->setParam($event, "%function( event, ui ) {".$jsCode."}%");
+	}
+
+	public function on($event,$jsCode){
+		$this->events[$event]=$jsCode;
+		return $this;
 	}
 
 	protected function setParamCtrl($key,$value,$typeCtrl){

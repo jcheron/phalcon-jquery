@@ -21,17 +21,21 @@ use Ajax\bootstrap\html\base\HtmlElementAsContent;
 	}
 
 	public function addItem($text=""){
-		switch ($this->tagName){
-			case "ul":
-				$element=new HtmlDoubleElement("list-gi-".$this->identifier);
-				$element->setTagName("li");
-				break;
-			case "div":
-				$element=new HtmlLink("list-gi-".$this->identifier);
-				break;
-		}
-		if(is_string($text)===true)
+		if(is_object($text)){
+			$element=$text;
+		}else{
+			switch ($this->tagName){
+				case "ul":
+					$element=new HtmlDoubleElement("list-gi-".$this->identifier);
+					$element->setTagName("li");
+					break;
+				case "div":
+					$element=new HtmlLink("list-gi-".$this->identifier);
+					break;
+			}
 			$element->setContent($text);
+
+		}
 
 		$item=new HtmlListgroupItem($element);
 		if(is_array($text)===true){

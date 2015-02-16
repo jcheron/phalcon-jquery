@@ -48,7 +48,7 @@ class HtmlNavzone extends BaseHtml {
 				if($element instanceof HtmlDropdownItem)
 					$this->elements[]=$element;
 				else if(is_array($element)){
-					if(isset($key)){
+					if(is_string($key)===true){
 						$dropdown=new HtmlDropdown($this->identifier."-dropdown-".$iid);
 						$dropdown->addItems($element);
 						$dropdown->setBtnCaption($key);

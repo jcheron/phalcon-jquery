@@ -1,10 +1,13 @@
 <?php
 namespace Ajax;
 use Phalcon\Text;
+use Ajax\config\DefaultConfig;
+use Ajax\config\Config;
 require_once 'lib/CDNJQueryUI.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
 require_once 'service/JArray.php';
+require_once 'config/DefaultConfig.php';
 /**
  * JQuery Phalcon library
  *
@@ -30,12 +33,21 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 */
 	protected $_bootstrap;
 
+	/**
+	 * @var Ajax\config\Config
+	 */
+	protected $config;
+
 	public function ui($ui=NULL){
 		if($ui!==NULL){
 			$this->_ui=$ui;
 			if($this->js!=null){
 				$this->js->ui($ui);
 				$ui->setJs($this);
+				$bs=$this->bootstrap();
+				if(isset($bs)){
+					$this->conflict();
+				}
 			}
 		}
 		return $this->_ui;
@@ -47,9 +59,34 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 			if($this->js!=null){
 				$this->js->bootstrap($bootstrap);
 				$bootstrap->setJs($this);
+				$ui=$this->ui();
+				if(isset($ui)){
+					$this->conflict();
+				}
 			}
 		}
 		return $this->_bootstrap;
+	}
+
+	protected function conflict(){
+		$this->js->_addToCompile("var btn = $.fn.button.noConflict();$.fn.btn = btn;");
+	}
+
+	/**
+	 * @param string $config
+	 * @return \Ajax\config\Config
+	 */
+	public function config($config=NULL){
+		if($config===NULL){
+			if($this->config===NULL){
+				$this->config=new DefaultConfig();
+			}
+		}elseif(is_array($config)){
+			$this->config=new Config($config);
+		}elseif($config instanceof Config){
+			$this->config=$config;
+		}
+		return $this->config;
 	}
 
 	public function setDi($di)
@@ -194,7 +231,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 */
 	function focus($element = 'this', $js = '')
 	{
-		return $this->js->__add_event($focus, $js);
+		return $this->js->__add_event($element, $js, "focus");
 	}
 
 	// --------------------------------------------------------------------

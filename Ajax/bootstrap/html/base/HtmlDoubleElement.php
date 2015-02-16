@@ -17,16 +17,36 @@ class HtmlDoubleElement extends HtmlSingleElement {
 		$this->content=$content;
 		return $this;
 	}
+
 	public function getContent() {
 		return $this->content;
+	}
+
+	public function addContent($content){
+		if(is_array($this->content)===false){
+			$newContent=array();
+			$newContent[]=$this->content;
+			$newContent[]=$content;
+			$this->content=$newContent;
+		}else{
+			$this->content[]=$content;
+		}
+		return $this;
 	}
 
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\HtmlSingleElement::run()
 	 */
 	public function run(JsUtils $js) {
+		parent::run($js);
 		if($this->content instanceof HtmlDoubleElement){
 			$this->content->run($js);
+		}else if(is_array($this->content)){
+			foreach ($this->content as $itemContent){
+				if($itemContent instanceof HtmlDoubleElement){
+					$itemContent->run($js);
+				}
+			}
 		}
 	}
 

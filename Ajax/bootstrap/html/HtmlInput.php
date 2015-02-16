@@ -11,6 +11,7 @@ include_once 'base/HtmlSingleElement.php';
 class HtmlInput extends HtmlSingleElement {
 	public function __construct($identifier) {
 		parent::__construct($identifier,"input");
+		$this->setProperty("name", $identifier);
 		$this->setProperty("class", "form-control");
 		$this->setProperty("role", "input");
 		$this->setProperty("value", "");
@@ -22,6 +23,14 @@ class HtmlInput extends HtmlSingleElement {
 
 	public function setInputType($value){
 		$this->setProperty("type", $value);
+	}
+
+	public function addLabel($label,$before=true){
+		if ($before===true){
+			$this->wrap("<label>".$label,"</label>");
+		}else{
+			$this->wrap("<label>","&nbsp;".$label."</label>");
+		}
 	}
 
 	public function onClick($jsCode){

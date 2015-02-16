@@ -6,7 +6,14 @@ namespace Ajax;
  * @author		jcheron
  * @version 	1.001
  */
-
+function __autoload($myClass){
+	if(file_exists("ui/components/".$myClass.".php")){
+		require_once("ui/components/".$myClass.".php");
+	}
+	if(file_exists("bootstrap/html/".$myClass.".php")){
+		require_once("bootstrap/html/".$myClass.".php");
+	}
+}
 /**
  * Jquery Class
 **/

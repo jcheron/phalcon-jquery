@@ -66,11 +66,13 @@ abstract class BaseHtml extends BaseWidget {
 	function compile(JsUtils $js=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
-			if(!Text::startsWith($key, "_")){
-				if(is_array($value))
-					$v=PropertyWrapper::wrap($value);
-				else
+			if(Text::startsWith($key, "_")===false){
+				if(is_array($value)){
+					$v=PropertyWrapper::wrap($value,$js);
+				}
+				else{
 					$v=$value;
+				}
 				$result=str_ireplace("%".$key."%", $v, $result);
 			}
 		}
@@ -155,18 +157,38 @@ abstract class BaseHtml extends BaseWidget {
 				unset($array[$key]);
 			}
 		}
+		foreach ($array as $key=>$value){
+			if(method_exists($this, $key)){
+				try {
+					$this->$key($value);
+					unset($array[$key]);
+				} catch (Exception $e) {}
+			}else{
+				$setter="set".ucfirst($key);
+				if(method_exists($this, $setter)){
+					try {
+						$this->$setter($value);
+						unset($array[$key]);
+					} catch (Exception $e) {}
+				}
+			}
+		}
 		return $array;
 	}
 
 	public function wrap($before,$after=""){
-		$this->wrapBefore=$before;
-		$this->wrapAfter=$after;
+		$this->wrapBefore.=$before;
+		$this->wrapAfter=$after.$this->wrapAfter;
 		return $this;
 	}
 
 	public function addEvent($event,$jsCode){
 		$this->events[$event]=$jsCode;
 		return $this;
+	}
+
+	public function on($event,$jsCode){
+		return $this->addEvent($event, $jsCode);
 	}
 
 	public function addEventsOnRun(){

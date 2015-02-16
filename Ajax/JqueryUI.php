@@ -1,7 +1,6 @@
 <?php
 namespace Ajax;
 use Phalcon\Text;
-use Ajax\ui\Components\SimpleComponent;
 use Ajax\ui\Components\Dialog;
 use Ajax\ui\Components\Accordion;
 use Ajax\ui\Components\Menu;
@@ -15,18 +14,7 @@ use Ajax\ui\Components\Button;
 use Ajax\ui\Components\Buttonset;
 use Ajax\ui\Components\Tooltip;
 use Ajax\common\BaseGui;
-require_once 'ui/components/Dialog.php';
-require_once 'ui/components/Accordion.php';
-require_once 'ui/components/Menu.php';
-require_once 'ui/components/Progressbar.php';
-require_once 'ui/components/Selectmenu.php';
-require_once 'ui/components/Slider.php';
-require_once 'ui/components/Spinner.php';
-require_once 'ui/components/Autocomplete.php';
-require_once 'ui/components/Tabs.php';
-require_once 'ui/components/Button.php';
-require_once 'ui/components/Buttonset.php';
-require_once 'ui/components/Tooltip.php';
+
 
 /**
  * JQuery UI Phalcon library

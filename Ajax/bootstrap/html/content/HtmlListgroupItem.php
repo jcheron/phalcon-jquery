@@ -6,6 +6,7 @@ use Ajax\bootstrap\html\base\CssRef;
 use Phalcon\Text;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
+use Ajax\JsUtils;
 /**
  * Inner element for Twitter Bootstrap HTML Listgroup component
  * @see http://getbootstrap.com/components/#list-group
@@ -45,6 +46,16 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 	public function __toString(){
 		return $this->element->compile();
 	}
+
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
+	 */
+	public function compile(JsUtils $js = NULL) {
+		return $this->element->compile($js);
+
+	}
+
 
 	public function setHeadingAndContent($title,$content="",$niveau="1"){
 		if(is_array($title)){
