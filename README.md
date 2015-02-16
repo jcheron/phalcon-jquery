@@ -62,6 +62,8 @@ Inject Jquery service in the **$di** project :
 $di->set("jquery",function(){
 	$jquery= new JsUtils(array("driver"=>"Jquery"));
 	$jquery->ui(new JqueryUI());//optional for JQuery UI
+	$jquery->bootstrap(new Bootstrap());//Optional for Twitter Bootstrap
+	
 	return $jquery;
 });
 ```
@@ -69,7 +71,7 @@ $di->set("jquery",function(){
 
 ###3 - JS files
 ####CDN
-For CDN using (From Google Api or MaxCDN)
+For CDN using (From Google Api or MaxCDN)\\
 In Phalcon controller, implements the initialize method and pass a variable to the view
 ```php
 use Phalcon\Mvc\Controller;
