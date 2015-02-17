@@ -3,7 +3,10 @@ namespace Ajax;
 use Phalcon\Text;
 use Ajax\config\DefaultConfig;
 use Ajax\config\Config;
-require_once 'lib/CDNJQueryUI.php';
+use Ajax\lib\CDNJQuery;
+use Ajax\lib\CDNGuiGen;
+use Ajax\lib\CDNBootstrap;
+require_once 'lib/CDNJQuery.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
 require_once 'service/JArray.php';
@@ -21,7 +24,7 @@ require_once 'config/DefaultConfig.php';
 class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	protected $_di;
 	protected $js;
-	protected $dcns;
+	protected $cdns;
 
 	/**
 	 * @var JqueryUI
@@ -124,7 +127,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 		extract($defaults);
 		$this->js=new Jquery();
-		$this->dcns=array();
+		$this->cdns=array();
 	}
 	public function addToCompile($jsScript){
 		$this->js->_addToCompile($jsScript);
@@ -1059,34 +1062,48 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		$script= $this->js->_execAndBindTo($element,$event,$js);
 		return $script;
 	}
-	public function getDCNs(){
-		return $this->dcns;
+	public function getCDNs(){
+		return $this->cdns;
 	}
 
-	public function setDCNs($dcns){
-		$this->dcns=$dcns;
+	public function setCDNs($cdns){
+		if(is_array($cdns)===false){
+			$cdns=array($cdns);
+		}
+		$this->cdns=$cdns;
 	}
-	public function genDCNs($template=NULL){
+	public function genCDNs($template=NULL){
 		$hasJQuery=false;
 		$hasJQueryUI=false;
 		$hasBootstrap=false;
-		$result="";
-		foreach ($this->dcns as $dcn){
-			if($dcn instanceof \CDNJQueryUI)
-				$hasJQuery=true;
-			if($dcn instanceof \CDNGuiGen)
-				$hasJQueryUI=true;
-			if($dcn instanceof \CDNBootsrap)
-				$hasBootstrap=true;
-			$result.="\n".$dcn;
+		$result=array();
+		foreach ($this->cdns as $cdn){
+			switch (get_class($cdn)){
+				case "Ajax\lib\CDNJQuery":
+					$hasJQuery=true;
+					$result[0]=$cdn;
+					break;
+				case "Ajax\lib\CDNJQuery":
+						$hasJQueryUI=true;
+						$result[1]=$cdn;
+						break;
+				case "Ajax\lib\CDNBootstrap":
+						$hasBootstrap=true;
+						$result[2]=$cdn;
+						break;
+			}
 		}
-		if($hasJQuery===false)
-			$result.="\n".new \CDNJQueryUI("x");
-		if($hasJQueryUI===false && isset($this->_ui))
-			$result.="\n".new \CDNGuiGen("x",$template);
-		if($hasBootstrap===false && isset($this->_bootstrap))
-			$result.="\n".new \CDNBootstrap("x");
-		return $result;
+		if($hasJQuery===false){
+			$result[0]=new CDNJQuery("x");
+		}
+		if($hasJQueryUI===false && isset($this->_ui)){
+			$result[1]=new CDNGuiGen("x",$template);
+		}
+		if($hasBootstrap===false && isset($this->_bootstrap)){
+			$result[2]=new CDNBootstrap("x");
+		}
+		ksort($result);
+		return implode("\n", $result);
 	}
 }
 // END Javascript Class

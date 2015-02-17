@@ -1,11 +1,14 @@
 <?php
+namespace Ajax\lib;
 use Phalcon\Tag;
+use Phalcon\Text;
 require_once 'CDN.php';
 require_once 'CDNBase.php';
 
 class CDNGuiGen extends CDNBase{
 	protected $theme;
 	protected $cssUrl;
+	protected $localCss;
 
 	public function __construct($version,$theme=NULL,$provider="Google") {
 		parent::__construct($version,$provider);
@@ -23,11 +26,6 @@ class CDNGuiGen extends CDNBase{
 
 	public function getCssUrl() {
 		return $this->cssUrl;
-	}
-
-	public function setCssUrl($cssUrl) {
-		$this->cssUrl = $cssUrl;
-		return $this;
 	}
 
 
@@ -69,7 +67,24 @@ class CDNGuiGen extends CDNBase{
 	public function __toString(){
 		$url=$this->getUrl();
 		$css=$this->getCss();
-		return Tag::javascriptInclude($url,$this->local)."\n".Tag::stylesheetLink($css,$this->local);
+		return Tag::javascriptInclude($url,$this->local)."\n".Tag::stylesheetLink($css,$this->localCss);
+	}
+	public function setCssUrl($cssUrl,$local=null) {
+		$this->cssUrl = $cssUrl;
+		if(isset($local)===false){
+			$local=Text::startsWith($cssUrl,"http")===false;
+		}
+		$this->setLocalCss($local);
+		return $this;
+	}
+
+	public function getLocalCss() {
+		return $this->localCss;
+	}
+
+	public function setLocalCss($localCss) {
+		$this->localCss = $localCss;
+		return $this;
 	}
 
 }
