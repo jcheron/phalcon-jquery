@@ -4,6 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
+use Phalcon\Text;
 include_once 'base/HtmlDoubleElement.php';
 /**
  * Twitter Bootstrap Button component
@@ -12,12 +13,31 @@ include_once 'base/HtmlDoubleElement.php';
  */
 class HtmlButton extends HtmlDoubleElement {
 
-	public function __construct($identifier) {
+	/**
+	 * Constructs an HTML Bootstrap button
+	 * @param string $identifier HTML id
+	 * @param string $value value of the Button
+	 * @param string $cssStyle btn-default, btn-primary...
+	 * @param string $onClick JS Code for click event
+	 */
+	public function __construct($identifier, $value="",$cssStyle=null,$onClick=null) {
 		parent::__construct($identifier,"button");
 		$this->setProperty("class", "btn btn-default");
 		$this->setProperty("role", "button");
+		$this->content=$value;
+		if(isset($cssStyle)){
+			$this->setStyle($cssStyle);
+		}
+		if(isset($onClick)){
+			$this->onClick($onClick);
+		}
 	}
 
+	/**
+	 * Set the button value
+	 * @param string $value
+	 * @return \Ajax\bootstrap\html\HtmlButton
+	 */
 	public function setValue($value){
 		$this->content=$value;
 		return $this;
@@ -31,6 +51,12 @@ class HtmlButton extends HtmlDoubleElement {
 	 * default : "btn-default"
 	 */
 	public function setStyle($cssStyle){
+		if(is_int($cssStyle)){
+			return $this->addToPropertyCtrl("class", CssRef::buttonStyles()[$cssStyle],"Ajax\bootstrap\html\CssButton");
+		}
+		if(Text::startsWith($cssStyle, "btn-")===false){
+			$cssStyle="btn".$cssStyle;
+		}
 		return $this->addToPropertyCtrl("class", $cssStyle,"Ajax\bootstrap\html\CssButton");
 	}
 

@@ -4,10 +4,11 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
 use Ajax\bootstrap\html\base\CssRef;
+use Phalcon\Text;
 include_once 'content/HtmlDropdownItem.php';
 
 /**
- * Twitter Bootstrap HTML Modal component
+ * Twitter Bootstrap HTML Dropdown component
  * @author jc
  * @version 1.001
  */
@@ -46,6 +47,9 @@ class HtmlDropdown extends HtmlButton {
 	public function setStyle($cssStyle){
  		if(is_int($cssStyle)){
  			return $this->addToMember($this->class, CssRef::buttonStyles()[$cssStyle]);
+ 		}
+ 		if(Text::startsWith($cssStyle, "btn-")===false){
+ 			$cssStyle="btn".$cssStyle;
  		}
  		return $this->addToMemberCtrl($this->class, $cssStyle, CssRef::buttonStyles());
 	}
@@ -181,5 +185,10 @@ class HtmlDropdown extends HtmlButton {
 		return $this->items;
 	}
 
+	public function asButton($cssStyle="btn-primary"){
+		$this->setTagName("button");
+		$this->setBtnClass("btn dropdown-toggle");
+		$this->setStyle($cssStyle);
+	}
 
 }

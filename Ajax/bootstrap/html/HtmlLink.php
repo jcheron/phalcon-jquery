@@ -29,5 +29,9 @@ class HtmlLink extends HtmlDoubleElement {
 	public function onClick($jsCode){
 		return $this->addEvent("click", $jsCode);
 	}
+
+	public function setTarget($value="_self"){
+		return $this->setProperty("target", $value);
+	}
 	//TODO use Class Tag
 }

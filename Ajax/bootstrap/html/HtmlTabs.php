@@ -11,6 +11,7 @@ use Ajax\JsUtils;
 use Ajax\bootstrap\Components\Tabs;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\content\HtmlTabContent;
+use Phalcon\Mvc\View;
 class HtmlTabs extends HtmlDoubleElement {
 	protected $tabs=array();
 	protected $_tabsType="tabs";
@@ -73,9 +74,9 @@ class HtmlTabs extends HtmlDoubleElement {
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL) {
+	public function compile(JsUtils $js=NULL,View $view=NULL) {
 		$this->setProperty("class", "nav nav-".$this->_tabsType);
-		return parent::compile($js);
+		return parent::compile($js,$view);
 	}
 
 

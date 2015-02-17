@@ -7,6 +7,7 @@ use Phalcon\Text;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
 use Ajax\JsUtils;
+use Phalcon\Mvc\View;
 /**
  * Inner element for Twitter Bootstrap HTML Listgroup component
  * @see http://getbootstrap.com/components/#list-group
@@ -51,8 +52,8 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js = NULL) {
-		return $this->element->compile($js);
+	public function compile(JsUtils $js = NULL,View $view=NULL) {
+		return $this->element->compile($js,$view);
 
 	}
 

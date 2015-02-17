@@ -2,6 +2,7 @@
 namespace Ajax\bootstrap\html\base;
 use Phalcon\Text;
 use Ajax\JsUtils;
+use Phalcon\Mvc\View;
 include_once 'BaseWidget.php';
 include_once 'CssRef.php';
 include_once 'PropertyWrapper.php';
@@ -63,7 +64,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	function compile(JsUtils $js=NULL) {
+	function compile(JsUtils $js=NULL,View $view=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
 			if(Text::startsWith($key, "_")===false){
@@ -76,8 +77,17 @@ abstract class BaseHtml extends BaseWidget {
 				$result=str_ireplace("%".$key."%", $v, $result);
 			}
 		}
-		if(isset($js))
+		if(isset($js)){
 			$this->run($js);
+		}
+		if(isset($view)===true){
+			$controls=$view->getVar("controls");
+			if(isset($controls)===false){
+				$controls=array();
+			}
+			$controls[$this->identifier]=$result;
+			$view->setVar("controls",$controls);
+		}
 		return $result;
 	}
 	protected function ctrl($name,$value,$typeCtrl){

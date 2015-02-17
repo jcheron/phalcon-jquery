@@ -20,7 +20,7 @@ class HtmlForm extends HtmlDoubleElement {
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js = NULL) {
+	public function compile(JsUtils $js = NULL,View $view=NULL) {
 		if(isset($js)){
 			$this->formElementsPrefix=$js->config()->getVar("formElementsPrefix");
 			foreach ($this->futureElements as $futureElement){
@@ -50,7 +50,7 @@ class HtmlForm extends HtmlDoubleElement {
 		foreach ($this->formGroups as $group){
 			$this->addContent($group);
 		}
-		return parent::compile($js);
+		return parent::compile($js,$view);
 	}
 
 	private function getPart($str,$part=1){
