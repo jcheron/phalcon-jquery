@@ -698,6 +698,10 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 */
 	function compile($view=NULL,$view_var = 'script_foot', $script_tags = TRUE)
 	{
+		$bs=$this->_bootstrap;
+		if(isset($bs) && isset($view)){
+			$bs->compileHtml($this,$view);
+		}
 		return $this->js->_compile($view,$view_var, $script_tags);
 	}
 

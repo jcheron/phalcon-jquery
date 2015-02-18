@@ -105,4 +105,13 @@ class HtmlButtongroups extends HtmlDoubleElement {
 		}
 		$this->addToPropertyCtrl("class", $value, CssRef::alignment("btn-group-"));
 	}
+
+	public function getButton($index){
+		return $this->elements[$index];
+	}
+
+	public function setButton($index,$button){
+		$this->elements[$index]=$button;
+		return $this;
+	}
 }

@@ -2,6 +2,7 @@
 namespace Ajax\common;
 use Phalcon\Text;
 use Ajax\JsUtils;
+use Phalcon\Mvc\View;
 require_once 'BaseComponent.php';
 require_once 'SimpleComponent.php';
 
@@ -18,6 +19,7 @@ class BaseGui{
 	protected $_di;
 	protected $autoCompile;
 	protected $components;
+	protected $htmlComponents;
 	/**
 	 * @var Ajax\JsUtils
 	 */
@@ -26,6 +28,7 @@ class BaseGui{
 	public function __construct($autoCompile=true){
 		$this->autoCompile=$autoCompile;
 		$this->components=array();
+		$this->htmlComponents=array();
 	}
 
 	public function isAutoCompile() {
@@ -59,5 +62,16 @@ class BaseGui{
 			if(is_array($params))
 				$component->setParams($params);
 		return $component;
+	}
+
+	public function addHtmlComponent($htmlComponent){
+		$this->htmlComponents[]=$htmlComponent;
+		return $htmlComponent;
+	}
+
+	public function compileHtml(JsUtils $js=NULL,View $view=NULL){
+		foreach ($this->htmlComponents as $htmlComponent){
+			$htmlComponent->compile($js,$view);
+		}
 	}
 }

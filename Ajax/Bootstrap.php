@@ -8,6 +8,8 @@ use Ajax\bootstrap\Components\Tab;
 use Ajax\bootstrap\Components\Collapse;
 use Ajax\bootstrap\Components\Carousel;
 use Ajax\bootstrap\Components\GenericComponent;
+use Ajax\bootstrap\html\HtmlButton;
+use Ajax\bootstrap\html\HtmlButtongroups;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -77,5 +79,24 @@ class Bootstrap extends BaseGui{
 	 */
 	public function carousel($attachTo=NULL,$params=NULL){
 		return $this->addComponent(new Carousel($this->js), $attachTo, $params);
+	}
+
+	public function htmlButton($identifier, $value="",$cssStyle=null,$onClick=null){
+		$button=new HtmlButton($identifier,$value,$cssStyle,$onClick);
+		return $this->addHtmlComponent($button);
+	}
+
+	public function htmlButtongroups($identifier, $values=null,$cssStyle=null,$size=null){
+		$buttongroup=new HtmlButtongroups($identifier);
+		if (isset($values)){
+			$buttongroup->fromArray($values);
+		}
+		if (isset($cssStyle)){
+			$buttongroup->setStyle($cssStyle);
+		}
+		if (isset($size)){
+			$buttongroup->setSize($size);
+		}
+		return $this->addHtmlComponent($buttongroup);
 	}
 }
