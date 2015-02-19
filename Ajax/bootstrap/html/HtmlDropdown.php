@@ -21,11 +21,12 @@ class HtmlDropdown extends HtmlButton {
 	/**
 	 * @param string $identifier the id
 	 */
-	public function __construct($identifier) {
-		parent::__construct($identifier);
+	public function __construct($identifier, $value="",$items=array(),$cssStyle=null,$onClick=null) {
+		parent::__construct($identifier,"",$cssStyle,$onClick);
 		$this->_template=include 'templates/tplDropdown.php';
+		$this->btnCaption=$value;
 		$this->tagName="a";
-		$this->items=array();
+		$this->fromArray($items);
 	}
 	/**
 	 * Define the tagName of the main element
@@ -55,22 +56,49 @@ class HtmlDropdown extends HtmlButton {
 	}
 
 
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\HtmlButton::setValue()
+	 */
+	public function setValue($value) {
+		$this->btnCaption=$value;
+	}
+
+
 	/**
-	 * add an HtmlDropdownitem
+	 * define the buttons size
+	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
+	 * @param string/int $size
+	 * @return \Ajax\bootstrap\html\HtmlButtonsgroup
+	 * default : ""
+	 */
+	public function setSize($size){
+		if(is_int($size)){
+			return $this->addToProperty("class", CssRef::sizes("btn-group")[$size]);
+		}
+		return $this->addToPropertyCtrl("class", $size, CssRef::sizes("btn-group"));
+	}
+
+
+	/**
+	 * add an HtmlDropdownItem
 	 * @param string $caption
 	 * @param string $href
-	 * @return HtmlDropdown
+	 * @return HtmlDropdownItem
 	 */
 	public function addItem($caption,$href="#"){
 		$iid=$this->getItemsCount()+1;
 		$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 		$item->setCaption($caption)->setHref($href);
 		$this->items[]=$item;
-		return $this;
+		return $item;
 	}
 
 	public function addDivider(){
 		return $this->addItem("-");
+	}
+
+	public function addHeader($caption){
+		return $this->addItem("-".$caption);
 	}
 
 	public function addItems($items){
@@ -189,6 +217,42 @@ class HtmlDropdown extends HtmlButton {
 		$this->setTagName("button");
 		$this->setBtnClass("btn dropdown-toggle");
 		$this->setStyle($cssStyle);
+	}
+
+	/**
+	 * This event fires immediately when the show instance method is called.
+	 * @param string $jsCode
+	 * @return $this
+	 */
+	public function onShow($jsCode){
+		return $this->addEvent("show.bs.dropdown", $jsCode);
+	}
+
+	/**
+	 * This event is fired when a dropdown element has been made visible to the user (will wait for CSS transitions to complete).
+	 * @param string $jsCode
+	 * @return $this
+	 */
+	public function onShown($jsCode){
+		return $this->addEvent("shown.bs.dropdown", $jsCode);
+	}
+
+	/**
+	 * This event is fired immediately when the hide method has been called.
+	 * @param string $jsCode
+	 * @return $this
+	 */
+	public function onHide($jsCode){
+		return $this->addEvent("hide.bs.dropdown", $jsCode);
+	}
+
+	/**
+	 * This event is fired when a dropdown element has been hidden from the user (will wait for CSS transitions to complete).
+	 * @param string $jsCode
+	 * @return $this
+	 */
+	public function onHidden($jsCode){
+		return $this->addEvent("hidden.bs.dropdown", $jsCode);
 	}
 
 }

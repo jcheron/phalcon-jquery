@@ -40,4 +40,5 @@ class HtmlSingleElement extends BaseHtml {
 		}
 		return $array;
 	}
+	public function setSize($size){}
 }

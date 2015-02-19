@@ -478,7 +478,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		return $this->js->_addClass($element, $class,$immediatly);
 	}
 
-		/**
+	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
 	 * @param string $attributeName
@@ -487,6 +487,16 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 */
 	function attr($element = 'this' , $attributeName,$value='',$immediatly=false){
 		return $this->js->_attr($element, $attributeName,$value,$immediatly);
+	}
+
+	/**
+	 * Get or set the html of an attribute for the first element in the set of matched elements.
+	 * @param string $element
+	 * @param string $value
+	 * @param string $immediatly diffère l'exécution si false
+	 */
+	function html($element = 'this',$value='',$immediatly=false){
+		return $this->js->_html($element,$value,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -682,6 +692,10 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	function show($element = 'this', $speed = '', $callback = '')
 	{
 		return $this->js->_show($element, $speed, $callback);
+	}
+
+	function condition($condition,$jsCodeIfTrue,$jsCodeIfFalse=null){
+		return $this->js->_condition($condition, $jsCodeIfTrue,$jsCodeIfFalse);
 	}
 
 

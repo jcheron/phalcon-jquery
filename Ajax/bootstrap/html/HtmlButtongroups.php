@@ -26,6 +26,9 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	 * default : ""
 	 */
 	public function setSize($size){
+		foreach ($this->elements as $element){
+				$element->setSize($size);
+		}
 		if(is_int($size)){
 			return $this->addToProperty("class", CssRef::sizes("btn-group")[$size]);
 		}

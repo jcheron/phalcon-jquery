@@ -7,9 +7,16 @@ namespace Ajax\bootstrap\html;
  */
 class HtmlInputCheckbox extends HtmlInput{
 
-	public function __construct($identifier) {
+	public function __construct($identifier,$label=NULL) {
 		parent::__construct($identifier);
 		$this->setProperty("type", "checkbox");
 		$this->setProperty("class", "");
+		if(isset($label)){
+			$this->addLabel($label,false);
+		}
+	}
+
+	public function setLabel($value){
+		$this->addLabel($value,false);
 	}
 }

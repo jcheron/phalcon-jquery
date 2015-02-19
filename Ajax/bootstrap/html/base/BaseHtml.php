@@ -81,12 +81,12 @@ abstract class BaseHtml extends BaseWidget {
 			$this->run($js);
 		}
 		if(isset($view)===true){
-			$controls=$view->getVar("controls");
+			$controls=$view->getVar("q");
 			if(isset($controls)===false){
 				$controls=array();
 			}
 			$controls[$this->identifier]=$result;
-			$view->setVar("controls",$controls);
+			$view->setVar("q",$controls);
 		}
 		return $result;
 	}
@@ -192,13 +192,19 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	public function addEvent($event,$jsCode){
+	public function addEvent($event,$jsCode,$stopPropagation=false,$preventDefault=false){
+		if($stopPropagation===true){
+			$jsCode="e.stopPropagation();".$jsCode;
+		}
+		if($preventDefault===true){
+			$jsCode="e.preventDefault();".$jsCode;
+		}
 		$this->events[$event]=$jsCode;
 		return $this;
 	}
 
-	public function on($event,$jsCode){
-		return $this->addEvent($event, $jsCode);
+	public function on($event,$jsCode,$stopPropagation=false,$preventDefault=false){
+		return $this->addEvent($event, $jsCode,$stopPropagation,$preventDefault);
 	}
 
 	public function addEventsOnRun(){

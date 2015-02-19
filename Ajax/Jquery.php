@@ -419,6 +419,23 @@ class Jquery extends JsUtils{
 		return $str;
 	}
 
+	/**
+	 * Get or set the html of an attribute for the first element in the set of matched elements.
+	 * @param string $element
+	 * @param string $value
+	 * @param string $immediatly diffère l'exécution si false
+	 */
+	function _html($element = 'this' ,$value="",$immediatly=false){
+		$element = $this->_prep_element($element);
+		if(isset($value))
+			$str  = "$({$element}).html(\"$value\");";
+		else
+			$str  = "$({$element}).html();";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
+		return $str;
+	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -708,6 +725,14 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).show({$speed}{$callback});";
 
+		return $str;
+	}
+
+	function _condition($condition, $jsCodeIfTrue,$jsCodeIfFalse=null){
+		$str="if(".$condition."){".$jsCodeIfTrue."}";
+		if(isset($jsCodeIfFalse)){
+			$str.="else{".$jsCodeIfFalse."}";
+		}
 		return $str;
 	}
 

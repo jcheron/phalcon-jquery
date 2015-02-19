@@ -9,19 +9,15 @@ require_once 'HtmlButton.php';
 class HtmlGlyphButton extends HtmlButton {
 	protected $glyph;
 
-	public function __construct($identifier,$glyph=0) {
-		parent::__construct($identifier);
+	public function __construct($identifier,$glyph=0, $value="",$cssStyle=null,$onClick=null) {
+		parent::__construct($identifier,$value,$cssStyle,$onClick);
 		$this->_template="<%tagName% id='%identifier%' %properties%>%glyph% %content%</%tagName%>";
 		$this->tagName="button";
 		$this->setGlyph($glyph);
 	}
 	public function setGlyph($glyph) {
-		if(is_int($glyph))
-			$this->glyph=HtmlGlyphicon::getGlyphicon($glyph);
-		else{
-			$this->glyph = new HtmlGlyphicon();
-			$this->glyph->setGlyphicon($glyph);
-		}
+		$this->glyph = new HtmlGlyphicon($this->identifier."-glyph");
+		$this->glyph->setGlyphicon($glyph);
 		return $this;
 	}
 }

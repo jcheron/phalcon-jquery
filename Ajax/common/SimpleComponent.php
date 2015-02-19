@@ -19,6 +19,11 @@ abstract class SimpleComponent extends BaseComponent {
 		$this->events=array();
 	}
 
+	protected function compileEvents(){
+		foreach ($this->events as $event=>$jsCode){
+			$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function( event, data ) {".$jsCode."});";
+		}
+	}
 	protected function compileJQueryCode(){
 		$result= implode("\n", $this->jquery_code_for_compile);
 		$result=str_ireplace("\"%", "", $result);
@@ -31,9 +36,10 @@ abstract class SimpleComponent extends BaseComponent {
 		$allParams=$this->params;
 		$this->jquery_code_for_compile=array();
 		$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
-		foreach ($this->events as $event=>$jsCode){
-			$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"{$event}\",function( event, data ) {".$jsCode."});";
-		}
+		$this->compileEvents();
+// 		foreach ($this->events as $event=>$jsCode){
+// 			$this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"{$event}\",function( event, data ) {".$jsCode."});";
+// 		}
 		return $this->compileJQueryCode();
 	}
 

@@ -6,9 +6,16 @@ namespace Ajax\bootstrap\html;
  * @version 1.001
  */
 class HtmlInputRadio extends HtmlInput {
-	public function __construct($identifier) {
+	public function __construct($identifier,$label=NULL) {
 		parent::__construct ( $identifier );
 		$this->setProperty("type", "radio");
 		$this->setProperty("class", "");
+			if(isset($label)){
+			$this->addLabel($label,false);
+		}
+	}
+
+	public function setLabel($value){
+		$this->addLabel($value,false);
 	}
 }
