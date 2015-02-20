@@ -11,11 +11,18 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 class HtmlButtongroups extends HtmlDoubleElement {
 	protected $elements;
 
-	public function __construct($identifier, $tagName = "div") {
+	public function __construct($identifier, $elements=array(),$cssStyle=NULL,$size=NULL,$tagName = "div") {
 		parent::__construct ($identifier, $tagName);
 		$this->_template="<%tagName% id='%identifier%' %properties%>%elements%</%tagName%>";
 		$this->setProperty("class", "btn-group");
 		$this->setRole("group");
+		$this->addElements($elements);
+		if(isset($cssStyle)){
+			$this->setStyle($cssStyle);
+		}
+		if (isset($size)){
+			$this->setSize($size);
+		}
 	}
 
 	/**
@@ -30,7 +37,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 				$element->setSize($size);
 		}
 		if(is_int($size)){
-			return $this->addToProperty("class", CssRef::sizes("btn-group")[$size]);
+			return $this->addToPropertyUnique("class", CssRef::sizes("btn-group")[$size],CssRef::sizes("btn-group"));
 		}
 		return $this->addToPropertyCtrl("class", $size, CssRef::sizes("btn-group"));
 	}
@@ -41,6 +48,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	}
 
 	public function addElement($element){
+		$result=$element;
 		$iid=sizeof($this->elements)+1;
 		if($element instanceof HtmlButton){
 			$this->elements[]=$element;
@@ -58,20 +66,21 @@ class HtmlButtongroups extends HtmlDoubleElement {
 				$bt->setTagName("button");
 				$bt->addBtnClass("dropdown-toogle");
 				$bt->addBtnClass("btn-default");
-
 			}else
 				$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->fromArray($element);
 			$this->elements[]=$bt;
-
+			$result=$bt;
 		}elseif(is_string($element)){
 			$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->setValue($element);
 			$this->elements[]=$bt;
+			$result=$bt;
 		}
+		return $result;
 	}
 
-	public function setElements($elements){
+	public function addElements($elements){
 		foreach ($elements as $element){
 			$this->addElement($element);
 		}
@@ -83,17 +92,8 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\HtmlSingleElement::fromArray()
 	 */
 	public function fromArray($array) {
-		$this->setElements($array);
+		$this->addElements($array);
 
-	}
-
-	/* (non-PHPdoc)
-	 * @see \Ajax\bootstrap\html\HtmlSingleElement::run()
-	 */
-	public function run(JsUtils $js) {
-		foreach ($this->elements as $element){
-			$element->run($js);
-		}
 	}
 
 	public function setAlignment($value){
@@ -109,12 +109,37 @@ class HtmlButtongroups extends HtmlDoubleElement {
 		$this->addToPropertyCtrl("class", $value, CssRef::alignment("btn-group-"));
 	}
 
-	public function getButton($index){
+	/**
+	 * Return the element at index
+	 * @param int $index
+	 * @return HtmlButton
+	 */
+	public function getElement($index){
 		return $this->elements[$index];
 	}
 
-	public function setButton($index,$button){
+	public function setElement($index,$button){
 		$this->elements[$index]=$button;
 		return $this;
+	}
+
+	/**
+	 * @param string $jsCode
+	 * @param string $stopPropagation
+	 * @param string $preventDefault
+	 */
+	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
+		foreach ($this->elements as $element){
+			$element->onClick($jsCode,$stopPropagation,$preventDefault);
+		}
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::on()
+	 */
+	public function on($event,$jsCode,$stopPropagation=false,$preventDefault=false){
+			foreach ($this->elements as $element){
+			$element->on($event,$jsCode,$stopPropagation,$preventDefault);
+		}
 	}
 }

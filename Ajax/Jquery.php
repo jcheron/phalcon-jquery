@@ -395,7 +395,8 @@ class Jquery extends JsUtils{
 	 */
 	function _addClass($element = 'this', $class='',$immediatly=false){
 		$element = $this->_prep_element($element);
-		$str  = "$({$element}).addClass(\"$class\");";
+		$class=$this->_prep_value($class);
+		$str  = "$({$element}).addClass({$class});";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $str;
 		return $str;
@@ -410,8 +411,10 @@ class Jquery extends JsUtils{
 	 */
 	function _attr($element = 'this' , $attributeName,$value="",$immediatly=false){
 		$element = $this->_prep_element($element);
-		if(isset($value))
-			$str  = "$({$element}).attr(\"$attributeName\",\"$value\");";
+		if(isset($value)){
+			$value=$this->_prep_value($value);
+			$str  = "$({$element}).attr(\"$attributeName\",{$value});";
+		}
 		else
 			$str  = "$({$element}).attr(\"$attributeName\");";
 		if($immediatly)
@@ -427,8 +430,10 @@ class Jquery extends JsUtils{
 	 */
 	function _html($element = 'this' ,$value="",$immediatly=false){
 		$element = $this->_prep_element($element);
-		if(isset($value))
-			$str  = "$({$element}).html(\"$value\");";
+		if(isset($value)){
+			$value=$this->_prep_value($value);
+			$str  = "$({$element}).html({$value});";
+		}
 		else
 			$str  = "$({$element}).html();";
 		if($immediatly)
@@ -449,8 +454,7 @@ class Jquery extends JsUtils{
 	 * @param	string	- Javascript callback function
 	 * @return	string
 	 */
-	function _animate($element = 'this', $params = array(), $speed = '', $extra = '')
-	{
+	function _animate($element = 'this', $params = array(), $speed = '', $extra = ''){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -478,6 +482,30 @@ class Jquery extends JsUtils{
 		return $str;
 	}
 
+	/**
+	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
+	 * @param string $to
+	 * @param string $element
+	 * @return string
+	 */
+	public function _append($to = 'this',$element){
+		$to = $this->_prep_element($to);
+		$element = $this->_prep_element($element);
+		return "$({$to}).append({$element});";
+	}
+
+	/**
+	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
+	 * @param string $to
+	 * @param string $element
+	 * @return string
+	 */
+	public function _prepend($to = 'this',$element){
+		$to = $this->_prep_element($to);
+		$element = $this->_prep_element($element);
+		return "$({$to}).prepend({$element});";
+	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -491,8 +519,7 @@ class Jquery extends JsUtils{
 	 * @param	string	- Javascript callback function
 	 * @return	string
 	 */
-	function _fadeIn($element = 'this', $speed = '', $callback = '')
-	{
+	function _fadeIn($element = 'this', $speed = '', $callback = ''){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -519,8 +546,7 @@ class Jquery extends JsUtils{
 	 * @param	string	- Javascript callback function
 	 * @return	string
 	 */
-	function _fadeOut($element = 'this', $speed = '', $callback = '')
-	{
+	function _fadeOut($element = 'this', $speed = '', $callback = ''){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -697,6 +723,17 @@ class Jquery extends JsUtils{
 	{
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).toggleClass(\"$class\");";
+		return $str;
+	}
+
+	/**
+	 * Execute all handlers and behaviors attached to the matched elements for the given event.
+	 * @param string $element
+	 * @param string $event
+	 */
+	public function _trigger($element='this',$event='click'){
+		$element = $this->_prep_element($element);
+		$str  = "$({$element}).trigger(\"$event\");";
 		return $str;
 	}
 
@@ -1099,14 +1136,29 @@ class Jquery extends JsUtils{
 	 * @param	string
 	 * @return	string
 	 */
-	function _prep_element($element)
-	{
-		if (strrpos($element,'this')===false)
-		{
+	function _prep_element($element){
+		if (strrpos($element,'this')===false && strrpos($element,'event')===false){
 			$element = '"'.$element.'"';
 		}
-
 		return $element;
+	}
+
+	/**
+	 * Prep Value
+	 *
+	 * Puts HTML values in quotes for use in jQuery code
+	 * unless the supplied value contains the Javascript 'this' or 'event'
+	 * object, in which case no quotes are added
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	string
+	 */
+	function _prep_value($value){
+		if (strrpos($value,'this')===false && strrpos($value,'event')===false){
+			$value = '"'.$value.'"';
+		}
+		return $value;
 	}
 
 	// --------------------------------------------------------------------
@@ -1143,8 +1195,34 @@ class Jquery extends JsUtils{
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.get(url,".$params.").done(function( data ) {\n";
-		if($responseElement!=="")
-			$retour.="\t$('".$responseElement."').html( data );\n";
+		if($responseElement!==""){
+			$responseElement=$this->_prep_value($responseElement);
+			$retour.="\t$({$responseElement}).html( data );\n";
+		}
+		$retour.="\t".$function."\n
+		});\n";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $retour;
+		return $retour;
+	}
+
+	/**
+	 * Effectue une requête en ajax, et réceptionne les données de type JSON en les affectant aux éléments DOM du même nom
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function _json($url,$method="get",$params="{}",$function=NULL,$attr="id",$immediatly=false){
+		$url=$this->_correctAjaxUrl($url);
+		$function=isset($function)?$function:"";
+		$retour="url='".$url."';\n";
+		if($attr=="value")
+			$retour.="url=url+'/'+$(this).val();\n";
+		else
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
+		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key)){ $('#'+key).val(data[key]);}};\n";
 		$retour.="\t".$function."\n
 		});\n";
 		if($immediatly)
@@ -1161,8 +1239,10 @@ class Jquery extends JsUtils{
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.post(url,".$params.").done(function( data ) {\n";
-		if($responseElement!=="")
-			$retour.="\t$('".$responseElement."').html( data );\n";
+		if($responseElement!==""){
+			$responseElement=$this->_prep_value($responseElement);
+			$retour.="\t$({$responseElement}).html( data );\n";
+		}
 		$retour.="\t".$function."\n
 		});\n";
 		if($immediatly)
@@ -1178,8 +1258,10 @@ class Jquery extends JsUtils{
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.post(url,$(".$form.").serialize()).done(function( data ) {\n";
-		if($responseElement!=="")
-			$retour.="\t$('".$responseElement."').html( data );\n";
+		if($responseElement!==""){
+			$responseElement=$this->_prep_value($responseElement);
+			$retour.="\t$({$responseElement}).html( data );\n";
+		}
 		$retour.="\t".$function."\n
 		});\n";
 		if($validation){

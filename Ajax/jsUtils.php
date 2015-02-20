@@ -512,11 +512,29 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- Javascript callback function
 	 * @return	string
 	 */
-	function animate($element = 'this', $params = array(), $speed = '', $extra = '')
-	{
+	function animate($element = 'this', $params = array(), $speed = '', $extra = ''){
 		return $this->js->_animate($element, $params, $speed, $extra);
 	}
 
+	/**
+	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
+	 * @param string $to
+	 * @param string $element
+	 * @return string
+	 */
+	public function append($to = 'this',$element){
+		return $this->js->_append($to,$element);
+	}
+
+	/**
+	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
+	 * @param string $to
+	 * @param string $element
+	 * @return string
+	 */
+	public function prepend($to = 'this',$element){
+		return $this->js->_prepend($to,$element);
+	}
 	// --------------------------------------------------------------------
 
 	/**
@@ -671,11 +689,18 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @return	string
 	 */
-	function toggleClass($element = 'this', $class='')
-	{
+	public function toggleClass($element = 'this', $class=''){
 		return $this->js->_toggleClass($element, $class);
 	}
 
+	/**
+	 * Execute all handlers and behaviors attached to the matched elements for the given event.
+	 * @param string $element
+	 * @param string $event
+	 */
+	public function trigger($element='this',$event='click'){
+		return $this->js->_trigger($element, $event);
+	}
 	// --------------------------------------------------------------------
 
 	/**
@@ -689,8 +714,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- Javascript callback function
 	 * @return	string
 	 */
-	function show($element = 'this', $speed = '', $callback = '')
-	{
+	public function show($element = 'this', $speed = '', $callback = ''){
 		return $this->js->_show($element, $speed, $callback);
 	}
 
@@ -973,6 +997,39 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
+	 * Effectue une requête en ajax, et réceptionne les données de type JSON en les affectant aux éléments DOM du même nom
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function json($url,$method="get",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_json($url,$method,$params,$function,$attr,true);
+	}
+
+	/**
+	 * Effectue une requête différée en ajax, et réceptionne les données de type JSON en les affectant aux éléments DOM du même nom
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function jsonDeferred($url,$method="get",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_json($url,$method,$params,$function,$attr,false);
+	}
+	/**
+	 * Prépare un GET différé en ajax
+	 * A utiliser sur un event
+	 * @param string $url Adresse de la requête
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $responseElement id de l'élément HTML affichant la réponse
+	 * @param string $function fonction appelée éventuellement après réception
+	 */
+	public function getDeferred($url,$responseElement="",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_get($url,$params,$responseElement,$function,$attr,false);
+	}
+
+	/**
 	 * Effectue un get vers $url sur l'évènement $event de $element en passant les paramètres $params
 	 * puis affiche le résultat dans $responseElement
 	 * @param string $element
@@ -998,6 +1055,18 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
+	 * Prépare un POST différé en ajax
+	 * A utiliser sur un event
+	 * @param string $url Adresse de la requête
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $responseElement id de l'élément HTML affichant la réponse
+	 * @param string $function fonction appelée éventuellement après réception
+	 */
+	public function postDeferred($url,$responseElement="",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_post($url,$params,$responseElement,$function,$attr,false);
+	}
+
+	/**
 	 * Effectue un post vers $url sur l'évènement $event de $element en passant les paramètres $params
 	 * puis affiche le résultat dans $responseElement
 	 * @param string $element
@@ -1010,6 +1079,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	public function postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$function=NULL,$attr="id"){
 		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$function,$attr);
 	}
+
 	/**
 	 * Effectue un POST d'un formulaire en ajax
 	 * @param string $url Adresse de la requête
@@ -1018,7 +1088,19 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $function fonction appelée éventuellement après réception
 	 */
 	public function postForm($url,$form,$responseElement,$validation=false,$function=NULL,$attr="id"){
-		return $this->js->_postForm($url, $form, $responseElement,$validation,$function,$attr);
+		return $this->js->_postForm($url, $form, $responseElement,$validation,$function,$attr,true);
+	}
+
+	/**
+	 * Prépare un POST différé d'un formulaire en ajax
+	 * A utiliser sur un event
+	 * @param string $url Adresse de la requête
+	 * @param string $form id du formulaire à poster
+	 * @param string $responseElement id de l'élément HTML affichant la réponse
+	 * @param string $function fonction appelée éventuellement après réception
+	 */
+	public function postFormDeferred($url,$form,$responseElement,$validation=false,$function=NULL,$attr="id"){
+		return $this->js->_postForm($url, $form, $responseElement,$validation,$function,$attr,false);
 	}
 
 	/**

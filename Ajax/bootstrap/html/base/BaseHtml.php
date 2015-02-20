@@ -117,6 +117,14 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
+	protected function addToMemberUnique(&$name,$value,$typeCtrl,$separator=" "){
+			if(is_array($typeCtrl)){
+				$this->removeOldValues($name, $typeCtrl);
+			$name.=$separator.$value;
+		}
+		return $this;
+	}
+
 	protected function addToMemberCtrl(&$name,$value,$typeCtrl,$separator=" "){
 		if($this->ctrl($name, $value, $typeCtrl)===true){
 			if(is_array($typeCtrl)){
@@ -130,6 +138,15 @@ abstract class BaseHtml extends BaseWidget {
 	protected function addToMember(&$name,$value,$separator=" "){
 		$name=str_ireplace($value, "", $name).$separator.$value;
 		return $this;
+	}
+
+	protected function addToPropertyUnique($name,$value,$typeCtrl){
+		if(@class_exists($typeCtrl,true))
+			$typeCtrl=$typeCtrl::getConstants();
+		if(is_array($typeCtrl)){
+			$this->removeOldValues($this->properties[$name], $typeCtrl);
+		}
+		return $this->addToProperty($name, $value);
 	}
 
 	protected function addToPropertyCtrl($name,$value,$typeCtrl){
@@ -194,10 +211,10 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function addEvent($event,$jsCode,$stopPropagation=false,$preventDefault=false){
 		if($stopPropagation===true){
-			$jsCode="e.stopPropagation();".$jsCode;
+			$jsCode="event.stopPropagation();".$jsCode;
 		}
 		if($preventDefault===true){
-			$jsCode="e.preventDefault();".$jsCode;
+			$jsCode="event.preventDefault();".$jsCode;
 		}
 		$this->events[$event]=$jsCode;
 		return $this;

@@ -52,7 +52,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 */
 	public function setStyle($cssStyle){
 		if(is_int($cssStyle)){
-			return $this->addToPropertyCtrl("class", CssRef::buttonStyles()[$cssStyle],"Ajax\bootstrap\html\CssButton");
+			return $this->addToPropertyUnique("class", CssRef::buttonStyles()[$cssStyle],"Ajax\bootstrap\html\CssButton");
 		}
 		if(Text::startsWith($cssStyle, "btn-")===false){
 			$cssStyle="btn".$cssStyle;
@@ -69,7 +69,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 */
 	public function setSize($size){
 		if(is_int($size)){
-			return $this->addToProperty("class", CssRef::sizes()[$size]);
+			return $this->addToPropertyUnique("class", CssRef::sizes()[$size], CssRef::sizes());
 		}
 		return $this->addToPropertyCtrl("class", $size, CssRef::sizes());
 	}
@@ -122,10 +122,10 @@ class HtmlButton extends HtmlDoubleElement {
 
 	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
 		if($stopPropagation===true){
-			$jsCode="e.stopPropagation();".$jsCode;
+			$jsCode="event.stopPropagation();".$jsCode;
 		}
 		if($preventDefault===true){
-			$jsCode="e.preventDefault();".$jsCode;
+			$jsCode="event.preventDefault();".$jsCode;
 		}
 		$this->events["click"]=$jsCode;
 		return $this;

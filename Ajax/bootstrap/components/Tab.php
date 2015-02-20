@@ -17,7 +17,7 @@ class Tab extends SimpleBsComponent {
 	 * @see \Ajax\bootstrap\Components\SimpleBsComponent::getScript()
 	 */
 	public function getScript() {
-		$jsCode="$('".$this->attachTo." a').click(function (e) { e.preventDefault();$(this).tab('show');});";
+		$jsCode="$('".$this->attachTo." a').click(function (event) { event.preventDefault();$(this).tab('show');});";
 		$this->jquery_code_for_compile[]=$jsCode;
 		$this->compileEvents();
 		return $this->compileJQueryCode();

@@ -13,6 +13,7 @@ use Ajax\bootstrap\html\HtmlButtongroups;
 use Ajax\bootstrap\html\HtmlGlyphButton;
 use Ajax\bootstrap\html\HtmlDropdown;
 use Ajax\bootstrap\Components\Splitbutton;
+use Ajax\bootstrap\html\HtmlButtontoolbar;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -127,17 +128,8 @@ class Bootstrap extends BaseGui{
 	 * @param string $size
 	 * @return HtmlButtongroups
 	 */
-	public function htmlButtongroups($identifier, $values=NULL,$cssStyle=NULL,$size=NULL){
-		$buttongroup=new HtmlButtongroups($identifier);
-		if (isset($values)){
-			$buttongroup->fromArray($values);
-		}
-		if (isset($cssStyle)){
-			$buttongroup->setStyle($cssStyle);
-		}
-		if (isset($size)){
-			$buttongroup->setSize($size);
-		}
+	public function htmlButtongroups($identifier, $values=array(),$cssStyle=NULL,$size=NULL){
+		$buttongroup=new HtmlButtongroups($identifier,$values,$cssStyle,$size);
 		return $this->addHtmlComponent($buttongroup);
 	}
 
@@ -149,8 +141,21 @@ class Bootstrap extends BaseGui{
 	 * @param string $size
 	 * @return HtmlDropdown
 	 */
-	public function htmlDropdown($identifier, $value="",$items=NULL,$cssStyle=NULL,$size=NULL){
+	public function htmlDropdown($identifier, $value="",$items=array(),$cssStyle=NULL,$size=NULL){
 		$button=new HtmlDropdown($identifier,$value,$items,$cssStyle,$size);
+		return $this->addHtmlComponent($button);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Dropdown
+	 * @param string $identifier
+	 * @param string $items
+	 * @param string $cssStyle
+	 * @param string $size
+	 * @return HtmlButtontoolbar
+	 */
+	public function htmlButtontoolbar($identifier,$elements=array(),$cssStyle=NULL,$size=NULL){
+		$button=new HtmlButtontoolbar($identifier,$elements,$cssStyle,$size);
 		return $this->addHtmlComponent($button);
 	}
 }
