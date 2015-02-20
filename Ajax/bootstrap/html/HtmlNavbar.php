@@ -21,14 +21,15 @@ class HtmlNavbar extends BaseHtml {
 	/**
 	 * @param string $identifier the id
 	 */
-	public function __construct($identifier) {
+	public function __construct($identifier,$brand="Brand",$brandHref="#") {
 		parent::__construct($identifier);
 		$this->_template=include 'templates/tplNavbar.php';
 		$this->navZones=array();
 		$this->class="navbar-default";
-		$this->brand="Brand";
-		$this->brandHref="#";
+		$this->brand=$brand;
+		$this->brandHref=$brandHref;
 	}
+
 	public function setClass($class) {
 		$this->class = $class;
 		return $this;

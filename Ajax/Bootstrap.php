@@ -14,6 +14,7 @@ use Ajax\bootstrap\html\HtmlGlyphButton;
 use Ajax\bootstrap\html\HtmlDropdown;
 use Ajax\bootstrap\Components\Splitbutton;
 use Ajax\bootstrap\html\HtmlButtontoolbar;
+use Ajax\bootstrap\html\HtmlNavbar;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -97,9 +98,9 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Html Button
 	 * @param string $identifier
-	 * @param string $values
+	 * @param string $value
 	 * @param string $cssStyle
-	 * @param string $size
+	 * @param string $onClick
 	 * @return HtmlButton
 	 */
 	public function htmlButton($identifier, $value="",$cssStyle=null,$onClick=null){
@@ -110,9 +111,10 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Html Glyphbutton
 	 * @param string $identifier
-	 * @param string $values
+	 * @param mixed $glyphIcon
+	 * @param string $value
 	 * @param string $cssStyle
-	 * @param string $size
+	 * @param string $onClick
 	 * @return HtmlGlyphButton
 	 */
 	public function htmlGlyphButton($identifier,$glyphIcon=0, $value="",$cssStyle=NULL,$onClick=NULL){
@@ -123,7 +125,7 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Html Buttongroups
 	 * @param string $identifier
-	 * @param string $values
+	 * @param array $values
 	 * @param string $cssStyle
 	 * @param string $size
 	 * @return HtmlButtongroups
@@ -136,7 +138,7 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Html Dropdown
 	 * @param string $identifier
-	 * @param string $items
+	 * @param array $items
 	 * @param string $cssStyle
 	 * @param string $size
 	 * @return HtmlDropdown
@@ -149,7 +151,7 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Html Dropdown
 	 * @param string $identifier
-	 * @param string $items
+	 * @param array $elements
 	 * @param string $cssStyle
 	 * @param string $size
 	 * @return HtmlButtontoolbar
@@ -157,5 +159,17 @@ class Bootstrap extends BaseGui{
 	public function htmlButtontoolbar($identifier,$elements=array(),$cssStyle=NULL,$size=NULL){
 		$button=new HtmlButtontoolbar($identifier,$elements,$cssStyle,$size);
 		return $this->addHtmlComponent($button);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Navbar
+	 * @param string $identifier
+	 * @param string $brand
+	 * @param string $brandHref
+	 * @return HtmlNavbar
+	 */
+	public function htmlNavbar($identifier,$brand="Brand",$brandHref="#"){
+		$nav=new HtmlNavbar($identifier,$brand,$brandHref);
+		return $this->addHtmlComponent($nav);
 	}
 }
