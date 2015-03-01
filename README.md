@@ -4,7 +4,7 @@ JQuery and UI library (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 ##What's Phalcon-jquery ?
 phalcon-jquery is a PHP library for the Phalcon framework : a Phalcon PHP wrapper for JQuery and UI components (JQuery UI and Twitter Bootstrap).
 
-The library can be injected as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers, respecting the MVC design patern.
+The library can be inserted as a service in **$di** object, and permit to generate JQuery scripts in Phalcon controllers, respecting the MVC design patern.
 
 ##Requirements/Dependencies
 
