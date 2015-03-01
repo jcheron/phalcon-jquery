@@ -80,7 +80,7 @@ class ExController extends Controller{
 		$this->view->setVar("jquery", $this->jquery->genCDNs("humanity"));//humanity template file for JqueryUI
 	}
 ```
-//Julian is here
+**
 In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
 #####volt
 ```html
