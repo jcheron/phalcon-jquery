@@ -30,7 +30,7 @@ git clone https://github.com/jcheron/phalcon-jquery.git
 cd library
 ```
 
-* Copy all contents of the library folder to your libraries folder project
+* Copy all the contents of the library folder to your project's library folder
 
 ```bash
 app
@@ -54,10 +54,10 @@ Define the library directory in phalcon bootstrap file(s) (index.php or loader.p
     	'../app/libraries/'
     ))->register();
 ```
-Copy all files from the phalcon-jquery library folder to your project libraries folder
+Copy all the files from the phalcon-jquery library folder to your project's library folder
 
-###2 - Injection
-Inject Jquery service in the **$di** project :
+###2 - Insertion
+Insert Jquery service into the **$di** project :
 ```php
 $di->set("jquery",function(){
 	$jquery= new JsUtils(array("driver"=>"Jquery"));
@@ -71,8 +71,8 @@ $di->set("jquery",function(){
 
 ###3 - JS files
 ####CDN
-For CDN using (From Google Api or MaxCDN)\\
-In Phalcon controller, implements the initialize method and pass a variable to the view
+To use CDN (From Google Api or MaxCDN)\\
+In Phalcon controller, implement the initialize method and pass a variable to the view
 ```php
 use Phalcon\Mvc\Controller;
 class ExController extends Controller{
@@ -80,6 +80,7 @@ class ExController extends Controller{
 		$this->view->setVar("jquery", $this->jquery->genCDNs("humanity"));//humanity template file for JqueryUI
 	}
 ```
+//Julian is here
 In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
 #####volt
 ```html
