@@ -88,15 +88,15 @@ $loader->registerDirs(
     )
 )->register();
 ```
-Copy all the files from the phalcon-jquery library folder to your project's library folder
+Copy the **Ajax** folder from the phalcon-jquery library folder to your project's library folder
 
 ###2 - Insertion
 Insert Jquery service into the **$di** project :
 ```php
 $di->set("jquery",function(){
-	$jquery= new JsUtils(array("driver"=>"Jquery"));
-	$jquery->ui(new JqueryUI());//optional for JQuery UI
-	$jquery->bootstrap(new Bootstrap());//Optional for Twitter Bootstrap
+	$jquery= new Ajax\JsUtils(array("driver"=>"Jquery"));
+	$jquery->ui(new Ajax\JqueryUI());//optional for JQuery UI
+	$jquery->bootstrap(new Ajax\Bootstrap());//Optional for Twitter Bootstrap
 	
 	return $jquery;
 });
