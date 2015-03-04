@@ -59,6 +59,34 @@ Define the library directory in phalcon bootstrap file(s) (index.php or loader.p
     	'../app/libraries/'
     ))->register();
 ```
+
+If config and loader are in separated files :
+Check the **libraryDir** entry key
+```
+'application' => array(
+    'controllersDir' => __DIR__ . '/../../app/controllers/',
+    'modelsDir'      => __DIR__ . '/../../app/models/',
+    'viewsDir'       => __DIR__ . '/../../app/views/',
+    'pluginsDir'     => __DIR__ . '/../../app/plugins/',
+    'libraryDir'     => __DIR__ . '/../../app/library/',
+    'cacheDir'       => __DIR__ . '/../../app/cache/',
+    'baseUri'        => '/siteBaseURL/',
+);
+```
+Also check the presence of the **libraryDir** variable in **loader.php** file:
+$loader = new \Phalcon\Loader();
+ 
+/**
+ * We're a registering a set of directories taken from the configuration file
+ */
+$loader->registerDirs(
+    array(
+        $config->application->controllersDir,
+        $config->application->modelsDir,
+        $config->application->libraryDir
+    )
+)->register();
+```
 Copy all the files from the phalcon-jquery library folder to your project's library folder
 
 ###2 - Insertion
