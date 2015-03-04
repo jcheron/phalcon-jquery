@@ -60,7 +60,7 @@ Define the library directory in phalcon bootstrap file(s) (index.php or loader.p
     ))->register();
 ```
 
-If config and loader are in separated files :
+If config and loader are in separated files :\\
 Check the **libraryDir** entry key
 ```
 'application' => array(
@@ -74,6 +74,7 @@ Check the **libraryDir** entry key
 );
 ```
 Also check the presence of the **libraryDir** variable in **loader.php** file:
+```
 $loader = new \Phalcon\Loader();
  
 /**
