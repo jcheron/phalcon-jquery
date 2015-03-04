@@ -35,12 +35,17 @@ cd library
 ```bash
 app
 	libraries
-		  Jquery.php
-		  JqueryUI.php
-		  jsUtils.php
-		  Components
-		  lib
-				...
+		Ajax
+			bootstrap
+			common
+			config
+			lib
+			service
+			ui
+			bootstrap.php
+			Jquery.php
+			JqueryUI.php
+			jsUtils.php
 ```
 
 ##II - Phalcon project configuration

@@ -5,6 +5,7 @@ namespace Ajax;
  *
  * @author		jcheron
  * @version 	1.001
+ * @license Apache 2 http://www.apache.org/licenses/
  */
 function __autoload($myClass){
 	if(file_exists("ui/components/".$myClass.".php")){
@@ -61,8 +62,7 @@ class Jquery extends JsUtils{
 	 * @param	string	The code to execute
 	 * @return	string
 	 */
-	function _blur($element = 'this', $js = '')
-	{
+	function _blur($element = 'this', $js = ''){
 		return $this->_add_event($element, $js, 'blur');
 	}
 
@@ -78,8 +78,7 @@ class Jquery extends JsUtils{
 	 * @param	string	The code to execute
 	 * @return	string
 	 */
-	function _change($element = 'this', $js = '')
-	{
+	function _change($element = 'this', $js = ''){
 		return $this->_add_event($element, $js, 'change');
 	}
 
@@ -96,8 +95,7 @@ class Jquery extends JsUtils{
 	 * @param	boolean	whether or not to return false
 	 * @return	string
 	 */
-	function _click($element = 'this', $js = '', $ret_false = TRUE)
-	{
+	function _click($element = 'this', $js = '', $ret_false = TRUE){
 		if ( ! is_array($js))
 		{
 			$js = array($js);
@@ -123,8 +121,7 @@ class Jquery extends JsUtils{
 	 * @param	string	The code to execute
 	 * @return	string
 	 */
-	function _dblclick($element = 'this', $js = '')
-	{
+	function _dblclick($element = 'this', $js = ''){
 		return $this->_add_event($element, $js, 'dblclick');
 	}
 
@@ -140,8 +137,7 @@ class Jquery extends JsUtils{
 	 * @param	string	The code to execute
 	 * @return	string
 	 */
-	function _error($element = 'this', $js = '')
-	{
+	function _error($element = 'this', $js = ''){
 		return $this->_add_event($element, $js, 'error');
 	}
 
@@ -157,8 +153,7 @@ class Jquery extends JsUtils{
 	 * @param	string	The code to execute
 	 * @return	string
 	 */
-	function _focus($element = 'this', $js = '')
-	{
+	function _focus($element = 'this', $js = ''){
 		return $this->_add_event($element, $js, 'focus');
 	}
 
@@ -175,8 +170,7 @@ class Jquery extends JsUtils{
 	 * @param	string	- Javascript code for mouse out
 	 * @return	string
 	 */
-	function _hover($element = 'this', $over, $out)
-	{
+	function _hover($element = 'this', $over, $out){
 		$event = "\n\t$(" . $this->_prep_element($element) . ").hover(\n\t\tfunction()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunction()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
 
 		$this->jquery_code_for_compile[] = $event;
@@ -1207,7 +1201,7 @@ class Jquery extends JsUtils{
 	}
 
 	/**
-	 * Effectue une requête en ajax, et réceptionne les données de type JSON en les affectant aux éléments DOM du même nom
+	 * Makes an ajax request and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request address
 	 * @param string $params Paramètres passés au format JSON
 	 * @param string $method Method use
@@ -1222,7 +1216,7 @@ class Jquery extends JsUtils{
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
-		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key)){ $('#'+key).val(data[key]);}};\n";
+		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key).length){ if($('#'+key).is('[value]')) { $('#'+key).val(data[key]);} else { $('#'+key).html(data[key]); }}};\n";
 		$retour.="\t".$function."\n
 		});\n";
 		if($immediatly)
