@@ -9,25 +9,8 @@ use Phalcon\Forms\Element\Text;
  *
  */
 class PhBsText extends PhBsElement{
-	protected $htmlElement;
 	public function __construct($name, array $attributes = null) {
 		parent::__construct ( $name, $attributes);
-		$this->htmlElement=new HtmlInput($name);
-	}
-
-
-	/* (non-PHPdoc)
-	 * @see \Phalcon\Forms\Element::setLabel()
-	 */
-	public function setLabel($label) {
-		parent::setLabel($label);
-		$this->htmlElement->addLabel($label);
-	}
-
-	public function render($attributes=null){
-			if(isset($attributes))
-				$this->htmlElement->addProperties($attributes);
-			$this->htmlElement->setValue($this->getValue());
-		return $this->htmlElement->compile();
+		$this->renderer=new PhBsRenderer(new Text($name,$attributes), new HtmlInput($name));
 	}
 }
