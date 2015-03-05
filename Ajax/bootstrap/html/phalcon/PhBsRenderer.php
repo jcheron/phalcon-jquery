@@ -23,7 +23,7 @@ class PhBsRenderer {
 
 	public function setLabel($label) {
 		$this->element->setLabel($label);
-		$this->htmlElement->addLabel($label);
+		$this->htmlElement->setLabel($label);
 		return $this;
 	}
 
