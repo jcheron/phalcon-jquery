@@ -17,6 +17,8 @@ class HtmlInput extends HtmlSingleElement {
 		$this->setProperty("value", "");
 		$this->setProperty("type", "text");
 	}
+
+
 	public function setValue($value){
 		$this->setProperty("value", $value);
 	}

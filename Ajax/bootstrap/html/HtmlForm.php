@@ -4,6 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Text;
+use Phalcon\Mvc\View;
 class HtmlForm extends HtmlDoubleElement {
 	protected $formElementsPrefix;
 	protected $futureElements;

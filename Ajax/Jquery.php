@@ -14,6 +14,9 @@ function __autoload($myClass){
 	if(file_exists("bootstrap/html/".$myClass.".php")){
 		require_once("bootstrap/html/".$myClass.".php");
 	}
+	if(file_exists("bootstrap/html/phalcon/".$myClass.".php")){
+		require_once("bootstrap/html/phalcon/".$myClass.".php");
+	}
 }
 /**
  * Jquery Class
@@ -1149,6 +1152,9 @@ class Jquery extends JsUtils{
 	 * @return	string
 	 */
 	function _prep_value($value){
+		if(is_array($value)){
+			$value=implode(",", $value);
+		}
 		if (strrpos($value,'this')===false && strrpos($value,'event')===false){
 			$value = '"'.$value.'"';
 		}
@@ -1314,16 +1320,14 @@ class Jquery extends JsUtils{
 	}
 
 	/**
-	 * Appelle la méthode JQuery $jqueryCall sur $element avec passage éventuel du/des paramètre/s $param
+	 * Call the JQuery method $jqueryCall on $element with parameters $param
 	 * @param string $element
 	 * @param string $jqueryCall
-	 * @param string/array $param
-	 * @return mixed
+	 * @param mixed $param
+	 * @return string
 	 */
 	public function _doJQueryOn($element,$jqueryCall,$param="",$function="",$immediatly=false){
-		if(is_array($param)){
-			$param=implode(",", $param);
-		}
+		$param=$this->_prep_value($param);
 		$callback="";
 		if($function!="")
 			$callback = ", function(event){\n{$function}\n}";

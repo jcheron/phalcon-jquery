@@ -1083,13 +1083,26 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 	/**
 	 * Call the JQuery callback $someThing on $element with facultative parameter $param
-	 * @param string $element
-	 * @param string $someThing
-	 * @param string $param
+	 * @param string $element the element
+	 * @param string $jqueryCall the JQuery callback
+	 * @param mixed $param array or string parameters
+	 * @param string $function
 	 * @return mixed
 	 */
 	public function doJQueryOn($element,$jqueryCall,$param="",$function=""){
 		return $this->js->_doJQueryOn($element, $jqueryCall,$param,$function,true);
+	}
+
+	/**
+	 * Call the JQuery callback $someThing on $element with facultative parameter $param
+	 * @param string $element the element
+	 * @param string $jqueryCall the JQuery callback
+	 * @param mixed $param array or string parameters
+	 * @param string $function
+	 * @return mixed
+	 */
+	public function doJQueryOnDeferred($element,$jqueryCall,$param="",$function=""){
+		return $this->js->_doJQueryOn($element, $jqueryCall,$param,$function,false);
 	}
 
 	/**
