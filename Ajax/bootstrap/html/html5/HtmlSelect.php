@@ -3,6 +3,7 @@
 namespace Ajax\bootstrap\html\html5;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\JsUtils;
 
 class HtmlSelect extends HtmlDoubleElement {
 	public function __construct($identifier) {
@@ -48,5 +49,23 @@ class HtmlSelect extends HtmlDoubleElement {
 		}else{
 			$this->wrap("","<label for='".$this->identifier."'>&nbsp;".$label."</label>");
 		}
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
+	 */
+	public function run(JsUtils $js) {
+		parent::run($js);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
+		$this->addEventsOnRun();
+		return $this->_bsComponent;
+	}
+
+	public function onChange($jsCode){
+		return $this->addEvent("change", $jsCode);
+	}
+
+	public function onKeypress($jsCode){
+		return $this->addEvent("keypress", $jsCode);
 	}
 }

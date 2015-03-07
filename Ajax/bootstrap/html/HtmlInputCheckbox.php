@@ -12,11 +12,7 @@ class HtmlInputCheckbox extends HtmlInput{
 		$this->setProperty("type", "checkbox");
 		$this->setProperty("class", "");
 		if(isset($label)){
-			$this->addLabel($label,false);
+			$this->setLabel($label,false);
 		}
-	}
-
-	public function setLabel($value){
-		$this->addLabel($value,false);
 	}
 }

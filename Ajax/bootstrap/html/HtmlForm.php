@@ -5,6 +5,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Text;
 use Phalcon\Mvc\View;
+use Ajax\bootstrap\html\html5\HtmlSelect;
 class HtmlForm extends HtmlDoubleElement {
 	protected $formElementsPrefix;
 	protected $futureElements;
@@ -31,18 +32,24 @@ class HtmlForm extends HtmlDoubleElement {
 					case "input":
 						$control=new HtmlInput($futureElement);
 						$control->setClass("form-control");
-						$control->addLabel($this->getPart($futureElement));
+						$control->setLabel($this->getPart($futureElement));
 						break;
 					case "checkbox":
 						$control=new HtmlInputCheckbox($futureElement);
-						$control->addLabel($this->getPart($futureElement),false);
+						$control->setLabel($this->getPart($futureElement),false);
 						break;
 					case "radio":
 						$name=$this->getPart($futureElement);
 						$label=$this->getPart($futureElement,2);
 						$control=new HtmlInputRadio($futureElement);
 						$control->setProperty("name", strtolower($name));
-						$control->addLabel($label,false);
+						$control->setLabel($label,false);
+						break;
+					case "select":
+						$control=new HtmlSelect($futureElement);
+						$control->setProperty("size", $futureElementValues[1]);
+						$control->setClass("form-control");
+						$control->setLabel($this->getPart($futureElement));
 						break;
 				}
 				$this->addElement($control);
@@ -101,6 +108,15 @@ class HtmlForm extends HtmlDoubleElement {
 		}
 		$group=$this->formGroups[sizeof($this->formGroups)-1];
 		$group->addContent($element);
+		return $group;
+	}
+
+	public function getElement($name){
+		$element=null;
+		foreach ($this->formGroups as $group){
+
+		}
+		return $element;
 	}
 
 

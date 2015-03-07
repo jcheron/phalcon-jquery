@@ -11,11 +11,7 @@ class HtmlInputRadio extends HtmlInput {
 		$this->setProperty("type", "radio");
 		$this->setProperty("class", "");
 			if(isset($label)){
-			$this->addLabel($label,false);
+			$this->setLabel($label,false);
 		}
-	}
-
-	public function setLabel($value){
-		$this->addLabel($value,false);
 	}
 }

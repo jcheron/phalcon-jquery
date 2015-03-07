@@ -27,11 +27,11 @@ class HtmlInput extends HtmlSingleElement {
 		$this->setProperty("type", $value);
 	}
 
-	public function addLabel($label,$before=true){
+	public function setLabel($label,$before=true){
 		if ($before===true){
-			$this->wrap("<label>".$label,"</label>");
+			$this->wrap("<label for='".$this->identifier."'>".$label."</label>","");
 		}else{
-			$this->wrap("<label>","&nbsp;".$label."</label>");
+			$this->wrap("","<label for='".$this->identifier."'>&nbsp;".$label."</label>");
 		}
 	}
 
