@@ -3,6 +3,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\CssRef;
 
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component
@@ -30,8 +31,11 @@ class HtmlNavzone extends BaseHtml {
 	public function addElement($element){
 		if(is_object($element)){
 			$this->elements[]=$element;
-		}else
-			$this->addLink($element);;
+		}else if(is_array($element)){
+			$this->addLink(array_pop($element),array_pop($element));
+		}else{
+			$this->addLink($element);
+		}
 	}
 
 	public function setValues($class,$tagName,$elements=array()){
@@ -55,8 +59,11 @@ class HtmlNavzone extends BaseHtml {
 						$dropdown->setMTagName("li");
 						$this->addElement($dropdown);
 					}else{
-						$this->addLink($element[1],$element[0]);
+						$this->addLink(array_pop($element),array_pop($element));
 					}
+				}
+				else if(is_object($element)){
+					$this->addElement($element);
 				}
 				else if(is_string($element)){
 					$this->addLink($element);
