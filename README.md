@@ -114,7 +114,6 @@ class ExController extends Controller{
 		$this->view->setVar("jquery", $this->jquery->genCDNs("humanity"));//humanity template file for JqueryUI
 	}
 ```
-**
 In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
 #####volt
 ```html
@@ -135,14 +134,14 @@ In the corresponding view, insert the jquery variable for stylesheets and javasc
 	</head>
 ```
 
-All JQuery files are inserted in the result, with Google CDN (default) and last JQuery versions
+All JQuery files are inserted in the result, with Google CDN (default) and the last JQuery versions
 ```
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/humanity/jquery-ui.css" />
 ```
 ####Local files
-Download all necessary JS and CSS files from the JQuery official web site and copy them to **public/assets** and **public/js** directories in your project
+Download all necessary JS and CSS files from the JQuery official web site and copy them the to **public/assets** and **public/js** directories in your project
 
 For JQuery (download at http://jquery.com/download/ or use the CDN)
 * jquery.min.js
@@ -197,7 +196,7 @@ the **script_foot** variable contains JQuery scripts generated in controller
 
 **an action in controller (associated to the view) :**
 
-the click on the **#btn** element must realize the ajax request (**index/responseURL**) and display it in the **response** element
+the click on the **#btn** element must carry out the ajax request (**index/responseURL**) and display it in the **response** element
 ```php
 	public function ajaxSampleAction(){
 		$this->jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
@@ -207,8 +206,8 @@ the click on the **#btn** element must realize the ajax request (**index/respons
 
 **The action for the response URL :**
 
-* This is an ajax request, so the view is disabled.
-* If the action is associated with an existing view, use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
+* This is an ajax request so the view is disabled.
+* If the action is associated with an existing view use **disableLevel(View::LEVEL_MAIN_LAYOUT)**
 
 ```php
 	public function responseURLAction(){
@@ -248,7 +247,7 @@ The modal result :
 
 ![ScreenShot](http://angular.kobject.net/git/phalconist/bsModalSample.png)
 ####Tooltip component
-Tool tips associated with buttons, the title property is used to display the content
+Tool tips associated are with buttons; the title property is used to display the content
 
 **The view : tooltip.phtml**
 
