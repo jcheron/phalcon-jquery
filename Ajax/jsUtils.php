@@ -268,6 +268,22 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	// --------------------------------------------------------------------
 
 	/**
+	 * Keypress
+	 *
+	 * Outputs a javascript library keypress event
+	 *
+	 * @access	public
+	 * @param	string	The element to attach the event to
+	 * @param	string	The code to execute
+	 * @return	string
+	 */
+	public function keypress($element = 'this', $js = ''){
+		return $this->js->_keypress($element, $js);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Keyup
 	 *
 	 * Outputs a javascript library keydown event

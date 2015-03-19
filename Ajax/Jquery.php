@@ -201,6 +201,23 @@ class Jquery extends JsUtils{
 	// --------------------------------------------------------------------
 
 	/**
+	 * Keypress
+	 *
+	 * Outputs a jQuery keypress event
+	 *
+	 * @access	private
+	 * @param	string	The element to attach the event to
+	 * @param	string	The code to execute
+	 * @return	string
+	 */
+	function _keypress($element = 'this', $js = '')
+	{
+		return $this->_add_event($element, $js, 'keypress');
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Keyup
 	 *
 	 * Outputs a jQuery keydown event
@@ -1315,7 +1332,7 @@ class Jquery extends JsUtils{
 	 * @param string $function
 	 */
 	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$validation=false,$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,  $this->_postForm($url,$form,$responseElement,$validation,$function,$attr));
+		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$function,$attr),$event);
 		return $script;
 	}
 
