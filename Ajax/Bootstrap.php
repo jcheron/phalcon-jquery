@@ -15,6 +15,7 @@ use Ajax\bootstrap\html\HtmlDropdown;
 use Ajax\bootstrap\Components\Splitbutton;
 use Ajax\bootstrap\html\HtmlButtontoolbar;
 use Ajax\bootstrap\html\HtmlNavbar;
+use Ajax\bootstrap\html\HtmlProgressbar;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -171,5 +172,18 @@ class Bootstrap extends BaseGui{
 	public function htmlNavbar($identifier,$brand="Brand",$brandHref="#"){
 		$nav=new HtmlNavbar($identifier,$brand,$brandHref);
 		return $this->addHtmlComponent($nav);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Progressbar
+	 * @param string $identifier
+	 * @param string $value
+	 * @param string $max
+	 * @param string $min
+	 * @return HtmlProgressbar
+	 */
+	public function htmlProgressbar($identifier, $style="info", $value=0,$max=100,$min=0){
+		$pb=new HtmlProgressbar($identifier, $style,$value,$max,$min);
+		return $this->addHtmlComponent($pb);
 	}
 }
