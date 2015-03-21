@@ -19,13 +19,23 @@ use Ajax\JsUtils;
  	protected $collapseEnd;
  	protected $_showOnStartup;
 
-	public function __construct($identifier) {
+	public function __construct($identifier,$content=NULL,$header=NULL,$footer=NULL) {
 		parent::__construct ( $identifier, "div");
 		$this->_template=include 'templates/tplPanel.php';
 		$this->setProperty("class","panel panel-default");
 		$this->_collapsable=false;
 		$this->_showOnStartup=false;
+		if($content!==NULL){
+			$this->setContent($content);
+		}
+		if($header!==NULL){
+			$this->addHeader($header);
+		}
+		if($footer!==NULL){
+			$this->addFooter($footer);
+		}
 	}
+
 	public function getHeader() {
 		return $this->header;
 	}
@@ -100,6 +110,10 @@ use Ajax\JsUtils;
 		$this->_collapsable = $_collapsable;
 		if($_collapsable){
 			$this->header->setRole("tab");
+			$lnk=new HtmlLink("lnk-".$this->identifier);
+			$lnk->setHref("#collapse-".$this->identifier);
+			$lnk->setContent($this->header->getContent());
+			$this->header->setContent($lnk);
 			$this->collapseBegin='<div id="collapse-'.$this->identifier.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-'.$this->identifier.'">';
 			$this->collapseEnd="</div>";
 		}else{

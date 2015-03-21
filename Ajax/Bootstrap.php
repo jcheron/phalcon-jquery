@@ -17,6 +17,7 @@ use Ajax\bootstrap\html\HtmlButtontoolbar;
 use Ajax\bootstrap\html\HtmlNavbar;
 use Ajax\bootstrap\html\HtmlProgressbar;
 use Ajax\bootstrap\Components\Popover;
+use Ajax\bootstrap\html\HtmlPanel;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -195,5 +196,18 @@ class Bootstrap extends BaseGui{
 	public function htmlProgressbar($identifier, $style="info", $value=0,$max=100,$min=0){
 		$pb=new HtmlProgressbar($identifier, $style,$value,$max,$min);
 		return $this->addHtmlComponent($pb);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Panel
+	 * @param string $identifier the Html identifier of the element
+	 * @param mixed $content the panel content (string or HtmlComponent)
+	 * @param string $header the header
+	 * @param string $footer the footer
+	 * @return HtmlPanel
+	 */
+	public function htmlPanel($identifier,$content=NULL,$header=NULL,$footer=NULL){
+		$panel=new HtmlPanel($identifier,$content,$header,$footer);
+		return $this->addHtmlComponent($panel);
 	}
 }

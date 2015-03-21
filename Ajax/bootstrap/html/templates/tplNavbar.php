@@ -1,6 +1,6 @@
 <?php
 return '
-<nav class="navbar %class%">
+<nav class="navbar %class%" id="%identifier%">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -10,11 +10,11 @@ return '
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="%brandHref%">%brand%%brandImage%</a>
+      <a class="navbar-brand" href="%brandHref%" target="%brandTarget%">%brand%%brandImage%</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="%identifier%">
+    <div class="collapse navbar-collapse" id="collapse-%identifier%">
 %navZones%
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
