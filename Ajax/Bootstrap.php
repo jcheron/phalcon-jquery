@@ -16,6 +16,7 @@ use Ajax\bootstrap\Components\Splitbutton;
 use Ajax\bootstrap\html\HtmlButtontoolbar;
 use Ajax\bootstrap\html\HtmlNavbar;
 use Ajax\bootstrap\html\HtmlProgressbar;
+use Ajax\bootstrap\Components\Popover;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -49,6 +50,15 @@ class Bootstrap extends BaseGui{
 	 */
 	public function tooltip($attachTo=NULL,$params=NULL){
 		return $this->addComponent(new Tooltip($this->js), $attachTo, $params);
+	}
+
+	/**
+	 * @param string $attachTo
+	 * @param string $params
+	 * @return $this
+	 */
+	public function popover($attachTo=NULL,$params=NULL){
+		return $this->addComponent(new Popover($this->js), $attachTo, $params);
 	}
 
 	/**

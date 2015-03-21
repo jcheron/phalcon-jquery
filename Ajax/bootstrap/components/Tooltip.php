@@ -16,7 +16,7 @@ class Tooltip extends SimpleBsComponent {
 
 	public function attach($identifier){
 		parent::attach($identifier);
-		$this->js->attr($identifier,"data-toggle","tooltip",true);
+		$this->js->attr($identifier,"data-toggle",$this->uiName,true);
 	}
 
 	/**
@@ -130,7 +130,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onShow($jsCode){
-		return $this->addEvent("show.bs.tooltip", $jsCode);
+		return $this->addEvent("show.bs.".$this->uiName, $jsCode);
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onShown($jsCode){
-		return $this->addEvent("shown.bs.tooltip", $jsCode);
+		return $this->addEvent("shown.bs.".$this->uiName, $jsCode);
 	}
 
 	/**
@@ -148,7 +148,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onHide($jsCode){
-		return $this->addEvent("hide.bs.tooltip", $jsCode);
+		return $this->addEvent("hide.bs.".$this->uiName, $jsCode);
 	}
 
 	/**
@@ -157,6 +157,6 @@ class Tooltip extends SimpleBsComponent {
 	 * @return $this
 	 */
 	public function onHidden($jsCode){
-		return $this->addEvent("hidden.bs.tooltip", $jsCode);
+		return $this->addEvent("hidden.bs.".$this->uiName, $jsCode);
 	}
 }
