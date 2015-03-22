@@ -1264,8 +1264,13 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 			$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n".
-				"var maskElm=$('".$maskSelector."');maskElm.hide();".
-				"var newElm=maskElm.clone();for(var key in value){\n".
+				"var maskElm=$('".$maskSelector."').first();maskElm.hide();".
+				"var newId=(maskElm.attr('id') || 'mask')+'-'+index;".
+				"var newElem=$('#'+newId);\n".
+				"if(!newElem.length){\n".
+					"newElm=maskElm.clone();newElm.attr('id',newId);\n".
+				"}\n".
+				"for(var key in value){\n".
 					"var sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
 						" if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
 					"}\n".
