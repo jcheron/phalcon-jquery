@@ -31,7 +31,7 @@ class HtmlAlert extends HtmlDoubleElement {
 	 * default : "alert-succes"
 	 */
 	public function setStyle($cssStyle){
-		return $this->addToPropertyCtrl("class", $cssStyle,CssRef::Styles("alert"));
+		return $this->addToPropertyCtrl("class", CssRef::getStyle($cssStyle, "alert"),CssRef::Styles("alert"));
 	}
 
 	public function addCloseButton(){

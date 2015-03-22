@@ -51,13 +51,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 * default : "btn-default"
 	 */
 	public function setStyle($cssStyle){
-		if(is_int($cssStyle)){
-			return $this->addToPropertyUnique("class", CssRef::buttonStyles()[$cssStyle],"Ajax\bootstrap\html\CssButton");
-		}
-		if(Text::startsWith($cssStyle, "btn-")===false){
-			$cssStyle="btn".$cssStyle;
-		}
-		return $this->addToPropertyCtrl("class", $cssStyle,"Ajax\bootstrap\html\CssButton");
+		return $this->addToPropertyCtrl("class", CssRef::getStyle($cssStyle, "btn"),CssRef::Styles("btn"));
 	}
 
 	/**
