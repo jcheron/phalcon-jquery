@@ -3,8 +3,8 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
-		/**
- * Composant Twitter Bootstrap Listgroup
+/**
+ * Composant Twitter Bootstrap Accordion
  * @see http://getbootstrap.com/javascript/#collapse-example-accordion
  * @author jc
  * @version 1.001

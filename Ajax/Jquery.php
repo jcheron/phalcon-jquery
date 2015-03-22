@@ -1247,6 +1247,39 @@ class Jquery extends JsUtils{
 		return $retour;
 	}
 
+	/**
+	 * Makes an ajax request and receives a JSON array data types by copying and assigning them to the DOM elements with the same name
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function _jsonArray($maskSelector,$url,$method="get",$params="{}",$function=NULL,$attr="id",$immediatly=false){
+		$url=$this->_correctAjaxUrl($url);
+		$function=isset($function)?$function:"";
+		$retour="url='".$url."';\n";
+		if($attr=="value")
+			$retour.="url=url+'/'+$(this).val();\n";
+		else
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
+			$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n".
+				"var maskElm=$('".$maskSelector."');maskElm.hide();".
+				"var newElm=maskElm.clone();for(var key in value){\n".
+					"var sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
+						" if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
+					"}\n".
+					"newElm.appendTo($('".$maskSelector."').parent());newElm.show();".
+			"}\n".
+		"});\n";
+
+		$retour.="\t".$function."\n
+		});\n";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $retour;
+		return $retour;
+	}
+
 	public function _post($url,$params="{}",$responseElement="",$function=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
 		$function=isset($function)?$function:"";

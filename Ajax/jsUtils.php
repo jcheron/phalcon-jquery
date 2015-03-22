@@ -997,6 +997,29 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	public function jsonDeferred($url,$method="get",$params="{}",$function=NULL,$attr="id"){
 		return $this->js->_json($url,$method,$params,$function,$attr,false);
 	}
+
+	/**
+	 * Makes an ajax request and receives the JSON array data types by assigning DOM elements with the same name
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function jsonArray($maskSelector,$url,$method="get",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_jsonArray($maskSelector,$url,$method,$params,$function,$attr,true);
+	}
+
+	/**
+	 * Makes an ajax request delayed and receives a JSON array data types by copying and assigning them to the DOM elements with the same name
+	 * @param string $url the request address
+	 * @param string $params Paramètres passés au format JSON
+	 * @param string $method Method use
+	 * @param string $function callback
+	 */
+	public function jsonArrayDeferred($maskSelector,$url,$method="get",$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_jsonArray($maskSelector,$url,$method,$params,$function,$attr,false);
+	}
+
 	/**
 	 * Prepare a Get ajax request
 	 * To use on an event
