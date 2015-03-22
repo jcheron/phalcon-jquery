@@ -1272,11 +1272,12 @@ class Jquery extends JsUtils{
 				"\t}\n".
 				"\tfor(var key in value){\n".
 					"\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
-						"\t\t\t if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
-						"var html = $('<div />').append($(sel,newElm).clone()).html();".
-						"if(html.indexOf('[['+key+']]')>-1){\n".
-							"$(sel,newElm).replaceWith(html.split('[['+key+']]').join(value[key]));".
-						"}\n".
+						"\t\t\tvar html = $('<div />').append($(sel,newElm).clone()).html();".
+						"\t\t\tif(html.indexOf('[['+key+']]')>-1){\n".
+							"\t\t\t\t$(sel,newElm).replaceWith(html.split('[['+key+']]').join(value[key]));".
+						"\t\t\t} else{\n".
+						"\t\t\t\t if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
+						"\t\t\t}".
 					"\t\t}\n".
 			"}\n".
 			"if(created==true){newElm.appendTo($('".$maskSelector."').parent());}".
