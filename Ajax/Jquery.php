@@ -1273,6 +1273,10 @@ class Jquery extends JsUtils{
 				"\tfor(var key in value){\n".
 					"\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
 						"\t\t\t if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
+						"var html = $('<div />').append($(sel,newElm).clone()).html();".
+						"if(html.indexOf('[['+key+']]')>-1){\n".
+							"$(sel,newElm).replaceWith(html.split('[['+key+']]').join(value[key]));".
+						"}\n".
 					"\t\t}\n".
 			"}\n".
 			"if(created==true){newElm.appendTo($('".$maskSelector."').parent());}".
