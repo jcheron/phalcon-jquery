@@ -18,6 +18,7 @@ use Ajax\bootstrap\html\HtmlNavbar;
 use Ajax\bootstrap\html\HtmlProgressbar;
 use Ajax\bootstrap\Components\Popover;
 use Ajax\bootstrap\html\HtmlPanel;
+use Ajax\bootstrap\html\HtmlAlert;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -209,5 +210,17 @@ class Bootstrap extends BaseGui{
 	public function htmlPanel($identifier,$content=NULL,$header=NULL,$footer=NULL){
 		$panel=new HtmlPanel($identifier,$content,$header,$footer);
 		return $this->addHtmlComponent($panel);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Alert
+	 * @param string $identifier
+	 * @param string $message
+	 * @param string $cssStyle
+	 * @return HtmlAlert
+	 */
+	public function htmlAlert($identifier,$message=NULL,$cssStyle="alert-warning"){
+		$alert=new HtmlAlert($identifier,$message,$cssStyle);
+		return $this->addHtmlComponent($alert);
 	}
 }
