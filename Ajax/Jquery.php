@@ -1264,22 +1264,23 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 			$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n".
-				"var maskElm=$('".$maskSelector."').first();maskElm.hide();".
-				"var newId=(maskElm.attr('id') || 'mask')+'-'+index;".
-				"var newElem=$('#'+newId);\n".
-				"if(!newElem.length){\n".
-					"newElm=maskElm.clone();newElm.attr('id',newId);\n".
-				"}\n".
-				"for(var key in value){\n".
-					"var sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
-						" if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
-					"}\n".
-					"newElm.appendTo($('".$maskSelector."').parent());newElm.show();".
+				"\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();".
+				"\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;".
+				"\tvar newElm=$('#'+newId);\n".
+				"\tif(!newElm.length){\n".
+					"\t\tnewElm=maskElm.clone();newElm.attr('id',newId);created=true;\n".
+				"\t}\n".
+				"\tfor(var key in value){\n".
+					"\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
+						"\t\t\t if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
+					"\t\t}\n".
 			"}\n".
+			"if(created==true){newElm.appendTo($('".$maskSelector."').parent());}".
+			"newElm.show();".
 		"});\n";
 
-		$retour.="\t".$function."\n
-		});\n";
+		$retour.="\t".$function."\n".
+		"});\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
 		return $retour;
