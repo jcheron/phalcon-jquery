@@ -1268,20 +1268,21 @@ class Jquery extends JsUtils{
 				"\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;".
 				"\tvar newElm=$('#'+newId);\n".
 				"\tif(!newElm.length){\n".
-					"\t\tnewElm=maskElm.clone();newElm.attr('id',newId);created=true;\n".
+					"\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n".
+					"\t\tnewElm.appendTo($('".$maskSelector."').parent());\n".
 				"\t}\n".
 				"\tfor(var key in value){\n".
+					"\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n".
+					"\t\t\tif(html.indexOf('[['+key+']]')>-1){\n".
+						"\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n".
+						"\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n".
+					"\t\t\t}\n".
 					"\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n".
-						"\t\t\tvar html = $('<div />').append($(sel,newElm).clone()).html();".
-						"\t\t\tif(html.indexOf('[['+key+']]')>-1){\n".
-							"\t\t\t\t$(sel,newElm).replaceWith(html.split('[['+key+']]').join(value[key]));".
-						"\t\t\t} else{\n".
-						"\t\t\t\t if($(sel,newElm).is('[value]')) { $(sel,newElm).val(value[key]);} else { $(sel,newElm).html(value[key]); }\n".
-						"\t\t\t}".
-					"\t\t}\n".
+						"\t\t\tvar selElm=$(sel,newElm);\n".
+						"\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n".
+				"\t\t}\n".
 			"}\n".
-			"if(created==true){newElm.appendTo($('".$maskSelector."').parent());}".
-			"newElm.show();".
+		"\t$(newElm).show(true);".
 		"});\n";
 
 		$retour.="\t".$function."\n".
