@@ -229,19 +229,20 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Accordion
 	 * @param string $identifier
+	 * @param array $images [(src=>"",alt=>"",caption=>"",description=>""),...]
 	 * @return HtmlButton
 	 */
-	public function htmlAccordion($identifier){
-		$accordion=new HtmlAccordion($identifier);
+	public function htmlAccordion($identifier,$images=NULL){
+		$accordion=new HtmlAccordion($identifier,$images);
 		return $this->addHtmlComponent($accordion);
 	}
 
 	/**
-	 * Return a new Bootstrap Html Carrousel
+	 * Return a new Bootstrap Html Carousel
 	 * @param string $identifier
 	 * @return HtmlButton
 	 */
-	public function htmlCaroussel($identifier){
+	public function htmlCarousel($identifier){
 		$caroussel=new HtmlCarousel($identifier);
 		return $this->addHtmlComponent($caroussel);
 	}
