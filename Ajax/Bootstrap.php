@@ -19,6 +19,8 @@ use Ajax\bootstrap\html\HtmlProgressbar;
 use Ajax\bootstrap\Components\Popover;
 use Ajax\bootstrap\html\HtmlPanel;
 use Ajax\bootstrap\html\HtmlAlert;
+use Ajax\bootstrap\html\HtmlAccordion;
+use Ajax\bootstrap\html\HtmlCarousel;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -222,5 +224,25 @@ class Bootstrap extends BaseGui{
 	public function htmlAlert($identifier,$message=NULL,$cssStyle="alert-warning"){
 		$alert=new HtmlAlert($identifier,$message,$cssStyle);
 		return $this->addHtmlComponent($alert);
+	}
+
+	/**
+	 * Return a new Bootstrap Accordion
+	 * @param string $identifier
+	 * @return HtmlButton
+	 */
+	public function htmlAccordion($identifier){
+		$accordion=new HtmlAccordion($identifier);
+		return $this->addHtmlComponent($accordion);
+	}
+
+	/**
+	 * Return a new Bootstrap Html Carrousel
+	 * @param string $identifier
+	 * @return HtmlButton
+	 */
+	public function htmlCaroussel($identifier){
+		$caroussel=new HtmlCarousel($identifier);
+		return $this->addHtmlComponent($caroussel);
 	}
 }
