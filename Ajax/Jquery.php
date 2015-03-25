@@ -1010,12 +1010,15 @@ class Jquery extends JsUtils{
 	 * @param	string	The event to pass
 	 * @return	string
 	 */
-	function _add_event($element, $js, $event)
+	function _add_event($element, $js, $event,$preventDefault=false)
 	{
 		if (is_array($js))
 		{
 			$js = implode("\n\t\t", $js);
 
+		}
+		if($preventDefault===true){
+			$js="event.preventDefault();\n".$js;
 		}
 		if(array_search($event, $this->jquery_events)===false)
 			$event="\n\t$(" . $this->_prep_element($element) . ").bind('{$event}',function(event){\n\t\t{$js}\n\t});\n";
@@ -1344,10 +1347,12 @@ class Jquery extends JsUtils{
 	 * @param string $url
 	 * @param string $params
 	 * @param string $responseElement
+	 * @param boolean $preventDefault
 	 * @param string $function
+	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _getAndBindTo($element,$event,$url,$params="{}",$responseElement="",$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,  $this->_get($url, $params,$responseElement,$function,$attr),$event);
+	public function _getAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$function=NULL,$attr="id"){
+		$script= $this->_add_event($element, $this->_get($url, $params,$responseElement,$function,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1359,10 +1364,12 @@ class Jquery extends JsUtils{
 	 * @param string $url
 	 * @param string $params
 	 * @param string $responseElement
+	 * @param boolean $preventDefault
 	 * @param string $function
+	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$function,$attr),$event);
+	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$function=NULL,$attr="id"){
+		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$function,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1374,10 +1381,12 @@ class Jquery extends JsUtils{
 	 * @param string $url
 	 * @param string $form
 	 * @param string $responseElement
+	 * @param boolean $preventDefault
 	 * @param string $function
+	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$validation=false,$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$function,$attr),$event);
+	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$function=NULL,$attr="id"){
+		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$function,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1406,9 +1415,11 @@ class Jquery extends JsUtils{
 	 * @param string $elementToModify
 	 * @param string $jqueryCall
 	 * @param string/array $param
+	 * @param boolean $preventDefault
+	 * @param string $function
 	 */
-	public function _doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$function=""){
-		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$function),$event);
+	public function _doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$function=""){
+		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$function),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1430,10 +1441,11 @@ class Jquery extends JsUtils{
 	 * @param string $element
 	 * @param string $event
 	 * @param string $js Code à exécuter
+	 * @param boolean $preventDefault
 	 * @return String
 	 */
-	public function _execAndBindTo($element,$event,$js){
-		$script= $this->_add_event($element, $this->_exec($js),$event);
+	public function _execAndBindTo($element,$event,$js,$preventDefault=false){
+		$script= $this->_add_event($element, $this->_exec($js),$event,$preventDefault);
 		return $script;
 	}
 }

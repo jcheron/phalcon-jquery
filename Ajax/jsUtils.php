@@ -1034,16 +1034,18 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 	/**
 	 * Performs a get to $url on the event $event on $element
-	 * puis affiche le résultat dans $responseElement
+	 * and display it in $responseElement
 	 * @param string $element
 	 * @param string $event
 	 * @param string $url
 	 * @param string $params
 	 * @param string $responseElement
+	 * @param boolean $preventDefault
 	 * @param string $function
+	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function getAndBindTo($element,$event,$url,$responseElement="",$params="{}",$function=NULL,$attr="id"){
-		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$function,$attr);
+	public function getAndBindTo($element,$event,$url,$responseElement="",$preventDefault=true,$params="{}",$function=NULL,$attr="id"){
+		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$function,$attr);
 	}
 
 	/**
@@ -1077,10 +1079,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $url
 	 * @param string $params
 	 * @param string $responseElement
+	 * @param boolean preventDefault
 	 * @param string $function
 	 */
-	public function postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$function=NULL,$attr="id"){
-		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$function,$attr);
+	public function postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$function=NULL,$attr="id"){
+		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$function,$attr);
 	}
 
 	/**
@@ -1116,8 +1119,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $responseElement
 	 * @param string $function
 	 */
-	public function postFormAndBindTo($element,$event,$url,$form,$responseElement="",$validation=false,$function=NULL,$attr="id"){
-		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$validation,$function,$attr);
+	public function postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$function=NULL,$attr="id"){
+		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$preventDefault,$validation,$function,$attr);
 	}
 
 	/**
@@ -1151,10 +1154,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $elementToModify
 	 * @param string $jqueryCall
 	 * @param string $param
+	 * @param boolean $preventDefault
 	 * @param string $function
 	 */
-	public function doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$function=""){
-		return $this->js->_doJQueryAndBindTo($element, $event,$elementToModify,$jqueryCall,$param,$function);
+	public function doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$function=""){
+		return $this->js->_doJQueryAndBindTo($element, $event,$elementToModify,$jqueryCall,$param,$preventDefault,$function);
 	}
 
 	/**
@@ -1173,10 +1177,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $element
 	 * @param string $event
 	 * @param string $js Code à exécuter
+	 * @param boolean $preventDefault
 	 * @return String
 	 */
-	public function execAndBindTo($element,$event,$js){
-		$script= $this->js->_execAndBindTo($element,$event,$js);
+	public function execAndBindTo($element,$event,$js,$preventDefault=false){
+		$script= $this->js->_execAndBindTo($element,$event,$js,$preventDefault);
 		return $script;
 	}
 	public function getCDNs(){
