@@ -1008,17 +1008,20 @@ class Jquery extends JsUtils{
 	 * @param	string	The element to attach the event to
 	 * @param	string	The code to execute
 	 * @param	string	The event to pass
+	 * @param boolean preventDefault If set to true, the default action of the event will not be triggered.
+	 * @param boolean stopPropagation Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
 	 * @return	string
 	 */
-	function _add_event($element, $js, $event,$preventDefault=false)
+	function _add_event($element, $js, $event,$preventDefault=false,$stopPropagation=false)
 	{
-		if (is_array($js))
-		{
+		if (is_array($js)){
 			$js = implode("\n\t\t", $js);
-
 		}
 		if($preventDefault===true){
 			$js="event.preventDefault();\n".$js;
+		}
+		if($stopPropagation===true){
+			$js="event.stopPropagation();\n".$js;
 		}
 		if(array_search($event, $this->jquery_events)===false)
 			$event="\n\t$(" . $this->_prep_element($element) . ").bind('{$event}',function(event){\n\t\t{$js}\n\t});\n";
@@ -1039,8 +1042,7 @@ class Jquery extends JsUtils{
 	 * @access	private
 	 * @return	string
 	 */
-	function _compile($view=NULL, $view_var = 'script_foot', $script_tags = TRUE)
-	{
+	function _compile($view=NULL, $view_var = 'script_foot', $script_tags=TRUE){
 		//Components UI
 		$ui=$this->ui();
 		if($this->ui()!=NULL){
@@ -1093,8 +1095,7 @@ class Jquery extends JsUtils{
 	 * @access	public
 	 * @return	void
 	 */
-	function _clear_compile()
-	{
+	function _clear_compile(){
 		$this->jquery_code_for_compile = array();
 	}
 
@@ -1108,16 +1109,13 @@ class Jquery extends JsUtils{
 	 * @access	private
 	 * @return	string
 	 */
-	function _document_ready($js)
-	{
-		if ( ! is_array($js))
-		{
+	function _document_ready($js){
+		if ( ! is_array($js)){
 			$js = array ($js);
 
 		}
 
-		foreach ($js as $script)
-		{
+		foreach ($js as $script){
 			$this->jquery_code_for_compile[] = $script;
 		}
 	}
@@ -1133,8 +1131,7 @@ class Jquery extends JsUtils{
 	 * @param	string
 	 * @return	string
 	 */
-	function script($library_src = '', $relative = FALSE)
-	{
+	function script($library_src = '', $relative = FALSE){
 		$library_src = $this->external($library_src, $relative);
 		$this->jquery_code_for_load[] = $library_src;
 		return $library_src;
@@ -1192,23 +1189,20 @@ class Jquery extends JsUtils{
 	 * @param	string
 	 * @return	string
 	 */
-	function _validate_speed($speed)
-	{
-		if (in_array($speed, array('slow', 'normal', 'fast')))
-		{
+	function _validate_speed($speed){
+		if (in_array($speed, array('slow', 'normal', 'fast'))){
 			$speed = '"'.$speed.'"';
 		}
-		elseif (preg_match("/[^0-9]/", $speed))
-		{
+		elseif (preg_match("/[^0-9]/", $speed)){
 			$speed = '';
 		}
 
 		return $speed;
 	}
 //------------------------------------------------------------------------
-	protected function _get($url,$params="{}",$responseElement="",$function=NULL,$attr="id",$immediatly=false){
+	protected function _get($url,$params="{}",$responseElement="",$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
-		$function=isset($function)?$function:"";
+		$jsCallback=isset($jsCallback)?$jsCallback:"";
 		$retour="url='".$url."';\n";
 		if($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
@@ -1219,7 +1213,7 @@ class Jquery extends JsUtils{
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t".$function."\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
@@ -1231,11 +1225,11 @@ class Jquery extends JsUtils{
 	 * @param string $url the request address
 	 * @param string $params Paramètres passés au format JSON
 	 * @param string $method Method use
-	 * @param string $function callback
+	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function _json($url,$method="get",$params="{}",$function=NULL,$attr="id",$immediatly=false){
+	public function _json($url,$method="get",$params="{}",$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
-		$function=isset($function)?$function:"";
+		$jsCallback=isset($jsCallback)?$jsCallback:"";
 		$retour="url='".$url."';\n";
 		if($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
@@ -1243,7 +1237,7 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key).length){ if($('#'+key).is('[value]')) { $('#'+key).val(data[key]);} else { $('#'+key).html(data[key]); }}};\n";
-		$retour.="\t".$function."\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
@@ -1255,11 +1249,11 @@ class Jquery extends JsUtils{
 	 * @param string $url the request address
 	 * @param string $params Paramètres passés au format JSON
 	 * @param string $method Method use
-	 * @param string $function callback
+	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function _jsonArray($maskSelector,$url,$method="get",$params="{}",$function=NULL,$attr="id",$immediatly=false){
+	public function _jsonArray($maskSelector,$url,$method="get",$params="{}",$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
-		$function=isset($function)?$function:"";
+		$jsCallback=isset($jsCallback)?$jsCallback:"";
 		$retour="url='".$url."';\n";
 		if($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
@@ -1288,16 +1282,16 @@ class Jquery extends JsUtils{
 		"\t$(newElm).show(true);".
 		"});\n";
 
-		$retour.="\t".$function."\n".
+		$retour.="\t".$jsCallback."\n".
 		"});\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
 		return $retour;
 	}
 
-	public function _post($url,$params="{}",$responseElement="",$function=NULL,$attr="id",$immediatly=false){
+	public function _post($url,$params="{}",$responseElement="",$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
-		$function=isset($function)?$function:"";
+		$jsCallback=isset($jsCallback)?$jsCallback:"";
 		$retour="url='".$url."';\n";
 		if($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
@@ -1308,15 +1302,15 @@ class Jquery extends JsUtils{
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t".$function."\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
 		return $retour;
 	}
-	public function _postForm($url,$form,$responseElement,$validation=false,$function=NULL,$attr="id",$immediatly=false){
+	public function _postForm($url,$form,$responseElement,$validation=false,$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
-		$function=isset($function)?$function:"";
+		$jsCallback=isset($jsCallback)?$jsCallback:"";
 		$retour="url='".$url."';\n";
 		if($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
@@ -1327,7 +1321,7 @@ class Jquery extends JsUtils{
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t".$function."\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if($validation){
 			$retour="$('#".$form."').validate({submitHandler: function(form) {
@@ -1348,11 +1342,11 @@ class Jquery extends JsUtils{
 	 * @param string $params
 	 * @param string $responseElement
 	 * @param boolean $preventDefault
-	 * @param string $function
+	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _getAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$function=NULL,$attr="id"){
-		$script= $this->_add_event($element, $this->_get($url, $params,$responseElement,$function,$attr),$event,$preventDefault);
+	public function _getAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$jsCallback=NULL,$attr="id"){
+		$script= $this->_add_event($element, $this->_get($url, $params,$responseElement,$jsCallback,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1365,11 +1359,11 @@ class Jquery extends JsUtils{
 	 * @param string $params
 	 * @param string $responseElement
 	 * @param boolean $preventDefault
-	 * @param string $function
+	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$function,$attr),$event,$preventDefault);
+	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$jsCallback=NULL,$attr="id"){
+		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$jsCallback,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1382,11 +1376,11 @@ class Jquery extends JsUtils{
 	 * @param string $form
 	 * @param string $responseElement
 	 * @param boolean $preventDefault
-	 * @param string $function
+	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$function=NULL,$attr="id"){
-		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$function,$attr),$event,$preventDefault);
+	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$jsCallback=NULL,$attr="id"){
+		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr),$event,$preventDefault);
 		return $script;
 	}
 
@@ -1395,13 +1389,14 @@ class Jquery extends JsUtils{
 	 * @param string $element
 	 * @param string $jqueryCall
 	 * @param mixed $param
+	 * @param string $jsCallback javascript code to execute after the jquery call
 	 * @return string
 	 */
-	public function _doJQueryOn($element,$jqueryCall,$param="",$function="",$immediatly=false){
+	public function _doJQueryOn($element,$jqueryCall,$param="",$jsCallback="",$immediatly=false){
 		$param=$this->_prep_value($param);
 		$callback="";
-		if($function!="")
-			$callback = ", function(event){\n{$function}\n}";
+		if($jsCallback!="")
+			$callback = ", function(event){\n{$jsCallback}\n}";
 		$script= "$(".$this->_prep_element($element).").".$jqueryCall."(".$param.$callback.");\n";
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $script;
@@ -1416,10 +1411,10 @@ class Jquery extends JsUtils{
 	 * @param string $jqueryCall
 	 * @param string/array $param
 	 * @param boolean $preventDefault
-	 * @param string $function
+	 * @param string $jsCallback javascript code to execute after the jquery call
 	 */
-	public function _doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$function=""){
-		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$function),$event,$preventDefault);
+	public function _doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$jsCallback=""){
+		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$jsCallback),$event,$preventDefault);
 		return $script;
 	}
 
