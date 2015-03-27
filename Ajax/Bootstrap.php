@@ -21,6 +21,7 @@ use Ajax\bootstrap\html\HtmlPanel;
 use Ajax\bootstrap\html\HtmlAlert;
 use Ajax\bootstrap\html\HtmlAccordion;
 use Ajax\bootstrap\html\HtmlCarousel;
+use Ajax\bootstrap\html\HtmlTabs;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -245,5 +246,15 @@ class Bootstrap extends BaseGui{
 	public function htmlCarousel($identifier){
 		$caroussel=new HtmlCarousel($identifier);
 		return $this->addHtmlComponent($caroussel);
+	}
+
+	/**
+	 * Return a new Bootstrap Html tabs
+	 * @param string $identifier
+	 * @return HtmlTabs
+	 */
+	public function htmlTabs($identifier){
+		$tabs=new HtmlTabs($identifier);
+		return $this->addHtmlComponent($tabs);
 	}
 }

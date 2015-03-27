@@ -836,16 +836,15 @@ class Jquery extends JsUtils{
 
 
 	// --------------------------------------------------------------------
-	// Pre-written handy stuff
+	// TO remove ?
 	// --------------------------------------------------------------------
 
 	/**
 	 * Zebra tables
-	 *
-	 * @access	private
-	 * @param	string	table name
-	 * @param	string	plugin location
-	 * @return	string
+	 * @param string $class
+	 * @param string $odd
+	 * @param string $hover
+	 * @return string
 	 */
 	function _zebraTables($class = '', $odd = 'odd', $hover = '')
 	{
@@ -867,75 +866,6 @@ class Jquery extends JsUtils{
 
 	// --------------------------------------------------------------------
 	// Plugins
-	// --------------------------------------------------------------------
-
-	/**
-	 * Corner Plugin
-	 *
-	 * http://www.malsup.com/jquery/corner/
-	 *
-	 * @access	public
-	 * @param	string	target
-	 * @return	string
-	 */
-	function corner($element = '', $corner_style = '')
-	{
-		// may want to make this configurable down the road
-		$corner_location = '/plugins/jquery.corner.js';
-
-		if ($corner_style != '')
-		{
-			$corner_style = '"'.$corner_style.'"';
-		}
-
-		return "$(" . $this->_prep_element($element) . ").corner(".$corner_style.");";
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * modal window
-	 *
-	 * Load a thickbox modal window
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	function modal($src, $relative = FALSE)
-	{
-		$this->jquery_code_for_load[] = $this->external($src, $relative);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Effect
-	 *
-	 * Load an Effect library
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	function effect($src, $relative = FALSE)
-	{
-		$this->jquery_code_for_load[] = $this->external($src, $relative);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Plugin
-	 *
-	 * Load a plugin library
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	function plugin($src, $relative = FALSE)
-	{
-		$this->jquery_code_for_load[] = $this->external($src, $relative);
-	}
-
 	// --------------------------------------------------------------------
 
 	/**
