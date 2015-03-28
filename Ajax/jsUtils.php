@@ -6,6 +6,7 @@ use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNBootstrap;
+use Ajax\service\JArray;
 require_once 'lib/CDNJQuery.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
@@ -1043,9 +1044,29 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param boolean $preventDefault if set to true, prevent the default behavior
 	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
+	 * @deprecated use getOn instead
 	 */
 	public function getAndBindTo($element,$event,$url,$responseElement="",$preventDefault=true,$params="{}",$jsCallback=NULL,$attr="id"){
-		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$jsCallback,$attr);
+		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,true,$jsCallback,$attr);
+	}
+
+	/**
+	 * Performs a get to $url on the event $event on $element
+	 * and display it in $responseElement
+	 * @param string $element
+	 * @param string $event
+	 * @param string $url The request url
+	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function getOn($element,$event,$url,$responseElement="",$parameters=array()){
+		$preventDefault=true;
+		$stopPropagation=true;
+		$jsCallback=null;
+		$params="{}";
+		$attr="id";
+		extract($parameters);
+		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$stopPropagation,$jsCallback,$attr);
 	}
 
 	/**
