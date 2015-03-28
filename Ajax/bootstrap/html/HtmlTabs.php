@@ -88,7 +88,7 @@ class HtmlTabs extends HtmlDoubleElement {
 		foreach ($this->tabs as $tab){
 			$this->_bsComponent->addTab($tab->run($js));
 		}
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 

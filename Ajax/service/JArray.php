@@ -13,4 +13,11 @@ class JArray{
 		if($pos<sizeof($values))
 			return $values[$pos];
 	}
+
+	public static function getDefaultValue($array,$key,$default){
+		if(array_key_exists($key, $array)){
+			return $array[$key];
+		}else
+			return $default;
+	}
 }

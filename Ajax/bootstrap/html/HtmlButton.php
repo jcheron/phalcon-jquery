@@ -100,7 +100,7 @@ class HtmlButton extends HtmlDoubleElement {
 		if(array_key_exists("data-toggle", $this->properties)){
 			$this->_bsComponent->addCode("$.fn.toggled=function(){return this.hasClass('active');};");
 		}
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 	/* (non-PHPdoc)

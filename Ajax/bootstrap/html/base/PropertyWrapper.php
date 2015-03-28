@@ -2,6 +2,7 @@
 namespace Ajax\bootstrap\html\base;
 
 use Ajax\service\JArray;
+use Ajax\service\AjaxCall;
 class PropertyWrapper {
 	public static function wrap($input,$js=NULL,$separator=' ',$valueQuote = '"'){
 		$output="";
@@ -11,8 +12,9 @@ class PropertyWrapper {
 		if(is_array($input)){
 			if(sizeof($input)>0){
 				$value1=reset($input);
-				if(is_object($value1))
+				if(is_object($value1)){
 					$output=PropertyWrapper::wrapObjects($input,$js,$separator=' ');
+				}
 				else
 					$output=PropertyWrapper::wrapStrings($input,$separator=' ',$valueQuote = '"');
 			}

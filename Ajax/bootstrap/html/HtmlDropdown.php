@@ -173,7 +173,7 @@ class HtmlDropdown extends HtmlButton {
 			}
 		}
 		$this->_bsComponent=$js->bootstrap()->dropdown("#".$this->identifier);
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 

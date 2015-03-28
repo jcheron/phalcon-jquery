@@ -57,7 +57,7 @@ class HtmlSelect extends HtmlDoubleElement {
 	public function run(JsUtils $js) {
 		parent::run($js);
 		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 

@@ -92,7 +92,7 @@ class HtmlModal extends BaseHtml {
 	 */
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 

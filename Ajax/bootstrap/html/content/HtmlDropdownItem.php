@@ -121,7 +121,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 
@@ -164,10 +164,10 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 
 	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
 		if($stopPropagation===true){
-			$jsCode="e.stopPropagation();".$jsCode;
+			$jsCode="event.stopPropagation();".$jsCode;
 		}
 		if($preventDefault===true){
-			$jsCode="e.preventDefault();".$jsCode;
+			$jsCode="event.preventDefault();".$jsCode;
 		}
 		$this->events["click"]=$jsCode;
 		return $this;

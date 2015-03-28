@@ -8,6 +8,7 @@ use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\content\HtmlCarouselItem;
 use Phalcon\Mvc\View;
+use Ajax\bootstrap\html\html5\HtmlImg;
 	/**
  * Composant Twitter Bootstrap Carousel
  * @see http://getbootstrap.com/components/#carousel
@@ -22,9 +23,14 @@ class HtmlCarousel extends BaseHtml {
 	protected $_base="";
 	protected $_glyphs=array();
 
-	public function __construct($identifier) {
+	public function __construct($identifier,$images=NULL) {
 		parent::__construct ( $identifier );
 		$this->_template=include 'templates/tplCarousel.php';
+		if($images!=NULL){
+			if(is_array($images)){
+				$this->fromArray($images);
+			}
+		}
 	}
 	public function getBase() {
 		return $this->_base;
@@ -38,7 +44,7 @@ class HtmlCarousel extends BaseHtml {
 
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->carousel("#".$this->identifier);
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 
@@ -92,6 +98,24 @@ class HtmlCarousel extends BaseHtml {
 		$this->slides[]=$image;
 		$this->createIndicator();
 	}
+
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromArray()
+	 */
+	public function fromArray($array) {
+		if(sizeof($array)>0){
+			foreach ($array as $value){
+				if(is_array($value)){
+						$this->addImage($value["src"],@$value["alt"],@$value["caption"],@$value["description"]);
+				}else{
+					$this->addImage($value);
+				}
+			}
+		}
+		return $this;
+	}
+
 
 	private function createIndicator(){
 		$indicator=new HtmlDoubleElement("indicator-".$this->identifier);

@@ -41,7 +41,7 @@ class HtmlSplitbutton extends HtmlDropdown {
 			}
 		}
 		$this->_bsComponent=$js->bootstrap()->splitbutton("#".$this->identifier);
-		$this->addEventsOnRun();
+		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 

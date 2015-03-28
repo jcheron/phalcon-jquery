@@ -3,6 +3,7 @@ namespace Ajax\bootstrap\html\base;
 use Phalcon\Text;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\service\AjaxCall;
 include_once 'BaseWidget.php';
 include_once 'CssRef.php';
 include_once 'PropertyWrapper.php';
@@ -112,8 +113,9 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	protected function setMemberCtrl(&$name,$value,$typeCtrl){
-		if($this->ctrl($name, $value, $typeCtrl)===true)
+		if($this->ctrl($name, $value, $typeCtrl)===true){
 			return $name=$value;
+		}
 		return $this;
 	}
 
@@ -224,11 +226,26 @@ abstract class BaseHtml extends BaseWidget {
 		return $this->addEvent($event, $jsCode,$stopPropagation,$preventDefault);
 	}
 
-	public function addEventsOnRun(){
+	public function addEventsOnRun(JsUtils $js){
 		if(isset($this->_bsComponent)){
 			foreach ($this->events as $event=>$jsCode){
+				if($jsCode instanceof AjaxCall){
+					$jsCode=$jsCode->compile($js);
+				}
 				$this->_bsComponent->addEvent($event,$jsCode);
 			}
 		}
+	}
+
+	public function getOn($event,$url,$responseElement="",$parameters=array()){
+		$params=array("url"=>$url,"responseElement"=>$responseElement);
+		$params=array_merge($params,$parameters);
+		$this->events[$event]=new AjaxCall("get", $params);
+	}
+
+	public function getOnClick($url,$responseElement="",$parameters=array()){
+		$params=array("url"=>$url,"responseElement"=>$responseElement);
+		$params=array_merge($params,$parameters);
+		$this->events["click"]=new AjaxCall("get", $params);
 	}
 }

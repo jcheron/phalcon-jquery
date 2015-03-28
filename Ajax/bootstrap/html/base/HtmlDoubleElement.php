@@ -25,7 +25,8 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	public function addContent($content){
 		if(is_array($this->content)===false){
 			$newContent=array();
-			$newContent[]=$this->content;
+			if(isset($this->content))
+				$newContent[]=$this->content;
 			$newContent[]=$content;
 			$this->content=$newContent;
 		}else{
@@ -60,6 +61,10 @@ class HtmlDoubleElement extends HtmlSingleElement {
 		$label=new HtmlLabel("label-".$this->identifier,$caption,$style);
 		$this->content.=$leftSeparator.$label->compile();
 		return $this;
+	}
+
+	public function setValue($value){
+
 	}
 
 }
