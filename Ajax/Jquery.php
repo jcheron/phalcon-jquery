@@ -1292,8 +1292,8 @@ class Jquery extends JsUtils{
 	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$jsCallback=NULL,$attr="id"){
-		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$jsCallback,$attr),$event,$preventDefault);
+	public function _postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$stopPropagation=true,$jsCallback=NULL,$attr="id"){
+		$script= $this->_add_event($element,  $this->_post($url, $params,$responseElement,$jsCallback,$attr),$event,$preventDefault,$stopPropagation);
 		return $script;
 	}
 

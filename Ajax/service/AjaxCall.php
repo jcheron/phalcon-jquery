@@ -17,10 +17,21 @@ class AjaxCall {
 		$params="{}";
 		$callback=NULL;
 		$attr="id";
+		$stopPropagation=true;
+		$preventDefault=true;
 		extract($this->parameters);
+		if($preventDefault===true){
+			$result.="event.preventDefault();\n";
+		}
+		if($stopPropagation===true){
+			$result.="event.stopPropagation();\n";
+		}
 		switch ($this->method){
 			case "get":
-				$result=$js->getDeferred($url,$responseElement,$params,$callback,$attr);
+				$result.=$js->getDeferred($url,$responseElement,$params,$callback,$attr);
+				break;
+			case "post":
+				$result.=$js->postDeferred($url,$responseElement,$params,$callback,$attr);
 				break;
 		}
 		return $result;

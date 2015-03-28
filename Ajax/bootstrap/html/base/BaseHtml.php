@@ -248,4 +248,16 @@ abstract class BaseHtml extends BaseWidget {
 		$params=array_merge($params,$parameters);
 		$this->events["click"]=new AjaxCall("get", $params);
 	}
+
+	public function postOn($event,$url,$params="{}",$responseElement="",$parameters=array()){
+		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
+		$params=array_merge($params,$parameters);
+		$this->events[$event]=new AjaxCall("post", $params);
+	}
+
+	public function postOnClick($url,$params="{}",$responseElement="",$parameters=array()){
+		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
+		$params=array_merge($params,$parameters);
+		$this->events["click"]=new AjaxCall("post", $params);
+	}
 }

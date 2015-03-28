@@ -968,7 +968,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 	/**
 	 * Performs an ajax GET request
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
@@ -1024,7 +1024,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Prepares a Get ajax request
 	 * To use on an event
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
@@ -1038,7 +1038,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * and display it in $responseElement
 	 * @param string $element
 	 * @param string $event
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $params
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param boolean $preventDefault if set to true, prevent the default behavior
@@ -1055,7 +1055,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * and display it in $responseElement
 	 * @param string $element
 	 * @param string $event
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
 	 */
@@ -1102,14 +1102,34 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param boolean preventDefault
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @deprecated use postOn instead
 	 */
 	public function postAndBindTo($element,$event,$url,$params="{}",$responseElement="",$preventDefault=true,$jsCallback=NULL,$attr="id"){
-		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$jsCallback,$attr);
+		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,true,$jsCallback,$attr);
+	}
+
+	/**
+	 * Performs a post to $url on the event $event fired on $element and pass the parameters $params
+	 * Display the result in $responseElement
+	 * @param string $element
+	 * @param string $event
+	 * @param string $url The url of the request
+	 * @param string $params The parameters to send
+	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function postOn($element,$event,$url,$params="{}",$responseElement="",$parameters=array()){
+		$preventDefault=true;
+		$stopPropagation=true;
+		$jsCallback=null;
+		$attr="id";
+		extract($parameters);
+		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$stopPropagation,$jsCallback,$attr);
 	}
 
 	/**
 	 * Performs a post form with ajax
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $form The form HTML id
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
@@ -1121,7 +1141,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Performs a delayed post form with ajax
 	 * For use on an event
-	 * @param string $url The request url
+	 * @param string $url The url of the request
 	 * @param string $form The form HTML id
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
