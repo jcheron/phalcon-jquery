@@ -1246,7 +1246,7 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
-		$retour.="$.post(url,$(".$form.").serialize()).done(function( data ) {\n";
+		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
 		if($responseElement!==""){
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
@@ -1309,8 +1309,8 @@ class Jquery extends JsUtils{
 	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$jsCallback=NULL,$attr="id"){
-		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr),$event,$preventDefault);
+	public function _postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$stopPropagation=true,$validation=false,$jsCallback=NULL,$attr="id"){
+		$script= $this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr),$event,$preventDefault,$stopPropagation);
 		return $script;
 	}
 

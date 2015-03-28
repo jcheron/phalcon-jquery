@@ -1159,9 +1159,30 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $form
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @deprecated use postFormOn instead
 	 */
 	public function postFormAndBindTo($element,$event,$url,$form,$responseElement="",$preventDefault=true,$validation=false,$jsCallback=NULL,$attr="id"){
-		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$preventDefault,$validation,$jsCallback,$attr);
+		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$preventDefault,true,$validation,$jsCallback,$attr);
+	}
+
+	/**
+	 * Performs a delayed post form with ajax in response to an event $event
+	 * display the result in $responseElement
+	 * @param string $element
+	 * @param string $event
+	 * @param string $url
+	 * @param string $form
+	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function postFormOn($element,$event,$url,$form,$responseElement="",$parameters=array()){
+		$preventDefault=true;
+		$stopPropagation=true;
+		$validation=false;
+		$jsCallback=null;
+		$attr="id";
+		extract($parameters);
+		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$preventDefault,$stopPropagation,$validation,$jsCallback,$attr);
 	}
 
 	/**

@@ -241,23 +241,32 @@ abstract class BaseHtml extends BaseWidget {
 		$params=array("url"=>$url,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
 		$this->events[$event]=new AjaxCall("get", $params);
+		return $this;
 	}
 
 	public function getOnClick($url,$responseElement="",$parameters=array()){
-		$params=array("url"=>$url,"responseElement"=>$responseElement);
-		$params=array_merge($params,$parameters);
-		$this->events["click"]=new AjaxCall("get", $params);
+		return $this->getOn("click", $url,$responseElement,$parameters);
 	}
 
 	public function postOn($event,$url,$params="{}",$responseElement="",$parameters=array()){
 		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
 		$this->events[$event]=new AjaxCall("post", $params);
+		return $this;
 	}
 
 	public function postOnClick($url,$params="{}",$responseElement="",$parameters=array()){
-		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
+		return $this->postOn("click", $url,$params,$responseElement,$parameters);
+	}
+
+	public function postFormOn($event,$url,$form,$responseElement="",$parameters=array()){
+		$params=array("url"=>$url,"form"=>$form,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
-		$this->events["click"]=new AjaxCall("post", $params);
+		$this->events[$event]=new AjaxCall("postForm", $params);
+		return $this;
+	}
+
+	public function postFormOnClick($url,$form,$responseElement="",$parameters=array()){
+		return $this->postFormOn("click", $url,$form,$responseElement,$parameters);
 	}
 }
