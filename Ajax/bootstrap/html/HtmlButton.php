@@ -115,13 +115,6 @@ class HtmlButton extends HtmlDoubleElement {
 	}
 
 	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
-		if($stopPropagation===true){
-			$jsCode="event.stopPropagation();".$jsCode;
-		}
-		if($preventDefault===true){
-			$jsCode="event.preventDefault();".$jsCode;
-		}
-		$this->events["click"]=$jsCode;
-		return $this;
+		return $this->addEvent("click", $jsCode,$stopPropagation,$preventDefault);
 	}
 }

@@ -26,8 +26,8 @@ class HtmlLink extends HtmlDoubleElement {
 		return $this->_bsComponent;
 	}
 
-	public function onClick($jsCode){
-		return $this->addEvent("click", $jsCode);
+	public function onClick($jsCode,$stopPropagation=true,$preventDefault=true){
+		return $this->addEvent("click", $jsCode,$stopPropagation,$preventDefault);
 	}
 
 	public function setTarget($value="_self"){

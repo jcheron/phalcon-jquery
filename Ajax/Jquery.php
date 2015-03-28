@@ -404,7 +404,7 @@ class Jquery extends JsUtils{
 	 *
 	 * @access	private
 	 * @param	string	- element
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
 	function _addClass($element = 'this', $class='',$immediatly=false){
@@ -421,7 +421,7 @@ class Jquery extends JsUtils{
 	 * @param string $element
 	 * @param string $attributeName
 	 * @param string $value
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly delayed if false
 	 */
 	function _attr($element = 'this' , $attributeName,$value="",$immediatly=false){
 		$element = $this->_prep_element($element);
@@ -440,7 +440,7 @@ class Jquery extends JsUtils{
 	 * Get or set the html of an attribute for the first element in the set of matched elements.
 	 * @param string $element
 	 * @param string $value
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly delayed if false
 	 */
 	function _html($element = 'this' ,$value="",$immediatly=false){
 		$element = $this->_prep_element($element);
@@ -466,9 +466,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _animate($element = 'this', $params = array(), $speed = '', $extra = ''){
+	function _animate($element = 'this', $params = array(), $speed = '', $extra = '',$immediatly=false){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -493,6 +494,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).animate({\n$animations\n\t\t}".$speed.$extra.");";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -500,24 +503,32 @@ class Jquery extends JsUtils{
 	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
 	 * @param string $to
 	 * @param string $element
+	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	public function _append($to = 'this',$element){
+	public function _append($to = 'this',$element,$immediatly=false){
 		$to = $this->_prep_element($to);
 		$element = $this->_prep_element($element);
-		return "$({$to}).append({$element});";
+		$str= "$({$to}).append({$element});";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
+		return $str;
 	}
 
 	/**
 	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
 	 * @param string $to
 	 * @param string $element
+	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	public function _prepend($to = 'this',$element){
+	public function _prepend($to = 'this',$element,$immediatly=false){
 		$to = $this->_prep_element($to);
 		$element = $this->_prep_element($element);
-		return "$({$to}).prepend({$element});";
+		$str="$({$to}).prepend({$element});";
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
+		return $str;
 	}
 
 	// --------------------------------------------------------------------
@@ -531,9 +542,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _fadeIn($element = 'this', $speed = '', $callback = ''){
+	function _fadeIn($element = 'this', $speed = '', $callback = '',$immediatly=false){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -544,6 +556,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).fadeIn({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -558,9 +572,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _fadeOut($element = 'this', $speed = '', $callback = ''){
+	function _fadeOut($element = 'this', $speed = '', $callback = '',$immediatly=false){
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
 
@@ -571,6 +586,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).fadeOut({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -585,9 +602,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _hide($element = 'this', $speed = '', $callback = '')
+	function _hide($element = 'this', $speed = '', $callback = '',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
@@ -599,6 +617,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).hide({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -611,12 +631,16 @@ class Jquery extends JsUtils{
 	 *
 	 * @access	private
 	 * @param	string	- element
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _removeClass($element = 'this', $class='')
+	function _removeClass($element = 'this', $class='',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).removeClass(\"$class\");";
+
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -631,9 +655,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _slideUp($element = 'this', $speed = '', $callback = '')
+	function _slideUp($element = 'this', $speed = '', $callback = '',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
@@ -645,6 +670,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).slideUp({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -659,9 +686,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _slideDown($element = 'this', $speed = '', $callback = '')
+	function _slideDown($element = 'this', $speed = '', $callback = '',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
@@ -673,6 +701,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).slideDown({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -687,9 +717,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _slideToggle($element = 'this', $speed = '', $callback = '')
+	function _slideToggle($element = 'this', $speed = '', $callback = '',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
@@ -701,6 +732,8 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).slideToggle({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -713,12 +746,16 @@ class Jquery extends JsUtils{
 	 *
 	 * @access	private
 	 * @param	string	- element
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _toggle($element = 'this')
+	function _toggle($element = 'this',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).toggle();";
+
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -731,12 +768,16 @@ class Jquery extends JsUtils{
 	 *
 	 * @access	private
 	 * @param	string	- element
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _toggleClass($element = 'this', $class='')
+	function _toggleClass($element = 'this', $class='',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).toggleClass(\"$class\");";
+
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -744,10 +785,14 @@ class Jquery extends JsUtils{
 	 * Execute all handlers and behaviors attached to the matched elements for the given event.
 	 * @param string $element
 	 * @param string $event
+	 * @param boolean $immediatly delayed if false
 	 */
-	public function _trigger($element='this',$event='click'){
+	public function _trigger($element='this',$event='click',$immediatly=false){
 		$element = $this->_prep_element($element);
 		$str  = "$({$element}).trigger(\"$event\");";
+
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
@@ -762,9 +807,10 @@ class Jquery extends JsUtils{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly delayed if false
 	 * @return	string
 	 */
-	function _show($element = 'this', $speed = '', $callback = '')
+	function _show($element = 'this', $speed = '', $callback = '',$immediatly=false)
 	{
 		$element = $this->_prep_element($element);
 		$speed = $this->_validate_speed($speed);
@@ -776,14 +822,27 @@ class Jquery extends JsUtils{
 
 		$str  = "$({$element}).show({$speed}{$callback});";
 
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 
-	function _condition($condition, $jsCodeIfTrue,$jsCodeIfFalse=null){
+	/**
+	 * Places a condition
+	 * @param string $condition
+	 * @param string $jsCodeIfTrue
+	 * @param string $jsCodeIfFalse
+	 * @param boolean $immediatly delayed if false
+	 * @return string
+	 */
+	function _condition($condition, $jsCodeIfTrue,$jsCodeIfFalse=null,$immediatly=false){
 		$str="if(".$condition."){".$jsCodeIfTrue."}";
 		if(isset($jsCodeIfFalse)){
 			$str.="else{".$jsCodeIfFalse."}";
 		}
+
+		if($immediatly)
+			$this->jquery_code_for_compile[] = $str;
 		return $str;
 	}
 

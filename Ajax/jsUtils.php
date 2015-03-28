@@ -470,7 +470,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @access	public
 	 * @param	string	- element
 	 * @param	string	- Class to add
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
 	public function addClass($element = 'this', $class = '',$immediatly=false){
@@ -482,7 +482,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $element
 	 * @param string $attributeName
 	 * @param string $value
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function attr($element = 'this' , $attributeName,$value='',$immediatly=false){
 		return $this->js->_attr($element, $attributeName,$value,$immediatly);
@@ -492,7 +492,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Get or set the html of an attribute for the first element in the set of matched elements.
 	 * @param string $element
 	 * @param string $value
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function html($element = 'this',$value='',$immediatly=false){
 		return $this->js->_html($element,$value,$immediatly);
@@ -509,30 +509,33 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function animate($element = 'this', $params = array(), $speed = '', $extra = ''){
-		return $this->js->_animate($element, $params, $speed, $extra);
+	public function animate($element = 'this', $params = array(), $speed = '', $extra = '',$immediatly=false){
+		return $this->js->_animate($element, $params, $speed, $extra,$immediatly);
 	}
 
 	/**
 	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
 	 * @param string $to
 	 * @param string $element
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return string
 	 */
-	public function append($to = 'this',$element){
-		return $this->js->_append($to,$element);
+	public function append($to = 'this',$element,$immediatly=false){
+		return $this->js->_append($to,$element,$immediatly);
 	}
 
 	/**
 	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
 	 * @param string $to
 	 * @param string $element
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return string
 	 */
-	public function prepend($to = 'this',$element){
-		return $this->js->_prepend($to,$element);
+	public function prepend($to = 'this',$element,$immediatly=false){
+		return $this->js->_prepend($to,$element,$immediatly);
 	}
 	// --------------------------------------------------------------------
 
@@ -545,10 +548,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function fadeIn($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_fadeIn($element, $speed, $callback);
+	public function fadeIn($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_fadeIn($element, $speed, $callback,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -562,10 +566,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function fadeOut($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_fadeOut($element, $speed, $callback);
+	public function fadeOut($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_fadeOut($element, $speed, $callback,$immediatly);
 	}
 	// --------------------------------------------------------------------
 
@@ -578,10 +583,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function slideUp($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_slideUp($element, $speed, $callback);
+	public function slideUp($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_slideUp($element, $speed, $callback,$immediatly);
 
 	}
 
@@ -595,10 +601,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @access	public
 	 * @param	string	- element
 	 * @param	string	- Class to add
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function removeClass($element = 'this', $class = ''){
-		return $this->js->_removeClass($element, $class);
+	public function removeClass($element = 'this', $class = '',$immediatly=false){
+		return $this->js->_removeClass($element, $class,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -612,10 +619,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function slideDown($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_slideDown($element, $speed, $callback);
+	public function slideDown($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_slideDown($element, $speed, $callback,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -629,10 +637,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function slideToggle($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_slideToggle($element, $speed, $callback);
+	public function slideToggle($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_slideToggle($element, $speed, $callback,$immediatly);
 
 	}
 
@@ -647,10 +656,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function hide($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_hide($element, $speed, $callback);
+	public function hide($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_hide($element, $speed, $callback,$immediatly);
 	}
 
 	// --------------------------------------------------------------------
@@ -662,10 +672,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 *
 	 * @access	public
 	 * @param	string	- element
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function toggle($element = 'this'){
-		return $this->js->_toggle($element);
+	public function toggle($element = 'this',$immediatly=false){
+		return $this->js->_toggle($element,$immediatly);
 
 	}
 
@@ -678,19 +689,21 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 *
 	 * @access	public
 	 * @param	string	- element
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function toggleClass($element = 'this', $class=''){
-		return $this->js->_toggleClass($element, $class);
+	public function toggleClass($element = 'this', $class='',$immediatly=false){
+		return $this->js->_toggleClass($element, $class,$immediatly);
 	}
 
 	/**
 	 * Execute all handlers and behaviors attached to the matched elements for the given event.
 	 * @param string $element
 	 * @param string $event
+	 * @param boolean $immediatly defers the execution if set to false
 	 */
-	public function trigger($element='this',$event='click'){
-		return $this->js->_trigger($element, $event);
+	public function trigger($element='this',$event='click',$immediatly=false){
+		return $this->js->_trigger($element, $event,$immediatly);
 	}
 	// --------------------------------------------------------------------
 
@@ -703,10 +716,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param	string	- Javascript callback function
+	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
-	public function show($element = 'this', $speed = '', $callback = ''){
-		return $this->js->_show($element, $speed, $callback);
+	public function show($element = 'this', $speed = '', $callback = '',$immediatly=false){
+		return $this->js->_show($element, $speed, $callback,$immediatly);
 	}
 
 	/**
@@ -714,9 +728,10 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $condition
 	 * @param string $jsCodeIfTrue
 	 * @param string $jsCodeIfFalse
+	 * @param boolean $immediatly defers the execution if set to false
 	 */
-	function condition($condition,$jsCodeIfTrue,$jsCodeIfFalse=null){
-		return $this->js->_condition($condition, $jsCodeIfTrue,$jsCodeIfFalse);
+	function condition($condition,$jsCodeIfTrue,$jsCodeIfFalse=null,$immediatly=false){
+		return $this->js->_condition($condition, $jsCodeIfTrue,$jsCodeIfFalse,$immediatly);
 	}
 
 
@@ -1226,7 +1241,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Executes the code $js
 	 * @param string $js Code to execute
-	 * @param string $immediatly delayed if false
+	 * @param boolean $immediatly delayed if false
 	 * @return String
 	 */
 	public function exec($js,$immediatly=false){

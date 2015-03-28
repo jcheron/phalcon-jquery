@@ -218,8 +218,20 @@ abstract class BaseHtml extends BaseWidget {
 		if($preventDefault===true){
 			$jsCode="event.preventDefault();".$jsCode;
 		}
-		$this->events[$event]=$jsCode;
+		$this->_addEvent($event, $jsCode);
 		return $this;
+	}
+
+	protected function _addEvent($event,$jsCode){
+		if(array_key_exists($event, $this->events)){
+			if(is_array($this->events[$event])){
+				$this->events[$event][]=$jsCode;
+			}else{
+				$this->events[$event]=array($this->events[$event],$jsCode);
+			}
+		}else{
+			$this->events[$event]=$jsCode;
+		}
 	}
 
 	public function on($event,$jsCode,$stopPropagation=false,$preventDefault=false){
@@ -229,10 +241,20 @@ abstract class BaseHtml extends BaseWidget {
 	public function addEventsOnRun(JsUtils $js){
 		if(isset($this->_bsComponent)){
 			foreach ($this->events as $event=>$jsCode){
-				if($jsCode instanceof AjaxCall){
-					$jsCode=$jsCode->compile($js);
+				$code=$jsCode;
+				if(is_array($jsCode)){
+					$code="";
+					foreach ($jsCode as $jsC){
+						if($jsC instanceof AjaxCall){
+							$code.="\n".$jsC->compile($js);
+						}else{
+							$code.="\n".$jsC;
+						}
+					}
+				}elseif($jsCode instanceof AjaxCall){
+					$code=$jsCode->compile($js);
 				}
-				$this->_bsComponent->addEvent($event,$jsCode);
+				$this->_bsComponent->addEvent($event,$code);
 			}
 		}
 	}
@@ -240,7 +262,7 @@ abstract class BaseHtml extends BaseWidget {
 	public function getOn($event,$url,$responseElement="",$parameters=array()){
 		$params=array("url"=>$url,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
-		$this->events[$event]=new AjaxCall("get", $params);
+		$this->_addEvent($event, new AjaxCall("get", $params));
 		return $this;
 	}
 
@@ -251,7 +273,7 @@ abstract class BaseHtml extends BaseWidget {
 	public function postOn($event,$url,$params="{}",$responseElement="",$parameters=array()){
 		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
-		$this->events[$event]=new AjaxCall("post", $params);
+		$this->_addEvent($event, new AjaxCall("post", $params));
 		return $this;
 	}
 
@@ -262,7 +284,7 @@ abstract class BaseHtml extends BaseWidget {
 	public function postFormOn($event,$url,$form,$responseElement="",$parameters=array()){
 		$params=array("url"=>$url,"form"=>$form,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
-		$this->events[$event]=new AjaxCall("postForm", $params);
+		$this->_addEvent($event, new AjaxCall("postForm", $params));
 		return $this;
 	}
 
