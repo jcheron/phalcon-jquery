@@ -51,6 +51,11 @@ class Jquery extends JsUtils{
 	public function setLibraryFile($name){
 		$this->libraryFile=$name;
 	}
+
+	public function _setImageLoader($img){
+		$this->jquery_ajax_img=$img;
+	}
+
 	// --------------------------------------------------------------------
 	// Event Code
 	// --------------------------------------------------------------------
@@ -869,12 +874,10 @@ class Jquery extends JsUtils{
 		$controller = (strpos('://', $controller) === FALSE) ? $controller : $url->get($controller);
 
 		// ajaxStart and ajaxStop are better choices here... but this is a stop gap
-		if ($this->jquery_ajax_img == '')
-		{
+		if ($this->jquery_ajax_img == ''){
 			$loading_notifier = "Loading...";
 		}
-		else
-		{
+		else{
 			$loading_notifier = $this->_di->get("tag")->image($this->jquery_ajax_img);
 		}
 
@@ -1189,6 +1192,18 @@ class Jquery extends JsUtils{
 		return $speed;
 	}
 //------------------------------------------------------------------------
+	protected function addLoading(&$retour,$responseElement){
+		if ($this->jquery_ajax_img == ''){
+			$loading_notifier = "Loading...";
+		}
+		else{
+			$loading_notifier = $this->_di->get("tag")->image(array($this->jquery_ajax_img,"class"=>"ajax-loader"));
+		}
+
+		$retour .= "$(\"{$responseElement}\").empty();\n";
+		$retour .= "\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
+	}
+
 	protected function _get($url,$params="{}",$responseElement="",$jsCallback=NULL,$attr="id",$immediatly=false){
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback)?$jsCallback:"";
@@ -1197,6 +1212,7 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.get(url,".$params.").done(function( data ) {\n";
 		if($responseElement!==""){
 			$responseElement=$this->_prep_value($responseElement);
@@ -1286,6 +1302,7 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url,".$params.").done(function( data ) {\n";
 		if($responseElement!==""){
 			$responseElement=$this->_prep_value($responseElement);
@@ -1305,6 +1322,7 @@ class Jquery extends JsUtils{
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
 		if($responseElement!==""){
 			$responseElement=$this->_prep_value($responseElement);

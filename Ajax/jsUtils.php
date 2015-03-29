@@ -115,14 +115,16 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	public function setLibraryFile($name){
 		$this->libraryFile=$name;
 	}
-	public function __construct($params = array())
-	{
+
+	public function setImageLoader($img){
+		$this->js->_setImageLoader($img);
+	}
+
+	public function __construct($params = array()){
 		$defaults = array('driver' => 'Jquery');
 
-		foreach ($defaults as $key => $val)
-		{
-			if (isset($params[$key]) && $params[$key] !== "")
-			{
+		foreach ($defaults as $key => $val){
+			if (isset($params[$key]) && $params[$key] !== ""){
 				$defaults[$key] = $params[$key];
 			}
 		}
@@ -131,6 +133,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		$this->js=new Jquery();
 		$this->cdns=array();
 	}
+
 	public function addToCompile($jsScript){
 		$this->js->_addToCompile($jsScript);
 	}
