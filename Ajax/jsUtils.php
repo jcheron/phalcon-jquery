@@ -1228,7 +1228,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
-	 * Calls the JQuery callback $someThing on $element with facultative parameter $param  in response to an event $event
+	 * Calls the JQuery callback $jqueryCall on $element with facultative parameter $param  in response to an event $event
 	 * @param string $event
 	 * @param string $element
 	 * @param string $elementToModify

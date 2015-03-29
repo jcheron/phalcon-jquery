@@ -22,6 +22,7 @@ use Ajax\bootstrap\html\HtmlAlert;
 use Ajax\bootstrap\html\HtmlAccordion;
 use Ajax\bootstrap\html\HtmlCarousel;
 use Ajax\bootstrap\html\HtmlTabs;
+use Ajax\bootstrap\html\HtmlModal;
 include_once 'bootstrap/js/Draggable.php';
 include_once 'common/JsCode.php';
 
@@ -256,5 +257,18 @@ class Bootstrap extends BaseGui{
 	public function htmlTabs($identifier){
 		$tabs=new HtmlTabs($identifier);
 		return $this->addHtmlComponent($tabs);
+	}
+
+	/**
+	 * Return a new Bootstrap Html modal dialog
+	 * @param string $identifier
+	 * @param string $title
+	 * @param string $content
+	 * @param array $buttonCaptions
+	 * @return HtmlModal
+	 */
+	public function htmlModal($identifier,$title="",$content="",$buttonCaptions=array()){
+		$modal=new HtmlModal($identifier,$title,$content,$buttonCaptions);
+		return $this->addHtmlComponent($modal);
 	}
 }

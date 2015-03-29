@@ -10,18 +10,23 @@ use Ajax\bootstrap\html\base\BaseHtml;
  */
 class HtmlModal extends BaseHtml {
 	protected $title="Titre de ma boîte";
-	protected $content="ok";
+	protected $content="";
 	protected $buttons=array();
+	protected $showOnStartup=false;
 
 
 	/**
 	 * @param string $identifier the id
 	 */
-	public function __construct($identifier) {
+	public function __construct($identifier,$title="",$content="",$buttonCaptions=array()) {
 		parent::__construct($identifier);
 		$this->_template=include 'templates/tplModal.php';
 		$this->buttons=array();
-		$this->addCloseButton();
+		$this->title=$title;
+		$this->content=$content;
+		foreach ($buttonCaptions as $button){
+			$this->addButton($button);
+		}
 	}
 
 	/**
@@ -43,7 +48,7 @@ class HtmlModal extends BaseHtml {
 	 * @param string $value
 	 * @return HtmlButton
 	 */
-	public function addCloseButton($value="Annuler"){
+	public function addCancelButton($value="Annuler"){
 		$btn=$this->addButton($value,"btn-default");
 		$btn->setProperty("data-dismiss", "modal");
 		return $btn;
@@ -91,9 +96,30 @@ class HtmlModal extends BaseHtml {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>false));
+		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>$this->showOnStartup));
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
+	}
+
+	public function getButton($index){
+		return $this->buttons[$index];
+	}
+
+	public function showOnCreate(){
+		$this->showOnStartup=true;
+		return $this;
+	}
+
+	public function show(){
+		return "$('#{$this->identifier}').modal('show');";
+	}
+
+	public function hide(){
+		return "$('#{$this->identifier}').modal('hide');";
+	}
+
+	public function get(JsUtils $js,$url){
+		return $js->getDeferred($url,"#".$this->identifier." .modal-body");
 	}
 
 }
