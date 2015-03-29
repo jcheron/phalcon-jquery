@@ -1071,13 +1071,13 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Performs a get to $url on the event $event on $element
 	 * and display it in $responseElement
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $url The url of the request
-	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param string $responseElement The selector of the HTML element displaying the answer
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
 	 */
-	public function getOn($element,$event,$url,$responseElement="",$parameters=array()){
+	public function getOn($event,$element,$url,$responseElement="",$parameters=array()){
 		$preventDefault=true;
 		$stopPropagation=true;
 		$jsCallback=null;
@@ -1129,14 +1129,14 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Performs a post to $url on the event $event fired on $element and pass the parameters $params
 	 * Display the result in $responseElement
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $url The url of the request
 	 * @param string $params The parameters to send
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
 	 */
-	public function postOn($element,$event,$url,$params="{}",$responseElement="",$parameters=array()){
+	public function postOn($event,$element,$url,$params="{}",$responseElement="",$parameters=array()){
 		$preventDefault=true;
 		$stopPropagation=true;
 		$jsCallback=null;
@@ -1186,14 +1186,14 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	/**
 	 * Performs a delayed post form with ajax in response to an event $event
 	 * display the result in $responseElement
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $url
 	 * @param string $form
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
 	 */
-	public function postFormOn($element,$event,$url,$form,$responseElement="",$parameters=array()){
+	public function postFormOn($event,$element,$url,$form,$responseElement="",$parameters=array()){
 		$preventDefault=true;
 		$stopPropagation=true;
 		$validation=false;
@@ -1211,8 +1211,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $jsCallback javascript code to execute after the jquery call
 	 * @return mixed
 	 */
-	public function doJQueryOn($element,$jqueryCall,$param="",$jsCallback=""){
-		return $this->js->_doJQueryOn($element, $jqueryCall,$param,$jsCallback,true);
+	public function doJQuery($element,$jqueryCall,$param="",$jsCallback=""){
+		return $this->js->_doJQuery($element, $jqueryCall,$param,$jsCallback,true);
 	}
 
 	/**
@@ -1223,22 +1223,25 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @param string $jsCallback javascript code to execute after the jquery call
 	 * @return mixed
 	 */
-	public function doJQueryOnDeferred($element,$jqueryCall,$param="",$jsCallback=""){
-		return $this->js->_doJQueryOn($element, $jqueryCall,$param,$jsCallback,false);
+	public function doJQueryDeferred($element,$jqueryCall,$param="",$jsCallback=""){
+		return $this->js->_doJQuery($element, $jqueryCall,$param,$jsCallback,false);
 	}
 
 	/**
 	 * Calls the JQuery callback $someThing on $element with facultative parameter $param  in response to an event $event
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $elementToModify
 	 * @param string $jqueryCall
 	 * @param string $param
-	 * @param boolean $preventDefault
-	 * @param string $jsCallback javascript code to execute after the jquery call
+	 * @param array $parameters default : array("preventDefault"=>false,"stopPropagation"=>false,"jsCallback"=>'')
 	 */
-	public function doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$jsCallback=""){
-		return $this->js->_doJQueryAndBindTo($element, $event,$elementToModify,$jqueryCall,$param,$preventDefault,$jsCallback);
+	public function doJQueryOn($event,$element,$elementToModify,$jqueryCall,$param="",$parameters=array()){
+		$jsCallback="";
+		$stopPropagation=false;
+		$preventDefault=false;
+		extract($parameters);
+		return $this->js->_doJQueryOn($event,$element, $elementToModify,$jqueryCall,$param,$preventDefault,$stopPropagation,$jsCallback);
 	}
 
 	/**
@@ -1254,14 +1257,17 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 
 	/**
 	 * Executes the javascript code $js when $event fires on $element
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $js Code to execute
-	 * @param boolean $preventDefault
+	 * @param array $parameters default : array("preventDefault"=>false,"stopPropagation"=>false)
 	 * @return String
 	 */
-	public function execAndBindTo($element,$event,$js,$preventDefault=false){
-		$script= $this->js->_execAndBindTo($element,$event,$js,$preventDefault);
+	public function execOn($event,$element,$js,$parameters=array()){
+		$stopPropagation=false;
+		$preventDefault=false;
+		extract($parameters);
+		$script= $this->js->_execOn($element,$event,$js,$preventDefault,$stopPropagation);
 		return $script;
 	}
 	public function getCDNs(){

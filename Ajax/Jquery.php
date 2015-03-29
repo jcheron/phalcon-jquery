@@ -1399,7 +1399,7 @@ class Jquery extends JsUtils{
 	 * @param string $jsCallback javascript code to execute after the jquery call
 	 * @return string
 	 */
-	public function _doJQueryOn($element,$jqueryCall,$param="",$jsCallback="",$immediatly=false){
+	public function _doJQuery($element,$jqueryCall,$param="",$jsCallback="",$immediatly=false){
 		$param=$this->_prep_value($param);
 		$callback="";
 		if($jsCallback!="")
@@ -1411,17 +1411,16 @@ class Jquery extends JsUtils{
 	}
 
 	/**
-	 *
-	 * @param string $element
 	 * @param string $event
+	 * @param string $element
 	 * @param string $elementToModify
 	 * @param string $jqueryCall
 	 * @param string/array $param
 	 * @param boolean $preventDefault
 	 * @param string $jsCallback javascript code to execute after the jquery call
 	 */
-	public function _doJQueryAndBindTo($element,$event,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$jsCallback=""){
-		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$jsCallback),$event,$preventDefault);
+	public function _doJQueryOn($event,$element,$elementToModify,$jqueryCall,$param="",$preventDefault=false,$stopPropagation=false,$jsCallback=""){
+		$script= $this->_add_event($element, $this->_doJQueryOn($elementToModify,$jqueryCall,$param,$jsCallback),$event,$preventDefault,$stopPropagation);
 		return $script;
 	}
 
@@ -1446,8 +1445,8 @@ class Jquery extends JsUtils{
 	 * @param boolean $preventDefault
 	 * @return String
 	 */
-	public function _execAndBindTo($element,$event,$js,$preventDefault=false){
-		$script= $this->_add_event($element, $this->_exec($js),$event,$preventDefault);
+	public function _execOn($element,$event,$js,$preventDefault=false,$stopPropagation=false){
+		$script= $this->_add_event($element, $this->_exec($js),$event,$preventDefault,$stopPropagation);
 		return $script;
 	}
 }
