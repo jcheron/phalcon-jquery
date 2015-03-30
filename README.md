@@ -91,7 +91,7 @@ $loader->registerDirs(
 Copy the **Ajax** folder from the phalcon-jquery library folder to your project's library folder
 
 ###2 - Insertion
-Insert Jquery service into the **$di** project :
+Insert Jquery service into the **$di** object :
 ```php
 $di->set("jquery",function(){
 	$jquery= new Ajax\JsUtils(array("driver"=>"Jquery"));
