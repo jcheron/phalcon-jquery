@@ -13,6 +13,7 @@ class HtmlModal extends BaseHtml {
 	protected $content="";
 	protected $buttons=array();
 	protected $showOnStartup=false;
+	protected $draggable=false;
 
 
 	/**
@@ -44,7 +45,7 @@ class HtmlModal extends BaseHtml {
 	}
 
 	/**
-	 * Add a cancel button
+	 * Add a cancel button (dismiss)
 	 * @param string $value
 	 * @return HtmlButton
 	 */
@@ -84,9 +85,10 @@ class HtmlModal extends BaseHtml {
 	 * @param View $view
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
+	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContent($view,$controller,$action){
-		 $template = $view->getRender($controller, $action, null, function($view) {
+	public function renderContent($view,$controller,$action,$params=NULL){
+		 $template = $view->getRender($controller, $action, $params, function($view) {
 			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 		});
 		$this->content= $template;
@@ -97,6 +99,8 @@ class HtmlModal extends BaseHtml {
 	 */
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>$this->showOnStartup));
+		if($this->draggable)
+			$this->_bsComponent->setDraggable(true);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
@@ -110,16 +114,33 @@ class HtmlModal extends BaseHtml {
 		return $this;
 	}
 
-	public function show(){
+	public function jsShow(){
 		return "$('#{$this->identifier}').modal('show');";
 	}
 
-	public function hide(){
+	public function jsHide(){
 		return "$('#{$this->identifier}').modal('hide');";
 	}
 
-	public function get(JsUtils $js,$url){
+	public function jsGetContent(JsUtils $js,$url){
 		return $js->getDeferred($url,"#".$this->identifier." .modal-body");
+	}
+
+	public function jsSetTitle($title){
+		return "$('#".$this->identifier." .modal-title').html('".$title."');";
+	}
+
+	public function jsHideButton($index){
+		return "$('#".$this->buttons[$index]->getIdentifier()."').hide();";
+	}
+
+	/**
+	 * Allow modal to be moved using the mouse.
+	 * needs JQuery UI
+	 * @param boolean $value
+	 */
+	public function setDraggable($value){
+		$this->draggable=$value;
 	}
 
 }
