@@ -221,11 +221,8 @@ A small dialog modal defined in controller action
 
 ```php
 public function modalAction(){
-	$b=new HtmlModal("boite1");
-	$b->setTitle("Titre de la boîte de dialogue");
-	$b->setContent("test");
-	$b->run($this->jquery);
-	echo $b->compile();
+	$b=$this->jquery->bootstrap()->htmlModal("boite1","Titre de la boîte de dialogue","test");
+	echo $b->compile($this->jquery);
 	echo $this->jquery->compile($this->view);
 	$this->view->setRenderLevel(View::LEVEL_MAIN_LAYOUT);
 }
@@ -234,11 +231,9 @@ a bigger dialog defined in controller, rendering a view and passed to another vi
 
 ```php
 	public function modalAction(){
-		$b=new HtmlModal("boite2");
+		$b=$this->jquery->bootstrap()->htmlModal("boite2");
 		$b->renderContent($this->view,"aController","anAction");
 		$b->addOkayButton();
-		$b->run($this->jquery);
-		$this->view->setVar("modal",$b->compile());
 		$this->jquery->compile($this->view);
 	}
 ```
