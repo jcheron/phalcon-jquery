@@ -1088,6 +1088,18 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
+	 * Performs a get to $url on the click event on $element
+	 * and display it in $responseElement
+	 * @param string $element
+	 * @param string $url The url of the request
+	 * @param string $responseElement The selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function getOnClick($element,$url,$responseElement="",$parameters=array()){
+		return $this->getOn("click",$element,$url,$responseElement,$parameters);
+	}
+
+	/**
 	 * Makes an ajax post
 	 * @param string $url the request url
 	 * @param string $params JSON parameters
@@ -1146,6 +1158,19 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
+	 * Performs a post to $url on the click event fired on $element and pass the parameters $params
+	 * Display the result in $responseElement
+	 * @param string $element
+	 * @param string $url The url of the request
+	 * @param string $params The parameters to send
+	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function postOnClick($element,$url,$params="{}",$responseElement="",$parameters=array()){
+		return $this->postOn("click",$element,$url,$params,$responseElement,$parameters);
+	}
+
+	/**
 	 * Performs a post form with ajax
 	 * @param string $url The url of the request
 	 * @param string $form The form HTML id
@@ -1184,7 +1209,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	/**
-	 * Performs a delayed post form with ajax in response to an event $event
+	 * Performs a post form with ajax in response to an event $event on $element
 	 * display the result in $responseElement
 	 * @param string $event
 	 * @param string $element
@@ -1201,6 +1226,19 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		$attr="id";
 		extract($parameters);
 		return $this->js->_postFormAndBindTo($element, $event,$url,$form,$responseElement,$preventDefault,$stopPropagation,$validation,$jsCallback,$attr);
+	}
+
+	/**
+	 * Performs a post form with ajax in response to the click event on $element
+	 * display the result in $responseElement
+	 * @param string $element
+	 * @param string $url
+	 * @param string $form
+	 * @param string $responseElement selector of the HTML element displaying the answer
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
+	 */
+	public function postFormOnClick($element,$url,$form,$responseElement="",$parameters=array()){
+		return $this->postFormOn("click",$element,$url,$form,$responseElement,$parameters);
 	}
 
 	/**
