@@ -199,7 +199,7 @@ the **script_foot** variable contains JQuery scripts generated in controller
 the click on the **#btn** element must carry out the ajax request (**index/responseURL**) and display it in the **response** element
 ```php
 	public function ajaxSampleAction(){
-		$this->jquery->getAndBindTo("#btn", "click", "index/responseURL","#response");
+		$this->jquery->getOnClick("#btn", "index/responseURL","#response");
 		$this->jquery->compile($this->view);
 	}
 ```
