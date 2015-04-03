@@ -147,8 +147,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library blur event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function blur($element = 'this', $js = ''){
@@ -163,8 +163,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library change event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function change($element = 'this', $js = ''){
@@ -179,9 +179,9 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library click event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
-	 * @param	boolean	whether or not to return false
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
+	 * @param	boolean	$ret_false whether or not to return false
 	 * @return	string
 	 */
 	public function click($element = 'this', $js = '', $ret_false = TRUE){
@@ -196,8 +196,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library dblclick event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function dblclick($element = 'this', $js = ''){
@@ -212,8 +212,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library error event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function error($element = 'this', $js = ''){
@@ -228,8 +228,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library focus event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function focus($element = 'this', $js = ''){
@@ -244,13 +244,13 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library hover event
 	 *
 	 * @access	public
-	 * @param	string	- element
-	 * @param	string	- Javascript code for mouse over
-	 * @param	string	- Javascript code for mouse out
+	 * @param	string	$element element
+	 * @param	string	$over Javascript code for mouse over
+	 * @param	string	$out Javascript code for mouse out
 	 * @return	string
 	 */
 	public function hover($element = 'this', $over, $out){
-		return $this->js->__hover($element, $over, $out);
+		return $this->js->_hover($element, $over, $out);
 	}
 
 	// --------------------------------------------------------------------
@@ -261,8 +261,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library keydown event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function keydown($element = 'this', $js = ''){
@@ -277,8 +277,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library keypress event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function keypress($element = 'this', $js = ''){
@@ -293,8 +293,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library keydown event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$jd The code to execute
 	 * @return	string
 	 */
 	public function keyup($element = 'this', $js = ''){
@@ -309,8 +309,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library load event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function load($element = 'this', $js = ''){
@@ -325,8 +325,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library mousedown event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function mousedown($element = 'this', $js = ''){
@@ -341,8 +341,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library mouseout event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function mouseout($element = 'this', $js = ''){
@@ -357,8 +357,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library mouseover event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function mouseover($element = 'this', $js = ''){
@@ -373,8 +373,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library mouseup event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function mouseup($element = 'this', $js = ''){
@@ -389,7 +389,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs the called javascript to the screen
 	 *
 	 * @access	public
-	 * @param	string	The code to output
+	 * @param	string	$js The code to output
 	 * @return	string
 	 */
 	public function output($js){
@@ -404,8 +404,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library mouseup event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function ready($js){
@@ -420,8 +419,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library resize event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function resize($element = 'this', $js = ''){
@@ -436,8 +435,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library scroll event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function scroll($element = 'this', $js = ''){
@@ -452,8 +451,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library unload event
 	 *
 	 * @access	public
-	 * @param	string	The element to attach the event to
-	 * @param	string	The code to execute
+	 * @param	string	$element The element to attach the event to
+	 * @param	string	$js The code to execute
 	 * @return	string
 	 */
 	public function unload($element = 'this', $js = ''){
@@ -471,8 +470,8 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * Outputs a javascript library addClass event
 	 *
 	 * @access	public
-	 * @param	string	- element
-	 * @param	string	- Class to add
+	 * @param	string	$element
+	 * @param	string	$class Class to add
 	 * @param boolean $immediatly defers the execution if set to false
 	 * @return	string
 	 */
