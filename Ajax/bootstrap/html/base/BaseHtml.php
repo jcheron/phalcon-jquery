@@ -238,6 +238,10 @@ abstract class BaseHtml extends BaseWidget {
 		return $this->addEvent($event, $jsCode,$stopPropagation,$preventDefault);
 	}
 
+	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
+		return $this->addEvent("click", $jsCode,$stopPropagation,$preventDefault);
+	}
+
 	public function addEventsOnRun(JsUtils $js){
 		if(isset($this->_bsComponent)){
 			foreach ($this->events as $event=>$jsCode){
@@ -290,5 +294,23 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function postFormOnClick($url,$form,$responseElement="",$parameters=array()){
 		return $this->postFormOn("click", $url,$form,$responseElement,$parameters);
+	}
+
+	public function getElementById($identifier,$elements){
+		if(is_array($elements)){
+			$flag=false;
+			$index=0;
+			while(!$flag && $index<sizeof($elements)){
+				if($elements[$index] instanceof BaseHtml)
+					$flag=($elements[$index]->getIdentifier()===$identifier);
+				$index++;
+			}
+			if($flag===true)
+				return $elements[$index-1];
+		}elseif($elements instanceof BaseHtml){
+			if($elements->getIdentifier()===$identifier)
+				return $elements;
+		}
+		return null;
 	}
 }
