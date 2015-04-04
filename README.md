@@ -1,6 +1,6 @@
 ![Phalcon jquery](http://angular.kobject.net/git/phalconist/phalcon-jquery-git.png "Phalcon jquery")
 
-**JQuery and UI library** (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
+**A JQuery and UI library** (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 ##What's Phalcon-jquery ?
 phalcon-jquery is a PHP library for the Phalcon framework : a Phalcon PHP wrapper for JQuery and UI components (JQuery UI and Twitter Bootstrap).
 
@@ -264,7 +264,7 @@ The associated action in controller
 	}
 ```
 
-Pretty result :
+A pretty result :
 ![ScreenShot](http://angular.kobject.net/git/phalconist/bsTooltipSample.png)
 
 ###3 - JQuery UI samples
