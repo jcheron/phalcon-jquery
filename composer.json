@@ -21,7 +21,7 @@
     ],
     "extra": {
         "installer-paths": {
-            "Ajax/": ["vendor/jcheron/phalcon-jquery/Ajax"]
+            "Ajax/{$name}": ["vendor/jcheron/phalcon-jquery/Ajax"]
         }
     }
 }
