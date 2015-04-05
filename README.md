@@ -27,8 +27,7 @@ Install composer in a common location or in your project:
 ```bash
 curl -s http://getcomposer.org/installer | php
 ```
-
-Create the composer.json file as follows:
+Create the composer.json file in the app directory as follows:
 
 ```json
 {
@@ -37,8 +36,7 @@ Create the composer.json file as follows:
     }
 }
 ```
-
-Run the composer installer from the app directory of your project :
+Run the composer installer :
 
 ```bash
 php composer.phar install
@@ -53,7 +51,7 @@ git clone https://github.com/jcheron/phalcon-jquery.git
 ```
 
 ##II - Phalcon project configuration
-### Register namespace
+###1 - Register namespace
 Define the **Ajax** namespace in the loader.php file
 ```php
 $loader->registerNamespaces(array(
@@ -77,8 +75,6 @@ $loader->registerDirs(
     )
 )->register();
 ```
-Copy the **Ajax** folder from the phalcon-jquery library folder to your project's library folder
-
 ###2 - Insertion
 Insert Jquery service into the **$di** object :
 ```php
