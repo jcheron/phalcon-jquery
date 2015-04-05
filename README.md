@@ -63,10 +63,9 @@ With a manual installation, you can copy the **Ajax** folder in the project's li
 and check the presence of the **libraryDir** variable in **loader.php** file:
 ```php
 $loader = new \Phalcon\Loader();
- 
 /**
- * We're a registering a set of directories taken from the configuration file
- */
+* We're a registering a set of directories taken from the configuration file
+*/
 $loader->registerDirs(
     array(
         $config->application->controllersDir,
