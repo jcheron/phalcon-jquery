@@ -9,19 +9,12 @@
         "twitter/bootstrap": "~3.3",
         "ext-phalcon": "~1.3"
     },
-    "require-dev": {
-        "composer/installers": "~1.0"
-    },
     "license": "Apache License Version 2",
     "authors": [
         {
             "name": "Jean-Christophe HERON",
-            "email": "myaddressmail@gmail.com"
+            "email": "myaddressmail@gmail.com",
+            "role": "Developer"
         }
-    ],
-    "extra": {
-        "installer-paths": {
-            "Ajax/{$name}": ["vendor/jcheron/phalcon-jquery/Ajax"]
-        }
-    }
+    ]
 }
