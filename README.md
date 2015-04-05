@@ -61,7 +61,7 @@ $loader->registerNamespaces(array(
 
 With a manual installation, you can copy the **Ajax** folder in the project's library folder, 
 and check the presence of the **libraryDir** variable in **loader.php** file:
-```
+```php
 $loader = new \Phalcon\Loader();
  
 /**
@@ -96,7 +96,7 @@ In Phalcon controller, implement the initialize method and pass a variable to th
 use Phalcon\Mvc\Controller;
 class ExController extends Controller{
 	public function initialize(){
-		$this->view->setVar("jquery", $this->jquery->genCDNs("humanity"));//humanity template file for JqueryUI
+		$this->view->setVar("jquery", $this->jquery->genCDNs());
 	}
 ```
 In the corresponding view, insert the jquery variable for stylesheets and javascript CDN :
@@ -126,10 +126,14 @@ All JQuery files are inserted in the result, with Google CDN (default) and the l
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/humanity/jquery-ui.css" />
 ```
 ####Local files
-Download all necessary JS and CSS files from the JQuery official web site and copy them the to **public/assets** and **public/js** directories in your project
+Copy all necessary JS and CSS files from the **vendor** directory to **public/css** and **public/js** directories in your project
 
 For JQuery (download at http://jquery.com/download/ or use the CDN)
 * jquery.min.js
+
+For Twitter Bootstrap
+ * minified : bootstrap.min.js
+ * bootstrap.min.css
 
 For JQuery UI (download at http://jqueryui.com/download/ or use the CDN)
 * minified : jquery-ui.min.js
