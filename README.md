@@ -19,61 +19,50 @@ Using the dependency injection, the jQuery object can be injected into the **$di
 * [Documentation](http://slamwiki.kobject.net/en/slam4/php/phalcon/jquery) : in progress
 
 ##I - Installation
-###Manual installation
 
-* Download the project at https://github.com/jcheron/phalcon-jquery/archive/master.zip
-* or just duplicate the repo and checkout the current branch
+### Installing via Composer
+
+Install composer in a common location or in your project:
 
 ```bash
-cd ~
-git clone https://github.com/jcheron/phalcon-jquery.git
-cd library
+curl -s http://getcomposer.org/installer | php
 ```
 
-* Copy all the contents of the library folder to your project's library folder
+Create the composer.json file as follows:
+
+```json
+{
+    "require": {
+        "jcheron/phalcon-jquery": "dev-master"
+    }
+}
+```
+
+Run the composer installer from the app directory of your project :
 
 ```bash
-app
-	libraries
-		Ajax
-			bootstrap
-			common
-			config
-			lib
-			service
-			ui
-			bootstrap.php
-			Jquery.php
-			JqueryUI.php
-			jsUtils.php
+php composer.phar install
+```
+
+### Installing via Github
+
+Just clone the repository in a common location or inside your project:
+
+```
+git clone https://github.com/jcheron/phalcon-jquery.git
 ```
 
 ##II - Phalcon project configuration
-###1 - Library directory
-Define the library directory in phalcon bootstrap file(s) (index.php or loader.php)
+### Register namespace
+Define the **Ajax** namespace in the loader.php file
 ```php
-    $loader = new \Phalcon\Loader();
-    $loader->registerDirs(array(
-        '../app/controllers/',
-        '../app/models/',
-    	'../app/libraries/'
-    ))->register();
+$loader->registerNamespaces(array(
+ 		'Ajax' => __DIR__ . '/../../app/vendor/jcheron/phalcon-jquery/Ajax/'
+));
 ```
 
-If config and loader are in separated files :\\
-Check the **libraryDir** entry key
-```
-'application' => array(
-    'controllersDir' => __DIR__ . '/../../app/controllers/',
-    'modelsDir'      => __DIR__ . '/../../app/models/',
-    'viewsDir'       => __DIR__ . '/../../app/views/',
-    'pluginsDir'     => __DIR__ . '/../../app/plugins/',
-    'libraryDir'     => __DIR__ . '/../../app/library/',
-    'cacheDir'       => __DIR__ . '/../../app/cache/',
-    'baseUri'        => '/siteBaseURL/',
-);
-```
-Also check the presence of the **libraryDir** variable in **loader.php** file:
+With a manual installation, you can copy the **Ajax** folder in the project's library folder, 
+and check the presence of the **libraryDir** variable in **loader.php** file:
 ```
 $loader = new \Phalcon\Loader();
  
