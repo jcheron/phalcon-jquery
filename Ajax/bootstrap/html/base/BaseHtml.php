@@ -165,6 +165,7 @@ abstract class BaseHtml extends BaseWidget {
 
 	protected function removeOldValues(&$oldValue,$allValues){
 		$oldValue=str_ireplace($allValues, "", $oldValue);
+		$oldValue=trim($oldValue);
 	}
 
 	public abstract function run(JsUtils $js);

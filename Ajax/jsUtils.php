@@ -526,6 +526,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	 * @return string
 	 */
 	public function append($to = 'this',$element,$immediatly=false){
+		$element=addslashes($element);
 		return $this->js->_append($to,$element,$immediatly);
 	}
 
