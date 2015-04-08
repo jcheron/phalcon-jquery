@@ -7,6 +7,8 @@ use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNBootstrap;
 use Ajax\service\JArray;
 use Ajax\service\PhalconUtils;
+use Phalcon\DiInterface;
+use Phalcon\Version;
 require_once 'lib/CDNJQuery.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
@@ -23,7 +25,7 @@ require_once 'config/DefaultConfig.php';
 /**
  * JsUtils Class : Phalcon service to be injected
  **/
-class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
+abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	protected $_di;
 	protected $js;
 	protected $cdns;
@@ -94,17 +96,11 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		return $this->config;
 	}
 
-	public function setDi($di)
-	{
-		$this->_di = $di;
-		if($this->js!=null && $di!=null)
-			$this->js->setDi($di);
-	}
-
 	public function getDi()
 	{
 		return $this->_di;
 	}
+
 
 	public function getLibraryScript(){
 		$assets=$this->_di->get('assets');
@@ -1350,6 +1346,25 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		}
 		ksort($result);
 		return implode("\n", $result);
+	}
+}
+if(Version::get()==="1.3.4"){
+	class JsUtils extends _JsUtils{
+		public function setDi($di)
+		{
+			$this->_di = $di;
+			if($this->js!=null && $di!=null)
+				$this->js->setDi($di);
+		}
+	}
+}else{
+	class JsUtils extends _JsUtils{
+		public function setDi(DiInterface $di)
+		{
+			$this->_di = $di;
+			if($this->js!=null && $di!=null)
+				$this->js->setDi($di);
+		}
 	}
 }
 // END Javascript Class
