@@ -1,6 +1,6 @@
 <?php
 namespace Ajax\lib;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 abstract class CDNBase {
 	protected $version;
 	protected $provider;
@@ -23,7 +23,7 @@ abstract class CDNBase {
 	public function setJsUrl($jsUrl,$local=null) {
 		$this->jsUrl = $jsUrl;
 		if(isset($local)===false){
-			$local=Text::startsWith($jsUrl,"http")===false;
+			$local=PhalconUtils::startsWith($jsUrl,"http")===false;
 		}
 		$this->setLocal($local);
 		return $this;

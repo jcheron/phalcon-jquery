@@ -3,7 +3,6 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
-use Phalcon\Text;
 use Phalcon\Mvc\View;
 use Ajax\bootstrap\html\html5\HtmlSelect;
 class HtmlForm extends HtmlDoubleElement {

@@ -1,6 +1,5 @@
 <?php
 namespace Ajax;
-use Phalcon\Text;
 use Ajax\ui\Components\Dialog;
 use Ajax\ui\Components\Accordion;
 use Ajax\ui\Components\Menu;

@@ -1,7 +1,6 @@
 <?php
 namespace Ajax\lib;
-use Phalcon\Tag;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 require_once 'CDN.php';
 require_once 'CDNBase.php';
 
@@ -18,7 +17,7 @@ class CDNGuiGen extends CDNBase{
 			if(sizeof($themes)>$theme-1)
 				$this->theme=$themes[$theme-1];
 			else
-				throw New Exception("CDNGuiGen : Le numéro de thème demandé n'existe pas");
+				throw New \Exception("CDNGuiGen : Le numéro de thème demandé n'existe pas");
 		}
 		$this->theme=$theme;
 		$this->cssUrl=null;
@@ -67,12 +66,12 @@ class CDNGuiGen extends CDNBase{
 	public function __toString(){
 		$url=$this->getUrl();
 		$css=$this->getCss();
-		return Tag::javascriptInclude($url,$this->local)."\n".Tag::stylesheetLink($css,$this->localCss);
+		return PhalconUtils::javascriptInclude($url,$this->local)."\n".PhalconUtils::stylesheetLink($css,$this->localCss);
 	}
 	public function setCssUrl($cssUrl,$local=null) {
 		$this->cssUrl = $cssUrl;
 		if(isset($local)===false){
-			$local=Text::startsWith($cssUrl,"http")===false;
+			$local=PhalconUtils::startsWith($cssUrl,"http")===false;
 		}
 		$this->setLocalCss($local);
 		return $this;

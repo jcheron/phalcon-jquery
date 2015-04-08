@@ -2,7 +2,6 @@
 namespace Ajax\bootstrap\html\base;
 
 use Ajax\common\BaseEnum;
-use Phalcon\Text;
 /**
  * Default HTML values for Twitter Bootstrap HTML components
  * @author jc

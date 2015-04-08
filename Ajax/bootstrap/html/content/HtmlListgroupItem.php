@@ -3,7 +3,6 @@ namespace Ajax\bootstrap\html\content;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Text;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
 use Ajax\JsUtils;

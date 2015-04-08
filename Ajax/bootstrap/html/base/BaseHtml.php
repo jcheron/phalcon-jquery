@@ -1,9 +1,9 @@
 <?php
 namespace Ajax\bootstrap\html\base;
-use Phalcon\Text;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\service\AjaxCall;
+use Ajax\service\PhalconUtils;
 include_once 'BaseWidget.php';
 include_once 'CssRef.php';
 include_once 'PropertyWrapper.php';
@@ -68,7 +68,7 @@ abstract class BaseHtml extends BaseWidget {
 	function compile(JsUtils $js=NULL,View $view=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
-			if(Text::startsWith($key, "_")===false){
+			if(PhalconUtils::startsWith($key, "_")===false){
 				if(is_array($value)){
 					$v=PropertyWrapper::wrap($value,$js);
 				}
@@ -180,7 +180,7 @@ abstract class BaseHtml extends BaseWidget {
 	public function fromArray($array){
 		foreach($this as $key=>$value){
 			if(array_key_exists($key, $array)){
-				if(!Text::startsWith($key, "_")){
+				if(!PhalconUtils::startsWith($key, "_")){
 					$setter="set".ucfirst($key);
 					$this->$setter($array[$key]);
 				}

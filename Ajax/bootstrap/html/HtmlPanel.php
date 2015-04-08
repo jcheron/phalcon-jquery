@@ -3,9 +3,9 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Text;
 use Ajax\JsUtils;
-	/**
+use Ajax\service\PhalconUtils;
+		/**
  * Composant Twitter Bootstrap panel
  * @see http://getbootstrap.com/components/#panels
  * @author jc
@@ -88,7 +88,7 @@ use Ajax\JsUtils;
 	 * default : "panel-default"
 	 */
 	public function setStyle($cssStyle){
-		if(!Text::startsWith($cssStyle, "panel"))
+		if(!PhalconUtils::startsWith($cssStyle, "panel"))
 			$cssStyle="panel".$cssStyle;
 		return $this->addToPropertyCtrl("class",$cssStyle,CssRef::Styles("panel"));
 	}

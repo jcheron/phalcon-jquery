@@ -1,12 +1,12 @@
 <?php
 namespace Ajax;
-use Phalcon\Text;
 use Ajax\config\DefaultConfig;
 use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNBootstrap;
 use Ajax\service\JArray;
+use Ajax\service\PhalconUtils;
 require_once 'lib/CDNJQuery.php';
 require_once 'lib/CDNGuiGen.php';
 require_once 'lib/CDNBootstrap.php';
@@ -976,7 +976,7 @@ class JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 	}
 
 	protected function _correctAjaxUrl($url){
-		if(Text::endsWith($url,"/"))
+		if(PhalconUtils::endsWith($url,"/"))
 			$url=substr($url, 0,strlen($url)-1);
 		if(strncmp($url, 'http://', 7) != 0 AND strncmp($url, 'https://', 8) != 0){
 			$url=$this->_di->get("url")->get($url);

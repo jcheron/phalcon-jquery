@@ -3,7 +3,6 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Text;
 use Ajax\bootstrap\html\content\HtmlListgroupItem;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 		/**

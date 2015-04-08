@@ -1,10 +1,10 @@
 <?php
 namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
-use Phalcon\Tag;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\base\CssNavbar;
 use Ajax\bootstrap\Components\Scrollspy;
+use Ajax\service\PhalconUtils;
 include_once 'content/HtmlNavzone.php';
 
 /**
@@ -57,7 +57,7 @@ class HtmlNavbar extends BaseHtml {
 
 
 	public function setBrandImage($imageSrc) {
-		$this->brandImage = Tag::image(array($imageSrc,"alt"=>$this->brand));
+		$this->brandImage = PhalconUtils::image(array($imageSrc,"alt"=>$this->brand));
 		$this->brand="";
 		return $this;
 	}

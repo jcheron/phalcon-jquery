@@ -3,7 +3,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\CssGlyphicon;
 use Ajax\bootstrap\html\base\HtmlSingleElement;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 /**
  * Composant Twitter Bootstrap Glyphicon
  * @author jc
@@ -29,7 +29,7 @@ class HtmlGlyphicon extends HtmlSingleElement {
 			}
 		}else{
 			$glyphicon=strtolower($glyphicon);
-			if(Text::startsWith($glyphicon, "glyphicon-")===false){
+			if(PhalconUtils::startsWith($glyphicon, "glyphicon-")===false){
 				$glyphicon="glyphicon-".$glyphicon;
 			}
 		}

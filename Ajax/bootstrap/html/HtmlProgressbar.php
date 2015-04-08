@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 class HtmlProgressbar extends HtmlDoubleElement {
 	protected $value;
 	protected $max;
@@ -102,7 +102,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	 * default : ""
 	 */
 	public function setStyle($cssStyle){
-		if(Text::startsWith($cssStyle, "progress-bar-")===true){
+		if(PhalconUtils::startsWith($cssStyle, "progress-bar-")===true){
 			$cssStyle=str_ireplace("progress-bar-", "", $cssStyle);
 		}
 		return $this->setMemberCtrl($this->style, $cssStyle,array("success","info","warning","danger"));

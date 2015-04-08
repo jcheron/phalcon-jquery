@@ -1,6 +1,6 @@
 <?php
 namespace Ajax\lib;
-use Phalcon\Tag;
+use Ajax\service\PhalconUtils;
 require_once 'CDN.php';
 require_once 'CDNBase.php';
 class CDNJQuery extends CDNBase{
@@ -21,7 +21,7 @@ class CDNJQuery extends CDNBase{
 
 	public function __toString(){
 		$url=$this->getUrl();
-		return Tag::javascriptInclude($url,$this->local);
+		return PhalconUtils::javascriptInclude($url,$this->local);
 	}
 
 }

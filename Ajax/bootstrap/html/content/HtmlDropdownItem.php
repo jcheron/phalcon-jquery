@@ -1,11 +1,11 @@
 <?php
 namespace Ajax\bootstrap\html\content;
 use Ajax\JsUtils;
-use Phalcon\Text;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\HtmlBadge;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\HtmlGlyphicon;
+use Ajax\service\PhalconUtils;
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
@@ -62,7 +62,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	 * @return $this
 	 */
 	public function setCaption($value){
-		if(Text::startsWith($value, "-")){
+		if(PhalconUtils::startsWith($value, "-")){
 			$this->class="dropdown-header";
 			$this->role="presentation";
 			$this->_template='<li id="%identifier%" class="%class%" role="%role%">%content%</li>';

@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 include_once 'content/HtmlDropdownItem.php';
 
 /**
@@ -49,7 +49,7 @@ class HtmlDropdown extends HtmlButton {
  		if(is_int($cssStyle)){
  			return $this->addToMember($this->class, CssRef::buttonStyles()[$cssStyle]);
  		}
- 		if(Text::startsWith($cssStyle, "btn-")===false){
+ 		if(PhalconUtils::startsWith($cssStyle, "btn-")===false){
  			$cssStyle="btn".$cssStyle;
  		}
  		return $this->addToMemberCtrl($this->class, $cssStyle, CssRef::buttonStyles());

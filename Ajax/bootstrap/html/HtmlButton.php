@@ -4,7 +4,6 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Text;
 include_once 'base/HtmlDoubleElement.php';
 /**
  * Twitter Bootstrap Button component

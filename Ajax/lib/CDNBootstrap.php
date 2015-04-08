@@ -1,7 +1,6 @@
 <?php
 namespace Ajax\lib;
-use Phalcon\Tag;
-use Phalcon\Text;
+use Ajax\service\PhalconUtils;
 require_once 'CDN.php';
 require_once 'CDNBase.php';
 class CDNBootstrap extends CDNBase{
@@ -34,13 +33,13 @@ class CDNBootstrap extends CDNBase{
 	public function __toString(){
 		$url=$this->getUrl();
 		$css=$this->getCss();
-		return Tag::javascriptInclude($url,$this->local)."\n".Tag::stylesheetLink($css,$this->localCss);;
+		return PhalconUtils::javascriptInclude($url,$this->local)."\n".PhalconUtils::stylesheetLink($css,$this->localCss);;
 	}
 
 	public function setCssUrl($cssUrl,$local=null) {
 		$this->cssUrl = $cssUrl;
 		if(isset($local)===false){
-			$local=Text::startsWith($cssUrl,"http")===false;
+			$local=PhalconUtils::startsWith($cssUrl,"http")===false;
 		}
 		$this->setLocalCss($local);
 		return $this;

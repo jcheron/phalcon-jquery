@@ -1,6 +1,5 @@
 <?php
 namespace Ajax\common;
-use Phalcon\Text;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 require_once 'BaseComponent.php';
