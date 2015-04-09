@@ -4,6 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
+use Phalcon\Mvc\View;
 		/**
  * Twitter Bootstrap Alert component
  * @see http://getbootstrap.com/javascript/#alert
@@ -12,6 +13,7 @@ use Ajax\bootstrap\html\base\CssRef;
  */
 class HtmlAlert extends HtmlDoubleElement {
 	protected $button="";
+	protected $closeable;
 	public function __construct($identifier,$message=NULL,$cssStyle="alert-warning") {
 		parent::__construct ( $identifier, "div" );
 		$this->_template='<div id="%identifier%" %properties%>%button%%content%</div>';
@@ -55,5 +57,30 @@ class HtmlAlert extends HtmlDoubleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
+
+	public function close(){
+		return "$('#".$this->identifier."').alert('close');";
+	}
+
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
+	 */
+	public function compile(JsUtils $js = NULL, View $view = NULL) {
+		if($this->closeable && $this->button===""){
+			$this->addCloseButton();
+		}
+		return parent::compile($js,$view);
+	}
+
+	public function setCloseable($closeable) {
+		$this->closeable = $closeable;
+		return $this;
+	}
+
+	public function setMessage($message){
+		$this->content=$message;
+	}
+
 
 }

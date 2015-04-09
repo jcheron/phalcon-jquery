@@ -23,6 +23,6 @@ class HtmlLabel extends HtmlDoubleElement {
 	 * default : "label-default"
 	 */
 	public function setStyle($cssStyle){
-		return $this->addToPropertyCtrl("class", $cssStyle,CssRef::Styles("label-"));
+		return $this->addToPropertyCtrl("class", CssRef::getStyle($cssStyle, "label"),CssRef::Styles("label"));
 	}
 }

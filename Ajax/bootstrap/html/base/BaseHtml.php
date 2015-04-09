@@ -68,7 +68,7 @@ abstract class BaseHtml extends BaseWidget {
 	function compile(JsUtils $js=NULL,View $view=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
-			if(PhalconUtils::startsWith($key, "_")===false){
+			if(PhalconUtils::startsWith($key, "_")===false && $key!=="events"){
 				if(is_array($value)){
 					$v=PropertyWrapper::wrap($value,$js);
 				}
@@ -241,6 +241,10 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
 		return $this->addEvent("click", $jsCode,$stopPropagation,$preventDefault);
+	}
+
+	public function setClick($jsCode){
+		return $this->onClick($jsCode);
 	}
 
 	public function addEventsOnRun(JsUtils $js){
