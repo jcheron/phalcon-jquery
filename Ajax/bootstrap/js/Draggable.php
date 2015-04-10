@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\Components\js;
+namespace Ajax\bootstrap\components\js;
 
 use Ajax\common\JsCode;
 class Draggable extends JsCode {

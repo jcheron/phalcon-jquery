@@ -1,6 +1,6 @@
 <?php
-namespace Ajax\bootstrap\Components;
-use Ajax\bootstrap\Components\SimpleBsComponent;
+namespace Ajax\bootstrap\components;
+use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\common\JsCode;
 /**

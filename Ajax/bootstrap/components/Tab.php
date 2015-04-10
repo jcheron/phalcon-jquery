@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 use Ajax\JsUtils;
 /**
  * Composant Twitter Bootstrap Tab
@@ -14,7 +14,7 @@ class Tab extends SimpleBsComponent {
 
 
 	/* (non-PHPdoc)
-	 * @see \Ajax\bootstrap\Components\SimpleBsComponent::getScript()
+	 * @see \Ajax\bootstrap\components\SimpleBsComponent::getScript()
 	 */
 	public function getScript() {
 		$jsCode="$('".$this->attachTo." a').click(function (event) { event.preventDefault();$(this).tab('show');});";

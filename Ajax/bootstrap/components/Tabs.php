@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 use Ajax\JsUtils;
 /**
  * Composant Twitter Bootstrap Tab

@@ -2,7 +2,7 @@
 namespace Ajax\bootstrap\html\content;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\HtmlLink;
-use Ajax\bootstrap\Components\Tab;
+use Ajax\bootstrap\components\Tab;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
 /**

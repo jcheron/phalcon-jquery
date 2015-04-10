@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 
 class Splitbutton extends Dropdown {
 	/* (non-PHPdoc)

@@ -1,7 +1,7 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 use Ajax\JsUtils;
-use Ajax\bootstrap\Components\js\Draggable;
+use Ajax\bootstrap\components\js\Draggable;
 /**
  * Composant Twitter Bootstrap Modal
  * @author jc

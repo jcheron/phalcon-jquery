@@ -3,7 +3,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\base\CssNavbar;
-use Ajax\bootstrap\Components\Scrollspy;
+use Ajax\bootstrap\components\Scrollspy;
 use Ajax\service\PhalconUtils;
 include_once 'content/HtmlNavzone.php';
 

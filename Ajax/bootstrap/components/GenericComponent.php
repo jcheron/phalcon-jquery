@@ -1,11 +1,11 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 
 class GenericComponent extends SimpleBsComponent {
 
 
 	/* (non-PHPdoc)
-	 * @see \Ajax\bootstrap\Components\SimpleBsComponent::getScript()
+	 * @see \Ajax\bootstrap\components\SimpleBsComponent::getScript()
 	 */
 	public function getScript() {
 		$this->jquery_code_for_compile=array();

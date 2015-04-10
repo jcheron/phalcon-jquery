@@ -8,7 +8,7 @@ namespace Ajax\bootstrap\html;
  */
 use Ajax\bootstrap\html\content\HtmlTabItem;
 use Ajax\JsUtils;
-use Ajax\bootstrap\Components\Tabs;
+use Ajax\bootstrap\components\Tabs;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\content\HtmlTabContent;
 use Phalcon\Mvc\View;

@@ -1,7 +1,7 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\Components\SimpleBsComponent;
+use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 
 /**

@@ -1,5 +1,5 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 use Ajax\common\SimpleComponent;
 use Ajax\common\JsCode;
 class SimpleBsComponent extends SimpleComponent{

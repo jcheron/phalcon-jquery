@@ -1,7 +1,7 @@
 <?php
-namespace Ajax\bootstrap\Components;
+namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\Components\Tooltip;
+use Ajax\bootstrap\components\Tooltip;
 use Ajax\JsUtils;
 /**
  * Composant Twitter Bootstrap Popover

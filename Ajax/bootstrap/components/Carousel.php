@@ -1,6 +1,6 @@
 <?php
-namespace Ajax\bootstrap\Components;
-use Ajax\bootstrap\Components\SimpleBsComponent;
+namespace Ajax\bootstrap\components;
+use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\common\JsCode;
 /**
@@ -22,7 +22,7 @@ class Carousel extends SimpleBsComponent {
 	/**
 	 * The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.
 	 * @param int $value
-	 * @return \Ajax\bootstrap\Components\Carousel
+	 * @return \Ajax\bootstrap\components\Carousel
 	 * default : 5000
 	 */
 	public function setInterval($value=5000){
@@ -32,7 +32,7 @@ class Carousel extends SimpleBsComponent {
 	/**
 	 * Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave.
 	 * @param string $event
-	 * @return \Ajax\bootstrap\Components\Carousel
+	 * @return \Ajax\bootstrap\components\Carousel
 	 * default : 'hover'
 	 */
 	public function setPause($event="hover"){
@@ -42,7 +42,7 @@ class Carousel extends SimpleBsComponent {
 	/**
 	 * Whether the carousel should cycle continuously or have hard stops.
 	 * @param string $value
-	 * @return \Ajax\bootstrap\Components\Carousel
+	 * @return \Ajax\bootstrap\components\Carousel
 	 * default : true
 	 */
 	public function setWrap($value=true){
@@ -52,7 +52,7 @@ class Carousel extends SimpleBsComponent {
 	/**
 	 * Whether the carousel should react to keyboard events.
 	 * @param string $value
-	 * @return \Ajax\bootstrap\Components\Carousel
+	 * @return \Ajax\bootstrap\components\Carousel
 	 * default : true
 	 */
 	public function setKeyboard($value=true){
