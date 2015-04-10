@@ -21,8 +21,10 @@ function __autoload($myClass){
 /**
  * Jquery Class
 **/
-class Jquery extends JsUtils{
-
+class Jquery{
+	protected $_di;
+	protected $_ui;
+	protected $_bootstrap;
 	protected $libraryFile;
 	protected $_javascript_folder = 'js';
 	protected $jquery_code_for_load = array();
@@ -38,10 +40,80 @@ class Jquery extends JsUtils{
 			"undelegate","unload"
 	);
 
+	public function setDi($di){
+		$this->_di = $di;
+	}
+
+	public function ui($ui=NULL){
+		if($ui!==NULL){
+			$this->_ui=$ui;
+		}
+		return $this->_ui;
+	}
+
+	public function bootstrap($bootstrap=NULL){
+		if($bootstrap!==NULL){
+			$this->_bootstrap=$bootstrap;
+		}
+		return $this->_bootstrap;
+	}
 	public function __construct($params=array()){
 
 	}
+	// --------------------------------------------------------------------
 
+	/**
+	 * Inline
+	 *
+	 * Outputs a <script> tag
+	 *
+	 * @access	public
+	 * @param	string	$script
+	 * @param	boolean	$cdata If a CDATA section should be added
+	 * @return	string
+	 */
+	function inline($script, $cdata = TRUE)
+	{
+		$str = $this->_open_script();
+		$str .= ($cdata) ? "\n// <![CDATA[\n{$script}\n// ]]>\n" : "\n{$script}\n";
+		$str .= $this->_close_script();
+
+		return $str;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Open Script
+	 *
+	 * Outputs an opening <script>
+	 *
+	 * @access	private
+	 * @param	string $src
+	 * @return	string
+	 */
+	function _open_script($src = '')
+	{
+		$str = '<script type="text/javascript" ';
+		$str .= ($src == '') ? '>' : ' src="'.$src.'">';
+		return $str;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Close Script
+	 *
+	 * Outputs an closing </script>
+	 *
+	 * @access	private
+	 * @param	string
+	 * @return	string
+	 */
+	function _close_script($extra = "\n")
+	{
+		return "</script>{$extra}";
+	}
 	public function getLibraryScript(){
 		$assets=$this->_di->get('assets');
 		$assets->addJs($this->libraryFile);
