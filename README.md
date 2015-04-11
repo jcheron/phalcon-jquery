@@ -1,7 +1,9 @@
 ![Phalcon jquery](http://angular.kobject.net/git/phalconist/phalcon-jquery-git.png "Phalcon jquery")
 
 **A JQuery and UI library** (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
+
 [![Build Status](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite.svg?branch=master)](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite)
+
  **Phalcon 1.3.4 and 2.0 compatible**
 
 ##What's Phalcon-jquery ?
