@@ -22,7 +22,6 @@ class Scrollspy extends SimpleBsComponent {
 	 */
 	public function attach($identifier) {
 		parent::attach($identifier);
-		$this->target=$identifier;
 	}
 
 	public function setTarget($target){
