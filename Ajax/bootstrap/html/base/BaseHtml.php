@@ -4,9 +4,7 @@ use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\service\AjaxCall;
 use Ajax\service\PhalconUtils;
-include_once 'BaseWidget.php';
-include_once 'CssRef.php';
-include_once 'PropertyWrapper.php';
+
 /**
  * BaseHtml for Twitter Bootstrap HTML components
  * @author jc
@@ -65,7 +63,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	function compile(JsUtils $js=NULL,View $view=NULL) {
+	public function compile(JsUtils $js=NULL,View $view=NULL) {
 		$result=$this->getTemplate();
 		foreach($this as $key => $value) {
 			if(PhalconUtils::startsWith($key, "_")===false && $key!=="events"){
@@ -95,12 +93,10 @@ abstract class BaseHtml extends BaseWidget {
 		if(is_array($typeCtrl)){
 			if(array_search($value, $typeCtrl)===false){
 				throw new \Exception("La valeur passée a propriété `".$name. "` ne fait pas partie des valeurs possibles : {".implode(",", $typeCtrl)."}");
-				return false;
 			}
 		}else{
 			if(!$typeCtrl($value)){
 				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$name);
-				return false;
 			}
 		}
 		return true;
@@ -168,7 +164,7 @@ abstract class BaseHtml extends BaseWidget {
 		$oldValue=trim($oldValue);
 	}
 
-	public abstract function run(JsUtils $js);
+	abstract public function run(JsUtils $js);
 	public function getTagName() {
 		return $this->tagName;
 	}
@@ -192,14 +188,16 @@ abstract class BaseHtml extends BaseWidget {
 				try {
 					$this->$key($value);
 					unset($array[$key]);
-				} catch (Exception $e) {}
+				} catch (\Exception $e) {}
 			}else{
 				$setter="set".ucfirst($key);
 				if(method_exists($this, $setter)){
 					try {
 						$this->$setter($value);
 						unset($array[$key]);
-					} catch (Exception $e) {}
+					} catch (\Exception $e) {
+						//Nothing to do
+					}
 				}
 			}
 		}
@@ -268,11 +266,14 @@ abstract class BaseHtml extends BaseWidget {
 		}
 	}
 
-	public function getOn($event,$url,$responseElement="",$parameters=array()){
+	private function _ajaxOn($operation,$event,$url,$responseElement="",$parameters=array()){
 		$params=array("url"=>$url,"responseElement"=>$responseElement);
 		$params=array_merge($params,$parameters);
-		$this->_addEvent($event, new AjaxCall("get", $params));
+		$this->_addEvent($event, new AjaxCall($operation, $params));
 		return $this;
+	}
+	public function getOn($event,$url,$responseElement="",$parameters=array()){
+		return $this->_ajaxOn("get", $event, $url,$responseElement,$parameters);
 	}
 
 	public function getOnClick($url,$responseElement="",$parameters=array()){
@@ -280,10 +281,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postOn($event,$url,$params="{}",$responseElement="",$parameters=array()){
-		$params=array("url"=>$url,"params"=>$params,"responseElement"=>$responseElement);
-		$params=array_merge($params,$parameters);
-		$this->_addEvent($event, new AjaxCall("post", $params));
-		return $this;
+		return $this->_ajaxOn("post", $event, $url,$responseElement,$parameters);
 	}
 
 	public function postOnClick($url,$params="{}",$responseElement="",$parameters=array()){
@@ -291,10 +289,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postFormOn($event,$url,$form,$responseElement="",$parameters=array()){
-		$params=array("url"=>$url,"form"=>$form,"responseElement"=>$responseElement);
-		$params=array_merge($params,$parameters);
-		$this->_addEvent($event, new AjaxCall("postForm", $params));
-		return $this;
+		return $this->_ajaxOn("postForm", $event, $url,$responseElement,$parameters);
 	}
 
 	public function postFormOnClick($url,$form,$responseElement="",$parameters=array()){
