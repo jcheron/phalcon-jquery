@@ -23,8 +23,7 @@ use Ajax\bootstrap\html\HtmlAccordion;
 use Ajax\bootstrap\html\HtmlCarousel;
 use Ajax\bootstrap\html\HtmlTabs;
 use Ajax\bootstrap\html\HtmlModal;
-include_once 'bootstrap/js/Draggable.php';
-include_once 'common/JsCode.php';
+
 
 class Bootstrap extends BaseGui{
 
@@ -231,21 +230,21 @@ class Bootstrap extends BaseGui{
 	/**
 	 * Return a new Bootstrap Accordion
 	 * @param string $identifier
-	 * @param array $images [(src=>"",alt=>"",caption=>"",description=>""),...]
-	 * @return HtmlButton
+	 * @return HtmlAccordion
 	 */
-	public function htmlAccordion($identifier,$images=NULL){
-		$accordion=new HtmlAccordion($identifier,$images);
+	public function htmlAccordion($identifier){
+		$accordion=new HtmlAccordion($identifier);
 		return $this->addHtmlComponent($accordion);
 	}
 
 	/**
 	 * Return a new Bootstrap Html Carousel
 	 * @param string $identifier
-	 * @return HtmlButton
+	 * @param array $images [(src=>"",alt=>"",caption=>"",description=>""),...]
+	 * @return HtmlCarousel
 	 */
-	public function htmlCarousel($identifier){
-		$caroussel=new HtmlCarousel($identifier);
+	public function htmlCarousel($identifier,$images=NULL){
+		$caroussel=new HtmlCarousel($identifier,$images);
 		return $this->addHtmlComponent($caroussel);
 	}
 
