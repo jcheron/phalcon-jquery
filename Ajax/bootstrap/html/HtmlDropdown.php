@@ -27,6 +27,9 @@ class HtmlDropdown extends HtmlButton {
 		$this->btnCaption=$value;
 		$this->tagName="a";
 		$this->fromArray($items);
+		if($cssStyle!==NULL){
+			$this->asButton($cssStyle);
+		}
 	}
 	/**
 	 * Define the tagName of the main element

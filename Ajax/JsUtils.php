@@ -54,6 +54,11 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface{
 		}
 		return $this->_ui;
 	}
+
+	/**
+	 * @param string $bootstrap
+	 * @return \Ajax\Bootstrap
+	 */
 	public function bootstrap($bootstrap=NULL){
 		if($bootstrap!==NULL){
 			$this->_bootstrap=$bootstrap;

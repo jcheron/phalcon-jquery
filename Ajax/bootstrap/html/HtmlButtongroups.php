@@ -4,7 +4,7 @@ use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 /**
- * Composant Twitter Bootstrap Buttongroups
+ * Twitter Bootstrap Buttongroups component
  * @author jc
  * @version 1.001
  */
@@ -46,11 +46,24 @@ class HtmlButtongroups extends HtmlDoubleElement {
 		foreach ($this->elements as $element)
 			$element->setStyle($value);
 	}
-
+	private function dropdownAsButton($bt){
+		$this->addExistingDropDown($bt);
+		$bt->setTagName("button");
+		$bt->addBtnClass("dropdown-toogle");
+		$bt->addBtnClass("btn-default");
+	}
+	private function addExistingDropDown($bt){
+		$bt->setMTagName("div");
+		$bt->setRole("group");
+		$bt->setMClass("btn-group");
+	}
 	public function addElement($element){
 		$result=$element;
 		$iid=sizeof($this->elements)+1;
-		if($element instanceof HtmlButton){
+		if(($element instanceof HtmlDropdown)||($element instanceof HtmlSplitbutton)){
+			$this->addExistingDropDown($element);
+			$this->elements[]=$element;
+		}elseif($element instanceof HtmlButton){
 			$this->elements[]=$element;
 		}elseif (is_array($element)){
 			if(array_key_exists("glyph", $element))
@@ -60,12 +73,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 					$bt=new HtmlSplitbutton($this->identifier."-dropdown-".$iid);
 				else
 					$bt=new HtmlDropdown($this->identifier."-dropdown-".$iid);
-				$bt->setMTagName("div");
-				$bt->setRole("group");
-				$bt->setMClass("btn-group");
-				$bt->setTagName("button");
-				$bt->addBtnClass("dropdown-toogle");
-				$bt->addBtnClass("btn-default");
+				$this->dropdownAsButton($bt);
 			}else
 				$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->fromArray($element);
@@ -115,7 +123,12 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	 * @return HtmlButton
 	 */
 	public function getElement($index){
-		return $this->elements[$index];
+		if(is_int($index))
+			return $this->elements[$index];
+		else{
+			$elm=$this->getElementById($index, $this->elements);
+			return $elm;
+		}
 	}
 
 	public function setElement($index,$button){
@@ -142,4 +155,9 @@ class HtmlButtongroups extends HtmlDoubleElement {
 			$element->on($event,$jsCode,$stopPropagation,$preventDefault);
 		}
 	}
+
+	public function getElements() {
+		return $this->elements;
+	}
+
 }

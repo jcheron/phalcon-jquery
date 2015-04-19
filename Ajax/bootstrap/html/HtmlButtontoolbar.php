@@ -51,9 +51,41 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 * return the Buttongroups at position $index
 	 * @return \Ajax\bootstrap\html\HtmlButtongroups
 	 */
-	public function getElement($index) {
+	public function getGroup($index) {
 		return parent::getElement($index);
 	}
+
+	public function getLastGroup(){
+		$bg=null;
+		$nb=sizeof($this->elements);
+		if($nb>0)
+			$bg=$this->elements[$nb-1];
+		return $bg;
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\HtmlButtongroups::getElement()
+	 */
+	public function getElement($index) {
+		$element=null;
+		$i=0;
+		if(is_int($index)){
+			$elements=array();
+			foreach($this->elements as $group){
+				$elements=array_merge($elements, $group->getElements());
+			}
+			if($index<sizeof($elements)){
+				$element=$elements[$index];
+			}
+		}else{
+			while($element==null && $i<sizeof($this->elements)){
+				$element=$this->elements[$i]->getElement($index);
+				$i++;
+			}
+		}
+		return $element;
+	}
+
 
 
 }
