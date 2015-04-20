@@ -1,19 +1,23 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
+
 /**
  * Composant Twitter Bootstrap Dropdown
  * @author jc
  * @version 1.001
  */
 class Dropdown extends SimpleBsComponent {
-	public function __construct(JsUtils $js){
+
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="dropdown";
 	}
 
-	public function attach($identifier){
+	public function attach($identifier) {
 		parent::attach($identifier);
 	}
 
@@ -22,7 +26,7 @@ class Dropdown extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($jsCode){
+	public function onShow($jsCode) {
 		return $this->addEvent("show.bs.dropdown", $jsCode);
 	}
 
@@ -31,7 +35,7 @@ class Dropdown extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($jsCode){
+	public function onShown($jsCode) {
 		return $this->addEvent("shown.bs.dropdown", $jsCode);
 	}
 
@@ -40,7 +44,7 @@ class Dropdown extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($jsCode){
+	public function onHide($jsCode) {
 		return $this->addEvent("hide.bs.dropdown", $jsCode);
 	}
 
@@ -49,7 +53,7 @@ class Dropdown extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($jsCode){
+	public function onHidden($jsCode) {
 		return $this->addEvent("hidden.bs.dropdown", $jsCode);
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ajax\bootstrap\components;
 
 use Ajax\bootstrap\components\SimpleBsComponent;
@@ -12,24 +13,23 @@ use Ajax\JsUtils;
 class Scrollspy extends SimpleBsComponent {
 
 	public function __construct(JsUtils $js) {
-		parent::__construct ( $js );
+		parent::__construct($js);
 		$this->uiName="scrollspy";
 	}
 
-
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see \Ajax\common\SimpleComponent::attach()
 	 */
 	public function attach($identifier) {
 		parent::attach($identifier);
 	}
 
-	public function setTarget($target){
+	public function setTarget($target) {
 		$this->setParam("target", $target);
 	}
 
-	public function onActivate($jsCode){
+	public function onActivate($jsCode) {
 		$this->addEvent("activate.bs.scrollspy", $jsCode);
 	}
-
 }

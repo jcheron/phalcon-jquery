@@ -1,7 +1,10 @@
 <?php
+
 namespace Ajax\ui\Components;
+
 use Ajax\JsUtils;
 use Ajax\common\SimpleComponent;
+
 /**
  * Composant JQuery UI Slider
  * @author jc
@@ -9,16 +12,17 @@ use Ajax\common\SimpleComponent;
  */
 class Slider extends SimpleComponent {
 
-	public function __construct(JsUtils $js){
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="slider";
 		$this->setParam("value", 0);
 	}
-	public function onChange($jsCode){
+
+	public function onChange($jsCode) {
 		return $this->addEvent("change", $jsCode);
 	}
 
-	public function onSlide($jsCode){
+	public function onSlide($jsCode) {
 		return $this->addEvent("slide", $jsCode);
 	}
 }

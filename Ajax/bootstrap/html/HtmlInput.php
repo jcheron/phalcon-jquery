@@ -11,31 +11,36 @@ use Ajax\JsUtils;
  * @version 1.001
  */
 class HtmlInput extends HtmlSingleElement {
+
 	public function __construct($identifier) {
-		parent::__construct($identifier,"input");
-		$this->setProperty("name",$identifier);
-		$this->setProperty("class","form-control");
-		$this->setProperty("role","input");
-		$this->setProperty("value","");
-		$this->setProperty("type","text");
+		parent::__construct($identifier, "input");
+		$this->setProperty("name", $identifier);
+		$this->setProperty("class", "form-control");
+		$this->setProperty("role", "input");
+		$this->setProperty("value", "");
+		$this->setProperty("type", "text");
 	}
+
 	public function setValue($value) {
-		$this->setProperty("value",$value);
+		$this->setProperty("value", $value);
 	}
+
 	public function setInputType($value) {
-		$this->setProperty("type",$value);
+		$this->setProperty("type", $value);
 	}
+
 	public function setLabel($label, $before=true) {
 		if ($before === true) {
-			$this->wrap("<label for='" . $this->identifier . "'>" . $label . "</label>","");
+			$this->wrap("<label for='" . $this->identifier . "'>" . $label . "</label>", "");
 		} else {
-			$this->wrap("","<label for='" . $this->identifier . "'>&nbsp;" . $label . "</label>");
+			$this->wrap("", "<label for='" . $this->identifier . "'>&nbsp;" . $label . "</label>");
 		}
 	}
+
 	public function onClick($jsCode) {
-		return $this->addEvent("click",$jsCode);
+		return $this->addEvent("click", $jsCode);
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
@@ -45,10 +50,12 @@ class HtmlInput extends HtmlSingleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
+
 	public function onChange($jsCode) {
-		return $this->addEvent("change",$jsCode);
+		return $this->addEvent("change", $jsCode);
 	}
+
 	public function onKeypress($jsCode) {
-		return $this->addEvent("keypress",$jsCode);
+		return $this->addEvent("keypress", $jsCode);
 	}
 }

@@ -23,7 +23,7 @@ class HtmlNavbar extends BaseHtml {
 	protected $scrollspy;
 	protected $hasScrollspy=false;
 	protected $scrollspyId="body";
-	
+
 	/**
 	 *
 	 * @param string $identifier the id
@@ -36,22 +36,27 @@ class HtmlNavbar extends BaseHtml {
 		$this->brand=$brand;
 		$this->brandHref=$brandHref;
 	}
+
 	public function setClass($class) {
 		$this->class=$class;
 		return $this;
 	}
+
 	public function setBrand($brand) {
 		$this->brand=$brand;
 		return $this;
 	}
+
 	public function setBrandHref($brandHref) {
 		$this->brandHref=$brandHref;
 		return $this;
 	}
+
 	public function setBrandTarget($brandTarget) {
 		$this->brandTarget=$brandTarget;
 		return $this;
 	}
+
 	public function setBrandImage($imageSrc) {
 		$this->brandImage=PhalconUtils::image(array (
 				$imageSrc,
@@ -60,7 +65,7 @@ class HtmlNavbar extends BaseHtml {
 		$this->brand="";
 		return $this;
 	}
-	
+
 	/**
 	 * adds a new zone of type $type
 	 * @param string $type one of nav, form, btn, right, left
@@ -68,7 +73,7 @@ class HtmlNavbar extends BaseHtml {
 	 * @return HtmlNavzone
 	 */
 	public function addZone($type="nav", $identifier=NULL) {
-		if (! isset($identifier)) {
+		if (!isset($identifier)) {
 			$nb=sizeof($this->navZones) + 1;
 			$identifier=$this->identifier . "-navzone-" . $nb;
 		}
@@ -76,18 +81,20 @@ class HtmlNavbar extends BaseHtml {
 		$this->navZones []=$zone;
 		return $zone;
 	}
+
 	public function addElement($element, HtmlNavzone $zone=NULL) {
 		$zone=$this->getZoneToInsertIn($zone);
 		if ($element instanceof HtmlDropdown)
 			$element->setMTagName("li");
 		$zone->addElement($element);
 	}
+
 	public function addElements($elements, HtmlNavzone $zone=NULL) {
 		$zone=$this->getZoneToInsertIn($zone);
 		$zone->addElements($elements);
 		return $zone;
 	}
-	
+
 	/**
 	 * /* (non-PHPdoc)
 	 * @see BaseHtml::addProperties()
@@ -95,6 +102,7 @@ class HtmlNavbar extends BaseHtml {
 	public function fromArray($array) {
 		return parent::fromArray($array);
 	}
+
 	public function setNavZones($navZones) {
 		if (is_array($navZones)) {
 			foreach ( $navZones as $zoneType => $zoneArray ) {
@@ -108,14 +116,14 @@ class HtmlNavbar extends BaseHtml {
 			}
 		}
 	}
-	
+
 	/**
 	 *
 	 * @param int $index
 	 * @return HtmlNavzone
 	 */
 	public function getZoneToInsertIn($zone=NULL) {
-		if (! isset($zone)) {
+		if (!isset($zone)) {
 			$nb=sizeof($this->navZones);
 			if ($nb < 1)
 				$zone=$this->addZone();
@@ -124,7 +132,7 @@ class HtmlNavbar extends BaseHtml {
 		}
 		return $zone;
 	}
-	
+
 	/**
 	 *
 	 * @param int $index
@@ -137,7 +145,7 @@ class HtmlNavbar extends BaseHtml {
 			if ($index < $nb)
 				$zone=$this->navZones [$index];
 		} else {
-			for($i=0; $i < $nb; $i ++) {
+			for($i=0; $i < $nb; $i++) {
 				if ($this->navZones [$i]->getIdentifier() === $index) {
 					$zone=$this->navZones [$i];
 					break;
@@ -146,6 +154,7 @@ class HtmlNavbar extends BaseHtml {
 		}
 		return $zone;
 	}
+
 	public function run(JsUtils $js) {
 		foreach ( $this->navZones as $zone ) {
 			$zone->run($js);
@@ -157,10 +166,12 @@ class HtmlNavbar extends BaseHtml {
 			$this->scrollspy->compile($js);
 		}
 	}
+
 	public function cssInverse() {
-		$this->addToMember($this->class,CssNavbar::NAVBAR_INVERSE);
+		$this->addToMember($this->class, CssNavbar::NAVBAR_INVERSE);
 		return $this;
 	}
+
 	public function scrollspy($attachTo="body") {
 		$this->hasScrollspy=true;
 		$this->scrollspyId=$attachTo;

@@ -1,13 +1,16 @@
 <?php
+
 namespace Ajax\bootstrap\html\base;
 
 use Ajax\JsUtils;
+
 class HtmlElementAsContent extends BaseHtml {
 	protected $element;
+
 	public function __construct($element) {
-		if($element instanceof HtmlSingleElement){
+		if ($element instanceof HtmlSingleElement) {
 			$this->element=$element;
-		}elseif(is_string($element)){
+		} elseif (is_string($element)) {
 			$this->element=new HtmlDoubleElement($element);
 		}
 		$this->identifier=$element->getIdentifier();
@@ -18,11 +21,11 @@ class HtmlElementAsContent extends BaseHtml {
 	}
 
 	public function setElement($element) {
-		$this->element = $element;
+		$this->element=$element;
 		return $this;
 	}
 
-	public function run(JsUtils $js){
+	public function run(JsUtils $js) {
 		$this->element->run($js);
 	}
 }

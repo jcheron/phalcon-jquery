@@ -1,6 +1,5 @@
 <?php
-return
-'<div class="%mClass%">
+return '<div class="%mClass%">
   %addonLeft%
   <input id="%identifier%" %properties%>
   %addonRight%

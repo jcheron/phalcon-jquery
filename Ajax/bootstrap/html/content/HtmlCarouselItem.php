@@ -2,7 +2,6 @@
 
 namespace Ajax\bootstrap\html\content;
 
-
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\JsUtils;
 
@@ -12,8 +11,8 @@ class HtmlCarouselItem extends BaseHtml {
 	protected $caption;
 
 	public function __construct($identifier) {
-		parent::__construct ( $identifier);
-		$this->_template=include __DIR__.'/../templates/tplCarouselItem.php';
+		parent::__construct($identifier);
+		$this->_template=include __DIR__ . '/../templates/tplCarouselItem.php';
 	}
 
 	public function getImageSrc() {
@@ -21,7 +20,7 @@ class HtmlCarouselItem extends BaseHtml {
 	}
 
 	public function setImageSrc($imageSrc) {
-		$this->imageSrc = $imageSrc;
+		$this->imageSrc=$imageSrc;
 		return $this;
 	}
 
@@ -30,7 +29,7 @@ class HtmlCarouselItem extends BaseHtml {
 	}
 
 	public function setImageAlt($imageAlt) {
-		$this->imageAlt = $imageAlt;
+		$this->imageAlt=$imageAlt;
 		return $this;
 	}
 
@@ -39,24 +38,23 @@ class HtmlCarouselItem extends BaseHtml {
 	}
 
 	public function setCaption($caption) {
-		$this->caption = $caption;
+		$this->caption=$caption;
 		return $this;
 	}
 
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
 		// TODO: Auto-generated method stub
-
 	}
 
-	public function __toString(){
+	public function __toString() {
 		return $this->compile();
 	}
 
-	public function setClass($value){
+	public function setClass($value) {
 		$this->setProperty("class", $value);
 	}
-
 }

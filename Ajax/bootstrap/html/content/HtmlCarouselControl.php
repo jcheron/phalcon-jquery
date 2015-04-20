@@ -10,8 +10,8 @@ class HtmlCarouselControl extends HtmlLink {
 	protected $caption;
 
 	public function __construct($identifier) {
-		parent::__construct ( $identifier);
-		$this->_template=include __DIR__.'/../templates/tplCarouselControl.php';
+		parent::__construct($identifier);
+		$this->_template=include __DIR__ . '/../templates/tplCarouselControl.php';
 	}
 
 	public function getSens() {
@@ -19,7 +19,7 @@ class HtmlCarouselControl extends HtmlLink {
 	}
 
 	public function setSens($sens) {
-		$this->sens = $sens;
+		$this->sens=$sens;
 		return $this;
 	}
 
@@ -28,7 +28,7 @@ class HtmlCarouselControl extends HtmlLink {
 	}
 
 	public function setGlyphIcon($glyphIcon) {
-		$this->glyphIcon = $glyphIcon;
+		$this->glyphIcon=$glyphIcon;
 		return $this;
 	}
 
@@ -37,8 +37,7 @@ class HtmlCarouselControl extends HtmlLink {
 	}
 
 	public function setCaption($caption) {
-		$this->caption = $caption;
+		$this->caption=$caption;
 		return $this;
 	}
-
 }

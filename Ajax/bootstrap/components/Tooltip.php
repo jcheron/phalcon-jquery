@@ -1,32 +1,35 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
+
 /**
  * Composant Twitter Bootstrap Tooltip
  * @author jc
  * @version 1.001
  */
 class Tooltip extends SimpleBsComponent {
-	public function __construct(JsUtils $js){
+
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="tooltip";
 	}
 
-	public function attach($identifier){
+	public function attach($identifier) {
 		parent::attach($identifier);
-		$this->js->attr($identifier,"data-toggle",$this->uiName,true);
+		$this->js->attr($identifier, "data-toggle", $this->uiName, true);
 	}
 
 	/**
 	 * Apply a CSS fade transition to the tooltip if set to true
 	 * @param Boolean $value
-	 * @return Tooltip
-	 * default : true
+	 * @return Tooltip default : true
 	 */
-	public function setAnimation($value){
-		return $this->setParamCtrl("animation", $value,"is_bool");
+	public function setAnimation($value) {
+		return $this->setParamCtrl("animation", $value, "is_bool");
 	}
 
 	/**
@@ -34,10 +37,9 @@ class Tooltip extends SimpleBsComponent {
 	 * If a number is supplied, delay is applied to both hide/show
 	 * Object structure is: delay: { "show": 500, "hide": 100 }
 	 * @param mixed $value
-	 * @return Tooltip
-	 * default : 0
+	 * @return Tooltip default : 0
 	 */
-	public function setDelai($value){
+	public function setDelai($value) {
 		return $this->setParam("delai", $value);
 	}
 
@@ -46,13 +48,11 @@ class Tooltip extends SimpleBsComponent {
 	 * If false, jQuery's text method will be used to insert content into the DOM.
 	 * Use text if you're worried about XSS attacks.
 	 * @param Boolean $value
-	 * @return $this
-	 * default : false
+	 * @return $this default : false
 	 */
-	public function setHtml($value){
-		return $this->setParamCtrl("html", $value,"is_bool");
+	public function setHtml($value) {
+		return $this->setParamCtrl("html", $value, "is_bool");
 	}
-
 
 	/**
 	 * How to position the tooltip - top | bottom | left | right | auto.
@@ -62,10 +62,9 @@ class Tooltip extends SimpleBsComponent {
 	 * it is called with the tooltip DOM node as its first argument and the triggering element DOM node as its second.
 	 * The this context is set to the tooltip instance.
 	 * @param string $value
-	 * @return $this
-	 * default : top
+	 * @return $this default : top
 	 */
-	public function setPlacement($value){
+	public function setPlacement($value) {
 		return $this->setParamCtrl("placement", $value, CssRef::position());
 	}
 
@@ -73,10 +72,9 @@ class Tooltip extends SimpleBsComponent {
 	 * If a selector is provided, tooltip objects will be delegated to the specified targets.
 	 * In practice, this is used to enable dynamic HTML content to have tooltips added.
 	 * @param string $value
-	 * @return $this
-	 * default : false
+	 * @return $this default : false
 	 */
-	public function setSelector($value){
+	public function setSelector($value) {
 		return $this->setParam("selector", $value);
 	}
 
@@ -88,7 +86,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @param string $value
 	 * @return $this
 	 */
-	public function setTemplate($value){
+	public function setTemplate($value) {
 		return $this->setParam("template", $value);
 	}
 
@@ -96,10 +94,9 @@ class Tooltip extends SimpleBsComponent {
 	 * Default title value if title attribute isn't present.
 	 * If a function is given, it will be called with its this reference set to the element that the tooltip is attached to.
 	 * @param string $value
-	 * @return $this
-	 * default : ''
+	 * @return $this default : ''
 	 */
-	public function setTitle($value){
+	public function setTitle($value) {
 		return $this->setParam("title", $value);
 	}
 
@@ -107,10 +104,9 @@ class Tooltip extends SimpleBsComponent {
 	 * How tooltip is triggered - click | hover | focus | manual.
 	 * You may pass multiple triggers; separate them with a space.
 	 * @param string $value
-	 * @return Tooltip
-	 * default : 'hover focus'
+	 * @return Tooltip default : 'hover focus'
 	 */
-	public function setTrigger($value){
+	public function setTrigger($value) {
 		return $this->setParam("trigger", $value);
 	}
 
@@ -120,7 +116,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @param mixed $value
 	 * @return $this
 	 */
-	public function setViewport($value){
+	public function setViewport($value) {
 		return $this->setParam("viewport", $value);
 	}
 
@@ -129,8 +125,8 @@ class Tooltip extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($jsCode){
-		return $this->addEvent("show.bs.".$this->uiName, $jsCode);
+	public function onShow($jsCode) {
+		return $this->addEvent("show.bs." . $this->uiName, $jsCode);
 	}
 
 	/**
@@ -138,8 +134,8 @@ class Tooltip extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($jsCode){
-		return $this->addEvent("shown.bs.".$this->uiName, $jsCode);
+	public function onShown($jsCode) {
+		return $this->addEvent("shown.bs." . $this->uiName, $jsCode);
 	}
 
 	/**
@@ -147,8 +143,8 @@ class Tooltip extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($jsCode){
-		return $this->addEvent("hide.bs.".$this->uiName, $jsCode);
+	public function onHide($jsCode) {
+		return $this->addEvent("hide.bs." . $this->uiName, $jsCode);
 	}
 
 	/**
@@ -156,7 +152,7 @@ class Tooltip extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($jsCode){
-		return $this->addEvent("hidden.bs.".$this->uiName, $jsCode);
+	public function onHidden($jsCode) {
+		return $this->addEvent("hidden.bs." . $this->uiName, $jsCode);
 	}
 }

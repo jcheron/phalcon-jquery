@@ -20,8 +20,9 @@ class HtmlAlert extends HtmlDoubleElement {
 	 */
 	protected $button="";
 	protected $closeable;
+
 	public function __construct($identifier, $message=NULL, $cssStyle="alert-warning") {
-		parent::__construct($identifier,"div");
+		parent::__construct($identifier, "div");
 		$this->_template='<div id="%identifier%" %properties%>%button%%content%</div>';
 		$this->setClass("alert");
 		$this->setRole("alert");
@@ -30,6 +31,7 @@ class HtmlAlert extends HtmlDoubleElement {
 			$this->content=$message;
 		}
 	}
+
 	/**
 	 * define the alert style
 	 * avaible values : "alert-success","alert-info","alert-warning","alert-danger"
@@ -37,8 +39,9 @@ class HtmlAlert extends HtmlDoubleElement {
 	 * @return \Ajax\bootstrap\html\HtmlAlert default : "alert-succes"
 	 */
 	public function setStyle($cssStyle) {
-		return $this->addToPropertyCtrl("class",CssRef::getStyle($cssStyle,"alert"),CssRef::Styles("alert"));
+		return $this->addToPropertyCtrl("class", CssRef::getStyle($cssStyle, "alert"), CssRef::Styles("alert"));
 	}
+
 	public function addCloseButton() {
 		$button=new HtmlButton("close-" . $this->identifier);
 		$button->setProperties(array (
@@ -47,15 +50,16 @@ class HtmlAlert extends HtmlDoubleElement {
 				"aria-label" => "close" 
 		));
 		$button->setValue('<span aria-hidden="true">&times;</span>');
-		$this->addToPropertyCtrl("class","alert-dismissible",array (
+		$this->addToPropertyCtrl("class", "alert-dismissible", array (
 				"alert-dismissible" 
 		));
 		$this->button=$button;
 	}
+
 	public function onClose($jsCode) {
-		return $this->addEvent("close.bs.alert",$jsCode);
+		return $this->addEvent("close.bs.alert", $jsCode);
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\HtmlDoubleElement::run()
@@ -65,10 +69,11 @@ class HtmlAlert extends HtmlDoubleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
+
 	public function close() {
 		return "$('#" . $this->identifier . "').alert('close');";
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
@@ -77,12 +82,14 @@ class HtmlAlert extends HtmlDoubleElement {
 		if ($this->closeable && $this->button === "") {
 			$this->addCloseButton();
 		}
-		return parent::compile($js,$view);
+		return parent::compile($js, $view);
 	}
+
 	public function setCloseable($closeable) {
 		$this->closeable=$closeable;
 		return $this;
 	}
+
 	public function setMessage($message) {
 		$this->content=$message;
 	}

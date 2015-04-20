@@ -1,11 +1,14 @@
 <?php
+
 namespace Ajax\bootstrap\html\content;
+
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\HtmlBadge;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\HtmlGlyphicon;
 use Ajax\service\PhalconUtils;
+
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
@@ -19,7 +22,9 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	protected $role;
 	protected $itemRole;
 	protected $target;
+
 	/**
+	 *
 	 * @param string $identifier the id
 	 */
 	public function __construct($identifier) {
@@ -33,25 +38,22 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 		$this->_template='<li id="%identifier%" class="%class%" role="%role%"><a role="%itemRole%" class="%itemClass%" tabindex="-1" href="%href%" target="%target%">%content%</a></li>';
 	}
 
-
 	public function setItemClass($itemClass) {
-		$this->itemClass = $itemClass;
+		$this->itemClass=$itemClass;
 		return $this;
 	}
 
 	public function setItemRole($itemRole) {
-		$this->itemRole = $itemRole;
+		$this->itemRole=$itemRole;
 		return $this;
 	}
-
 
 	/**
 	 * Set the item class
 	 * @param string $value
-	 * @return $this
-	 * default : ''
+	 * @return $this default : ''
 	 */
-	public function setClass($value){
+	public function setClass($value) {
 		$this->class=$value;
 		return $this;
 	}
@@ -61,12 +63,12 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	 * @param string $value
 	 * @return $this
 	 */
-	public function setCaption($value){
-		if(PhalconUtils::startsWith($value, "-")){
+	public function setCaption($value) {
+		if (PhalconUtils::startsWith($value, "-")) {
 			$this->class="dropdown-header";
 			$this->role="presentation";
 			$this->_template='<li id="%identifier%" class="%class%" role="%role%">%content%</li>';
-			if($value==="-"){
+			if ($value === "-") {
 				$this->class="divider";
 			}
 			$value=substr($value, 1);
@@ -75,7 +77,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 		return $this;
 	}
 
-	public function disable(){
+	public function disable() {
 		$this->role="presentation";
 		$this->class="disabled";
 	}
@@ -83,10 +85,9 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	/**
 	 * Set the item href
 	 * @param string $value
-	 * @return $this
-	 * default : '#'
+	 * @return $this default : '#'
 	 */
-	public function setHref($value){
+	public function setHref($value) {
 		$this->href=$value;
 		return $this;
 	}
@@ -94,24 +95,23 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	/**
 	 * Set the item role
 	 * @param string $value
-	 * @return $this
-	 * default : ''
+	 * @return $this default : ''
 	 */
-	public function setRole($value){
+	public function setRole($value) {
 		$this->role=$value;
 		return $this;
 	}
 
-	public function isDivider(){
-		return $this->class==="divider";
+	public function isDivider() {
+		return $this->class === "divider";
 	}
 
-	public function __toString(){
+	public function __toString() {
 		return $this->compile();
 	}
 
 	/**
-	/* Initialise l'objet à partir d'un tableau associatif
+	 * /* Initialise l'objet à partir d'un tableau associatif
 	 * array("identifier"=>"id","caption"=>"","class"=>"","href"=>"","role"=>"")
 	 * @see BaseHtml::addProperties()
 	 */
@@ -120,7 +120,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	}
 
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
@@ -129,27 +129,28 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	 * Js component creation when dropdownItem is in Navs/Pills
 	 * @param JsUtils $js
 	 */
-	public function runNav(JsUtils $js){
-		$js->bootstrap()->tab("#".$this->identifier);
+	public function runNav(JsUtils $js) {
+		$js->bootstrap()->tab("#" . $this->identifier);
 	}
 
 	public function getHref() {
 		return $this->href;
 	}
-	public function addBadge($caption,$leftSeparator="&nbsp;"){
-		$badge=new HtmlBadge("badge-".$this->identifier);
+
+	public function addBadge($caption, $leftSeparator="&nbsp;") {
+		$badge=new HtmlBadge("badge-" . $this->identifier);
 		$badge->setContent($caption);
-		$this->content.=$leftSeparator.$badge->compile();
+		$this->content.=$leftSeparator . $badge->compile();
 		return $this;
 	}
 
-	public function addGlyph($glyphicon,$left=true,$separator="&nbsp;"){
-		$glyph=new HtmlGlyphicon("glyph-".$this->identifier);
+	public function addGlyph($glyphicon, $left=true, $separator="&nbsp;") {
+		$glyph=new HtmlGlyphicon("glyph-" . $this->identifier);
 		$glyph->setGlyphicon($glyphicon);
-		if($left){
-			$this->content=$glyph->compile().$separator.$this->content;
-		}else{
-			$this->content.=$separator.$glyph->compile();
+		if ($left) {
+			$this->content=$glyph->compile() . $separator . $this->content;
+		} else {
+			$this->content.=$separator . $glyph->compile();
 		}
 		return $this;
 	}
@@ -157,14 +158,13 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	public function getTarget() {
 		return $this->target;
 	}
+
 	public function setTarget($target) {
-		$this->target = $target;
+		$this->target=$target;
 		return $this;
 	}
 
-	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
-		return $this->addEvent("click", $jsCode,$stopPropagation,$preventDefault);
+	public function onClick($jsCode, $stopPropagation=false, $preventDefault=false) {
+		return $this->addEvent("click", $jsCode, $stopPropagation, $preventDefault);
 	}
-
-
 }

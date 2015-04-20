@@ -1,30 +1,34 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\JsUtils;
+
 /**
  * Composant Twitter Bootstrap Tab
  * @author jc
  * @version 1.001
  */
 class Tab extends SimpleBsComponent {
+
 	public function __construct(JsUtils $js) {
-		parent::__construct ( $js );
+		parent::__construct($js);
 		$this->uiName="tab";
 	}
 
-
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\components\SimpleBsComponent::getScript()
 	 */
 	public function getScript() {
-		$jsCode="$('".$this->attachTo." a').click(function (event) { event.preventDefault();$(this).tab('show');});";
-		$this->jquery_code_for_compile[]=$jsCode;
+		$jsCode="$('" . $this->attachTo . " a').click(function (event) { event.preventDefault();$(this).tab('show');});";
+		$this->jquery_code_for_compile []=$jsCode;
 		$this->compileEvents();
 		return $this->compileJQueryCode();
 	}
 
-	public function show(){
-		$this->jquery_code_for_compile[]=' $(function () {$("'.$this->attachTo.' a").tab("show");});';
+	public function show() {
+		$this->jquery_code_for_compile []=' $(function () {$("' . $this->attachTo . ' a").tab("show");});';
 	}
 
 	/**
@@ -33,7 +37,7 @@ class Tab extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($jsCode){
+	public function onShow($jsCode) {
 		return $this->addEvent("show.bs.tab", $jsCode);
 	}
 
@@ -43,7 +47,7 @@ class Tab extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($jsCode){
+	public function onShown($jsCode) {
 		return $this->addEvent("shown.bs.tab", $jsCode);
 	}
 
@@ -53,7 +57,7 @@ class Tab extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($jsCode){
+	public function onHide($jsCode) {
 		return $this->addEvent("hide.bs.tab", $jsCode);
 	}
 
@@ -63,8 +67,7 @@ class Tab extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($jsCode){
+	public function onHidden($jsCode) {
 		return $this->addEvent("hidden.bs.tab", $jsCode);
 	}
-
 }

@@ -9,24 +9,26 @@ use Phalcon\Mvc\View;
 
 abstract class PhBsElement extends Element {
 	/**
+	 *
 	 * @var PhBsRenderer
 	 */
 	protected $renderer;
 	/**
+	 *
 	 * @var JsUtils
 	 */
 	protected $js;
-	public function __construct($name, array $attributes = null) {
-		parent::__construct ( $name, $attributes);
+
+	public function __construct($name, array $attributes=null) {
+		parent::__construct($name, $attributes);
 	}
 
 	public function setName($name) {
 		$this->renderer->setName($name);
 	}
 
-
-	public function compile(JsUtils $js = NULL,View $view=NULL) {
-		return $this->renderer->compile($js,$view);
+	public function compile(JsUtils $js=NULL, View $view=NULL) {
+		return $this->renderer->compile($js, $view);
 	}
 
 	public function run(JsUtils $js) {
@@ -37,7 +39,8 @@ abstract class PhBsElement extends Element {
 		return $this->renderer->setLabel($label);
 	}
 
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see \Phalcon\Forms\Element::setAttribute()
 	 */
 	public function setAttribute($attribute, $value) {
@@ -49,14 +52,15 @@ abstract class PhBsElement extends Element {
 	}
 
 	public function setRenderer(PhBsRenderer $renderer) {
-		$this->renderer = $renderer;
+		$this->renderer=$renderer;
 		return $this;
 	}
 
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see \Phalcon\Forms\ElementInterface::render()
 	 */
-	public function render($attributes = null) {
+	public function render($attributes=null) {
 		$this->renderer->getElement()->setDefault($this->getValue());
 		return $this->renderer->render($attributes);
 	}
@@ -69,5 +73,4 @@ abstract class PhBsElement extends Element {
 		$this->renderer->setHtmlElement($htmlElement);
 		return $this;
 	}
-
 }

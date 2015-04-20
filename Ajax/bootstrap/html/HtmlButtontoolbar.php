@@ -10,11 +10,12 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\HtmlButtongroups;
 
 class HtmlButtontoolbar extends HtmlButtongroups {
+
 	public function __construct($identifier, $elements=array(), $cssStyle=NULL, $size=NULL, $tagName="div") {
-		parent::__construct($identifier,$elements,$cssStyle,$size,$tagName);
+		parent::__construct($identifier, $elements, $cssStyle, $size, $tagName);
 		$this->setClass("btn-toolbar");
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\HtmlButtongroups::addElement()
@@ -26,7 +27,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 			$this->getLastButtonGroup()->addElement($element);
 		}
 	}
-	
+
 	/**
 	 * Add and return a new buttongroup
 	 * @return \Ajax\bootstrap\html\HtmlButtongroups
@@ -37,7 +38,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 		$this->elements []=$bg;
 		return $bg;
 	}
-	
+
 	/**
 	 *
 	 * @return HtmlButtongroups
@@ -52,7 +53,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 		}
 		return $bg;
 	}
-	
+
 	/**
 	 * return the Buttongroups at position $index
 	 * @return \Ajax\bootstrap\html\HtmlButtongroups
@@ -60,6 +61,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	public function getGroup($index) {
 		return parent::getElement($index);
 	}
+
 	public function getLastGroup() {
 		$bg=null;
 		$nb=sizeof($this->elements);
@@ -67,7 +69,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 			$bg=$this->elements [$nb - 1];
 		return $bg;
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\HtmlButtongroups::getElement()
@@ -78,7 +80,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 		if (is_int($index)) {
 			$elements=array ();
 			foreach ( $this->elements as $group ) {
-				$elements=array_merge($elements,$group->getElements());
+				$elements=array_merge($elements, $group->getElements());
 			}
 			if ($index < sizeof($elements)) {
 				$element=$elements [$index];
@@ -86,7 +88,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 		} else {
 			while ( $element == null && $i < sizeof($this->elements) ) {
 				$element=$this->elements [$i]->getElement($index);
-				$i ++;
+				$i++;
 			}
 		}
 		return $element;

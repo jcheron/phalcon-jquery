@@ -1,8 +1,11 @@
 <?php
+
 namespace Ajax\ui\Components;
+
 use Ajax\JsUtils;
 use Ajax\ui\Properties\Position;
 use Ajax\common\SimpleComponent;
+
 /**
  * Composant JQuery UI Menu
  * @author jc
@@ -10,7 +13,7 @@ use Ajax\common\SimpleComponent;
  */
 class Tooltip extends SimpleComponent {
 
-	public function __construct(JsUtils $js){
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="tooltip";
 	}
@@ -21,27 +24,25 @@ class Tooltip extends SimpleComponent {
 	 * default : function returning the title attribute
 	 * @return $this
 	 */
-	public function setContent($value){
+	public function setContent($value) {
 		return $this->setParam("content", $value);
 	}
 
 	/**
 	 * Disables the tooltip if set to true.
-	 * @param mixed $value
-	 * default : false
+	 * @param mixed $value default : false
 	 * @return $this
 	 */
-	public function setDisabled($value){
+	public function setDisabled($value) {
 		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
 	/**
 	 * If and how to animate the hiding of the tooltip.
-	 * @param mixed $value
-	 * default : true
+	 * @param mixed $value default : true
 	 * @return $this
 	 */
-	public function setHide($value){
+	public function setHide($value) {
 		return $this->setParam("hide", $value);
 	}
 
@@ -49,11 +50,10 @@ class Tooltip extends SimpleComponent {
 	 * A selector indicating which items should show tooltips.
 	 * Customize if you're using something other then the title attribute for the tooltip content,
 	 * or if you need a different selector for event delegation.
-	 * @param string $value
-	 * default : title
+	 * @param string $value default : title
 	 * @return $this
 	 */
-	public function setItems($value){
+	public function setItems($value) {
 		return $this->setParam("items", $value);
 	}
 
@@ -61,42 +61,38 @@ class Tooltip extends SimpleComponent {
 	 * Identifies the position of the tooltip in relation to the associated target element.
 	 * The of option defaults to the target element, but you can specify another element to position against.
 	 * You can refer to the jQuery UI Position utility for more details about the various options.
-	 * @param Position $position
-	 * default : { my: "left top+15", at: "left bottom", collision: "flipfit" }
+	 * @param Position $position default : { my: "left top+15", at: "left bottom", collision: "flipfit" }
 	 * @return $this
 	 */
-	public function setPosition(Position $position){
+	public function setPosition(Position $position) {
 		return $this->setParam("position", $position->getParams());
 	}
 
 	/**
 	 * If and how to animate the showing of the tooltip.
-	 * @param mixed $value
-	 * default : true
+	 * @param mixed $value default : true
 	 * @return $this
 	 */
-	public function setShow($value){
+	public function setShow($value) {
 		return $this->setParam("show", $value);
 	}
 
 	/**
 	 * A class to add to the widget, can be used to display various tooltip types, like warnings or errors.
 	 * This may get replaced by the classes option.
-	 * @param string $value
-	 * default : null
+	 * @param string $value default : null
 	 * @return $this
 	 */
-	public function setTooltipClass($value){
+	public function setTooltipClass($value) {
 		return $this->setParam("tooltipclass", $value);
 	}
 
 	/**
 	 * Whether the tooltip should track (follow) the mouse.
-	 * @param Boolean $value
-	 * default :false
+	 * @param Boolean $value default :false
 	 * @return $this
 	 */
-	public function setTrack($value){
+	public function setTrack($value) {
 		return $this->setParamCtrl("track", $value, "is_bool");
 	}
 
@@ -105,7 +101,7 @@ class Tooltip extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onClose($jsCode){
+	public function onClose($jsCode) {
 		return $this->addEvent("close", $jsCode);
 	}
 
@@ -114,7 +110,7 @@ class Tooltip extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onOpen($jsCode){
+	public function onOpen($jsCode) {
 		return $this->addEvent("open", $jsCode);
 	}
 }

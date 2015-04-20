@@ -1,6 +1,5 @@
 <?php
-return
-'<div id="%identifier%" tabindex="-1">
+return '<div id="%identifier%" tabindex="-1">
 	<div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

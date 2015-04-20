@@ -78,21 +78,25 @@ class Jquery {
 			"undelegate",
 			"unload" 
 	);
+
 	public function setDi($di) {
 		$this->_di=$di;
 	}
+
 	public function ui($ui=NULL) {
 		if ($ui !== NULL) {
 			$this->_ui=$ui;
 		}
 		return $this->_ui;
 	}
+
 	public function bootstrap($bootstrap=NULL) {
 		if ($bootstrap !== NULL) {
 			$this->_bootstrap=$bootstrap;
 		}
 		return $this->_bootstrap;
 	}
+
 	public function __construct($params=array()) {
 	}
 	
@@ -147,14 +151,17 @@ class Jquery {
 	private function _close_script($extra="\n") {
 		return "</script>{$extra}";
 	}
+
 	public function getLibraryScript() {
 		$assets=$this->_di->get('assets');
 		$assets->addJs($this->libraryFile);
 		return $assets->outputJs();
 	}
+
 	public function setLibraryFile($name) {
 		$this->libraryFile=$name;
 	}
+
 	public function _setImageLoader($img) {
 		$this->jquery_ajax_img=$img;
 	}
@@ -173,7 +180,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _blur($element='this', $js='') {
-		return $this->_add_event($element,$js,'blur');
+		return $this->_add_event($element, $js, 'blur');
 	}
 	
 	// --------------------------------------------------------------------
@@ -188,7 +195,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _change($element='this', $js='') {
-		return $this->_add_event($element,$js,'change');
+		return $this->_add_event($element, $js, 'change');
 	}
 	
 	// --------------------------------------------------------------------
@@ -204,7 +211,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _click($element='this', $js='', $ret_false=TRUE) {
-		if (! is_array($js)) {
+		if (!is_array($js)) {
 			$js=array (
 					$js 
 			);
@@ -214,7 +221,7 @@ class Jquery {
 			$js []="return false;";
 		}
 		
-		return $this->_add_event($element,$js,'click');
+		return $this->_add_event($element, $js, 'click');
 	}
 	
 	// --------------------------------------------------------------------
@@ -229,7 +236,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _dblclick($element='this', $js='') {
-		return $this->_add_event($element,$js,'dblclick');
+		return $this->_add_event($element, $js, 'dblclick');
 	}
 	
 	// --------------------------------------------------------------------
@@ -244,7 +251,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _error($element='this', $js='') {
-		return $this->_add_event($element,$js,'error');
+		return $this->_add_event($element, $js, 'error');
 	}
 	
 	// --------------------------------------------------------------------
@@ -259,7 +266,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _focus($element='this', $js='') {
-		return $this->_add_event($element,$js,'focus');
+		return $this->_add_event($element, $js, 'focus');
 	}
 	
 	// --------------------------------------------------------------------
@@ -294,7 +301,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _keydown($element='this', $js='') {
-		return $this->_add_event($element,$js,'keydown');
+		return $this->_add_event($element, $js, 'keydown');
 	}
 	
 	// --------------------------------------------------------------------
@@ -309,7 +316,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _keypress($element='this', $js='') {
-		return $this->_add_event($element,$js,'keypress');
+		return $this->_add_event($element, $js, 'keypress');
 	}
 	
 	// --------------------------------------------------------------------
@@ -324,7 +331,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _keyup($element='this', $js='') {
-		return $this->_add_event($element,$js,'keyup');
+		return $this->_add_event($element, $js, 'keyup');
 	}
 	
 	// --------------------------------------------------------------------
@@ -339,7 +346,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _load($element='this', $js='') {
-		return $this->_add_event($element,$js,'load');
+		return $this->_add_event($element, $js, 'load');
 	}
 	
 	// --------------------------------------------------------------------
@@ -354,7 +361,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _mousedown($element='this', $js='') {
-		return $this->_add_event($element,$js,'mousedown');
+		return $this->_add_event($element, $js, 'mousedown');
 	}
 	
 	// --------------------------------------------------------------------
@@ -369,7 +376,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _mouseout($element='this', $js='') {
-		return $this->_add_event($element,$js,'mouseout');
+		return $this->_add_event($element, $js, 'mouseout');
 	}
 	
 	// --------------------------------------------------------------------
@@ -384,7 +391,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _mouseover($element='this', $js='') {
-		return $this->_add_event($element,$js,'mouseover');
+		return $this->_add_event($element, $js, 'mouseover');
 	}
 	
 	// --------------------------------------------------------------------
@@ -399,7 +406,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _mouseup($element='this', $js='') {
-		return $this->_add_event($element,$js,'mouseup');
+		return $this->_add_event($element, $js, 'mouseup');
 	}
 	
 	// --------------------------------------------------------------------
@@ -414,7 +421,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _output($array_js='') {
-		if (! is_array($array_js)) {
+		if (!is_array($array_js)) {
 			$array_js=array (
 					$array_js 
 			);
@@ -437,7 +444,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _resize($element='this', $js='') {
-		return $this->_add_event($element,$js,'resize');
+		return $this->_add_event($element, $js, 'resize');
 	}
 	
 	// --------------------------------------------------------------------
@@ -452,7 +459,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _scroll($element='this', $js='') {
-		return $this->_add_event($element,$js,'scroll');
+		return $this->_add_event($element, $js, 'scroll');
 	}
 	
 	// --------------------------------------------------------------------
@@ -467,7 +474,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _unload($element='this', $js='') {
-		return $this->_add_event($element,$js,'unload');
+		return $this->_add_event($element, $js, 'unload');
 	}
 	
 	// --------------------------------------------------------------------
@@ -491,7 +498,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -510,7 +517,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Get or set the html of an attribute for the first element in the set of matched elements.
 	 * @param string $element
@@ -553,7 +560,7 @@ class Jquery {
 				$animations.=$param . ': \'' . $value . '\', ';
 			}
 		}
-		$animations=substr($animations,0,- 2); // remove the last ", "
+		$animations=substr($animations, 0, -2); // remove the last ", "
 		
 		if ($speed != '') {
 			$speed=', ' . $speed;
@@ -569,7 +576,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
 	 * @param string $to
@@ -585,7 +592,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
 	 * @param string $to
@@ -832,7 +839,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Execute all handlers and behaviors attached to the matched elements for the given event.
 	 * @param string $element
@@ -875,7 +882,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Places a condition
 	 * @param string $condition
@@ -912,7 +919,7 @@ class Jquery {
 		$url=$this->_di->get("url");
 		$container=$this->_prep_element($container);
 		
-		$controller=(strpos('://',$controller) === FALSE) ? $controller : $url->get($controller);
+		$controller=(strpos('://', $controller) === FALSE) ? $controller : $url->get($controller);
 		
 		// ajaxStart and ajaxStop are better choices here... but this is a stop gap
 		if ($this->jquery_ajax_img == '') {
@@ -927,7 +934,7 @@ class Jquery {
 		$request_options='';
 		if ($options != '') {
 			$request_options.=", {";
-			$request_options.=(is_array($options)) ? "'" . implode("', '",$options) . "'" : "'" . str_replace(":","':'",$options) . "'";
+			$request_options.=(is_array($options)) ? "'" . implode("', '", $options) . "'" : "'" . str_replace(":", "':'", $options) . "'";
 			$request_options.="}";
 		}
 		
@@ -955,7 +962,7 @@ class Jquery {
 			foreach ( $options as $k => $v ) {
 				$sort_options []="\n\t\t" . $k . ': ' . $v . "";
 			}
-			$sort_options=implode(",",$sort_options);
+			$sort_options=implode(",", $sort_options);
 		} else {
 			$sort_options='';
 		}
@@ -995,7 +1002,7 @@ class Jquery {
 	 */
 	public function _add_event($element, $js, $event, $preventDefault=false, $stopPropagation=false) {
 		if (is_array($js)) {
-			$js=implode("\n\t\t",$js);
+			$js=implode("\n\t\t", $js);
 		}
 		if ($preventDefault === true) {
 			$js="event.preventDefault();\n" . $js;
@@ -1003,7 +1010,7 @@ class Jquery {
 		if ($stopPropagation === true) {
 			$js="event.stopPropagation();\n" . $js;
 		}
-		if (array_search($event,$this->jquery_events) === false)
+		if (array_search($event, $this->jquery_events) === false)
 			$event="\n\t$(" . $this->_prep_element($element) . ").bind('{$event}',function(event){\n\t\t{$js}\n\t});\n";
 		else
 			$event="\n\t$(" . $this->_prep_element($element) . ").{$event}(function(event){\n\t\t{$js}\n\t});\n";
@@ -1041,7 +1048,7 @@ class Jquery {
 		}
 		
 		// External references
-		$external_scripts=implode('',$this->jquery_code_for_load);
+		$external_scripts=implode('', $this->jquery_code_for_load);
 		extract(array (
 				'library_src' => $external_scripts 
 		));
@@ -1053,15 +1060,16 @@ class Jquery {
 		
 		// Inline references
 		$script='$(document).ready(function() {' . "\n";
-		$script.=implode('',$this->jquery_code_for_compile);
+		$script.=implode('', $this->jquery_code_for_compile);
 		$script.='});';
 		
 		$output=($script_tags === FALSE) ? $script : $this->inline($script);
 		
 		if ($view != NULL)
-			$view->setVar($view_var,$output);
+			$view->setVar($view_var, $output);
 		return $output;
 	}
+
 	public function _addToCompile($jsScript) {
 		$this->jquery_code_for_compile []=$jsScript;
 	}
@@ -1090,7 +1098,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _document_ready($js) {
-		if (! is_array($js)) {
+		if (!is_array($js)) {
 			$js=array (
 					$js 
 			);
@@ -1115,12 +1123,12 @@ class Jquery {
 	 * @return string
 	 */
 	public function _prep_element($element) {
-		if (strrpos($element,'this') === false && strrpos($element,'event') === false) {
+		if (strrpos($element, 'this') === false && strrpos($element, 'event') === false) {
 			$element='"' . $element . '"';
 		}
 		return $element;
 	}
-	
+
 	/**
 	 * Prep Value
 	 *
@@ -1134,9 +1142,9 @@ class Jquery {
 	 */
 	public function _prep_value($value) {
 		if (is_array($value)) {
-			$value=implode(",",$value);
+			$value=implode(",", $value);
 		}
-		if (strrpos($value,'this') === false && strrpos($value,'event') === false) {
+		if (strrpos($value, 'this') === false && strrpos($value, 'event') === false) {
 			$value='"' . $value . '"';
 		}
 		return $value;
@@ -1154,13 +1162,13 @@ class Jquery {
 	 * @return string
 	 */
 	private function _validate_speed($speed) {
-		if (in_array($speed,array (
+		if (in_array($speed, array (
 				'slow',
 				'normal',
 				'fast' 
 		))) {
 			$speed='"' . $speed . '"';
-		} elseif (preg_match("/[^0-9]/",$speed)) {
+		} elseif (preg_match("/[^0-9]/", $speed)) {
 			$speed='';
 		}
 		
@@ -1180,6 +1188,7 @@ class Jquery {
 		$retour.="$(\"{$responseElement}\").empty();\n";
 		$retour.="\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
 	}
+
 	protected function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
@@ -1188,7 +1197,7 @@ class Jquery {
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
-		$this->addLoading($retour,$responseElement);
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.get(url," . $params . ").done(function( data ) {\n";
 		if ($responseElement !== "") {
 			$responseElement=$this->_prep_value($responseElement);
@@ -1200,14 +1209,16 @@ class Jquery {
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
 	}
+
 	protected function _correctAjaxUrl($url) {
-		if (PhalconUtils::endsWith($url,"/"))
-			$url=substr($url,0,strlen($url) - 1);
-		if (strncmp($url,'http://',7) != 0 && strncmp($url,'https://',8) != 0) {
+		if (PhalconUtils::endsWith($url, "/"))
+			$url=substr($url, 0, strlen($url) - 1);
+		if (strncmp($url, 'http://', 7) != 0 && strncmp($url, 'https://', 8) != 0) {
 			$url=$this->_di->get("url")->get($url);
 		}
 		return $url;
 	}
+
 	/**
 	 * Makes an ajax request and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request address
@@ -1231,7 +1242,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
 	}
-	
+
 	/**
 	 * Makes an ajax request and receives a JSON array data types by copying and assigning them to the DOM elements with the same name
 	 * @param string $url the request address
@@ -1255,6 +1266,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
 	}
+
 	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
@@ -1263,7 +1275,7 @@ class Jquery {
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
-		$this->addLoading($retour,$responseElement);
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url," . $params . ").done(function( data ) {\n";
 		if ($responseElement !== "") {
 			$responseElement=$this->_prep_value($responseElement);
@@ -1275,6 +1287,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
 	}
+
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
@@ -1283,7 +1296,7 @@ class Jquery {
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
 			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
-		$this->addLoading($retour,$responseElement);
+		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url,$('#" . $form . "').serialize()).done(function( data ) {\n";
 		if ($responseElement !== "") {
 			$responseElement=$this->_prep_value($responseElement);
@@ -1301,6 +1314,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
 	}
+
 	/**
 	 * Effectue un get vers $url sur l'évènement $event de $element en passant les paramètres $params
 	 * puis affiche le résultat dans $responseElement
@@ -1314,10 +1328,10 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _getAndBindTo($element, $event, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element,$this->_get($url,$params,$responseElement,$jsCallback,$attr),$event,$preventDefault,$stopPropagation);
+		$script=$this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
-	
+
 	/**
 	 * Effectue un post vers $url sur l'évènement $event de $element en passant les paramètres $params
 	 * puis affiche le résultat dans $responseElement
@@ -1331,10 +1345,10 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _postAndBindTo($element, $event, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element,$this->_post($url,$params,$responseElement,$jsCallback,$attr),$event,$preventDefault,$stopPropagation);
+		$script=$this->_add_event($element, $this->_post($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
-	
+
 	/**
 	 * Effectue un post vers $url sur l'évènement $event de $element en passant les paramètres du formulaire $form
 	 * puis affiche le résultat dans $responseElement
@@ -1348,10 +1362,10 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _postFormAndBindTo($element, $event, $url, $form, $responseElement="", $preventDefault=true, $stopPropagation=true, $validation=false, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element,$this->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr),$event,$preventDefault,$stopPropagation);
+		$script=$this->_add_event($element, $this->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
-	
+
 	/**
 	 * Call the JQuery method $jqueryCall on $element with parameters $param
 	 * @param string $element
@@ -1370,7 +1384,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$script;
 		return $script;
 	}
-	
+
 	/**
 	 *
 	 * @param string $event
@@ -1382,10 +1396,10 @@ class Jquery {
 	 * @param string $jsCallback javascript code to execute after the jquery call
 	 */
 	public function _doJQueryOn($event, $element, $elementToModify, $jqueryCall, $param="", $preventDefault=false, $stopPropagation=false, $jsCallback="") {
-		$script=$this->_add_event($element,$this->_doJQueryOn($elementToModify,$jqueryCall,$param,$jsCallback),$event,$preventDefault,$stopPropagation);
+		$script=$this->_add_event($element, $this->_doJQueryOn($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
-	
+
 	/**
 	 * Exécute le code $js
 	 * @param string $js Code à exécuter
@@ -1398,7 +1412,7 @@ class Jquery {
 			$this->jquery_code_for_compile []=$script;
 		return $script;
 	}
-	
+
 	/**
 	 *
 	 * @param string $element
@@ -1408,7 +1422,7 @@ class Jquery {
 	 * @return String
 	 */
 	public function _execOn($element, $event, $js, $preventDefault=false, $stopPropagation=false) {
-		$script=$this->_add_event($element,$this->_exec($js),$event,$preventDefault,$stopPropagation);
+		$script=$this->_add_event($element, $this->_exec($js), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
 }

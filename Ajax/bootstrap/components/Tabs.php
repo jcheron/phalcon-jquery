@@ -1,6 +1,9 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\JsUtils;
+
 /**
  * Composant Twitter Bootstrap Tab
  * @author jc
@@ -8,13 +11,14 @@ use Ajax\JsUtils;
  */
 class Tabs extends SimpleBsComponent {
 	/**
+	 *
 	 * @var array of Tab
 	 */
 	protected $tabs;
 
 	public function __construct(JsUtils $js) {
-		parent::__construct ( $js );
-		$this->tabs=array();
+		parent::__construct($js);
+		$this->tabs=array ();
 	}
 
 	public function getTabs() {
@@ -22,21 +26,21 @@ class Tabs extends SimpleBsComponent {
 	}
 
 	public function setTabs(array $tabs) {
-		$this->tabs = $tabs;
+		$this->tabs=$tabs;
 		return $this;
 	}
 
-	public function addTab($tab){
-		$this->tabs[]=$tab;
+	public function addTab($tab) {
+		$this->tabs []=$tab;
 	}
 
-	public function getTab($index){
-		if($index>0 && $index<sizeof($this->tabs))
-			return $this->tabs[$index];
+	public function getTab($index) {
+		if ($index > 0 && $index < sizeof($this->tabs))
+			return $this->tabs [$index];
 	}
 
-	public function show($index){
-		$this->tabs[$index]->show();
+	public function show($index) {
+		$this->tabs [$index]->show();
 	}
 
 	/**
@@ -46,9 +50,9 @@ class Tabs extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($index,$jsCode){
+	public function onShow($index, $jsCode) {
 		$tab=$this->getTab($index);
-		if(isset($tab))
+		if (isset($tab))
 			return $tab->onShow($jsCode);
 	}
 
@@ -58,9 +62,9 @@ class Tabs extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($index,$jsCode){
+	public function onShown($index, $jsCode) {
 		$tab=$this->getTab($index);
-		if(isset($tab))
+		if (isset($tab))
 			return $tab->onShown($jsCode);
 	}
 
@@ -70,9 +74,9 @@ class Tabs extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($index,$jsCode){
+	public function onHide($index, $jsCode) {
 		$tab=$this->getTab($index);
-		if(isset($tab))
+		if (isset($tab))
 			return $tab->onShow($jsCode);
 	}
 
@@ -82,10 +86,9 @@ class Tabs extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($index,$jsCode){
+	public function onHidden($index, $jsCode) {
 		$tab=$this->getTab($index);
-		if(isset($tab))
+		if (isset($tab))
 			return $tab->onShow($jsCode);
 	}
-
 }

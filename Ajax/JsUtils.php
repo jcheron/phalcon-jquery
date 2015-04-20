@@ -43,7 +43,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @var Config
 	 */
 	protected $config;
-	
+
 	/**
 	 *
 	 * @param JqueryUI $ui
@@ -63,7 +63,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		return $this->_ui;
 	}
-	
+
 	/**
 	 *
 	 * @param Bootstrap $bootstrap
@@ -83,9 +83,11 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		return $this->_bootstrap;
 	}
+
 	protected function conflict() {
 		$this->js->_addToCompile("var btn = $.fn.button.noConflict();$.fn.btn = btn;");
 	}
+
 	/**
 	 *
 	 * @param \Ajax\config\Config $config
@@ -103,20 +105,25 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		return $this->config;
 	}
+
 	public function getDi() {
 		return $this->_di;
 	}
+
 	public function getLibraryScript() {
 		$assets=$this->_di->get('assets');
 		$assets->addJs($this->libraryFile);
 		return $assets->outputJs();
 	}
+
 	public function setLibraryFile($name) {
 		$this->libraryFile=$name;
 	}
+
 	public function setImageLoader($img) {
 		$this->js->_setImageLoader($img);
 	}
+
 	public function __construct($params=array()) {
 		$defaults=array (
 				'driver' => 'Jquery' 
@@ -130,6 +137,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$this->js=new Jquery();
 		$this->cdns=array ();
 	}
+
 	public function addToCompile($jsScript) {
 		$this->js->_addToCompile($jsScript);
 	}
@@ -147,7 +155,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function blur($element='this', $js='') {
-		return $this->js->_blur($element,$js);
+		return $this->js->_blur($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -161,7 +169,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function change($element='this', $js='') {
-		return $this->js->_change($element,$js);
+		return $this->js->_change($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -176,7 +184,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function click($element='this', $js='', $ret_false=TRUE) {
-		return $this->js->_click($element,$js,$ret_false);
+		return $this->js->_click($element, $js, $ret_false);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -190,7 +198,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function dblclick($element='this', $js='') {
-		return $this->js->_dblclick($element,$js);
+		return $this->js->_dblclick($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -204,7 +212,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function error($element='this', $js='') {
-		return $this->js->_error($element,$js);
+		return $this->js->_error($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -218,7 +226,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function focus($element='this', $js='') {
-		return $this->js->_add_event($element,$js,"focus");
+		return $this->js->_add_event($element, $js, "focus");
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -233,7 +241,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function hover($element='this', $over, $out) {
-		return $this->js->_hover($element,$over,$out);
+		return $this->js->_hover($element, $over, $out);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -247,7 +255,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function keydown($element='this', $js='') {
-		return $this->js->_keydown($element,$js);
+		return $this->js->_keydown($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -261,7 +269,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function keypress($element='this', $js='') {
-		return $this->js->_keypress($element,$js);
+		return $this->js->_keypress($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -275,7 +283,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function keyup($element='this', $js='') {
-		return $this->js->_keyup($element,$js);
+		return $this->js->_keyup($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -289,7 +297,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function load($element='this', $js='') {
-		return $this->js->_load($element,$js);
+		return $this->js->_load($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -303,7 +311,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function mousedown($element='this', $js='') {
-		return $this->js->_mousedown($element,$js);
+		return $this->js->_mousedown($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -317,7 +325,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function mouseout($element='this', $js='') {
-		return $this->js->_mouseout($element,$js);
+		return $this->js->_mouseout($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -331,7 +339,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function mouseover($element='this', $js='') {
-		return $this->js->_mouseover($element,$js);
+		return $this->js->_mouseover($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -345,7 +353,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function mouseup($element='this', $js='') {
-		return $this->js->_mouseup($element,$js);
+		return $this->js->_mouseup($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -385,7 +393,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function resize($element='this', $js='') {
-		return $this->js->_resize($element,$js);
+		return $this->js->_resize($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -399,7 +407,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function scroll($element='this', $js='') {
-		return $this->js->_scroll($element,$js);
+		return $this->js->_scroll($element, $js);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -413,7 +421,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function unload($element='this', $js='') {
-		return $this->js->_unload($element,$js);
+		return $this->js->_unload($element, $js);
 	}
 	// --------------------------------------------------------------------
 	// Effects
@@ -430,8 +438,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function addClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_addClass($element,$class,$immediatly);
+		return $this->js->_addClass($element, $class, $immediatly);
 	}
+
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -440,8 +449,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function attr($element='this', $attributeName, $value='', $immediatly=false) {
-		return $this->js->_attr($element,$attributeName,$value,$immediatly);
+		return $this->js->_attr($element, $attributeName, $value, $immediatly);
 	}
+
 	/**
 	 * Get or set the html of an attribute for the first element in the set of matched elements.
 	 * @param string $element
@@ -449,7 +459,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function html($element='this', $value='', $immediatly=false) {
-		return $this->js->_html($element,$value,$immediatly);
+		return $this->js->_html($element, $value, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -465,8 +475,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function animate($element='this', $params=array(), $speed='', $extra='', $immediatly=false) {
-		return $this->js->_animate($element,$params,$speed,$extra,$immediatly);
+		return $this->js->_animate($element, $params, $speed, $extra, $immediatly);
 	}
+
 	/**
 	 * Insert content, specified by the parameter $element, to the end of each element in the set of matched elements $to.
 	 * @param string $to
@@ -476,8 +487,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 */
 	public function append($to='this', $element, $immediatly=false) {
 		$element=addslashes($element);
-		return $this->js->_append($to,$element,$immediatly);
+		return $this->js->_append($to, $element, $immediatly);
 	}
+
 	/**
 	 * Insert content, specified by the parameter $element, to the beginning of each element in the set of matched elements $to.
 	 * @param string $to
@@ -486,7 +498,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function prepend($to='this', $element, $immediatly=false) {
-		return $this->js->_prepend($to,$element,$immediatly);
+		return $this->js->_prepend($to, $element, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -502,7 +514,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function fadeIn($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_fadeIn($element,$speed,$callback,$immediatly);
+		return $this->js->_fadeIn($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -518,7 +530,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function fadeOut($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_fadeOut($element,$speed,$callback,$immediatly);
+		return $this->js->_fadeOut($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -534,7 +546,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function slideUp($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_slideUp($element,$speed,$callback,$immediatly);
+		return $this->js->_slideUp($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -549,7 +561,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function removeClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_removeClass($element,$class,$immediatly);
+		return $this->js->_removeClass($element, $class, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -565,7 +577,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function slideDown($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_slideDown($element,$speed,$callback,$immediatly);
+		return $this->js->_slideDown($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -581,7 +593,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function slideToggle($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_slideToggle($element,$speed,$callback,$immediatly);
+		return $this->js->_slideToggle($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -597,7 +609,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function hide($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_hide($element,$speed,$callback,$immediatly);
+		return $this->js->_hide($element, $speed, $callback, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -611,7 +623,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function toggle($element='this', $immediatly=false) {
-		return $this->js->_toggle($element,$immediatly);
+		return $this->js->_toggle($element, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -625,8 +637,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function toggleClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_toggleClass($element,$class,$immediatly);
+		return $this->js->_toggleClass($element, $class, $immediatly);
 	}
+
 	/**
 	 * Execute all handlers and behaviors attached to the matched elements for the given event.
 	 * @param string $element
@@ -634,7 +647,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function trigger($element='this', $event='click', $immediatly=false) {
-		return $this->js->_trigger($element,$event,$immediatly);
+		return $this->js->_trigger($element, $event, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -650,8 +663,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function show($element='this', $speed='', $callback='', $immediatly=false) {
-		return $this->js->_show($element,$speed,$callback,$immediatly);
+		return $this->js->_show($element, $speed, $callback, $immediatly);
 	}
+
 	/**
 	 * Allows to attach a condition
 	 * @param string $condition
@@ -660,7 +674,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function condition($condition, $jsCodeIfTrue, $jsCodeIfFalse=null, $immediatly=false) {
-		return $this->js->_condition($condition,$jsCodeIfTrue,$jsCodeIfFalse,$immediatly);
+		return $this->js->_condition($condition, $jsCodeIfTrue, $jsCodeIfFalse, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -677,10 +691,11 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	public function compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		$bs=$this->_bootstrap;
 		if (isset($bs) && isset($view)) {
-			$bs->compileHtml($this,$view);
+			$bs->compileHtml($this, $view);
 		}
-		return $this->js->_compile($view,$view_var,$script_tags);
+		return $this->js->_compile($view, $view_var, $script_tags);
 	}
+
 	/**
 	 * Clear Compile
 	 *
@@ -753,6 +768,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	private function _close_script($extra="\n") {
 		return "</script>$extra";
 	}
+
 	/**
 	 * Update
 	 *
@@ -765,7 +781,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function update($element='this', $speed='', $callback='') {
-		return $this->js->_updater($element,$speed,$callback);
+		return $this->js->_updater($element, $speed, $callback);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -780,7 +796,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	public function generate_json($result=NULL, $match_array_type=FALSE) {
 		// JSON data can optionally be passed to this function
 		// either as a database result object or an array, or a user supplied array
-		if (! is_null($result)) {
+		if (!is_null($result)) {
 			if (is_object($result)) {
 				$json_result=$result->result_array();
 			} elseif (is_array($result)) {
@@ -793,19 +809,19 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		$json=array ();
 		$_is_assoc=TRUE;
-		if (! is_array($json_result) && empty($json_result)) {
+		if (!is_array($json_result) && empty($json_result)) {
 			show_error("Generate JSON Failed - Illegal key, value pair.");
 		} elseif ($match_array_type) {
 			$_is_assoc=$this->_is_associative_array($json_result);
 		}
 		foreach ( $json_result as $k => $v ) {
 			if ($_is_assoc) {
-				$json []=$this->_prep_args($k,TRUE) . ':' . $this->generate_json($v,$match_array_type);
+				$json []=$this->_prep_args($k, TRUE) . ':' . $this->generate_json($v, $match_array_type);
 			} else {
-				$json []=$this->generate_json($v,$match_array_type);
+				$json []=$this->generate_json($v, $match_array_type);
 			}
 		}
-		$json=implode(',',$json);
+		$json=implode(',', $json);
 		return $_is_assoc ? "{" . $json . "}" : "[" . $json . "]";
 	}
 	// --------------------------------------------------------------------
@@ -849,18 +865,19 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 					"\r",
 					'"',
 					'/' 
-			),array (
+			), array (
 					'\\\\',
 					'\\t',
 					'\\n',
 					"\\r",
 					'\"',
 					'\/' 
-			),$result) . '"';
+			), $result) . '"';
 		} elseif (is_scalar($result)) {
 			return $result;
 		}
 	}
+
 	/**
 	 * Performs an ajax GET request
 	 * @param string $url The url of the request
@@ -869,8 +886,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function get($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_get($url,$params,$responseElement,$jsCallback,$attr,true);
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, $attr, true);
 	}
+
 	/**
 	 * Performs an ajax request and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request url
@@ -879,8 +897,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function json($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_json($url,$method,$params,$jsCallback,$attr,true);
+		return $this->js->_json($url, $method, $params, $jsCallback, $attr, true);
 	}
+
 	/**
 	 * Prepares an ajax request delayed and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request url
@@ -889,8 +908,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function jsonDeferred($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_json($url,$method,$params,$jsCallback,$attr,false);
+		return $this->js->_json($url, $method, $params, $jsCallback, $attr, false);
 	}
+
 	/**
 	 * Performs an ajax request and receives the JSON array data types by assigning DOM elements with the same name
 	 * @param string $url the request url
@@ -899,8 +919,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function jsonArray($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_jsonArray($maskSelector,$url,$method,$params,$jsCallback,$attr,true);
+		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, $attr, true);
 	}
+
 	/**
 	 * Peforms an ajax request delayed and receives a JSON array data types by copying and assigning them to the DOM elements with the same name
 	 * @param string $url the request url
@@ -909,8 +930,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function jsonArrayDeferred($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_jsonArray($maskSelector,$url,$method,$params,$jsCallback,$attr,false);
+		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, $attr, false);
 	}
+
 	/**
 	 * Prepares a Get ajax request
 	 * To use on an event
@@ -920,8 +942,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function getDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_get($url,$params,$responseElement,$jsCallback,$attr,false);
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, $attr, false);
 	}
+
 	/**
 	 * Performs a get to $url on the event $event on $element
 	 * and display it in $responseElement
@@ -936,8 +959,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @deprecated use getOn instead
 	 */
 	public function getAndBindTo($element, $event, $url, $responseElement="", $preventDefault=true, $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,true,$jsCallback,$attr);
+		return $this->js->_getAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, true, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a get to $url on the event $event on $element
 	 * and display it in $responseElement
@@ -954,8 +978,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$params="{}";
 		$attr="id";
 		extract($parameters);
-		return $this->js->_getAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$stopPropagation,$jsCallback,$attr);
+		return $this->js->_getAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a get to $url on the click event on $element
 	 * and display it in $responseElement
@@ -965,8 +990,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
 	 */
 	public function getOnClick($element, $url, $responseElement="", $parameters=array()) {
-		return $this->getOn("click",$element,$url,$responseElement,$parameters);
+		return $this->getOn("click", $element, $url, $responseElement, $parameters);
 	}
+
 	/**
 	 * Makes an ajax post
 	 * @param string $url the request url
@@ -975,8 +1001,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function post($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_post($url,$params,$responseElement,$jsCallback,$attr,true);
+		return $this->js->_post($url, $params, $responseElement, $jsCallback, $attr, true);
 	}
+
 	/**
 	 * Prepares a delayed ajax POST
 	 * to use on an event
@@ -986,8 +1013,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function postDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_post($url,$params,$responseElement,$jsCallback,$attr,false);
+		return $this->js->_post($url, $params, $responseElement, $jsCallback, $attr, false);
 	}
+
 	/**
 	 * Performs a post to $url on the event $event on $element and pass the parameters $params
 	 * Display the result in $responseElement
@@ -1001,8 +1029,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @deprecated use postOn instead
 	 */
 	public function postAndBindTo($element, $event, $url, $params="{}", $responseElement="", $preventDefault=true, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,true,$jsCallback,$attr);
+		return $this->js->_postAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, true, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a post to $url on the event $event fired on $element and pass the parameters $params
 	 * Display the result in $responseElement
@@ -1019,8 +1048,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$jsCallback=null;
 		$attr="id";
 		extract($parameters);
-		return $this->js->_postAndBindTo($element,$event,$url,$params,$responseElement,$preventDefault,$stopPropagation,$jsCallback,$attr);
+		return $this->js->_postAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a post to $url on the click event fired on $element and pass the parameters $params
 	 * Display the result in $responseElement
@@ -1031,8 +1061,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
 	 */
 	public function postOnClick($element, $url, $params="{}", $responseElement="", $parameters=array()) {
-		return $this->postOn("click",$element,$url,$params,$responseElement,$parameters);
+		return $this->postOn("click", $element, $url, $params, $responseElement, $parameters);
 	}
+
 	/**
 	 * Performs a post form with ajax
 	 * @param string $url The url of the request
@@ -1041,8 +1072,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr,true);
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr, true);
 	}
+
 	/**
 	 * Performs a delayed post form with ajax
 	 * For use on an event
@@ -1052,8 +1084,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postForm($url,$form,$responseElement,$validation,$jsCallback,$attr,false);
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr, false);
 	}
+
 	/**
 	 * Performs a delayed post form with ajax in response to an event $event
 	 * display the result in $responseElement
@@ -1066,8 +1099,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @deprecated use postFormOn instead
 	 */
 	public function postFormAndBindTo($element, $event, $url, $form, $responseElement="", $preventDefault=true, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postFormAndBindTo($element,$event,$url,$form,$responseElement,$preventDefault,true,$validation,$jsCallback,$attr);
+		return $this->js->_postFormAndBindTo($element, $event, $url, $form, $responseElement, $preventDefault, true, $validation, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a post form with ajax in response to an event $event on $element
 	 * display the result in $responseElement
@@ -1085,8 +1119,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$jsCallback=null;
 		$attr="id";
 		extract($parameters);
-		return $this->js->_postFormAndBindTo($element,$event,$url,$form,$responseElement,$preventDefault,$stopPropagation,$validation,$jsCallback,$attr);
+		return $this->js->_postFormAndBindTo($element, $event, $url, $form, $responseElement, $preventDefault, $stopPropagation, $validation, $jsCallback, $attr);
 	}
+
 	/**
 	 * Performs a post form with ajax in response to the click event on $element
 	 * display the result in $responseElement
@@ -1097,8 +1132,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
 	 */
 	public function postFormOnClick($element, $url, $form, $responseElement="", $parameters=array()) {
-		return $this->postFormOn("click",$element,$url,$form,$responseElement,$parameters);
+		return $this->postFormOn("click", $element, $url, $form, $responseElement, $parameters);
 	}
+
 	/**
 	 * Calls the JQuery callback $someThing on $element with facultative parameter $param
 	 * @param string $element the element
@@ -1108,8 +1144,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return mixed
 	 */
 	public function doJQuery($element, $jqueryCall, $param="", $jsCallback="") {
-		return $this->js->_doJQuery($element,$jqueryCall,$param,$jsCallback,true);
+		return $this->js->_doJQuery($element, $jqueryCall, $param, $jsCallback, true);
 	}
+
 	/**
 	 * Calls the JQuery callback $someThing on $element with facultative parameter $param
 	 * @param string $element the element
@@ -1119,8 +1156,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return mixed
 	 */
 	public function doJQueryDeferred($element, $jqueryCall, $param="", $jsCallback="") {
-		return $this->js->_doJQuery($element,$jqueryCall,$param,$jsCallback,false);
+		return $this->js->_doJQuery($element, $jqueryCall, $param, $jsCallback, false);
 	}
+
 	/**
 	 * Calls the JQuery callback $jqueryCall on $element with facultative parameter $param in response to an event $event
 	 * @param string $event
@@ -1135,8 +1173,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$stopPropagation=false;
 		$preventDefault=false;
 		extract($parameters);
-		return $this->js->_doJQueryOn($event,$element,$elementToModify,$jqueryCall,$param,$preventDefault,$stopPropagation,$jsCallback);
+		return $this->js->_doJQueryOn($event, $element, $elementToModify, $jqueryCall, $param, $preventDefault, $stopPropagation, $jsCallback);
 	}
+
 	/**
 	 * Executes the code $js
 	 * @param string $js Code to execute
@@ -1144,9 +1183,10 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return String
 	 */
 	public function exec($js, $immediatly=false) {
-		$script=$this->js->_exec($js,$immediatly);
+		$script=$this->js->_exec($js, $immediatly);
 		return $script;
 	}
+
 	/**
 	 * Executes the javascript code $js when $event fires on $element
 	 * @param string $event
@@ -1159,12 +1199,14 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$stopPropagation=false;
 		$preventDefault=false;
 		extract($parameters);
-		$script=$this->js->_execOn($element,$event,$js,$preventDefault,$stopPropagation);
+		$script=$this->js->_execOn($element, $event, $js, $preventDefault, $stopPropagation);
 		return $script;
 	}
+
 	public function getCDNs() {
 		return $this->cdns;
 	}
+
 	public function setCDNs($cdns) {
 		if (is_array($cdns) === false) {
 			$cdns=array (
@@ -1173,6 +1215,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		$this->cdns=$cdns;
 	}
+
 	public function genCDNs($template=NULL) {
 		$hasJQuery=false;
 		$hasJQueryUI=false;
@@ -1198,17 +1241,18 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 			$result [0]=new CDNJQuery("x");
 		}
 		if ($hasJQueryUI === false && isset($this->_ui)) {
-			$result [1]=new CDNGuiGen("x",$template);
+			$result [1]=new CDNGuiGen("x", $template);
 		}
 		if ($hasBootstrap === false && isset($this->_bootstrap)) {
 			$result [2]=new CDNBootstrap("x");
 		}
 		ksort($result);
-		return implode("\n",$result);
+		return implode("\n", $result);
 	}
 }
 if (Version::get() === "1.3.4") {
 	class JsUtils extends _JsUtils {
+
 		public function setDi($di) {
 			$this->_di=$di;
 			if ($this->js != null && $di != null)
@@ -1217,6 +1261,7 @@ if (Version::get() === "1.3.4") {
 	}
 } else {
 	class JsUtils extends _JsUtils {
+
 		public function setDi(DiInterface $di) {
 			$this->_di=$di;
 			if ($this->js != null && $di != null)

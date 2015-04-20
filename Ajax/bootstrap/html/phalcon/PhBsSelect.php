@@ -8,11 +8,12 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\html5\HtmlSelect;
 
 class PhBsSelect extends PhBsElement {
-	public function __construct($name, $options=array(),$attributes=NULL) {
-		parent::__construct ( $name, $attributes);
+
+	public function __construct($name, $options=array(), $attributes=NULL) {
+		parent::__construct($name, $attributes);
 		$list=new HtmlSelect($name);
 		$list->setTagName("select");
-		$this->renderer=new PhBsRenderer(new Select($name,array(),$attributes),$list);
+		$this->renderer=new PhBsRenderer(new Select($name, array (), $attributes), $list);
 		$this->setOptions($options);
 	}
 
@@ -20,7 +21,7 @@ class PhBsSelect extends PhBsElement {
 	 * Set the choice’s options
 	 * @param mixed $options array of options to add
 	 */
-	public function setOptions($options){
+	public function setOptions($options) {
 		$this->renderer->getElement()->setOptions($options);
 		$this->renderer->getHtmlElement()->setOptions($options);
 	}
@@ -29,7 +30,7 @@ class PhBsSelect extends PhBsElement {
 	 * Adds an option to the current options
 	 * @param mixed $option option to add
 	 */
-	public function addOption($option){
+	public function addOption($option) {
 		$this->renderer->getElement()->addOption($option);
 		$this->renderer->getHtmlElement()->addOption($option);
 	}

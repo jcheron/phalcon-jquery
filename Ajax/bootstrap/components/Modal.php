@@ -1,7 +1,10 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\JsUtils;
 use Ajax\bootstrap\components\js\Draggable;
+
 /**
  * Composant Twitter Bootstrap Modal
  * @author jc
@@ -9,67 +12,64 @@ use Ajax\bootstrap\components\js\Draggable;
  */
 class Modal extends SimpleBsComponent {
 
-	public function __construct(JsUtils $js){
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="modal";
 	}
 
-	public function attach($identifier){
+	public function attach($identifier) {
 		parent::attach($identifier);
-		$this->js->addClass($identifier,"modal",true);
-		$this->js->attr($identifier,"role","dialog",true);
-		$this->js->attr($identifier,"aria-labelledby","myModalLabel",true);
-		$this->js->attr($identifier,"aria-hidden",true,true);
+		$this->js->addClass($identifier, "modal", true);
+		$this->js->attr($identifier, "role", "dialog", true);
+		$this->js->attr($identifier, "aria-labelledby", "myModalLabel", true);
+		$this->js->attr($identifier, "aria-hidden", true, true);
 	}
 
 	/**
 	 * Shows the modal when initialized.
-	 * @param Boolean $value
-	 * default : true
+	 * @param Boolean $value default : true
 	 * @return $this
 	 */
-	public function setShow($value){
+	public function setShow($value) {
 		return $this->setParam("show", $value);
 	}
 
 	/**
 	 * Includes a modal-backdrop element.
 	 * Alternatively, specify static for a backdrop which doesn't close the modal on click.
-	 * @param Boolean $value
-	 * default : true
+	 * @param Boolean $value default : true
 	 * @return $this
 	 */
-	public function setBackdrop($value){
+	public function setBackdrop($value) {
 		return $this->setParam("backdrop", $value);
 	}
 
 	/**
 	 * Closes the modal when escape key is pressed.
-	 * @param Boolean $value
-	 * default : false
+	 * @param Boolean $value default : false
 	 * @return $this
 	 */
-	public function setKeyboard($value){
+	public function setKeyboard($value) {
 		return $this->setParam("keyboard", $value);
 	}
 
-	public function setDraggable($value){
-		if($value){
-			$this->jsCodes["draggable"]=new Draggable();
+	public function setDraggable($value) {
+		if ($value) {
+			$this->jsCodes ["draggable"]=new Draggable();
 			$this->setBackdrop(false);
-		}
-		else if(array_key_exists("draggable", $this->jsCodes)){
-			unset($this->jsCodes["draggable"]);
-			unset($this->params["backdrop"]);
+		} else if (array_key_exists("draggable", $this->jsCodes)) {
+			unset($this->jsCodes ["draggable"]);
+			unset($this->params ["backdrop"]);
 		}
 	}
+
 	/**
 	 * This event fires immediately when the show instance method is called.
 	 * If caused by a click, the clicked element is available as the relatedTarget property of the event.
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($jsCode){
+	public function onShow($jsCode) {
 		return $this->addEvent("show.bs.modal", $jsCode);
 	}
 
@@ -79,7 +79,7 @@ class Modal extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($jsCode){
+	public function onShown($jsCode) {
 		return $this->addEvent("shown.bs.modal", $jsCode);
 	}
 
@@ -88,7 +88,7 @@ class Modal extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($jsCode){
+	public function onHide($jsCode) {
 		return $this->addEvent("hide.bs.modal", $jsCode);
 	}
 
@@ -97,7 +97,7 @@ class Modal extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($jsCode){
+	public function onHidden($jsCode) {
 		return $this->addEvent("hidden.bs.modal", $jsCode);
 	}
 
@@ -106,7 +106,7 @@ class Modal extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onLoaded($jsCode){
+	public function onLoaded($jsCode) {
 		return $this->addEvent("loaded.bs.modal", $jsCode);
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ajax\bootstrap\html\base;
 
 /**
@@ -9,7 +10,7 @@ namespace Ajax\bootstrap\html\base;
 abstract class BaseWidget {
 	protected $identifier;
 
-	public function __construct($identifier){
+	public function __construct($identifier) {
 		$this->identifier=$this->cleanIdentifier($identifier);
 	}
 
@@ -18,12 +19,11 @@ abstract class BaseWidget {
 	}
 
 	public function setIdentifier($identifier) {
-		$this->identifier = $identifier;
+		$this->identifier=$identifier;
 		return $this;
 	}
 
-	protected function cleanIdentifier($id){
+	protected function cleanIdentifier($id) {
 		return preg_replace('/[^a-zA-Z0-9\-.]/s', '', $id);
 	}
-
 }

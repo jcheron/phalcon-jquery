@@ -13,11 +13,12 @@ use Ajax\service\PhalconUtils;
  */
 class HtmlGlyphicon extends HtmlSingleElement {
 	protected $glyphicon;
+
 	public function __construct($identifier) {
-		parent::__construct($identifier,"span");
+		parent::__construct($identifier, "span");
 		$this->_template='<span class="glyphicon %glyphicon%" aria-hidden="true"></span>';
 	}
-	
+
 	/**
 	 * Defines the glyphicon with his name or his index
 	 * @param string|int $glyphicon
@@ -31,12 +32,13 @@ class HtmlGlyphicon extends HtmlSingleElement {
 			}
 		} else {
 			$glyphicon=strtolower($glyphicon);
-			if (PhalconUtils::startsWith($glyphicon,"glyphicon-") === false) {
+			if (PhalconUtils::startsWith($glyphicon, "glyphicon-") === false) {
 				$glyphicon="glyphicon-" . $glyphicon;
 			}
 		}
 		$this->glyphicon=$glyphicon;
 	}
+
 	/**
 	 * return an instance of GlyphButton with a glyph defined by string or index
 	 * @param string|int $glyph

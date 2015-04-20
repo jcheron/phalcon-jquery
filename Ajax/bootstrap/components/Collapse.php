@@ -1,8 +1,11 @@
 <?php
+
 namespace Ajax\bootstrap\components;
+
 use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\common\JsCode;
+
 /**
  * Composant Twitter Bootstrap Collapse
  * @author jc
@@ -10,18 +13,19 @@ use Ajax\common\JsCode;
  */
 class Collapse extends SimpleBsComponent {
 	protected $collapsed;
-	public function __construct(JsUtils $js){
+
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="collapse";
 	}
 
-	public function attach($identifier){
+	public function attach($identifier) {
 		parent::attach($identifier);
-		$this->js->attr($identifier,"data-toggle","collapse",true);
+		$this->js->attr($identifier, "data-toggle", "collapse", true);
 	}
 
-	public function show(){
-		$this->jsCodes[]=new JsCode(' $(function () {$("%identifier%").click();});');
+	public function show() {
+		$this->jsCodes []=new JsCode(' $(function () {$("%identifier%").click();});');
 	}
 
 	/**
@@ -29,7 +33,7 @@ class Collapse extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShow($jsCode){
+	public function onShow($jsCode) {
 		return $this->addEvent("show.bs.collapse", $jsCode);
 	}
 
@@ -38,7 +42,7 @@ class Collapse extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onShown($jsCode){
+	public function onShown($jsCode) {
 		return $this->addEvent("shown.bs.collapse", $jsCode);
 	}
 
@@ -47,7 +51,7 @@ class Collapse extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHide($jsCode){
+	public function onHide($jsCode) {
 		return $this->addEvent("hide.bs.collapse", $jsCode);
 	}
 
@@ -56,19 +60,18 @@ class Collapse extends SimpleBsComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onHidden($jsCode){
+	public function onHidden($jsCode) {
 		return $this->addEvent("hidden.bs.collapse", $jsCode);
 	}
 
-	protected function compileEvents(){
-		foreach ($this->events as $event=>$jsCode){
-			$this->jquery_code_for_compile[]="$( \"".$this->collapsed."\" ).on(\"".$event."\" , function (e) {".$jsCode."});";
+	protected function compileEvents() {
+		foreach ( $this->events as $event => $jsCode ) {
+			$this->jquery_code_for_compile []="$( \"" . $this->collapsed . "\" ).on(\"" . $event . "\" , function (e) {" . $jsCode . "});";
 		}
 	}
+
 	public function setCollapsed($collapsed) {
-		$this->collapsed = $collapsed;
+		$this->collapsed=$collapsed;
 		return $this;
 	}
-
-
 }

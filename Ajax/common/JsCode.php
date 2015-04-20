@@ -1,5 +1,7 @@
 <?php
+
 namespace Ajax\common;
+
 /**
  * Base class for js code
  * @author jc
@@ -8,7 +10,7 @@ namespace Ajax\common;
 class JsCode {
 	protected $mask;
 
-	public function __construct($mask){
+	public function __construct($mask) {
 		$this->mask=$mask;
 	}
 
@@ -17,14 +19,13 @@ class JsCode {
 	}
 
 	public function setMask($mask) {
-		$this->mask = $mask;
+		$this->mask=$mask;
 		return $this;
 	}
 
-
-	public function compile($keyAndvalues){
+	public function compile($keyAndvalues) {
 		$result=$this->mask;
-		foreach ($keyAndvalues as $k=>$v){
+		foreach ( $keyAndvalues as $k => $v ) {
 			$result=str_ireplace("%{$k}%", $v, $result);
 		}
 		return $result;

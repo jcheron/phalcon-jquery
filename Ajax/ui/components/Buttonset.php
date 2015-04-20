@@ -1,8 +1,10 @@
 <?php
+
 namespace Ajax\ui\Components;
 
 use Ajax\JsUtils;
 use Ajax\common\SimpleComponent;
+
 /**
  * Composant JQuery UI Menu
  * @author jc
@@ -10,18 +12,17 @@ use Ajax\common\SimpleComponent;
  */
 class Buttonset extends SimpleComponent {
 
-	public function __construct(JsUtils $js){
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="buttonset";
 	}
 
 	/**
 	 * Disables the buttonSet if set to true.
-	 * @param Boolean $value
-	 * default : false
+	 * @param Boolean $value default : false
 	 * @return $this
 	 */
-	public function setDisabled($value){
+	public function setDisabled($value) {
 		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
@@ -31,7 +32,7 @@ class Buttonset extends SimpleComponent {
 	 * @param String $value
 	 * @return $this
 	 */
-	public function setItems($value){
+	public function setItems($value) {
 		return $this->setParam("items", $value);
 	}
 }

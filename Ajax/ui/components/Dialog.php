@@ -13,6 +13,7 @@ use Ajax\common\SimpleComponent;
 class Dialog extends SimpleComponent {
 	protected $attachTo;
 	protected $buttons=array ();
+
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->params=array (
@@ -20,6 +21,7 @@ class Dialog extends SimpleComponent {
 		);
 		$this->addCancelBtn("Annuler");
 	}
+
 	public function getScript() {
 		$allParams=$this->params;
 		$jsonButtons=array ();
@@ -28,14 +30,14 @@ class Dialog extends SimpleComponent {
 		}
 		$allParams ["buttons"]=$jsonButtons;
 		$this->jquery_code_for_compile []="$( '" . $this->attachTo . "' ).dialog(" . $this->getParamsAsJSON($allParams) . ");";
-		$result=implode("",$this->jquery_code_for_compile);
-		$result=str_ireplace("\"%","",$result);
-		$result=str_ireplace("%\"","",$result);
-		$result=str_ireplace("\\n","",$result);
-		$result=str_ireplace("\\t","",$result);
+		$result=implode("", $this->jquery_code_for_compile);
+		$result=str_ireplace("\"%", "", $result);
+		$result=str_ireplace("%\"", "", $result);
+		$result=str_ireplace("\\n", "", $result);
+		$result=str_ireplace("\\t", "", $result);
 		return $result;
 	}
-	
+
 	/**
 	 *
 	 * @param String $identifier identifiant CSS
@@ -43,18 +45,22 @@ class Dialog extends SimpleComponent {
 	public function attach($identifier) {
 		$this->attachTo=$identifier;
 	}
+
 	public function addCancelBtn($caption="Annuler", $position=NULL) {
-		$this->insertBtn(DialogButton::cancelButton($caption),$position);
+		$this->insertBtn(DialogButton::cancelButton($caption), $position);
 	}
+
 	public function addSubmitBtn(JsUtils $js, $url, $form, $responseElement, $caption="Valider", $position=NULL) {
-		$this->insertBtn(DialogButton::submitButton($js,$url,$form,$responseElement,$caption),$position);
+		$this->insertBtn(DialogButton::submitButton($js, $url, $form, $responseElement, $caption), $position);
 	}
+
 	public function addButton($caption, $jsCode, $position=NULL) {
-		$this->insertBtn(new DialogButton($caption,$jsCode),$position);
+		$this->insertBtn(new DialogButton($caption, $jsCode), $position);
 	}
+
 	private function insertBtn($insert, $position=NULL) {
 		if ($position != NULL) {
-			$this->buttons=array_splice($this->buttons,$position,0,$insert);
+			$this->buttons=array_splice($this->buttons, $position, 0, $insert);
 		} else {
 			$this->buttons []=$insert;
 		}

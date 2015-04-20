@@ -1,4 +1,5 @@
 <?php
+
 namespace Ajax\ui\Components;
 
 use Ajax\JsUtils;
@@ -6,6 +7,7 @@ use Phalcon\Text;
 use Phalcon\Mvc\Url;
 use Ajax\ui\Properties\Position;
 use Ajax\common\SimpleComponent;
+
 /**
  * JQuery UI Autocomplete component
  * @author jc
@@ -13,7 +15,7 @@ use Ajax\common\SimpleComponent;
  */
 class Autocomplete extends SimpleComponent {
 
-	public function __construct(JsUtils $js){
+	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->uiName="autocomplete";
 		$this->setParam("minLength", 3);
@@ -25,10 +27,10 @@ class Autocomplete extends SimpleComponent {
 	 * @param String $url
 	 * @return $this
 	 */
-	public function setAjaxSource($url){
-		if(Text::startsWith($url, "/")){
+	public function setAjaxSource($url) {
+		if (Text::startsWith($url, "/")) {
 			$u=$this->js->getDi()->get("url");
-			$url=$u->getBaseUri().$url;
+			$url=$u->getBaseUri() . $url;
 		}
 		$ajax="%function (request, response) {
 			$.ajax({
@@ -49,9 +51,12 @@ class Autocomplete extends SimpleComponent {
 	 * @param String $source
 	 * @return $this
 	 */
-	public function setSource($source){
-		$source=str_ireplace(array("\"","'"), "%quote%", $source);
-		return $this->setParam("source", "%".$source."%");
+	public function setSource($source) {
+		$source=str_ireplace(array (
+				"\"",
+				"'" 
+		), "%quote%", $source);
+		return $this->setParam("source", "%" . $source . "%");
 	}
 
 	/**
@@ -60,8 +65,8 @@ class Autocomplete extends SimpleComponent {
 	 * @param Boolean $value
 	 * @return $this
 	 */
-	public function setAutofocus($value){
-		return $this->setParamCtrl("autoFocus", $value,"is_bool");
+	public function setAutofocus($value) {
+		return $this->setParamCtrl("autoFocus", $value, "is_bool");
 	}
 
 	/**
@@ -72,17 +77,16 @@ class Autocomplete extends SimpleComponent {
 	 * @param int $value
 	 * @return $this
 	 */
-	public function setDelay($value){
-		return $this->setParamCtrl("delay", $value,"is_int");
+	public function setDelay($value) {
+		return $this->setParamCtrl("delay", $value, "is_int");
 	}
 
 	/**
 	 * Disables the autocomplete if set to true.
-	 * @param Boolean $value
-	 * default : false
+	 * @param Boolean $value default : false
 	 * @return $this
 	 */
-	public function setDisabled($value){
+	public function setDisabled($value) {
 		return $this->setParamCtrl("disabled", $value, "is_bool");
 	}
 
@@ -90,11 +94,10 @@ class Autocomplete extends SimpleComponent {
 	 * The minimum number of characters a user must type before a search is performed.
 	 * Zero is useful for local data with just a few items,
 	 * but a higher value should be used when a single character search could match a few thousand items.
-	 * @param int $value
-	 * default : 1
+	 * @param int $value default : 1
 	 * @return $this
 	 */
-	public function setMinLength($value){
+	public function setMinLength($value) {
 		return $this->setParamCtrl("minLength", $value, "is_int");
 	}
 
@@ -102,11 +105,10 @@ class Autocomplete extends SimpleComponent {
 	 * Identifies the position of the suggestions menu in relation to the associated input element.
 	 * The of option defaults to the input element, but you can specify another element to position against.
 	 * You can refer to the jQuery UI Position utility for more details about the various options.
-	 * @param int $position
-	 * default : { my: "left top", at: "left bottom", collision: "none" }
+	 * @param int $position default : { my: "left top", at: "left bottom", collision: "none" }
 	 * @return $this
 	 */
-	public function setPosition(Position $position){
+	public function setPosition(Position $position) {
 		return $this->setParam("position", $position->getParams());
 	}
 
@@ -115,16 +117,17 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onChange($jsCode){
+	public function onChange($jsCode) {
 		return $this->addEvent("change", $jsCode);
 	}
 
 	/**
-	 * Triggered when the menu is hidden. Not every close event will be accompanied by a change event.
+	 * Triggered when the menu is hidden.
+	 * Not every close event will be accompanied by a change event.
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onClose($jsCode){
+	public function onClose($jsCode) {
 		return $this->addEvent("close", $jsCode);
 	}
 
@@ -136,7 +139,7 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onFocus($jsCode){
+	public function onFocus($jsCode) {
 		return $this->addEvent("focus", $jsCode);
 	}
 
@@ -145,7 +148,7 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onOpen($jsCode){
+	public function onOpen($jsCode) {
 		return $this->addEvent("open", $jsCode);
 	}
 
@@ -156,7 +159,7 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onResponse($jsCode){
+	public function onResponse($jsCode) {
 		return $this->addEvent("response", $jsCode);
 	}
 
@@ -166,7 +169,7 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onSearch($jsCode){
+	public function onSearch($jsCode) {
 		return $this->addEvent("search", $jsCode);
 	}
 
@@ -177,7 +180,7 @@ class Autocomplete extends SimpleComponent {
 	 * @param string $jsCode
 	 * @return $this
 	 */
-	public function onSelect($jsCode){
+	public function onSelect($jsCode) {
 		return $this->addEvent("select", $jsCode);
 	}
 }

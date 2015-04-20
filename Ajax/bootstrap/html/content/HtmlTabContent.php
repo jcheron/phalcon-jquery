@@ -1,30 +1,33 @@
 <?php
+
 namespace Ajax\bootstrap\html\content;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
+
 /**
  * Twitter Bootstrap HTML TabContent component
  * @author jc
  * @version 1.001
  */
 class HtmlTabContent extends HtmlDoubleElement {
-	public function __construct($identifier, $tagName = "div") {
-		parent::__construct ( $identifier, $tagName);
+
+	public function __construct($identifier, $tagName="div") {
+		parent::__construct($identifier, $tagName);
 		$this->setProperty("class", "tab-content");
-		$this->content=array();//HtmlTabContentItem
+		$this->content=array (); // HtmlTabContentItem
 	}
 
-	public function addTabItem($identifier){
+	public function addTabItem($identifier) {
 		$tabItem=new HtmlTabContentItem($identifier);
-		$this->content[]=$tabItem;
+		$this->content []=$tabItem;
 	}
 
-	public function getTabItem($index){
-		if($index<sizeof($this->content))
-			return $this->content[$index];
+	public function getTabItem($index) {
+		if ($index < sizeof($this->content))
+			return $this->content [$index];
 	}
 
-	public function getTabItems(){
+	public function getTabItems() {
 		return $this->content;
 	}
 }

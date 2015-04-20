@@ -1,8 +1,11 @@
 <?php
+
 namespace Ajax\bootstrap\html;
+
 use Phalcon\Mvc\View;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
+
 /**
  * Twitter Bootstrap HTML Modal component
  * @author jc
@@ -11,21 +14,23 @@ use Ajax\bootstrap\html\base\BaseHtml;
 class HtmlModal extends BaseHtml {
 	protected $title="Titre de ma boîte";
 	protected $content="";
-	protected $buttons=array();
+	protected $buttons=array ();
 	protected $showOnStartup=false;
 	protected $draggable=false;
-
+	protected $validCondition=NULL;
+	protected $backdrop=true;
 
 	/**
+	 *
 	 * @param string $identifier the id
 	 */
-	public function __construct($identifier,$title="",$content="",$buttonCaptions=array()) {
+	public function __construct($identifier, $title="", $content="", $buttonCaptions=array()) {
 		parent::__construct($identifier);
 		$this->_template=include 'templates/tplModal.php';
-		$this->buttons=array();
+		$this->buttons=array ();
 		$this->title=$title;
 		$this->content=$content;
-		foreach ($buttonCaptions as $button){
+		foreach ( $buttonCaptions as $button ) {
 			$this->addButton($button);
 		}
 	}
@@ -36,11 +41,11 @@ class HtmlModal extends BaseHtml {
 	 * @param string $style one of "btn-default","btn-primary","btn-success","btn-info","btn-warning","btn-danger"
 	 * @return HtmlButton
 	 */
-	public function addButton($value="Okay",$style="btn-primary"){
+	public function addButton($value="Okay", $style="btn-primary") {
 		$btn=new HtmlButton($value);
 		$btn->setStyle($style);
 		$btn->setValue($value);
-		$this->buttons[]=$btn;
+		$this->buttons []=$btn;
 		return $btn;
 	}
 
@@ -49,34 +54,56 @@ class HtmlModal extends BaseHtml {
 	 * @param string $value
 	 * @return HtmlButton
 	 */
-	public function addCancelButton($value="Annuler"){
-		$btn=$this->addButton($value,"btn-default");
+	public function addCancelButton($value="Annuler") {
+		$btn=$this->addButton($value, "btn-default");
 		$btn->setProperty("data-dismiss", "modal");
 		return $btn;
 	}
 
 	/**
-	 * Add an Okay button
+	 * Add an Okay button (close the box only if $(identifier).valid===true)
 	 * @param string $value
 	 * @return HtmlButton
 	 */
-	public function addOkayButton($value="Okay"){
-		$btn=$this->addButton($value,"btn-primary");
+	public function addOkayButton($value="Okay") {
+		$btn=$this->addButton($value, "btn-primary");
+		$btn->onClick("if(" . $this->getValidCondition() . ") $('#" . $this->identifier . "').modal('hide');");
 		return $btn;
 	}
+
+	protected function getDefaultValidCondition() {
+		return "$('#" . $this->identifier . "').prop('valid')";
+	}
+
+	public function setValidCondition($js) {
+		$this->validCondition=$js;
+	}
+
+	public function getValidCondition() {
+		if ($this->validCondition == NULL) {
+			return $this->getDefaultValidCondition();
+		} else {
+			return $this->validCondition;
+		}
+	}
+
+	public function setValid() {
+		$this->validCondition="1==1";
+	}
+
 	/**
 	 * set the content of the modal
 	 * @param string $content
 	 */
-	public function setContent($content){
+	public function setContent($content) {
 		$this->content=$content;
 	}
 
 	/**
 	 * set the title of the modal
-	 * @param string $content
+	 * @param string $title
 	 */
-	public function setTitle($title){
+	public function setTitle($title) {
 		$this->title=$title;
 	}
 
@@ -87,51 +114,60 @@ class HtmlModal extends BaseHtml {
 	 * @param string $action a Phalcon action
 	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContent($view,$controller,$action,$params=NULL){
-		 $template = $view->getRender($controller, $action, $params, function($view) {
+	public function renderContent($view, $controller, $action, $params=NULL) {
+		$template=$view->getRender($controller, $action, $params, function ($view) {
 			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 		});
-		$this->content= $template;
+		$this->content=$template;
 	}
 
-	/* (non-PHPdoc)
+	/*
+	 * (non-PHPdoc)
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier,array("show"=>$this->showOnStartup));
-		if($this->draggable)
+		$this->_bsComponent=$js->bootstrap()->modal("#" . $this->identifier, array (
+				"show" => $this->showOnStartup 
+		));
+		if ($this->draggable)
 			$this->_bsComponent->setDraggable(true);
+		$this->_bsComponent->setBackdrop($this->backdrop);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 
-	public function getButton($index){
-		return $this->buttons[$index];
+	public function getButton($index) {
+		if (is_int($index))
+			return $this->buttons [$index];
+		else
+			return $this->getElementById($index, $this->buttons);
 	}
 
-	public function showOnCreate(){
+	public function showOnCreate() {
 		$this->showOnStartup=true;
 		return $this;
 	}
 
-	public function jsShow(){
+	public function jsShow() {
 		return "$('#{$this->identifier}').modal('show');";
 	}
 
-	public function jsHide(){
+	public function jsHide() {
 		return "$('#{$this->identifier}').modal('hide');";
 	}
 
-	public function jsGetContent(JsUtils $js,$url){
-		return $js->getDeferred($url,"#".$this->identifier." .modal-body");
+	public function jsGetContent(JsUtils $js, $url) {
+		return $js->getDeferred($url, "#" . $this->identifier . " .modal-body");
 	}
 
-	public function jsSetTitle($title){
-		return "$('#".$this->identifier." .modal-title').html('".$title."');";
+	public function jsSetTitle($title) {
+		return "$('#" . $this->identifier . " .modal-title').html('" . $title . "');";
 	}
 
-	public function jsHideButton($index){
-		return "$('#".$this->buttons[$index]->getIdentifier()."').hide();";
+	public function jsHideButton($index) {
+		$btn=$this->getButton($index);
+		if ($btn)
+			return "$('#" . $btn->getIdentifier() . "').hide();";
 	}
 
 	/**
@@ -139,8 +175,20 @@ class HtmlModal extends BaseHtml {
 	 * needs JQuery UI
 	 * @param boolean $value
 	 */
-	public function setDraggable($value){
+	public function setDraggable($value) {
 		$this->draggable=$value;
+		if ($value) {
+			$this->backdrop=false;
+		}
 	}
 
+	/**
+	 * Includes a modal-backdrop element.
+	 * Alternatively, specify static for a backdrop which doesn't close the modal on click.
+	 * @param Boolean $value default : true
+	 * @return HtmlModal
+	 */
+	public function setBackdrop($value) {
+		return $this->backdrop=$value;
+	}
 }

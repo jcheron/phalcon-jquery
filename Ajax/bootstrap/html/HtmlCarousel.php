@@ -24,6 +24,7 @@ class HtmlCarousel extends BaseHtml {
 	protected $rightControl="";
 	protected $_base="";
 	protected $_glyphs=array ();
+
 	public function __construct($identifier, $images=NULL) {
 		parent::__construct($identifier);
 		$this->_template=include 'templates/tplCarousel.php';
@@ -33,23 +34,27 @@ class HtmlCarousel extends BaseHtml {
 			}
 		}
 	}
+
 	public function getBase() {
 		return $this->_base;
 	}
+
 	public function setBase($_base) {
 		$this->_base=$_base;
 		return $this;
 	}
+
 	public function run(JsUtils $js) {
 		$this->_bsComponent=$js->bootstrap()->carousel("#" . $this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
+
 	private function createControls() {
-		$this->rightControl=$this->createControl("next","right");
-		$this->leftControl=$this->createControl("previous","left");
+		$this->rightControl=$this->createControl("next", "right");
+		$this->leftControl=$this->createControl("previous", "left");
 	}
-	
+
 	/**
 	 *
 	 * @param string $caption
@@ -59,28 +64,32 @@ class HtmlCarousel extends BaseHtml {
 	private function createControl($caption="next", $sens="left") {
 		$control=new HtmlCarouselControl($sens . "-ctrl-" . $this->identifier);
 		$control->setClass($sens . " carousel-control");
-		$control->setProperty("data-slide",substr($caption,0,4));
+		$control->setProperty("data-slide", substr($caption, 0, 4));
 		$control->setHref("#" . $this->identifier);
 		$control->setRole("button");
 		$control->setCaption(ucfirst($caption));
 		$control->setGlyphIcon($this->getGlyph($sens));
 		return $control;
 	}
+
 	private function getGlyph($sens="left") {
-		if (array_key_exists($sens,$this->_glyphs))
+		if (array_key_exists($sens, $this->_glyphs))
 			return $this->_glyphs [$sens];
 		return "glyphicon-chevron-" . $sens;
 	}
+
 	public function setRightGlyph($glyphicon) {
 		$glyphs=CssRef::glyphIcons();
-		if (array_search($glyphicon,$glyphs) !== false)
+		if (array_search($glyphicon, $glyphs) !== false)
 			$this->_glyphs ["right"]=$glyphicon;
 	}
+
 	public function setLeftGlyph($glyphicon) {
 		$glyphs=CssRef::glyphIcons();
-		if (array_search($glyphicon,$glyphs) !== false)
+		if (array_search($glyphicon, $glyphs) !== false)
 			$this->_glyphs ["left"]=$glyphicon;
 	}
+
 	public function addImage($imageSrc, $imageAlt="", $caption=NULL, $description=NULL) {
 		$image=new HtmlCarouselItem("item-" . $this->identifier);
 		$image->setImageSrc($this->_base . $imageSrc);
@@ -96,7 +105,7 @@ class HtmlCarousel extends BaseHtml {
 		$this->slides []=$image;
 		$this->createIndicator();
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromArray()
@@ -105,7 +114,7 @@ class HtmlCarousel extends BaseHtml {
 		if (sizeof($array) > 0) {
 			foreach ( $array as $value ) {
 				if (is_array($value)) {
-					$this->addImage($value ["src"],@$value ["alt"],@$value ["caption"],@$value ["description"]);
+					$this->addImage($value ["src"], @$value ["alt"], @$value ["caption"], @$value ["description"]);
 				} else {
 					$this->addImage($value);
 				}
@@ -113,14 +122,15 @@ class HtmlCarousel extends BaseHtml {
 		}
 		return $this;
 	}
+
 	private function createIndicator() {
 		$indicator=new HtmlDoubleElement("indicator-" . $this->identifier);
-		$indicator->setProperty("data-target","#" . $this->identifier);
-		$indicator->setProperty("data-slide-to",sizeof($this->indicators));
+		$indicator->setProperty("data-target", "#" . $this->identifier);
+		$indicator->setProperty("data-slide-to", sizeof($this->indicators));
 		$indicator->setTagName("li");
 		$this->indicators []=$indicator;
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
@@ -129,6 +139,6 @@ class HtmlCarousel extends BaseHtml {
 		$this->slides [0]->setClass("item active");
 		$this->indicators [0]->setClass("active");
 		$this->createControls();
-		return parent::compile($js,$view);
+		return parent::compile($js, $view);
 	}
 }

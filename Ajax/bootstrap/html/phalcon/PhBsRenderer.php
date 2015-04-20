@@ -5,18 +5,21 @@ namespace Ajax\bootstrap\html\phalcon;
 use Phalcon\Forms\Element;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+
 class PhBsRenderer {
 	/**
+	 *
 	 * @var HtmlSingleElement
 	 */
 	protected $htmlElement;
-
+	
 	/**
+	 *
 	 * @var Element
 	 */
 	protected $element;
 
-	public function __construct(Element $element,$htmlElement){
+	public function __construct(Element $element, $htmlElement) {
 		$this->element=$element;
 		$this->htmlElement=$htmlElement;
 	}
@@ -30,33 +33,32 @@ class PhBsRenderer {
 	public function setName($name) {
 		$this->element->setName($name);
 		$this->htmlElement->setIdentifier($name);
-		$this->htmlElement->setProperty("name",$name);
+		$this->htmlElement->setProperty("name", $name);
 	}
 
-	public function compile(JsUtils $js = NULL,View $view=NULL) {
-		return $this->htmlElement->compile($js,$view);
+	public function compile(JsUtils $js=NULL, View $view=NULL) {
+		return $this->htmlElement->compile($js, $view);
 	}
 
 	public function run(JsUtils $js) {
 		return $this->htmlElement->run($js);
 	}
 
-
 	public function setAttribute($attribute, $value) {
 		$this->element->setAttribute($attribute, $value);
 		return $this->htmlElement->setProperty($attribute, $value);
 	}
 
-	public function render($attributes=null){
+	public function render($attributes=null) {
 		$attrs=$this->element->getAttributes();
-		foreach ($attrs as $key=>$value){
-			$this->htmlElement->setProperty($key,$value);
+		foreach ( $attrs as $key => $value ) {
+			$this->htmlElement->setProperty($key, $value);
 		}
-		if(isset($attributes))
+		if (isset($attributes))
 			$this->htmlElement->addProperties($attributes);
 		$this->htmlElement->setIdentifier($this->element->getName());
 		$this->htmlElement->setValue($this->element->getValue());
-
+		
 		return $this->htmlElement->compile();
 	}
 
@@ -65,7 +67,7 @@ class PhBsRenderer {
 	}
 
 	public function setHtmlElement($htmlElement) {
-		$this->htmlElement = $htmlElement;
+		$this->htmlElement=$htmlElement;
 		return $this;
 	}
 
@@ -74,8 +76,7 @@ class PhBsRenderer {
 	}
 
 	public function setElement(Element $element) {
-		$this->element = $element;
+		$this->element=$element;
 		return $this;
 	}
-
 }
