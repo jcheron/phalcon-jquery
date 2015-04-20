@@ -35,7 +35,7 @@ class HtmlDoubleElement extends HtmlSingleElement {
 		}
 		return $this;
 	}
-
+	
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\HtmlSingleElement::run()

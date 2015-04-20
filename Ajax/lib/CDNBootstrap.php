@@ -1,8 +1,7 @@
 <?php
 namespace Ajax\lib;
 use Ajax\service\PhalconUtils;
-require_once 'CDN.php';
-require_once 'CDNBase.php';
+
 class CDNBootstrap extends CDNBase{
 	protected $cssUrl;
 	protected $localCss;
