@@ -41,11 +41,16 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @var Bootstrap
 	 */
 	protected $_bootstrap;
+
 	/**
-	 *
 	 * @var Ajax\config\Config
 	 */
 	protected $config;
+
+	/**
+	 * @param JqueryUI $ui
+	 * @return \Ajax\JqueryUI
+	 */
 	public function ui($ui = NULL) {
 		if ($ui !== NULL) {
 			$this->_ui = $ui;
@@ -63,7 +68,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 
 	/**
 	 *
-	 * @param string $bootstrap
+	 * @param Bootstrap $bootstrap
 	 * @return \Ajax\Bootstrap
 	 */
 	public function bootstrap($bootstrap = NULL) {
@@ -85,7 +90,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	}
 	/**
 	 *
-	 * @param string $config
+	 * @param Config $config
 	 * @return \Ajax\config\Config
 	 */
 	public function config($config = NULL) {
@@ -215,7 +220,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return string
 	 */
 	public function focus($element = 'this', $js = '') {
-		return $this->js->__add_event ( $element, $js, "focus" );
+		return $this->js->_add_event ( $element, $js, "focus" );
 	}
 	// --------------------------------------------------------------------
 	/**

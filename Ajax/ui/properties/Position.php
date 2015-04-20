@@ -26,7 +26,7 @@ class Position extends BaseComponent{
 	 * default : left top
 	 */
 	public function setMy($value){
-		$this->setParamCtr("my", $value,"is_string");
+		$this->setParamCtrl("my", $value,"is_string");
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Position extends BaseComponent{
 	 * default : left bottom
 	 */
 	public function setAt($value){
-		$this->setParamCtr("at", $value,"is_string");
+		$this->setParamCtrl("at", $value,"is_string");
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Position extends BaseComponent{
 	 * default : null
 	 */
 	public function setOf($value){
-		$this->setParamCtr("of", $value,"is_string");
+		$this->setParamCtrl("of", $value,"is_string");
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Position extends BaseComponent{
 	 * default : none
 	 */
 	public function setCollision($value){
-		$this->setParamCtr("collision", $value,"is_string");
+		$this->setParamCtrl("collision", $value,"is_string");
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Position extends BaseComponent{
 	 * default : window
 	 */
 	public function setWithin($value){
-		$this->setParamCtr("within", $value,"is_string");
+		$this->setParamCtrl("within", $value,"is_string");
 	}
 
 	protected function setParamCtrl($key,$value,$typeCtrl){
