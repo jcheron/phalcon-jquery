@@ -40,7 +40,7 @@ class CssRef {
 	/**
 	 * return a valid style
 	 * avaible values : "default","primary","success","info","warning","danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return string
 	 */
 	public static function getStyle($cssStyle,$prefix){

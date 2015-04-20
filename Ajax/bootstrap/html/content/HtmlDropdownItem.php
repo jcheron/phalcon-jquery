@@ -25,7 +25,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	public function __construct($identifier) {
 		parent::__construct($identifier);
 		$this->class="";
-		$this->btnClass="";
+		$this->itemClass="";
 		$this->content="";
 		$this->href="#";
 		$this->role="menuitem";

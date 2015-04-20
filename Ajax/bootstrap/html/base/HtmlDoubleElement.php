@@ -7,6 +7,9 @@ use Ajax\bootstrap\html\HtmlLabel;
 include_once 'HtmlSingleElement.php';
 
 class HtmlDoubleElement extends HtmlSingleElement {
+	/**
+	 * @var mixed
+	 */
 	protected $content;
 	public function __construct($identifier,$tagName="p") {
 		parent::__construct($identifier,$tagName);

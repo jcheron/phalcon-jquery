@@ -7,6 +7,7 @@ use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\service\PhalconUtils;
 /**
  * Inner element for Twitter Bootstrap HTML Listgroup component
  * @see http://getbootstrap.com/components/#list-group
@@ -37,7 +38,7 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 	 * default : "list-group-item-default"
 	 */
 	public function setStyle($cssStyle){
-		if(!Text::startsWith($cssStyle, "list-group-item"))
+		if(!PhalconUtils::startsWith($cssStyle, "list-group-item"))
 			$cssStyle="list-group-item".$cssStyle;
 		$this->element->addToPropertyCtrl("class",$cssStyle,CssRef::Styles("list-group-item"));
 		return $this->element;

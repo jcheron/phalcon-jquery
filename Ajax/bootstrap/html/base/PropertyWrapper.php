@@ -23,7 +23,6 @@ class PropertyWrapper {
 	}
 
 	public static function wrapStrings($input,$separator=' ',$valueQuote = '"'){
-		$result="";
 		if(JArray::isAssociative($input)===true){
 			$result=implode($separator, array_map(function ($v, $k) use ($valueQuote) { return $k.'='.$valueQuote.$v.$valueQuote ; }, $input, array_keys($input)));
 		}else{

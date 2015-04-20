@@ -4,6 +4,7 @@ use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
+use Ajax\bootstrap\html\content\HtmlDropdownItem;
 
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component

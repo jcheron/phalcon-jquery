@@ -147,7 +147,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this->addToProperty($name, $value);
 	}
 
-	protected function addToPropertyCtrl($name,$value,$typeCtrl){
+	public function addToPropertyCtrl($name,$value,$typeCtrl){
 		//if($this->ctrl($name, $value, $typeCtrl)===true){
 			if(@class_exists($typeCtrl,true))
 				$typeCtrl=$typeCtrl::getConstants();
