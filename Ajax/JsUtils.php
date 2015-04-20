@@ -789,8 +789,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 *
 	 * Can be passed a database result or associative array and returns a JSON formatted string
 	 *
-	 * @param mixed result set or array
-	 * @param bool match array types (defaults to objects)
+	 * @param mixed $result result set or array
+	 * @param bool $match_array_type match array types (defaults to objects)
 	 * @return string json formatted string
 	 */
 	public function generate_json($result=NULL, $match_array_type=FALSE) {
@@ -807,6 +807,10 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		} else {
 			return 'null';
 		}
+		return $this->_create_json($json_result, $match_array_type);
+	}
+
+	private function _create_json($json_result,$match_array_type){
 		$json=array ();
 		$_is_assoc=TRUE;
 		if (!is_array($json_result)&&empty($json_result)) {
