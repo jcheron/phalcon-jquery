@@ -198,9 +198,9 @@ class Jquery {
 	 *
 	 * Outputs a jQuery click event
 	 *
-	 * @param string The element to attach the event to
-	 * @param string The code to execute
-	 * @param boolean whether or not to return false
+	 * @param string $element The element to attach the event to
+	 * @param string|array $js The code to execute
+	 * @param boolean $ret_false whether or not to return false
 	 * @return string
 	 */
 	public function _click($element='this', $js='', $ret_false=TRUE) {
@@ -537,7 +537,7 @@ class Jquery {
 	 * Outputs a jQuery animate event
 	 *
 	 * @param string $element element
-	 * @param string $params One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string|array $params One of 'slow', 'normal', 'fast', or time in milliseconds
 	 * @param string $speed
 	 * @param string $extra
 	 * @param boolean $immediatly delayed if false
@@ -548,11 +548,11 @@ class Jquery {
 		$speed=$this->_validate_speed($speed);
 
 		$animations="\t\t\t";
-
-		foreach ( $params as $param => $value ) {
-			$animations.=$param . ': \'' . $value . '\', ';
+		if(is_array($params)){
+			foreach ( $params as $param => $value ) {
+				$animations.=$param . ': \'' . $value . '\', ';
+			}
 		}
-
 		$animations=substr($animations,0,- 2); // remove the last ", "
 
 		if ($speed != '') {
