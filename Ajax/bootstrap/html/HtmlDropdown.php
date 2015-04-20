@@ -70,7 +70,8 @@ class HtmlDropdown extends HtmlButton {
 	 * define the buttons size
 	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
 	 * @param string|int $size
-	 * @return HtmlButtonsgroup default : ""
+	 * @return HtmlDropdown
+	 * default : ""
 	 */
 	public function setSize($size) {
 		if (is_int($size)) {

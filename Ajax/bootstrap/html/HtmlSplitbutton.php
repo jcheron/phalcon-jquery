@@ -20,9 +20,10 @@ class HtmlSplitbutton extends HtmlDropdown {
 		$this->mClass="btn-group";
 	}
 
-	/*
+	/**
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\HtmlDropdown::setSize()
+	 * @return HtmlSplitbutton
 	 */
 	public function setSize($size) {
 		if (is_int($size)) {
