@@ -1087,10 +1087,9 @@ class Jquery {
 	 *
 	 * A wrapper for writing document.ready()
 	 *
-	 * @access private
 	 * @return string
 	 */
-	private function _document_ready($js) {
+	public function _document_ready($js) {
 		if (! is_array($js)) {
 			$js=array (
 					$js

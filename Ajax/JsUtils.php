@@ -43,7 +43,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	protected $_bootstrap;
 
 	/**
-	 * @var Ajax\config\Config
+	 * @var Config
 	 */
 	protected $config;
 
@@ -90,7 +90,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	}
 	/**
 	 *
-	 * @param Config $config
+	 * @param \Ajax\config\Config $config
 	 * @return \Ajax\config\Config
 	 */
 	public function config($config = NULL) {
@@ -105,6 +105,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		return $this->config;
 	}
+
 	public function getDi() {
 		return $this->_di;
 	}
