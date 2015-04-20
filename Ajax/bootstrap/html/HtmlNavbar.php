@@ -142,7 +142,7 @@ class HtmlNavbar extends BaseHtml {
 				$zone=$this->navZones[$index];
 		}else{
 			for($i=0;$i<$nb;$i++){
-				if($zone->getIdentifier()===$index){
+				if($this->navZones[$i]->getIdentifier()===$index){
 					$zone=$this->navZones[$i];
 					break;
 				}

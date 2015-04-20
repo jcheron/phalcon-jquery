@@ -28,15 +28,16 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 * @return \Ajax\bootstrap\html\HtmlButtongroups
 	 */
 	public function addGroup(){
-		$bg=null;
 		$nb=sizeof($this->elements);
 		$bg=new HtmlButtongroups($this->identifier."-buttongroups-".$nb);
 		$this->elements[]=$bg;
 		return $bg;
 	}
 
+	/**
+	 * @return HtmlButtongroups
+	 */
 	private function getLastButtonGroup(){
-		$bg=null;
 		$nb=sizeof($this->elements);
 		if($nb>0)
 			$bg=$this->elements[$nb-1];

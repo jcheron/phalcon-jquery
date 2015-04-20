@@ -29,7 +29,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	 * define the buttons size
 	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
 	 * @param string/int $size
-	 * @return \Ajax\bootstrap\html\HtmlButtonsgroup
+	 * @return HtmlButtongroups
 	 * default : ""
 	 */
 	public function setSize($size){
@@ -138,8 +138,8 @@ class HtmlButtongroups extends HtmlDoubleElement {
 
 	/**
 	 * @param string $jsCode
-	 * @param string $stopPropagation
-	 * @param string $preventDefault
+	 * @param boolean $stopPropagation
+	 * @param boolean $preventDefault
 	 */
 	public function onClick($jsCode,$stopPropagation=false,$preventDefault=false){
 		foreach ($this->elements as $element){

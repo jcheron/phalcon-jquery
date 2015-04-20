@@ -12,6 +12,9 @@ use Phalcon\Mvc\View;
  * @version 1.001
  */
 class HtmlAlert extends HtmlDoubleElement {
+	/**
+	 * @var string|HtmlButton
+	 */
 	protected $button="";
 	protected $closeable;
 	public function __construct($identifier,$message=NULL,$cssStyle="alert-warning") {

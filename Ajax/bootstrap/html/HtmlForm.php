@@ -50,6 +50,11 @@ class HtmlForm extends HtmlDoubleElement {
 						$control->setClass("form-control");
 						$control->setLabel($this->getPart($futureElement));
 						break;
+					default:
+						$control=new HtmlInput($futureElement);
+						$control->setClass("form-control");
+						$control->setLabel($this->getPart($futureElement));
+						break;
 				}
 				$this->addElement($control);
 			}

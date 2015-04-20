@@ -53,6 +53,11 @@ class HtmlCarousel extends BaseHtml {
 		$this->leftControl=$this->createControl("previous","left");
 	}
 
+	/**
+	 * @param string $caption
+	 * @param string $sens
+	 * @return HtmlCarouselControl|string
+	 */
 	private function createControl($caption="next",$sens="left"){
 		$control=new HtmlCarouselControl($sens."-ctrl-".$this->identifier);
 		$control->setClass($sens." carousel-control");
@@ -87,7 +92,6 @@ class HtmlCarousel extends BaseHtml {
 		$image->setImageSrc($this->_base.$imageSrc);
 		$image->setImageAlt($imageAlt);
 		$image->setClass("item");
-		$optCaption="";
 		if(isset($caption)){
 			$optCaption="<h3>".$caption."</h3>";
 			if(isset($description)){

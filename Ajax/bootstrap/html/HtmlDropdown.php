@@ -71,7 +71,7 @@ class HtmlDropdown extends HtmlButton {
 	 * define the buttons size
 	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
 	 * @param string/int $size
-	 * @return \Ajax\bootstrap\html\HtmlButtonsgroup
+	 * @return HtmlButtonsgroup
 	 * default : ""
 	 */
 	public function setSize($size){

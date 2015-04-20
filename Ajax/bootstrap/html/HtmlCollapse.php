@@ -12,7 +12,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
  */
 
 class HtmlCollapse extends HtmlElementAsContent {
-	protected $collapse="";
+	protected $collapse;
 	public function __construct($element=NULL) {
 		parent::__construct($element);
 		$this->_template="%element%%collapse%";

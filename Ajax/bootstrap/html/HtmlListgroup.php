@@ -28,7 +28,7 @@ use Ajax\bootstrap\html\base\HtmlElementAsContent;
 					$element=new HtmlDoubleElement("list-gi-".$this->identifier);
 					$element->setTagName("li");
 					break;
-				case "div":
+				default:
 					$element=new HtmlLink("list-gi-".$this->identifier);
 					break;
 			}
