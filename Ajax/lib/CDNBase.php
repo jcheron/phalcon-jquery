@@ -86,5 +86,5 @@ abstract class CDNBase {
 		return $this->getVersions($provider)[0];
 	}
 
-	public abstract function getUrl();
+	abstract public function getUrl();
 }

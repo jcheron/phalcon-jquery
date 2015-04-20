@@ -210,7 +210,7 @@ class Jquery {
 	 * @param boolean $ret_false whether or not to return false
 	 * @return string
 	 */
-	public function _click($element='this', $js='', $ret_false=TRUE) {
+	public function _click($element='this', $js=array(), $ret_false=TRUE) {
 		if (!is_array($js)) {
 			$js=array (
 					$js 

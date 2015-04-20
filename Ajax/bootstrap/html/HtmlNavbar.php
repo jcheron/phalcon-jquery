@@ -119,7 +119,7 @@ class HtmlNavbar extends BaseHtml {
 
 	/**
 	 *
-	 * @param int $index
+	 * @param HtmlNavzone $zone
 	 * @return HtmlNavzone
 	 */
 	public function getZoneToInsertIn($zone=NULL) {

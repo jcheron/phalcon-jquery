@@ -80,5 +80,5 @@ abstract class BaseComponent {
 		return $this;
 	}
 
-	public abstract function getScript();
+	abstract public function getScript();
 }
