@@ -26,12 +26,12 @@ class HtmlListgroup extends HtmlDoubleElement {
 		if (is_object($text)) {
 			$element=$text;
 		} else {
-			switch ($this->tagName) {
+			switch($this->tagName) {
 				case "ul":
 					$element=new HtmlDoubleElement("list-gi-" . $this->identifier);
 					$element->setTagName("li");
 					break;
-				default :
+				default:
 					$element=new HtmlLink("list-gi-" . $this->identifier);
 					break;
 			}

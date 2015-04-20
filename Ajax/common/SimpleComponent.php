@@ -42,9 +42,6 @@ abstract class SimpleComponent extends BaseComponent {
 		$this->jquery_code_for_compile=array ();
 		$this->jquery_code_for_compile []="$( \"" . $this->attachTo . "\" ).{$this->uiName}(" . $this->getParamsAsJSON($allParams) . ");";
 		$this->compileEvents();
-		// foreach ($this->events as $event=>$jsCode){
-		// $this->jquery_code_for_compile[]="$( \"".$this->attachTo."\" ).on(\"{$event}\",function( event, data ) {".$jsCode."});";
-		// }
 		return $this->compileJQueryCode();
 	}
 

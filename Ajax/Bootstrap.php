@@ -35,7 +35,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function generic($attachTo=NULL, $params=NULL) {
@@ -45,7 +45,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function modal($attachTo=NULL, $params=NULL) {
@@ -55,7 +55,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function tooltip($attachTo=NULL, $params=NULL) {
@@ -65,7 +65,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function popover($attachTo=NULL, $params=NULL) {
@@ -75,7 +75,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function dropdown($attachTo=NULL, $params=NULL) {
@@ -85,7 +85,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function splitbutton($attachTo=NULL, $params=NULL) {
@@ -95,7 +95,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function tab($attachTo=NULL, $params=NULL) {
@@ -105,7 +105,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function collapse($attachTo=NULL, $params=NULL) {
@@ -115,7 +115,7 @@ class Bootstrap extends BaseGui {
 	/**
 	 *
 	 * @param string $attachTo
-	 * @param string $params
+	 * @param string|array $params
 	 * @return $this
 	 */
 	public function carousel($attachTo=NULL, $params=NULL) {

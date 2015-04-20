@@ -46,7 +46,7 @@ class HtmlButton extends HtmlDoubleElement {
 	/**
 	 * define the button style
 	 * avaible values : "btn-default","btn-primary","btn-success","btn-info","btn-warning","btn-danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlButton default : "btn-default"
 	 */
 	public function setStyle($cssStyle) {
@@ -56,7 +56,7 @@ class HtmlButton extends HtmlDoubleElement {
 	/**
 	 * define the button size
 	 * available values : "btn-lg","","btn-sm","btn-xs"
-	 * @param string/int $size
+	 * @param string|int $size
 	 * @return \Ajax\bootstrap\html\HtmlButton default : ""
 	 */
 	public function setSize($size) {

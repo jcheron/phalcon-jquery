@@ -279,7 +279,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 *
 	 * @access public
 	 * @param string $element element to attach the event to
-	 * @param string $jd code to execute
+	 * @param string $js code to execute
 	 * @return string
 	 */
 	public function keyup($element='this', $js='') {
@@ -1222,7 +1222,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$hasBootstrap=false;
 		$result=array ();
 		foreach ( $this->cdns as $cdn ) {
-			switch (get_class($cdn)) {
+			switch(get_class($cdn)) {
 				case "Ajax\lib\CDNJQuery":
 					$hasJQuery=true;
 					$result [0]=$cdn;

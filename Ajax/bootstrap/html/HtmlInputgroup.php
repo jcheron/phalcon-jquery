@@ -94,7 +94,7 @@ class HtmlInputgroup extends HtmlInput {
 	/**
 	 * define the elements size
 	 * available values : "input-group-lg","","input-group-sm","input-group-xs"
-	 * @param string/int $size
+	 * @param string|int $size
 	 * @return \Ajax\bootstrap\html\HtmlInputgroup default : ""
 	 */
 	public function setSize($size) {

@@ -101,7 +101,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	/**
 	 * define the progressbar style
 	 * avaible values : "success","info","warning","danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlProgressbar default : ""
 	 */
 	public function setStyle($cssStyle) {

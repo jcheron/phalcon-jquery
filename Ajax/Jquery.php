@@ -97,7 +97,7 @@ class Jquery {
 		return $this->_bootstrap;
 	}
 
-	public function __construct($params=array()) {
+	public function __construct() {
 	}
 	
 	// --------------------------------------------------------------------
@@ -1391,9 +1391,11 @@ class Jquery {
 	 * @param string $element
 	 * @param string $elementToModify
 	 * @param string $jqueryCall
-	 * @param string/array $param
+	 * @param string|array $param
 	 * @param boolean $preventDefault
+	 * @param boolean $stopPropagation
 	 * @param string $jsCallback javascript code to execute after the jquery call
+	 * @return string
 	 */
 	public function _doJQueryOn($event, $element, $elementToModify, $jqueryCall, $param="", $preventDefault=false, $stopPropagation=false, $jsCallback="") {
 		$script=$this->_add_event($element, $this->_doJQueryOn($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
@@ -1403,7 +1405,7 @@ class Jquery {
 	/**
 	 * Exécute le code $js
 	 * @param string $js Code à exécuter
-	 * @param string $immediatly diffère l'exécution si false
+	 * @param boolean $immediatly diffère l'exécution si false
 	 * @return String
 	 */
 	public function _exec($js, $immediatly=false) {

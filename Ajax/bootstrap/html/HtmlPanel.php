@@ -85,7 +85,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	/**
 	 * define the Panel style
 	 * avaible values : "panel-default","panel-primary","panel-success","panel-info","panel-warning","panel-danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlPanel default : "panel-default"
 	 */
 	public function setStyle($cssStyle) {

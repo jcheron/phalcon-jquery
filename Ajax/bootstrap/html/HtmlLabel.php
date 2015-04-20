@@ -23,7 +23,7 @@ class HtmlLabel extends HtmlDoubleElement {
 	/**
 	 * define the label style
 	 * avaible values : "label-default","label-primary","label-success","label-info","label-warning","label-danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlLabel default : "label-default"
 	 */
 	public function setStyle($cssStyle) {
