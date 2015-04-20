@@ -21,7 +21,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 * @see \Ajax\bootstrap\html\HtmlButtongroups::addElement()
 	 */
 	public function addElement($element) {
-		if ($element instanceof HtmlButtongroups) {
+		if ($elementinstanceofHtmlButtongroups) {
 			$this->elements []=$element;
 		} else {
 			$this->getLastButtonGroup()->addElement($element);
@@ -34,7 +34,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 */
 	public function addGroup() {
 		$nb=sizeof($this->elements);
-		$bg=new HtmlButtongroups($this->identifier . "-buttongroups-" . $nb);
+		$bg=new HtmlButtongroups($this->identifier."-buttongroups-".$nb);
 		$this->elements []=$bg;
 		return $bg;
 	}
@@ -45,10 +45,10 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 */
 	private function getLastButtonGroup() {
 		$nb=sizeof($this->elements);
-		if ($nb > 0)
-			$bg=$this->elements [$nb - 1];
+		if ($nb>0)
+			$bg=$this->elements [$nb-1];
 		else {
-			$bg=new HtmlButtongroups($this->identifier . "-buttongroups-" . $nb);
+			$bg=new HtmlButtongroups($this->identifier."-buttongroups-".$nb);
 			$this->elements []=$bg;
 		}
 		return $bg;
@@ -65,8 +65,8 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	public function getLastGroup() {
 		$bg=null;
 		$nb=sizeof($this->elements);
-		if ($nb > 0)
-			$bg=$this->elements [$nb - 1];
+		if ($nb>0)
+			$bg=$this->elements [$nb-1];
 		return $bg;
 	}
 
@@ -82,11 +82,11 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 			foreach ( $this->elements as $group ) {
 				$elements=array_merge($elements, $group->getElements());
 			}
-			if ($index < sizeof($elements)) {
+			if ($index<sizeof($elements)) {
 				$element=$elements [$index];
 			}
 		} else {
-			while ( $element == null && $i < sizeof($this->elements) ) {
+			while ( $element==null&&$i<sizeof($this->elements) ) {
 				$element=$this->elements [$i]->getElement($index);
 				$i++;
 			}

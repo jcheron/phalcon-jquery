@@ -35,7 +35,7 @@ class Tabs extends SimpleBsComponent {
 	}
 
 	public function getTab($index) {
-		if ($index > 0 && $index < sizeof($this->tabs))
+		if ($index>0&&$index<sizeof($this->tabs))
 			return $this->tabs [$index];
 	}
 

@@ -25,19 +25,19 @@ class HtmlCollapse extends HtmlElementAsContent {
 
 	public function attachTo($identifier) {
 		$this->element->setProperty("aria-controls", $identifier);
-		if ($this->element->getTagName() === "a")
-			$this->element->setProperty("href", "#" . $identifier);
+		if ($this->element->getTagName()==="a")
+			$this->element->setProperty("href", "#".$identifier);
 		else
-			$this->element->setProperty("data-target", "#" . $identifier);
+			$this->element->setProperty("data-target", "#".$identifier);
 	}
 
 	public function getAttachedZone() {
 		$id=$this->element->getProperty("aria-controls");
 		if (!isset($id))
-			if ($this->element->getTagName() === "a")
+			if ($this->element->getTagName()==="a")
 				$id=$this->element->getProperty("href");
-		if (!isset($id) || $id === "#") {
-			$id="collapse-" . $this->element->getIdentifier();
+		if (!isset($id)||$id==="#") {
+			$id="collapse-".$this->element->getIdentifier();
 			$this->attachTo($id);
 		}
 		$id=$this->cleanIdentifier($id);
@@ -68,7 +68,7 @@ class HtmlCollapse extends HtmlElementAsContent {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->collapse("#" . $this->element->getIdentifier());
+		$this->_bsComponent=$js->bootstrap()->collapse("#".$this->element->getIdentifier());
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

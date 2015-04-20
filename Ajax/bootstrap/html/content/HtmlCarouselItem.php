@@ -12,7 +12,7 @@ class HtmlCarouselItem extends BaseHtml {
 
 	public function __construct($identifier) {
 		parent::__construct($identifier);
-		$this->_template=include __DIR__ . '/../templates/tplCarouselItem.php';
+		$this->_template=include __DIR__.'/../templates/tplCarouselItem.php';
 	}
 
 	public function getImageSrc() {

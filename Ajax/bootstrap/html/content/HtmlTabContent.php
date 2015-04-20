@@ -23,7 +23,7 @@ class HtmlTabContent extends HtmlDoubleElement {
 	}
 
 	public function getTabItem($index) {
-		if ($index < sizeof($this->content))
+		if ($index<sizeof($this->content))
 			return $this->content [$index];
 	}
 

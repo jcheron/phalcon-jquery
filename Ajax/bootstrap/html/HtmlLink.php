@@ -26,7 +26,7 @@ class HtmlLink extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

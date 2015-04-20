@@ -30,7 +30,7 @@ class Autocomplete extends SimpleComponent {
 	public function setAjaxSource($url) {
 		if (Text::startsWith($url, "/")) {
 			$u=$this->js->getDi()->get("url");
-			$url=$u->getBaseUri() . $url;
+			$url=$u->getBaseUri().$url;
 		}
 		$ajax="%function (request, response) {
 			$.ajax({
@@ -56,7 +56,7 @@ class Autocomplete extends SimpleComponent {
 				"\"",
 				"'" 
 		), "%quote%", $source);
-		return $this->setParam("source", "%" . $source . "%");
+		return $this->setParam("source", "%".$source."%");
 	}
 
 	/**

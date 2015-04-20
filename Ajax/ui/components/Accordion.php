@@ -49,7 +49,7 @@ class Accordion extends SimpleComponent {
 	 * @return $this
 	 */
 	public function setAnimate($value) {
-		if ($value instanceof Animation)
+		if ($valueinstanceofAnimation)
 			$value=$value->getParams();
 		else if (is_string($value)) {
 			$animation=new Animation();
@@ -91,6 +91,7 @@ class Accordion extends SimpleComponent {
 
 	/**
 	 * Selector for the header element, applied via .
+	 *
 	 * find() on the main accordion element.
 	 * Content panels must be the sibling immediately after their associated headers.
 	 * @param string $value css/JQuery Selector
@@ -130,7 +131,7 @@ class Accordion extends SimpleComponent {
 		if (is_string($value)) {
 			if (Text::startsWith($value, "{"))
 				;
-			$value="%" . $value . "%";
+			$value="%".$value."%";
 		}
 		$this->setParam("icons", $value);
 		return $this;

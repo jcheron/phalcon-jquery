@@ -14,8 +14,8 @@ class CDNGuiGen extends CDNBase {
 		$this->data=$this->data ["JQueryUI"];
 		if (is_int($theme)) {
 			$themes=$this->getThemes();
-			if (sizeof($themes) > $theme - 1)
-				$this->theme=$themes [$theme - 1];
+			if (sizeof($themes)>$theme-1)
+				$this->theme=$themes [$theme-1];
 			else
 				throw new \Exception("CDNGuiGen : Le numéro de thème demandé n'existe pas");
 		}
@@ -36,7 +36,7 @@ class CDNGuiGen extends CDNBase {
 
 	public function getFirstTheme($provider=NULL) {
 		$themes=$this->getThemes($provider);
-		if (sizeof($themes) > 0)
+		if (sizeof($themes)>0)
 			return $themes [0];
 		return "";
 	}
@@ -49,10 +49,10 @@ class CDNGuiGen extends CDNBase {
 		if (isset($this->cssUrl))
 			return $this->cssUrl;
 		$version=$this->version;
-		if (array_search($version, $this->getVersions()) === false)
+		if (array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();
 		$theme=$this->theme;
-		if (array_search($theme, $this->getThemes()) === false)
+		if (array_search($theme, $this->getThemes())===false)
 			$theme=$this->getFirstTheme();
 		return $this->replaceVersionAndTheme($this->data [$this->provider] ["css"], $version, $theme);
 	}
@@ -60,13 +60,13 @@ class CDNGuiGen extends CDNBase {
 	public function __toString() {
 		$url=$this->getUrl();
 		$css=$this->getCss();
-		return PhalconUtils::javascriptInclude($url, $this->local) . "\n" . PhalconUtils::stylesheetLink($css, $this->localCss);
+		return PhalconUtils::javascriptInclude($url, $this->local)."\n".PhalconUtils::stylesheetLink($css, $this->localCss);
 	}
 
 	public function setCssUrl($cssUrl, $local=null) {
 		$this->cssUrl=$cssUrl;
-		if (isset($local) === false) {
-			$local=PhalconUtils::startsWith($cssUrl, "http") === false;
+		if (isset($local)===false) {
+			$local=PhalconUtils::startsWith($cssUrl, "http")===false;
 		}
 		$this->setLocalCss($local);
 		return $this;

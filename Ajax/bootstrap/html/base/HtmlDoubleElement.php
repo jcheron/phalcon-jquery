@@ -28,7 +28,7 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	}
 
 	public function addContent($content) {
-		if (is_array($this->content) === false) {
+		if (is_array($this->content)===false) {
 			$newContent=array ();
 			if (isset($this->content))
 				$newContent []=$this->content;
@@ -46,11 +46,11 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	 */
 	public function run(JsUtils $js) {
 		parent::run($js);
-		if ($this->content instanceof HtmlDoubleElement) {
+		if ($this->contentinstanceofHtmlDoubleElement) {
 			$this->content->run($js);
 		} else if (is_array($this->content)) {
 			foreach ( $this->content as $itemContent ) {
-				if ($itemContent instanceof HtmlDoubleElement) {
+				if ($itemContentinstanceofHtmlDoubleElement) {
 					$itemContent->run($js);
 				}
 			}
@@ -58,14 +58,14 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	}
 
 	public function addBadge($caption, $leftSeparator="&nbsp;") {
-		$badge=new HtmlBadge("badge-" . $this->identifier, $caption);
-		$this->content.=$leftSeparator . $badge->compile();
+		$badge=new HtmlBadge("badge-".$this->identifier, $caption);
+		$this->content.=$leftSeparator.$badge->compile();
 		return $this;
 	}
 
 	public function addLabel($caption, $style="label-default", $leftSeparator="&nbsp;") {
-		$label=new HtmlLabel("label-" . $this->identifier, $caption, $style);
-		$this->content.=$leftSeparator . $label->compile();
+		$label=new HtmlLabel("label-".$this->identifier, $caption, $style);
+		$this->content.=$leftSeparator.$label->compile();
 		return $this;
 	}
 

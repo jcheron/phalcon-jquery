@@ -27,13 +27,13 @@ class HtmlPanel extends HtmlDoubleElement {
 		$this->setProperty("class", "panel panel-default");
 		$this->_collapsable=false;
 		$this->_showOnStartup=false;
-		if ($content !== NULL) {
+		if ($content!==NULL) {
 			$this->setContent($content);
 		}
-		if ($header !== NULL) {
+		if ($header!==NULL) {
 			$this->addHeader($header);
 		}
-		if ($footer !== NULL) {
+		if ($footer!==NULL) {
 			$this->addFooter($footer);
 		}
 	}
@@ -57,7 +57,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	}
 
 	public function addHeader($content) {
-		$header=new HtmlDoubleElement("header-" . $this->identifier);
+		$header=new HtmlDoubleElement("header-".$this->identifier);
 		$header->setTagName("div");
 		$header->setClass("panel-heading");
 		$header->setContent($content);
@@ -66,15 +66,15 @@ class HtmlPanel extends HtmlDoubleElement {
 	}
 
 	public function addHeaderH($content, $niveau="1") {
-		$headerH=new HtmlDoubleElement("header-h-" . $this->identifier);
+		$headerH=new HtmlDoubleElement("header-h-".$this->identifier);
 		$headerH->setContent($content);
-		$headerH->setTagName("h" . $niveau);
+		$headerH->setTagName("h".$niveau);
 		$headerH->setClass("panel-title");
 		return $this->addHeader($headerH);
 	}
 
 	public function addFooter($content) {
-		$footer=new HtmlDoubleElement("footer-" . $this->identifier);
+		$footer=new HtmlDoubleElement("footer-".$this->identifier);
 		$footer->setTagName("div");
 		$footer->setClass("panel-footer");
 		$footer->setContent($content);
@@ -90,7 +90,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	 */
 	public function setStyle($cssStyle) {
 		if (!PhalconUtils::startsWith($cssStyle, "panel"))
-			$cssStyle="panel" . $cssStyle;
+			$cssStyle="panel".$cssStyle;
 		return $this->addToPropertyCtrl("class", $cssStyle, CssRef::Styles("panel"));
 	}
 
@@ -100,9 +100,9 @@ class HtmlPanel extends HtmlDoubleElement {
 	 */
 	public function run(JsUtils $js) {
 		if ($this->_collapsable) {
-			$this->_bsComponent=$js->bootstrap()->collapse("#lnk-" . $this->identifier);
-			$this->_bsComponent->setCollapsed("#collapse-" . $this->identifier);
-			if ($this->_showOnStartup === true) {
+			$this->_bsComponent=$js->bootstrap()->collapse("#lnk-".$this->identifier);
+			$this->_bsComponent->setCollapsed("#collapse-".$this->identifier);
+			if ($this->_showOnStartup===true) {
 				$this->_bsComponent->show();
 			}
 		}
@@ -113,11 +113,11 @@ class HtmlPanel extends HtmlDoubleElement {
 		$this->_collapsable=$_collapsable;
 		if ($_collapsable) {
 			$this->header->setRole("tab");
-			$lnk=new HtmlLink("lnk-" . $this->identifier);
-			$lnk->setHref("#collapse-" . $this->identifier);
+			$lnk=new HtmlLink("lnk-".$this->identifier);
+			$lnk->setHref("#collapse-".$this->identifier);
 			$lnk->setContent($this->header->getContent());
 			$this->header->setContent($lnk);
-			$this->collapseBegin='<div id="collapse-' . $this->identifier . '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-' . $this->identifier . '">';
+			$this->collapseBegin='<div id="collapse-'.$this->identifier.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-'.$this->identifier.'">';
 			$this->collapseEnd="</div>";
 		} else {
 			$this->collapseBegin="";

@@ -12,14 +12,14 @@ use Ajax\service\PhalconUtils;
  * @license Apache 2 http://www.apache.org/licenses/
  */
 function __autoload($myClass) {
-	if (file_exists("ui/components/" . $myClass . ".php")) {
-		require_once ("ui/components/" . $myClass . ".php");
+	if (file_exists("ui/components/".$myClass.".php")) {
+		require_once ("ui/components/".$myClass.".php");
 	}
-	if (file_exists("bootstrap/html/" . $myClass . ".php")) {
-		require_once ("bootstrap/html/" . $myClass . ".php");
+	if (file_exists("bootstrap/html/".$myClass.".php")) {
+		require_once ("bootstrap/html/".$myClass.".php");
 	}
-	if (file_exists("bootstrap/html/phalcon/" . $myClass . ".php")) {
-		require_once ("bootstrap/html/phalcon/" . $myClass . ".php");
+	if (file_exists("bootstrap/html/phalcon/".$myClass.".php")) {
+		require_once ("bootstrap/html/phalcon/".$myClass.".php");
 	}
 }
 /**
@@ -84,14 +84,14 @@ class Jquery {
 	}
 
 	public function ui($ui=NULL) {
-		if ($ui !== NULL) {
+		if ($ui!==NULL) {
 			$this->_ui=$ui;
 		}
 		return $this->_ui;
 	}
 
 	public function bootstrap($bootstrap=NULL) {
-		if ($bootstrap !== NULL) {
+		if ($bootstrap!==NULL) {
 			$this->_bootstrap=$bootstrap;
 		}
 		return $this->_bootstrap;
@@ -133,7 +133,7 @@ class Jquery {
 	 */
 	private function _open_script($src='') {
 		$str='<script type="text/javascript" ';
-		$str.=($src == '') ? '>' : ' src="' . $src . '">';
+		$str.=($src=='') ? '>' : ' src="'.$src.'">';
 		return $str;
 	}
 	
@@ -282,7 +282,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _hover($element='this', $over, $out) {
-		$event="\n\t$(" . $this->_prep_element($element) . ").hover(\n\t\tfunction()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunction()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
+		$event="\n\t$(".$this->_prep_element($element).").hover(\n\t\tfunction()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunction()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
 		
 		$this->jquery_code_for_compile []=$event;
 		
@@ -557,20 +557,20 @@ class Jquery {
 		$animations="\t\t\t";
 		if (is_array($params)) {
 			foreach ( $params as $param => $value ) {
-				$animations.=$param . ': \'' . $value . '\', ';
+				$animations.=$param.': \''.$value.'\', ';
 			}
 		}
 		$animations=substr($animations, 0, -2); // remove the last ", "
 		
-		if ($speed != '') {
-			$speed=', ' . $speed;
+		if ($speed!='') {
+			$speed=', '.$speed;
 		}
 		
-		if ($extra != '') {
-			$extra=', ' . $extra;
+		if ($extra!='') {
+			$extra=', '.$extra;
 		}
 		
-		$str="$({$element}).animate({\n$animations\n\t\t}" . $speed . $extra . ");";
+		$str="$({$element}).animate({\n$animations\n\t\t}".$speed.$extra.");";
 		
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$str;
@@ -627,7 +627,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -655,7 +655,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -683,7 +683,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -732,7 +732,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -760,7 +760,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -788,7 +788,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -872,7 +872,7 @@ class Jquery {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 		
-		if ($callback != '') {
+		if ($callback!='') {
 			$callback=", function(){\n{$callback}\n}";
 		}
 		
@@ -892,9 +892,9 @@ class Jquery {
 	 * @return string
 	 */
 	public function _condition($condition, $jsCodeIfTrue, $jsCodeIfFalse=null, $immediatly=false) {
-		$str="if(" . $condition . "){" . $jsCodeIfTrue . "}";
+		$str="if(".$condition."){".$jsCodeIfTrue."}";
 		if (isset($jsCodeIfFalse)) {
-			$str.="else{" . $jsCodeIfFalse . "}";
+			$str.="else{".$jsCodeIfFalse."}";
 		}
 		
 		if ($immediatly)
@@ -919,10 +919,10 @@ class Jquery {
 		$url=$this->_di->get("url");
 		$container=$this->_prep_element($container);
 		
-		$controller=(strpos('://', $controller) === FALSE) ? $controller : $url->get($controller);
+		$controller=(strpos('://', $controller)===FALSE) ? $controller : $url->get($controller);
 		
 		// ajaxStart and ajaxStop are better choices here... but this is a stop gap
-		if ($this->jquery_ajax_img == '') {
+		if ($this->jquery_ajax_img=='') {
 			$loading_notifier="Loading...";
 		} else {
 			$loading_notifier=$this->_di->get("tag")->image($this->jquery_ajax_img);
@@ -932,9 +932,9 @@ class Jquery {
 		$updater.="\t\t$($container).prepend(\"$loading_notifier\");\n"; // to replace with an image
 		
 		$request_options='';
-		if ($options != '') {
+		if ($options!='') {
 			$request_options.=", {";
-			$request_options.=(is_array($options)) ? "'" . implode("', '", $options) . "'" : "'" . str_replace(":", "':'", $options) . "'";
+			$request_options.=(is_array($options)) ? "'".implode("', '", $options)."'" : "'".str_replace(":", "':'", $options)."'";
 			$request_options.="}";
 		}
 		
@@ -957,17 +957,17 @@ class Jquery {
 	 * @return void
 	 */
 	public function sortable($element, $options=array()) {
-		if (count($options) > 0) {
+		if (count($options)>0) {
 			$sort_options=array ();
 			foreach ( $options as $k => $v ) {
-				$sort_options []="\n\t\t" . $k . ': ' . $v . "";
+				$sort_options []="\n\t\t".$k.': '.$v."";
 			}
 			$sort_options=implode(",", $sort_options);
 		} else {
 			$sort_options='';
 		}
 		
-		return "$(" . $this->_prep_element($element) . ").sortable({" . $sort_options . "\n\t});";
+		return "$(".$this->_prep_element($element).").sortable({".$sort_options."\n\t});";
 	}
 	
 	// --------------------------------------------------------------------
@@ -981,7 +981,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function tablesorter($table='', $options='') {
-		$this->jquery_code_for_compile []="\t$(" . $this->_prep_element($table) . ").tablesorter($options);\n";
+		$this->jquery_code_for_compile []="\t$(".$this->_prep_element($table).").tablesorter($options);\n";
 	}
 	
 	// --------------------------------------------------------------------
@@ -1004,16 +1004,16 @@ class Jquery {
 		if (is_array($js)) {
 			$js=implode("\n\t\t", $js);
 		}
-		if ($preventDefault === true) {
-			$js="event.preventDefault();\n" . $js;
+		if ($preventDefault===true) {
+			$js="event.preventDefault();\n".$js;
 		}
-		if ($stopPropagation === true) {
-			$js="event.stopPropagation();\n" . $js;
+		if ($stopPropagation===true) {
+			$js="event.stopPropagation();\n".$js;
 		}
-		if (array_search($event, $this->jquery_events) === false)
-			$event="\n\t$(" . $this->_prep_element($element) . ").bind('{$event}',function(event){\n\t\t{$js}\n\t});\n";
+		if (array_search($event, $this->jquery_events)===false)
+			$event="\n\t$(".$this->_prep_element($element).").bind('{$event}',function(event){\n\t\t{$js}\n\t});\n";
 		else
-			$event="\n\t$(" . $this->_prep_element($element) . ").{$event}(function(event){\n\t\t{$js}\n\t});\n";
+			$event="\n\t$(".$this->_prep_element($element).").{$event}(function(event){\n\t\t{$js}\n\t});\n";
 		$this->jquery_code_for_compile []=$event;
 		return $event;
 	}
@@ -1033,7 +1033,7 @@ class Jquery {
 	public function _compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		// Components UI
 		$ui=$this->ui();
-		if ($this->ui() != NULL) {
+		if ($this->ui()!=NULL) {
 			if ($ui->isAutoCompile()) {
 				$ui->compile(true);
 			}
@@ -1041,7 +1041,7 @@ class Jquery {
 		
 		// Components UI
 		$bootstrap=$this->bootstrap();
-		if ($this->bootstrap() != NULL) {
+		if ($this->bootstrap()!=NULL) {
 			if ($bootstrap->isAutoCompile()) {
 				$bootstrap->compile(true);
 			}
@@ -1053,19 +1053,19 @@ class Jquery {
 				'library_src' => $external_scripts 
 		));
 		
-		if (count($this->jquery_code_for_compile) == 0) {
+		if (count($this->jquery_code_for_compile)==0) {
 			// no inline references, let's just return
 			return;
 		}
 		
 		// Inline references
-		$script='$(document).ready(function() {' . "\n";
+		$script='$(document).ready(function() {'."\n";
 		$script.=implode('', $this->jquery_code_for_compile);
 		$script.='});';
 		
-		$output=($script_tags === FALSE) ? $script : $this->inline($script);
+		$output=($script_tags===FALSE) ? $script : $this->inline($script);
 		
-		if ($view != NULL)
+		if ($view!=NULL)
 			$view->setVar($view_var, $output);
 		return $output;
 	}
@@ -1123,8 +1123,8 @@ class Jquery {
 	 * @return string
 	 */
 	public function _prep_element($element) {
-		if (strrpos($element, 'this') === false && strrpos($element, 'event') === false) {
-			$element='"' . $element . '"';
+		if (strrpos($element, 'this')===false&&strrpos($element, 'event')===false) {
+			$element='"'.$element.'"';
 		}
 		return $element;
 	}
@@ -1144,8 +1144,8 @@ class Jquery {
 		if (is_array($value)) {
 			$value=implode(",", $value);
 		}
-		if (strrpos($value, 'this') === false && strrpos($value, 'event') === false) {
-			$value='"' . $value . '"';
+		if (strrpos($value, 'this')===false&&strrpos($value, 'event')===false) {
+			$value='"'.$value.'"';
 		}
 		return $value;
 	}
@@ -1167,7 +1167,7 @@ class Jquery {
 				'normal',
 				'fast' 
 		))) {
-			$speed='"' . $speed . '"';
+			$speed='"'.$speed.'"';
 		} elseif (preg_match("/[^0-9]/", $speed)) {
 			$speed='';
 		}
@@ -1176,7 +1176,7 @@ class Jquery {
 	}
 	// ------------------------------------------------------------------------
 	protected function addLoading(&$retour, $responseElement) {
-		if ($this->jquery_ajax_img == '') {
+		if ($this->jquery_ajax_img=='') {
 			$loading_notifier="Loading...";
 		} else {
 			$loading_notifier=$this->_di->get("tag")->image(array (
@@ -1192,18 +1192,18 @@ class Jquery {
 	protected function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='" . $url . "';\n";
-		if ($attr == "value")
+		$retour="url='".$url."';\n";
+		if ($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
-			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$this->addLoading($retour, $responseElement);
-		$retour.="$.get(url," . $params . ").done(function( data ) {\n";
-		if ($responseElement !== "") {
+		$retour.="$.get(url,".$params.").done(function( data ) {\n";
+		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t" . $jsCallback . "\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$retour;
@@ -1212,8 +1212,8 @@ class Jquery {
 
 	protected function _correctAjaxUrl($url) {
 		if (PhalconUtils::endsWith($url, "/"))
-			$url=substr($url, 0, strlen($url) - 1);
-		if (strncmp($url, 'http://', 7) != 0 && strncmp($url, 'https://', 8) != 0) {
+			$url=substr($url, 0, strlen($url)-1);
+		if (strncmp($url, 'http://', 7)!=0&&strncmp($url, 'https://', 8)!=0) {
 			$url=$this->_di->get("url")->get($url);
 		}
 		return $url;
@@ -1229,14 +1229,14 @@ class Jquery {
 	public function _json($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='" . $url . "';\n";
-		if ($attr == "value")
+		$retour="url='".$url."';\n";
+		if ($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
-			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
-		$retour.="$.{$method}(url," . $params . ").done(function( data ) {\n";
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key).length){ if($('#'+key).is('[value]')) { $('#'+key).val(data[key]);} else { $('#'+key).html(data[key]); }}};\n";
-		$retour.="\t" . $jsCallback . "\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$retour;
@@ -1253,15 +1253,15 @@ class Jquery {
 	public function _jsonArray($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='" . $url . "';\n";
-		if ($attr == "value")
+		$retour="url='".$url."';\n";
+		if ($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
-			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
-		$retour.="$.{$method}(url," . $params . ").done(function( data ) {\n";
-		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n" . "\tvar created=false;var maskElm=$('" . $maskSelector . "').first();maskElm.hide();" . "\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;" . "\tvar newElm=$('#'+newId);\n" . "\tif(!newElm.length){\n" . "\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n" . "\t\tnewElm.appendTo($('" . $maskSelector . "').parent());\n" . "\t}\n" . "\tfor(var key in value){\n" . "\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n" . "\t\t\tif(html.indexOf('[['+key+']]')>-1){\n" . "\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n" . "\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n" . "\t\t\t}\n" . "\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n" . "\t\t\tvar selElm=$(sel,newElm);\n" . "\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n" . "\t\t}\n" . "}\n" . "\t$(newElm).show(true);" . "});\n";
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
+		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n"."\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();"."\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;"."\tvar newElm=$('#'+newId);\n"."\tif(!newElm.length){\n"."\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n"."\t\tnewElm.appendTo($('".$maskSelector."').parent());\n"."\t}\n"."\tfor(var key in value){\n"."\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n"."\t\t\tif(html.indexOf('[['+key+']]')>-1){\n"."\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n"."\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n"."\t\t\t}\n"."\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n"."\t\t\tvar selElm=$(sel,newElm);\n"."\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n"."\t\t}\n"."}\n"."\t$(newElm).show(true);"."});\n";
 		
-		$retour.="\t" . $jsCallback . "\n" . "});\n";
+		$retour.="\t".$jsCallback."\n"."});\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$retour;
 		return $retour;
@@ -1270,18 +1270,18 @@ class Jquery {
 	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='" . $url . "';\n";
-		if ($attr == "value")
+		$retour="url='".$url."';\n";
+		if ($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
-			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$this->addLoading($retour, $responseElement);
-		$retour.="$.post(url," . $params . ").done(function( data ) {\n";
-		if ($responseElement !== "") {
+		$retour.="$.post(url,".$params.").done(function( data ) {\n";
+		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t" . $jsCallback . "\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$retour;
@@ -1291,24 +1291,24 @@ class Jquery {
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='" . $url . "';\n";
-		if ($attr == "value")
+		$retour="url='".$url."';\n";
+		if ($attr=="value")
 			$retour.="url=url+'/'+$(this).val();\n";
 		else
-			$retour.="url=url+'/'+$(this).attr('" . $attr . "');\n";
+			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		$this->addLoading($retour, $responseElement);
-		$retour.="$.post(url,$('#" . $form . "').serialize()).done(function( data ) {\n";
-		if ($responseElement !== "") {
+		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
+		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t" . $jsCallback . "\n
+		$retour.="\t".$jsCallback."\n
 		});\n";
 		if ($validation) {
-			$retour="$('#" . $form . "').validate({submitHandler: function(form) {
-			" . $retour . "
+			$retour="$('#".$form."').validate({submitHandler: function(form) {
+			".$retour."
 			}});\n";
-			$retour.="$('#" . $form . "').submit();\n";
+			$retour.="$('#".$form."').submit();\n";
 		}
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$retour;
@@ -1377,9 +1377,9 @@ class Jquery {
 	public function _doJQuery($element, $jqueryCall, $param="", $jsCallback="", $immediatly=false) {
 		$param=$this->_prep_value($param);
 		$callback="";
-		if ($jsCallback != "")
+		if ($jsCallback!="")
 			$callback=", function(event){\n{$jsCallback}\n}";
-		$script="$(" . $this->_prep_element($element) . ")." . $jqueryCall . "(" . $param . $callback . ");\n";
+		$script="$(".$this->_prep_element($element).").".$jqueryCall."(".$param.$callback.");\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$script;
 		return $script;
@@ -1409,7 +1409,7 @@ class Jquery {
 	 * @return String
 	 */
 	public function _exec($js, $immediatly=false) {
-		$script=$js . "\n";
+		$script=$js."\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile []=$script;
 		return $script;

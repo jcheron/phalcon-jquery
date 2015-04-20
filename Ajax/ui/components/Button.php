@@ -40,7 +40,7 @@ class Button extends SimpleComponent {
 		if (is_string($value)) {
 			if (Text::startsWith($value, "{"))
 				;
-			$value="%" . $value . "%";
+			$value="%".$value."%";
 		}
 		return $this->setParam("icons", $value);
 	}

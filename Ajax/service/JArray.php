@@ -5,7 +5,7 @@ namespace Ajax\service;
 class JArray {
 
 	public static function isAssociative($array) {
-		return (array_keys($array) !== range(0, count($array) - 1));
+		return (array_keys($array)!==range(0, count($array)-1));
 	}
 
 	public static function getValue($array, $key, $pos) {
@@ -13,7 +13,7 @@ class JArray {
 			return $array [$key];
 		}
 		$values=array_values($array);
-		if ($pos < sizeof($values))
+		if ($pos<sizeof($values))
 			return $values [$pos];
 	}
 

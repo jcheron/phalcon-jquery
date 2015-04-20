@@ -22,13 +22,13 @@ class HtmlInputgroup extends HtmlInput {
 	}
 
 	public function createSpan($text, $position="left") {
-		$id=$position . "-" . $this->identifier;
+		$id=$position."-".$this->identifier;
 		$span=new HtmlDoubleElement($id);
 		$span->setTagName("span");
 		$this->setProperty("aria-describedby", $id);
 		$span->setContent($text);
 		$span->setClass("input-group-addon");
-		if (strtolower($position) === "left")
+		if (strtolower($position)==="left")
 			$this->addonLeft=$span;
 		else
 			$this->addonRight=$span;
@@ -68,7 +68,7 @@ class HtmlInputgroup extends HtmlInput {
 		$dropdown->setBtnCaption($caption);
 		$dropdown->fromArray($items);
 		
-		if (strtolower($position) === "left")
+		if (strtolower($position)==="left")
 			$this->addonLeft=$dropdown;
 		else
 			$this->addonRight=$dropdown;

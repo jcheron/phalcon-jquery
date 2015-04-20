@@ -21,14 +21,14 @@ class Tab extends SimpleBsComponent {
 	 * @see \Ajax\bootstrap\components\SimpleBsComponent::getScript()
 	 */
 	public function getScript() {
-		$jsCode="$('" . $this->attachTo . " a').click(function (event) { event.preventDefault();$(this).tab('show');});";
+		$jsCode="$('".$this->attachTo." a').click(function (event) { event.preventDefault();$(this).tab('show');});";
 		$this->jquery_code_for_compile []=$jsCode;
 		$this->compileEvents();
 		return $this->compileJQueryCode();
 	}
 
 	public function show() {
-		$this->jquery_code_for_compile []=' $(function () {$("' . $this->attachTo . ' a").tab("show");});';
+		$this->jquery_code_for_compile []=' $(function () {$("'.$this->attachTo.' a").tab("show");});';
 	}
 
 	/**

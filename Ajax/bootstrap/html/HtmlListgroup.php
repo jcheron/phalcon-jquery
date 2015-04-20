@@ -28,18 +28,18 @@ class HtmlListgroup extends HtmlDoubleElement {
 		} else {
 			switch($this->tagName) {
 				case "ul":
-					$element=new HtmlDoubleElement("list-gi-" . $this->identifier);
+					$element=new HtmlDoubleElement("list-gi-".$this->identifier);
 					$element->setTagName("li");
 					break;
 				default:
-					$element=new HtmlLink("list-gi-" . $this->identifier);
+					$element=new HtmlLink("list-gi-".$this->identifier);
 					break;
 			}
 			$element->setContent($text);
 		}
 		
 		$item=new HtmlListgroupItem($element);
-		if (is_array($text) === true) {
+		if (is_array($text)===true) {
 			$item->setHeadingAndContent($text);
 		}
 		$this->content []=$item;
@@ -56,7 +56,7 @@ class HtmlListgroup extends HtmlDoubleElement {
 	}
 
 	public function getItem($index) {
-		if ($index < sizeof($this->content))
+		if ($index<sizeof($this->content))
 			return $this->content [$index];
 	}
 }

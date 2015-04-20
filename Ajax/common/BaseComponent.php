@@ -25,7 +25,7 @@ abstract class BaseComponent {
 
 	protected function getParamsAsJSON($params) {
 		$result="";
-		if (sizeof($params) > 0) {
+		if (sizeof($params)>0) {
 			$result=json_encode($params, JSON_UNESCAPED_SLASHES);
 			$result=str_ireplace("%quote%", "\"", $result);
 		}
@@ -49,7 +49,7 @@ abstract class BaseComponent {
 	}
 
 	public function compile(JsUtils $js=NULL) {
-		if ($js == NULL)
+		if ($js==NULL)
 			$js=$this->js;
 		$script=$this->getScript();
 		$js->addToCompile($script);
@@ -57,11 +57,11 @@ abstract class BaseComponent {
 
 	protected function setParamCtrl($key, $value, $typeCtrl) {
 		if (is_array($typeCtrl)) {
-			if (array_search($value, $typeCtrl) === false)
-				throw new \Exception("La valeur passée a propriété `" . $key . "` ne fait pas partie des valeurs possibles : {" . implode(",", $typeCtrl) . "}");
+			if (array_search($value, $typeCtrl)===false)
+				throw new \Exception("La valeur passée a propriété `".$key."` ne fait pas partie des valeurs possibles : {".implode(",", $typeCtrl)."}");
 		} else {
 			if (!$typeCtrl($value)) {
-				throw new \Exception("La fonction " . $typeCtrl . " a retourné faux pour l'affectation de la propriété " . $key);
+				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key);
 			}
 		}
 		$this->setParam($key, $value);
@@ -69,14 +69,15 @@ abstract class BaseComponent {
 
 	public function setParams($params) {
 		foreach ( $params as $k => $v ) {
-			$method="set" . ucfirst($k);
+			$method="set".ucfirst($k);
 			if (method_exists($this, $method))
 				$this->$method($v);
 			else {
 				$this->setParam($k, $v);
-				trigger_error("`" . $k . "` property n'existe pas", E_USER_NOTICE);
+				trigger_error("`".$k."` property n'existe pas", E_USER_NOTICE);
 			}
 		}
+		
 		return $this;
 	}
 

@@ -74,8 +74,8 @@ class HtmlNavbar extends BaseHtml {
 	 */
 	public function addZone($type="nav", $identifier=NULL) {
 		if (!isset($identifier)) {
-			$nb=sizeof($this->navZones) + 1;
-			$identifier=$this->identifier . "-navzone-" . $nb;
+			$nb=sizeof($this->navZones)+1;
+			$identifier=$this->identifier."-navzone-".$nb;
 		}
 		$zone=HtmlNavzone::$type($identifier);
 		$this->navZones []=$zone;
@@ -84,7 +84,7 @@ class HtmlNavbar extends BaseHtml {
 
 	public function addElement($element, HtmlNavzone $zone=NULL) {
 		$zone=$this->getZoneToInsertIn($zone);
-		if ($element instanceof HtmlDropdown)
+		if ($elementinstanceofHtmlDropdown)
 			$element->setMTagName("li");
 		$zone->addElement($element);
 	}
@@ -125,10 +125,10 @@ class HtmlNavbar extends BaseHtml {
 	public function getZoneToInsertIn($zone=NULL) {
 		if (!isset($zone)) {
 			$nb=sizeof($this->navZones);
-			if ($nb < 1)
+			if ($nb<1)
 				$zone=$this->addZone();
 			else
-				$zone=$this->navZones [$nb - 1];
+				$zone=$this->navZones [$nb-1];
 		}
 		return $zone;
 	}
@@ -142,11 +142,11 @@ class HtmlNavbar extends BaseHtml {
 		$zone=null;
 		$nb=sizeof($this->navZones);
 		if (is_int($index)) {
-			if ($index < $nb)
+			if ($index<$nb)
 				$zone=$this->navZones [$index];
 		} else {
-			for($i=0; $i < $nb; $i++) {
-				if ($this->navZones [$i]->getIdentifier() === $index) {
+			for($i=0; $i<$nb; $i++) {
+				if ($this->navZones [$i]->getIdentifier()===$index) {
 					$zone=$this->navZones [$i];
 					break;
 				}
@@ -162,7 +162,7 @@ class HtmlNavbar extends BaseHtml {
 		if ($this->hasScrollspy) {
 			$this->scrollspy=new Scrollspy($js);
 			$this->scrollspy->attach($this->scrollspyId);
-			$this->scrollspy->setTarget("#" . $this->identifier);
+			$this->scrollspy->setTarget("#".$this->identifier);
 			$this->scrollspy->compile($js);
 		}
 	}

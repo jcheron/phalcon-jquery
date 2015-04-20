@@ -17,7 +17,7 @@ class HtmlTabItem extends HtmlDoubleElement {
 	public function __construct($identifier, $caption="", $href="#") {
 		parent::__construct($identifier, "li");
 		$this->_template='<%tagName% id="%identifier%">%content%</%tagName%>';
-		$this->content=new HtmlLink("link-" . $identifier);
+		$this->content=new HtmlLink("link-".$identifier);
 		$this->content->setHref($href);
 		$this->content->setContent($caption);
 		$this->setProperty("role", "presentation");
@@ -36,7 +36,7 @@ class HtmlTabItem extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\HtmlDoubleElement::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->tab("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->tab("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

@@ -13,7 +13,7 @@ class PropertyWrapper {
 			$output=$input;
 		}
 		if (is_array($input)) {
-			if (sizeof($input) > 0) {
+			if (sizeof($input)>0) {
 				$value1=reset($input);
 				if (is_object($value1)) {
 					$output=PropertyWrapper::wrapObjects($input, $js, $separator=' ');
@@ -25,9 +25,9 @@ class PropertyWrapper {
 	}
 
 	public static function wrapStrings($input, $separator=' ', $valueQuote='"') {
-		if (JArray::isAssociative($input) === true) {
+		if (JArray::isAssociative($input)===true) {
 			$result=implode($separator, array_map(function ($v, $k) use($valueQuote) {
-				return $k . '=' . $valueQuote . $v . $valueQuote;
+				return $k.'='.$valueQuote.$v.$valueQuote;
 			}, $input, array_keys($input)));
 		} else {
 			$result=implode($separator, array_values($input));

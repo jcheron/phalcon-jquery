@@ -22,7 +22,7 @@ class HtmlTabs extends HtmlDoubleElement {
 	public function __construct($identifier, $tagName="ul") {
 		parent::__construct($identifier, $tagName);
 		$this->_template="<%tagName% %properties%>%tabs%</%tagName%>%content%";
-		$this->setProperty("class", "nav nav-" . $this->_tabsType);
+		$this->setProperty("class", "nav nav-".$this->_tabsType);
 	}
 
 	protected function addTab_($tab, $index=null) {
@@ -36,13 +36,13 @@ class HtmlTabs extends HtmlDoubleElement {
 	}
 
 	public function addTab($element, $index=null) {
-		$iid=$this->countTabs() + 1;
+		$iid=$this->countTabs()+1;
 		$tab=$element;
 		if (is_string($element)) {
-			$tab=new HtmlTabItem("tab-" . $this->identifier, $element . "-" . $iid);
+			$tab=new HtmlTabItem("tab-".$this->identifier, $element."-".$iid);
 			$this->addTab_($tab, $index);
 		} elseif (is_array($element)) {
-			$tab=new HtmlTabItem("tab-" . $this->identifier . "-" . $iid);
+			$tab=new HtmlTabItem("tab-".$this->identifier."-".$iid);
 			$tab->fromArray($element);
 			$this->addTab_($tab, $index);
 		} else {
@@ -81,7 +81,7 @@ class HtmlTabs extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-		$this->setProperty("class", "nav nav-" . $this->_tabsType);
+		$this->setProperty("class", "nav nav-".$this->_tabsType);
 		return parent::compile($js, $view);
 	}
 
@@ -99,11 +99,11 @@ class HtmlTabs extends HtmlDoubleElement {
 	}
 
 	public function createTabContents() {
-		$tabContent=new HtmlTabContent("tabcontent-" . $this->identifier);
+		$tabContent=new HtmlTabContent("tabcontent-".$this->identifier);
 		foreach ( $this->tabs as $tab ) {
-			if ($tab instanceof HtmlTabItem)
+			if ($tabinstanceofHtmlTabItem)
 				$tabContent->addTabItem($tab->getHref());
-			elseif ($tab instanceof HtmlDropdown) {
+			elseif ($tabinstanceofHtmlDropdown) {
 				foreach ( $tab->getItems() as $dropdownItem ) {
 					$tabContent->addTabItem($dropdownItem->getHref());
 				}
@@ -131,15 +131,15 @@ class HtmlTabs extends HtmlDoubleElement {
 	}
 
 	public function getTabItem($index) {
-		if ($index < sizeof($this->content->get))
+		if ($index<sizeof($this->content->get))
 			return $this->content;
 	}
 
 	public function fadeEffect() {
-		if (sizeof($this->content->getTabItems()) > 0) {
+		if (sizeof($this->content->getTabItems())>0) {
 			$this->content->getTabItem(0)->addToProperty("class", "fade in");
 			$size=sizeof($this->tabs);
-			for($index=0; $index < $size; $index++) {
+			for($index=0; $index<$size; $index++) {
 				$this->content->getTabItem($index)->addToProperty("class", "fade");
 			}
 		}

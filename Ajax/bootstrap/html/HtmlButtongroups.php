@@ -64,28 +64,28 @@ class HtmlButtongroups extends HtmlDoubleElement {
 
 	public function addElement($element) {
 		$result=$element;
-		$iid=sizeof($this->elements) + 1;
-		if (($element instanceof HtmlDropdown) || ($element instanceof HtmlSplitbutton)) {
+		$iid=sizeof($this->elements)+1;
+		if (($elementinstanceofHtmlDropdown)||($elementinstanceofHtmlSplitbutton)) {
 			$this->addExistingDropDown($element);
 			$this->elements []=$element;
-		} elseif ($element instanceof HtmlButton) {
+		} elseif ($elementinstanceofHtmlButton) {
 			$this->elements []=$element;
 		} elseif (is_array($element)) {
 			if (array_key_exists("glyph", $element))
-				$bt=new HtmlGlyphButton($this->identifier . "-button-" . $iid);
+				$bt=new HtmlGlyphButton($this->identifier."-button-".$iid);
 			elseif (array_key_exists("btnCaption", $element)) {
 				if (array_key_exists("split", $element))
-					$bt=new HtmlSplitbutton($this->identifier . "-dropdown-" . $iid);
+					$bt=new HtmlSplitbutton($this->identifier."-dropdown-".$iid);
 				else
-					$bt=new HtmlDropdown($this->identifier . "-dropdown-" . $iid);
+					$bt=new HtmlDropdown($this->identifier."-dropdown-".$iid);
 				$this->dropdownAsButton($bt);
 			} else
-				$bt=new HtmlButton($this->identifier . "-button-" . $iid);
+				$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->fromArray($element);
 			$this->elements []=$bt;
 			$result=$bt;
 		} elseif (is_string($element)) {
-			$bt=new HtmlButton($this->identifier . "-button-" . $iid);
+			$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->setValue($element);
 			$this->elements []=$bt;
 			$result=$bt;
@@ -112,7 +112,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 		if (is_int($value)) {
 			$value=CssRef::alignment("btn-group")[$value];
 		} else
-			$value="btn-group-" . $value;
+			$value="btn-group-".$value;
 		if (strstr($value, "justified")) {
 			foreach ( $this->elements as $element ) {
 				$element->wrap('<div class="btn-group" role="group">', '</div>');

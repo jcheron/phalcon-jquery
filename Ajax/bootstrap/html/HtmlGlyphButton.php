@@ -18,7 +18,7 @@ class HtmlGlyphButton extends HtmlButton {
 	}
 
 	public function setGlyph($glyph) {
-		$this->glyph=new HtmlGlyphicon($this->identifier . "-glyph");
+		$this->glyph=new HtmlGlyphicon($this->identifier."-glyph");
 		$this->glyph->setGlyphicon($glyph);
 		return $this;
 	}

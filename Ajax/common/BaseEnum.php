@@ -12,7 +12,7 @@ abstract class BaseEnum {
 	private static $constCacheArray=NULL;
 
 	public static function getConstants() {
-		if (self::$constCacheArray == NULL) {
+		if (self::$constCacheArray==NULL) {
 			self::$constCacheArray=[ ];
 		}
 		$calledClass=get_called_class();

@@ -27,7 +27,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	}
 
 	public function setActive($value) {
-		if ($value === true)
+		if ($value===true)
 			$this->active="active";
 		else
 			$this->active="";
@@ -35,7 +35,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	}
 
 	public function setStriped($value) {
-		if ($value === true)
+		if ($value===true)
 			$this->striped="progress-bar-striped";
 		else
 			$this->striped="";
@@ -43,7 +43,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	}
 
 	public function showCaption($value) {
-		if ($value === true)
+		if ($value===true)
 			$this->caption="%value%%";
 		else
 			$this->caption='<span class="sr-only">%value%% Complete (%style%)</span>';
@@ -57,10 +57,10 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	public function stack(HtmlProgressbar $progressBar) {
 		$this->_template='%content%';
 		$progressBar->setIsStacked(true);
-		$progressBar->showCaption($this->caption == "%value%%");
-		$progressBar->setStriped($this->striped !== "");
-		$progressBar->setActive($this->active === "active");
-		if (is_array($this->content) === false) {
+		$progressBar->showCaption($this->caption=="%value%%");
+		$progressBar->setStriped($this->striped!=="");
+		$progressBar->setActive($this->active==="active");
+		if (is_array($this->content)===false) {
 			$this->content=array ();
 		}
 		$this->content []=$progressBar;
@@ -105,7 +105,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	 * @return \Ajax\bootstrap\html\HtmlProgressbar default : ""
 	 */
 	public function setStyle($cssStyle) {
-		if (PhalconUtils::startsWith($cssStyle, "progress-bar-") === true) {
+		if (PhalconUtils::startsWith($cssStyle, "progress-bar-")===true) {
 			$cssStyle=str_ireplace("progress-bar-", "", $cssStyle);
 		}
 		return $this->setMemberCtrl($this->style, $cssStyle, array (
@@ -122,7 +122,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	 */
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
 		$this->_template=str_replace("%caption%", $this->caption, $this->_template);
-		if ($this->getIsStacked() === false) {
+		if ($this->getIsStacked()===false) {
 			$this->wrap('<div class="progress">', '</div>');
 		}
 		return parent::compile($js, $view);

@@ -18,7 +18,7 @@ class HtmlSelect extends HtmlDoubleElement {
 	}
 
 	private function _addOption($key, $value) {
-		$elm=new HtmlDoubleElement("opt-" . $key);
+		$elm=new HtmlDoubleElement("opt-".$key);
 		$elm->setTagName("option");
 		$elm->setProperty("value", $key);
 		$elm->setContent($value);
@@ -27,7 +27,7 @@ class HtmlSelect extends HtmlDoubleElement {
 
 	public function addOption($option) {
 		if (is_array($option)) {
-			if (sizeof($option) > 1) {
+			if (sizeof($option)>1) {
 				$this->_addOption($option [0], $option [1]);
 			}
 		} else {
@@ -37,7 +37,7 @@ class HtmlSelect extends HtmlDoubleElement {
 
 	public function setValue($value) {
 		foreach ( $this->content as $option ) {
-			if ($option->getProperty("value") === $value) {
+			if ($option->getProperty("value")===$value) {
 				$option->setProperty("selected", "");
 				break;
 			}
@@ -45,10 +45,10 @@ class HtmlSelect extends HtmlDoubleElement {
 	}
 
 	public function setLabel($label, $before=true) {
-		if ($before === true) {
-			$this->wrap("<label for='" . $this->identifier . "'>" . $label . "</label>", "");
+		if ($before===true) {
+			$this->wrap("<label for='".$this->identifier."'>".$label."</label>", "");
 		} else {
-			$this->wrap("", "<label for='" . $this->identifier . "'>&nbsp;" . $label . "</label>");
+			$this->wrap("", "<label for='".$this->identifier."'>&nbsp;".$label."</label>");
 		}
 	}
 
@@ -58,7 +58,7 @@ class HtmlSelect extends HtmlDoubleElement {
 	 */
 	public function run(JsUtils $js) {
 		parent::run($js);
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

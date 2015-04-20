@@ -40,12 +40,12 @@ class HtmlSplitbutton extends HtmlDropdown {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		if ($this->getProperty("role") === "nav") {
+		if ($this->getProperty("role")==="nav") {
 			foreach ( $this->items as $dropdownItem ) {
 				$dropdownItem->runNav($js);
 			}
 		}
-		$this->_bsComponent=$js->bootstrap()->splitbutton("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->splitbutton("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

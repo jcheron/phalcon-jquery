@@ -67,12 +67,12 @@ class HtmlModal extends BaseHtml {
 	 */
 	public function addOkayButton($value="Okay") {
 		$btn=$this->addButton($value, "btn-primary");
-		$btn->onClick("if(" . $this->getValidCondition() . ") $('#" . $this->identifier . "').modal('hide');");
+		$btn->onClick("if(".$this->getValidCondition().") $('#".$this->identifier."').modal('hide');");
 		return $btn;
 	}
 
 	protected function getDefaultValidCondition() {
-		return "$('#" . $this->identifier . "').prop('valid')";
+		return "$('#".$this->identifier."').prop('valid')";
 	}
 
 	public function setValidCondition($js) {
@@ -80,7 +80,7 @@ class HtmlModal extends BaseHtml {
 	}
 
 	public function getValidCondition() {
-		if ($this->validCondition == NULL) {
+		if ($this->validCondition==NULL) {
 			return $this->getDefaultValidCondition();
 		} else {
 			return $this->validCondition;
@@ -126,7 +126,7 @@ class HtmlModal extends BaseHtml {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->modal("#" . $this->identifier, array (
+		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier, array (
 				"show" => $this->showOnStartup 
 		));
 		if ($this->draggable)
@@ -157,17 +157,17 @@ class HtmlModal extends BaseHtml {
 	}
 
 	public function jsGetContent(JsUtils $js, $url) {
-		return $js->getDeferred($url, "#" . $this->identifier . " .modal-body");
+		return $js->getDeferred($url, "#".$this->identifier." .modal-body");
 	}
 
 	public function jsSetTitle($title) {
-		return "$('#" . $this->identifier . " .modal-title').html('" . $title . "');";
+		return "$('#".$this->identifier." .modal-title').html('".$title."');";
 	}
 
 	public function jsHideButton($index) {
 		$btn=$this->getButton($index);
 		if ($btn)
-			return "$('#" . $btn->getIdentifier() . "').hide();";
+			return "$('#".$btn->getIdentifier()."').hide();";
 	}
 
 	/**

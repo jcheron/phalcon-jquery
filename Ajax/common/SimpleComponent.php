@@ -21,7 +21,7 @@ abstract class SimpleComponent extends BaseComponent {
 
 	protected function compileEvents() {
 		foreach ( $this->events as $event => $jsCode ) {
-			$this->jquery_code_for_compile []="$( \"" . $this->attachTo . "\" ).on(\"" . $event . "\" , function( event, data ) {" . $jsCode . "});";
+			$this->jquery_code_for_compile []="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function( event, data ) {".$jsCode."});";
 		}
 	}
 
@@ -40,7 +40,7 @@ abstract class SimpleComponent extends BaseComponent {
 	public function getScript() {
 		$allParams=$this->params;
 		$this->jquery_code_for_compile=array ();
-		$this->jquery_code_for_compile []="$( \"" . $this->attachTo . "\" ).{$this->uiName}(" . $this->getParamsAsJSON($allParams) . ");";
+		$this->jquery_code_for_compile []="$( \"".$this->attachTo."\" ).{$this->uiName}(".$this->getParamsAsJSON($allParams).");";
 		$this->compileEvents();
 		return $this->compileJQueryCode();
 	}
@@ -54,7 +54,7 @@ abstract class SimpleComponent extends BaseComponent {
 	}
 
 	public function addEvent($event, $jsCode) {
-		return $this->setParam($event, "%function( event, ui ) {" . $jsCode . "}%");
+		return $this->setParam($event, "%function( event, ui ) {".$jsCode."}%");
 	}
 
 	public function on($event, $jsCode) {
@@ -64,11 +64,11 @@ abstract class SimpleComponent extends BaseComponent {
 
 	protected function setParamCtrl($key, $value, $typeCtrl) {
 		if (is_array($typeCtrl)) {
-			if (array_search($value, $typeCtrl) === false)
-				throw new \Exception("La valeur passée a propriété `" . $key . "` pour le composant `" . $this->uiName . "` ne fait pas partie des valeurs possibles : {" . implode(",", $typeCtrl) . "}");
+			if (array_search($value, $typeCtrl)===false)
+				throw new \Exception("La valeur passée a propriété `".$key."` pour le composant `".$this->uiName."` ne fait pas partie des valeurs possibles : {".implode(",", $typeCtrl)."}");
 		} else {
 			if (!$typeCtrl($value)) {
-				throw new \Exception("La fonction " . $typeCtrl . " a retourné faux pour l'affectation de la propriété " . $key . " au composant " . $this->uiName);
+				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key." au composant ".$this->uiName);
 			}
 		}
 		return $this->setParam($key, $value);

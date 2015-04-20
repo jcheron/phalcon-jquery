@@ -24,14 +24,14 @@ class CDNBootstrap extends CDNBase {
 	public function __toString() {
 		$url=$this->getUrl();
 		$css=$this->getCss();
-		return PhalconUtils::javascriptInclude($url, $this->local) . "\n" . PhalconUtils::stylesheetLink($css, $this->localCss);
+		return PhalconUtils::javascriptInclude($url, $this->local)."\n".PhalconUtils::stylesheetLink($css, $this->localCss);
 		;
 	}
 
 	public function setCssUrl($cssUrl, $local=null) {
 		$this->cssUrl=$cssUrl;
-		if (isset($local) === false) {
-			$local=PhalconUtils::startsWith($cssUrl, "http") === false;
+		if (isset($local)===false) {
+			$local=PhalconUtils::startsWith($cssUrl, "http")===false;
 		}
 		$this->setLocalCss($local);
 		return $this;

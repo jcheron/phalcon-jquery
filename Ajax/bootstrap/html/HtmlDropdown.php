@@ -29,7 +29,7 @@ class HtmlDropdown extends HtmlButton {
 		$this->btnCaption=$value;
 		$this->tagName="a";
 		$this->fromArray($items);
-		if ($cssStyle !== NULL) {
+		if ($cssStyle!==NULL) {
 			$this->asButton($cssStyle);
 		}
 	}
@@ -52,8 +52,8 @@ class HtmlDropdown extends HtmlButton {
 		if (is_int($cssStyle)) {
 			return $this->addToMember($this->class, CssRef::buttonStyles()[$cssStyle]);
 		}
-		if (PhalconUtils::startsWith($cssStyle, "btn-") === false) {
-			$cssStyle="btn" . $cssStyle;
+		if (PhalconUtils::startsWith($cssStyle, "btn-")===false) {
+			$cssStyle="btn".$cssStyle;
 		}
 		return $this->addToMemberCtrl($this->class, $cssStyle, CssRef::buttonStyles());
 	}
@@ -86,8 +86,8 @@ class HtmlDropdown extends HtmlButton {
 	 * @return HtmlDropdownItem
 	 */
 	public function addItem($caption, $href="#") {
-		$iid=$this->getItemsCount() + 1;
-		$item=new HtmlDropdownItem($this->identifier . "-dropdown-item-" . $iid);
+		$iid=$this->getItemsCount()+1;
+		$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 		$item->setCaption($caption)->setHref($href);
 		$this->items []=$item;
 		return $item;
@@ -98,20 +98,20 @@ class HtmlDropdown extends HtmlButton {
 	}
 
 	public function addHeader($caption) {
-		return $this->addItem("-" . $caption);
+		return $this->addItem("-".$caption);
 	}
 
 	public function addItems($items) {
-		$iid=$this->getItemsCount() + 1;
+		$iid=$this->getItemsCount()+1;
 		if (is_array($items)) {
 			foreach ( $items as $item ) {
 				if (is_string($item)) {
 					$this->addItem($item);
 				} else if (is_array($item)) {
-					$dropDownItem=new HtmlDropdownItem($this->identifier . "-dropdown-item-" . $iid);
+					$dropDownItem=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 					$dropDownItem->fromArray($item);
 					$this->items []=$dropDownItem;
-				} else if ($item instanceof HtmlDropdownItem) {
+				} else if ($iteminstanceofHtmlDropdownItem) {
 					$this->items []=$item;
 				}
 			}
@@ -124,7 +124,7 @@ class HtmlDropdown extends HtmlButton {
 	 * @see BaseHtml::fromArray()
 	 */
 	public function fromArray($array) {
-		if (array_keys($array) !== range(0, count($array) - 1))
+		if (array_keys($array)!==range(0, count($array)-1))
 			return parent::fromArray($array);
 		else
 			return $this->addItems($array);
@@ -165,12 +165,12 @@ class HtmlDropdown extends HtmlButton {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		if ($this->getProperty("role") === "nav") {
+		if ($this->getProperty("role")==="nav") {
 			foreach ( $this->items as $dropdownItem ) {
 				$dropdownItem->runNav($js);
 			}
 		}
-		$this->_bsComponent=$js->bootstrap()->dropdown("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->dropdown("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
@@ -180,7 +180,7 @@ class HtmlDropdown extends HtmlButton {
 	 * @see \Ajax\bootstrap\html\BaseHtml::setTagName()
 	 */
 	public function setTagName($tagName) {
-		if ($tagName == "button")
+		if ($tagName=="button")
 			$this->class="btn";
 		return parent::setTagName($tagName);
 	}
@@ -200,7 +200,7 @@ class HtmlDropdown extends HtmlButton {
 
 	public function setAlignment($alignment) {
 		if (is_int($alignment))
-			$alignment="dropdown-menu-" . CssRef::alignment()[$alignment];
+			$alignment="dropdown-menu-".CssRef::alignment()[$alignment];
 		return $this->addToMemberCtrl($this->class, $alignment, CssRef::alignment());
 	}
 

@@ -29,7 +29,7 @@ class HtmlForm extends HtmlDoubleElement {
 			foreach ( $this->futureElements as $futureElement ) {
 				$futureElementValue=$this->getPrefix($futureElement);
 				$futureElementValues=explode("_", $futureElementValue);
-				switch ($futureElementValues [0]) {
+				switch($futureElementValues [0]) {
 					case "input":
 						$control=new HtmlInput($futureElement);
 						$control->setClass("form-control");
@@ -52,7 +52,7 @@ class HtmlForm extends HtmlDoubleElement {
 						$control->setClass("form-control");
 						$control->setLabel($this->getPart($futureElement));
 						break;
-					default :
+					default:
 						$control=new HtmlInput($futureElement);
 						$control->setClass("form-control");
 						$control->setLabel($this->getPart($futureElement));
@@ -69,7 +69,7 @@ class HtmlForm extends HtmlDoubleElement {
 
 	private function getPart($str, $part=1) {
 		$result=preg_split('/(?=[A-Z])/', $str);
-		if (sizeof($result) > $part) {
+		if (sizeof($result)>$part) {
 			$result=$result [$part];
 		} else {
 			$result=$str;
@@ -79,7 +79,7 @@ class HtmlForm extends HtmlDoubleElement {
 
 	private function getId($str) {
 		$result=preg_split('/(?=[A-Z])/', $str);
-		if (sizeof($result) > 2) {
+		if (sizeof($result)>2) {
 			$result=$result [2];
 		} else {
 			$result=$str;
@@ -99,8 +99,8 @@ class HtmlForm extends HtmlDoubleElement {
 	}
 
 	public function addGroup($identifier="") {
-		if ($identifier === "")
-			$identifier="form-" . $this->identifier;
+		if ($identifier==="")
+			$identifier="form-".$this->identifier;
 		$group=new HtmlDoubleElement($identifier);
 		$group->setTagName("div");
 		$group->setClass("form-group");
@@ -109,10 +109,10 @@ class HtmlForm extends HtmlDoubleElement {
 	}
 
 	public function addElement($element) {
-		if (sizeof($this->formGroups) === 0) {
+		if (sizeof($this->formGroups)===0) {
 			$this->addGroup();
 		}
-		$group=$this->formGroups [sizeof($this->formGroups) - 1];
+		$group=$this->formGroups [sizeof($this->formGroups)-1];
 		$group->addContent($element);
 		return $group;
 	}

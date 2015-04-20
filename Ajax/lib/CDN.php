@@ -90,8 +90,7 @@ return array (
 								"vader" 
 						) 
 				) 
-		)
-		,
+		),
 		"Bootstrap" => array (
 				"MaxCDN" => array (
 						"core" => "http://maxcdn.bootstrapcdn.com/bootstrap/%version%/js/bootstrap.min.js",

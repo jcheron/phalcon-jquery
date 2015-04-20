@@ -11,7 +11,7 @@ class HtmlCarouselControl extends HtmlLink {
 
 	public function __construct($identifier) {
 		parent::__construct($identifier);
-		$this->_template=include __DIR__ . '/../templates/tplCarouselControl.php';
+		$this->_template=include __DIR__.'/../templates/tplCarouselControl.php';
 	}
 
 	public function getSens() {

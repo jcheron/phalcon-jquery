@@ -66,7 +66,7 @@ class Collapse extends SimpleBsComponent {
 
 	protected function compileEvents() {
 		foreach ( $this->events as $event => $jsCode ) {
-			$this->jquery_code_for_compile []="$( \"" . $this->collapsed . "\" ).on(\"" . $event . "\" , function (e) {" . $jsCode . "});";
+			$this->jquery_code_for_compile []="$( \"".$this->collapsed."\" ).on(\"".$event."\" , function (e) {".$jsCode."});";
 		}
 	}
 

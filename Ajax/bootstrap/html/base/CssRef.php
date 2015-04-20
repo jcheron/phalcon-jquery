@@ -27,21 +27,21 @@ class CssRef {
 
 	public static function Styles($prefix="btn") {
 		return array (
-				$prefix . "-default",
-				$prefix . "-primary",
-				$prefix . "-success",
-				$prefix . "-info",
-				$prefix . "-warning",
-				$prefix . "-danger" 
+				$prefix."-default",
+				$prefix."-primary",
+				$prefix."-success",
+				$prefix."-info",
+				$prefix."-warning",
+				$prefix."-danger" 
 		);
 	}
 
 	public static function sizes($prefix="btn") {
 		return array (
-				$prefix . "-lg",
+				$prefix."-lg",
 				"",
-				$prefix . "-sm",
-				$prefix . "-xs" 
+				$prefix."-sm",
+				$prefix."-xs" 
 		);
 	}
 
@@ -57,11 +57,11 @@ class CssRef {
 
 	public static function alignment($prefix="") {
 		return array (
-				$prefix . "",
-				$prefix . "left",
-				$prefix . "right",
-				$prefix . "vertical",
-				$prefix . "justified" 
+				$prefix."",
+				$prefix."left",
+				$prefix."right",
+				$prefix."vertical",
+				$prefix."justified" 
 		);
 	}
 
@@ -347,17 +347,17 @@ class CssRef {
 	public static function getStyle($cssStyle, $prefix) {
 		if (is_int($cssStyle)) {
 			$styles=CssRef::Styles($prefix);
-			if ($cssStyle < sizeof($styles) && $cssStyle >= 0) {
+			if ($cssStyle<sizeof($styles)&&$cssStyle>=0) {
 				return CssRef::styles($prefix)[$cssStyle];
 			} else {
-				throw new \Exception("La valeur passée a propriété `Style` ne fait pas partie des valeurs possibles : index '" . $cssStyle . "' inexistant");
+				throw new \Exception("La valeur passée a propriété `Style` ne fait pas partie des valeurs possibles : index '".$cssStyle."' inexistant");
 			}
 		}
-		if (PhalconUtils::startsWith($cssStyle, "-") === true) {
+		if (PhalconUtils::startsWith($cssStyle, "-")===true) {
 			$cssStyle=substr($cssStyle, 1);
 		}
-		if (PhalconUtils::startsWith($cssStyle, $prefix) === false) {
-			$cssStyle=$prefix . "-" . $cssStyle;
+		if (PhalconUtils::startsWith($cssStyle, $prefix)===false) {
+			$cssStyle=$prefix."-".$cssStyle;
 		}
 		return $cssStyle;
 	}

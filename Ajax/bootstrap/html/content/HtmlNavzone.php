@@ -52,12 +52,12 @@ class HtmlNavzone extends BaseHtml {
 	public function addElements($elements) {
 		if (is_array($elements)) {
 			foreach ( $elements as $key => $element ) {
-				$iid=$this->getElementsCount() + 1;
-				if ($element instanceof HtmlDropdownItem)
+				$iid=$this->getElementsCount()+1;
+				if ($elementinstanceofHtmlDropdownItem)
 					$this->elements []=$element;
 				else if (is_array($element)) {
-					if (is_string($key) === true) {
-						$dropdown=new HtmlDropdown($this->identifier . "-dropdown-" . $iid);
+					if (is_string($key)===true) {
+						$dropdown=new HtmlDropdown($this->identifier."-dropdown-".$iid);
 						$dropdown->addItems($element);
 						$dropdown->setBtnCaption($key);
 						$dropdown->setMTagName("li");
@@ -77,9 +77,9 @@ class HtmlNavzone extends BaseHtml {
 	}
 
 	public function addLink($caption, $href="#") {
-		$iid=$this->getElementsCount() + 1;
-		$li=new HtmlDoubleElement($this->identifier . "-li-" . $iid, "li");
-		$link=new HtmlLink($this->identifier . "-link-" . $iid, $href, $caption);
+		$iid=$this->getElementsCount()+1;
+		$li=new HtmlDoubleElement($this->identifier."-li-".$iid, "li");
+		$link=new HtmlLink($this->identifier."-link-".$iid, $href, $caption);
 		$li->setContent($link);
 		$this->addElement($li);
 	}

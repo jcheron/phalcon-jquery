@@ -25,8 +25,8 @@ abstract class CDNBase {
 
 	public function setJsUrl($jsUrl, $local=null) {
 		$this->jsUrl=$jsUrl;
-		if (isset($local) === false) {
-			$local=PhalconUtils::startsWith($jsUrl, "http") === false;
+		if (isset($local)===false) {
+			$local=PhalconUtils::startsWith($jsUrl, "http")===false;
 		}
 		$this->setLocal($local);
 		return $this;
@@ -36,7 +36,7 @@ abstract class CDNBase {
 		if (isset($element))
 			return $element;
 		$version=$this->version;
-		if (array_search($version, $this->getVersions()) === false)
+		if (array_search($version, $this->getVersions())===false)
 			$version=$this->getLastVersion();
 		return $this->replaceVersion($this->data [$this->provider] [$key], $version);
 	}

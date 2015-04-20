@@ -30,10 +30,10 @@ class HtmlInput extends HtmlSingleElement {
 	}
 
 	public function setLabel($label, $before=true) {
-		if ($before === true) {
-			$this->wrap("<label for='" . $this->identifier . "'>" . $label . "</label>", "");
+		if ($before===true) {
+			$this->wrap("<label for='".$this->identifier."'>".$label."</label>", "");
 		} else {
-			$this->wrap("", "<label for='" . $this->identifier . "'>&nbsp;" . $label . "</label>");
+			$this->wrap("", "<label for='".$this->identifier."'>&nbsp;".$label."</label>");
 		}
 	}
 
@@ -46,7 +46,7 @@ class HtmlInput extends HtmlSingleElement {
 	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}

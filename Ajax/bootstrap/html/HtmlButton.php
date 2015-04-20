@@ -99,7 +99,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		if (array_key_exists("data-toggle", $this->properties)) {
 			$this->_bsComponent->addCode("$.fn.toggled=function(){return this.hasClass('active');};");
 		}

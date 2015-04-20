@@ -41,7 +41,7 @@ class BaseGui {
 	}
 
 	public function compile($internal=false) {
-		if ($internal === false && $this->autoCompile === true)
+		if ($internal===false&&$this->autoCompile===true)
 			throw new \Exception("Impossible to compile if autoCompile is set to 'true'");
 		foreach ( $this->components as $component ) {
 			$component->compile();

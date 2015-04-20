@@ -50,9 +50,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return \Ajax\JqueryUI
 	 */
 	public function ui($ui=NULL) {
-		if ($ui !== NULL) {
+		if ($ui!==NULL) {
 			$this->_ui=$ui;
-			if ($this->js != null) {
+			if ($this->js!=null) {
 				$this->js->ui($ui);
 				$ui->setJs($this);
 			}
@@ -70,9 +70,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return \Ajax\Bootstrap
 	 */
 	public function bootstrap($bootstrap=NULL) {
-		if ($bootstrap !== NULL) {
+		if ($bootstrap!==NULL) {
 			$this->_bootstrap=$bootstrap;
-			if ($this->js != null) {
+			if ($this->js!=null) {
 				$this->js->bootstrap($bootstrap);
 				$bootstrap->setJs($this);
 			}
@@ -94,13 +94,13 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @return \Ajax\config\Config
 	 */
 	public function config($config=NULL) {
-		if ($config === NULL) {
-			if ($this->config === NULL) {
+		if ($config===NULL) {
+			if ($this->config===NULL) {
 				$this->config=new DefaultConfig();
 			}
 		} elseif (is_array($config)) {
 			$this->config=new Config($config);
-		} elseif ($config instanceof Config) {
+		} elseif ($configinstanceofConfig) {
 			$this->config=$config;
 		}
 		return $this->config;
@@ -129,7 +129,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 				'driver' => 'Jquery' 
 		);
 		foreach ( $defaults as $key => $val ) {
-			if (isset($params [$key]) && $params [$key] !== "") {
+			if (isset($params [$key])&&$params [$key]!=="") {
 				$defaults [$key]=$params [$key];
 			}
 		}
@@ -690,7 +690,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 */
 	public function compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		$bs=$this->_bootstrap;
-		if (isset($bs) && isset($view)) {
+		if (isset($bs)&&isset($view)) {
 			$bs->compileHtml($this, $view);
 		}
 		return $this->js->_compile($view, $view_var, $script_tags);
@@ -752,7 +752,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 */
 	private function _open_script($src='') {
 		$str='<script type="text/javascript" ';
-		$str.=($src == '') ? '>' : ' src="' . $src . '">';
+		$str.=($src=='') ? '>' : ' src="'.$src.'">';
 		return $str;
 	}
 	// --------------------------------------------------------------------
@@ -809,20 +809,20 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		$json=array ();
 		$_is_assoc=TRUE;
-		if (!is_array($json_result) && empty($json_result)) {
+		if (!is_array($json_result)&&empty($json_result)) {
 			show_error("Generate JSON Failed - Illegal key, value pair.");
 		} elseif ($match_array_type) {
 			$_is_assoc=$this->_is_associative_array($json_result);
 		}
 		foreach ( $json_result as $k => $v ) {
 			if ($_is_assoc) {
-				$json []=$this->_prep_args($k, TRUE) . ':' . $this->generate_json($v, $match_array_type);
+				$json []=$this->_prep_args($k, TRUE).':'.$this->generate_json($v, $match_array_type);
 			} else {
 				$json []=$this->generate_json($v, $match_array_type);
 			}
 		}
 		$json=implode(',', $json);
-		return $_is_assoc ? "{" . $json . "}" : "[" . $json . "]";
+		return $_is_assoc ? "{".$json."}" : "[".$json."]";
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -836,7 +836,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 */
 	public function _is_associative_array($arr) {
 		foreach ( array_keys($arr) as $key => $val ) {
-			if ($key !== $val) {
+			if ($key!==$val) {
 				return TRUE;
 			}
 		}
@@ -856,9 +856,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		if (is_null($result)) {
 			return 'null';
 		} elseif (is_bool($result)) {
-			return ($result === TRUE) ? 'true' : 'false';
-		} elseif (is_string($result) || $is_key) {
-			return '"' . str_replace(array (
+			return ($result===TRUE) ? 'true' : 'false';
+		} elseif (is_string($result)||$is_key) {
+			return '"'.str_replace(array (
 					'\\',
 					"\t",
 					"\n",
@@ -872,7 +872,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 					"\\r",
 					'\"',
 					'\/' 
-			), $result) . '"';
+			), $result).'"';
 		} elseif (is_scalar($result)) {
 			return $result;
 		}
@@ -1208,7 +1208,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	}
 
 	public function setCDNs($cdns) {
-		if (is_array($cdns) === false) {
+		if (is_array($cdns)===false) {
 			$cdns=array (
 					$cdns 
 			);
@@ -1237,25 +1237,25 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 					break;
 			}
 		}
-		if ($hasJQuery === false) {
+		if ($hasJQuery===false) {
 			$result [0]=new CDNJQuery("x");
 		}
-		if ($hasJQueryUI === false && isset($this->_ui)) {
+		if ($hasJQueryUI===false&&isset($this->_ui)) {
 			$result [1]=new CDNGuiGen("x", $template);
 		}
-		if ($hasBootstrap === false && isset($this->_bootstrap)) {
+		if ($hasBootstrap===false&&isset($this->_bootstrap)) {
 			$result [2]=new CDNBootstrap("x");
 		}
 		ksort($result);
 		return implode("\n", $result);
 	}
 }
-if (Version::get() === "1.3.4") {
+if (Version::get()==="1.3.4") {
 	class JsUtils extends _JsUtils {
 
 		public function setDi($di) {
 			$this->_di=$di;
-			if ($this->js != null && $di != null)
+			if ($this->js!=null&&$di!=null)
 				$this->js->setDi($di);
 		}
 	}
@@ -1264,7 +1264,7 @@ if (Version::get() === "1.3.4") {
 
 		public function setDi(DiInterface $di) {
 			$this->_di=$di;
-			if ($this->js != null && $di != null)
+			if ($this->js!=null&&$di!=null)
 				$this->js->setDi($di);
 		}
 	}

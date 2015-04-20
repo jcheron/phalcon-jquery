@@ -41,7 +41,7 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 	 */
 	public function setStyle($cssStyle) {
 		if (!PhalconUtils::startsWith($cssStyle, "list-group-item"))
-			$cssStyle="list-group-item" . $cssStyle;
+			$cssStyle="list-group-item".$cssStyle;
 		$this->element->addToPropertyCtrl("class", $cssStyle, CssRef::Styles("list-group-item"));
 		return $this->element;
 	}
@@ -65,7 +65,7 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 			$content=JArray::getValue($array, "content", 1);
 			$niveau=JArray::getValue($array, "niveau", 2);
 		}
-		$elementHeader=new HtmlDoubleElement("", "h" . $niveau);
+		$elementHeader=new HtmlDoubleElement("", "h".$niveau);
 		$elementHeader->setContent($title);
 		$elementHeader->setClass("list-group-item-heading");
 		$element=new HtmlDoubleElement("", "p");

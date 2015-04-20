@@ -14,7 +14,7 @@ class AjaxCall {
 	}
 
 	public function compile(JsUtils $js=null) {
-		if ($js == null)
+		if ($js==null)
 			return;
 		$result="";
 		$params="{}";
@@ -24,13 +24,13 @@ class AjaxCall {
 		$stopPropagation=true;
 		$preventDefault=true;
 		extract($this->parameters);
-		if ($preventDefault === true) {
+		if ($preventDefault===true) {
 			$result.="\nevent.preventDefault();\n";
 		}
-		if ($stopPropagation === true) {
+		if ($stopPropagation===true) {
 			$result.="event.stopPropagation();\n";
 		}
-		switch ($this->method) {
+		switch($this->method) {
 			case "get":
 				$result.=$js->getDeferred($url, $responseElement, $params, $callback, $attr);
 				break;

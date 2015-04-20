@@ -68,7 +68,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 			$this->class="dropdown-header";
 			$this->role="presentation";
 			$this->_template='<li id="%identifier%" class="%class%" role="%role%">%content%</li>';
-			if ($value === "-") {
+			if ($value==="-") {
 				$this->class="divider";
 			}
 			$value=substr($value, 1);
@@ -103,7 +103,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	}
 
 	public function isDivider() {
-		return $this->class === "divider";
+		return $this->class==="divider";
 	}
 
 	public function __toString() {
@@ -120,7 +120,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	}
 
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
@@ -130,7 +130,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	 * @param JsUtils $js
 	 */
 	public function runNav(JsUtils $js) {
-		$js->bootstrap()->tab("#" . $this->identifier);
+		$js->bootstrap()->tab("#".$this->identifier);
 	}
 
 	public function getHref() {
@@ -138,19 +138,19 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 	}
 
 	public function addBadge($caption, $leftSeparator="&nbsp;") {
-		$badge=new HtmlBadge("badge-" . $this->identifier);
+		$badge=new HtmlBadge("badge-".$this->identifier);
 		$badge->setContent($caption);
-		$this->content.=$leftSeparator . $badge->compile();
+		$this->content.=$leftSeparator.$badge->compile();
 		return $this;
 	}
 
 	public function addGlyph($glyphicon, $left=true, $separator="&nbsp;") {
-		$glyph=new HtmlGlyphicon("glyph-" . $this->identifier);
+		$glyph=new HtmlGlyphicon("glyph-".$this->identifier);
 		$glyph->setGlyphicon($glyphicon);
 		if ($left) {
-			$this->content=$glyph->compile() . $separator . $this->content;
+			$this->content=$glyph->compile().$separator.$this->content;
 		} else {
-			$this->content.=$separator . $glyph->compile();
+			$this->content.=$separator.$glyph->compile();
 		}
 		return $this;
 	}

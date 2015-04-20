@@ -27,7 +27,7 @@ class HtmlAlert extends HtmlDoubleElement {
 		$this->setClass("alert");
 		$this->setRole("alert");
 		$this->setStyle($cssStyle);
-		if ($message != NULL) {
+		if ($message!=NULL) {
 			$this->content=$message;
 		}
 	}
@@ -43,7 +43,7 @@ class HtmlAlert extends HtmlDoubleElement {
 	}
 
 	public function addCloseButton() {
-		$button=new HtmlButton("close-" . $this->identifier);
+		$button=new HtmlButton("close-".$this->identifier);
 		$button->setProperties(array (
 				"class" => "close",
 				"data-dismiss" => "alert",
@@ -65,13 +65,13 @@ class HtmlAlert extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\base\HtmlDoubleElement::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->bootstrap()->generic("#" . $this->identifier);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
 
 	public function close() {
-		return "$('#" . $this->identifier . "').alert('close');";
+		return "$('#".$this->identifier."').alert('close');";
 	}
 
 	/*
@@ -79,7 +79,7 @@ class HtmlAlert extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-		if ($this->closeable && $this->button === "") {
+		if ($this->closeable&&$this->button==="") {
 			$this->addCloseButton();
 		}
 		return parent::compile($js, $view);

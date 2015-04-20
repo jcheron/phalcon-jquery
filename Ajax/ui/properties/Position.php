@@ -73,7 +73,7 @@ class Position extends BaseComponent {
 
 	protected function setParamCtrl($key, $value, $typeCtrl) {
 		if (!$typeCtrl($value)) {
-			throw new \Exception("La fonction " . $typeCtrl . " a retourné faux pour l'affectation de la propriété " . $key . " à la position");
+			throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$key." à la position");
 		} else
 			$this->setParam($key, $value);
 	}

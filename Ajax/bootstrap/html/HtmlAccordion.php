@@ -22,12 +22,12 @@ class HtmlAccordion extends HtmlDoubleElement {
 	}
 
 	public function addPanel($title, $content) {
-		$nb=sizeof($this->content) + 1;
-		$panel=new HtmlPanel("panel-" . $this->identifier . "-" . $nb);
-		$link=new HtmlLink("lnk-panel-" . $this->identifier . "-" . $nb);
+		$nb=sizeof($this->content)+1;
+		$panel=new HtmlPanel("panel-".$this->identifier."-".$nb);
+		$link=new HtmlLink("lnk-panel-".$this->identifier."-".$nb);
 		$link->setProperty("data-toggle", "collapse");
-		$link->setProperty("data-parent", "#" . $this->identifier);
-		$link->setHref("#collapse-panel-" . $this->identifier . "-" . $nb);
+		$link->setProperty("data-parent", "#".$this->identifier);
+		$link->setHref("#collapse-panel-".$this->identifier."-".$nb);
 		$link->setContent($title);
 		$panel->addHeader($link);
 		$panel->setContent($content);
@@ -43,7 +43,7 @@ class HtmlAccordion extends HtmlDoubleElement {
 	}
 
 	public function getPanel($index) {
-		if ($index < sizeof($this->content))
+		if ($index<sizeof($this->content))
 			return $this->content [$index];
 	}
 }
