@@ -292,6 +292,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postFormOn($event,$url,$form,$responseElement="",$parameters=array()){
+		$parameters["form"]=$form;
 		return $this->_ajaxOn("postForm", $event, $url,$responseElement,$parameters);
 	}
 

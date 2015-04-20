@@ -5,7 +5,6 @@ use Ajax\JsUtils;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\service\PhalconUtils;
-include_once 'content/HtmlDropdownItem.php';
 
 /**
  * Twitter Bootstrap HTML Dropdown component
