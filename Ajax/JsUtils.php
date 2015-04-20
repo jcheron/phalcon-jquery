@@ -855,14 +855,6 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 			return $result;
 		}
 	}
-	protected function _correctAjaxUrl($url) {
-		if (PhalconUtils::endsWith ( $url, "/" ))
-			$url = substr ( $url, 0, strlen ( $url ) - 1 );
-		if (strncmp ( $url, 'http://', 7 ) != 0 and strncmp ( $url, 'https://', 8 ) != 0) {
-			$url = $this->_di->get ( "url" )->get ( $url );
-		}
-		return $url;
-	}
 	/**
 	 * Performs an ajax GET request
 	 * @param string $url The url of the request
@@ -1182,15 +1174,15 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$result = array ();
 		foreach ( $this->cdns as $cdn ) {
 			switch (get_class ( $cdn )) {
-				case "Ajax\lib\CDNJQuery" :
+				case "Ajax\lib\CDNJQuery":
 					$hasJQuery = true;
 					$result [0] = $cdn;
 					break;
-				case "Ajax\lib\CDNJQuery" :
+				case "Ajax\lib\CDNJQuery":
 					$hasJQueryUI = true;
 					$result [1] = $cdn;
 					break;
-				case "Ajax\lib\CDNBootstrap" :
+				case "Ajax\lib\CDNBootstrap":
 					$hasBootstrap = true;
 					$result [2] = $cdn;
 					break;

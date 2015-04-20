@@ -1,5 +1,6 @@
 <?php
 namespace Ajax;
+use Ajax\service\PhalconUtils;
 /**
  * JQuery Phalcon library
  *
@@ -60,6 +61,7 @@ class Jquery{
 	public function __construct($params=array()){
 
 	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -970,50 +972,7 @@ class Jquery{
 
 
 	// --------------------------------------------------------------------
-	// TO remove ?
-	// --------------------------------------------------------------------
-
-	/**
-	 * Zebra tables
-	 * @param string $class
-	 * @param string $odd
-	 * @param string $hover
-	 * @return string
-	 */
-	function _zebraTables($class = '', $odd = 'odd', $hover = '')
-	{
-		$class = ($class != '') ? '.'.$class : '';
-
-		$zebra  = "\t\$(\"table{$class} tbody tr:nth-child(even)\").addClass(\"{$odd}\");";
-
-		$this->jquery_code_for_compile[] = $zebra;
-
-		if ($hover != '')
-		{
-			$hover = $this->hover("table{$class} tbody tr", "$(this).addClass('hover');", "$(this).removeClass('hover');");
-		}
-
-		return $zebra;
-	}
-
-
-
-	// --------------------------------------------------------------------
 	// Plugins
-	// --------------------------------------------------------------------
-
-	/**
-	 * loadLibrary
-	 *
-	 * Load a user interface library
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	function loadLibrary($src, $relative = FALSE)
-	{
-		$this->jquery_code_for_load[] = $this->external($src, $relative);
-	}
 	// --------------------------------------------------------------------
 
 	/**
@@ -1187,23 +1146,6 @@ class Jquery{
 	// --------------------------------------------------------------------
 
 	/**
-	 * Script Tag
-	 *
-	 * Outputs the script tag that loads the jquery.js file into an HTML document
-	 *
-	 * @access	public
-	 * @param	string
-	 * @return	string
-	 */
-	function script($library_src = '', $relative = FALSE){
-		$library_src = $this->external($library_src, $relative);
-		$this->jquery_code_for_load[] = $library_src;
-		return $library_src;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Prep Element
 	 *
 	 * Puts HTML element in quotes for use in jQuery code
@@ -1295,6 +1237,15 @@ class Jquery{
 		if($immediatly)
 			$this->jquery_code_for_compile[] = $retour;
 		return $retour;
+	}
+
+	protected function _correctAjaxUrl($url) {
+		if (PhalconUtils::endsWith ( $url, "/" ))
+			$url = substr ( $url, 0, strlen ( $url ) - 1 );
+		if (strncmp ( $url, 'http://', 7 ) != 0 and strncmp ( $url, 'https://', 8 ) != 0) {
+			$url = $this->_di->get ( "url" )->get ( $url );
+		}
+		return $url;
 	}
 
 	/**
