@@ -67,9 +67,9 @@ class HtmlButtongroups extends HtmlDoubleElement {
 		$iid=sizeof($this->elements)+1;
 		if (($element instanceof HtmlDropdown)||($element instanceof HtmlSplitbutton)) {
 			$this->addExistingDropDown($element);
-			$this->elements []=$element;
+			$this->elements[]=$element;
 		} elseif ($element instanceof HtmlButton) {
-			$this->elements []=$element;
+			$this->elements[]=$element;
 		} elseif (is_array($element)) {
 			if (array_key_exists("glyph", $element))
 				$bt=new HtmlGlyphButton($this->identifier."-button-".$iid);
@@ -82,12 +82,12 @@ class HtmlButtongroups extends HtmlDoubleElement {
 			} else
 				$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->fromArray($element);
-			$this->elements []=$bt;
+			$this->elements[]=$bt;
 			$result=$bt;
 		} elseif (is_string($element)) {
 			$bt=new HtmlButton($this->identifier."-button-".$iid);
 			$bt->setValue($element);
-			$this->elements []=$bt;
+			$this->elements[]=$bt;
 			$result=$bt;
 		}
 		return $result;
@@ -128,7 +128,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	 */
 	public function getElement($index) {
 		if (is_int($index))
-			return $this->elements [$index];
+			return $this->elements[$index];
 		else {
 			$elm=$this->getElementById($index, $this->elements);
 			return $elm;
@@ -136,7 +136,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	}
 
 	public function setElement($index, $button) {
-		$this->elements [$index]=$button;
+		$this->elements[$index]=$button;
 		return $this;
 	}
 

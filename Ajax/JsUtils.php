@@ -44,6 +44,12 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 */
 	protected $config;
 
+	protected function _setDi($di) {
+		$this->_di=$di;
+		if ($this->js!=null&&$di!=null)
+			$this->js->setDi($di);
+	}
+
 	/**
 	 *
 	 * @param JqueryUI $ui
@@ -110,16 +116,6 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		return $this->_di;
 	}
 
-	public function getLibraryScript() {
-		$assets=$this->_di->get('assets');
-		$assets->addJs($this->libraryFile);
-		return $assets->outputJs();
-	}
-
-	public function setLibraryFile($name) {
-		$this->libraryFile=$name;
-	}
-
 	public function setImageLoader($img) {
 		$this->js->_setImageLoader($img);
 	}
@@ -129,8 +125,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 				'driver' => 'Jquery'
 		);
 		foreach ( $defaults as $key => $val ) {
-			if (isset($params [$key])&&$params [$key]!=="") {
-				$defaults [$key]=$params [$key];
+			if (isset($params[$key])&&$params[$key]!=="") {
+				$defaults[$key]=$params[$key];
 			}
 		}
 		extract($defaults);
@@ -468,9 +464,10 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * Outputs a javascript library animate event
 	 *
 	 * @access public
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param array $params
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $extra
 	 * @param boolean $immediatly defers the execution if set to false
 	 * @return string
 	 */
@@ -810,7 +807,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		return $this->_create_json($json_result, $match_array_type);
 	}
 
-	private function _create_json($json_result,$match_array_type){
+	private function _create_json($json_result, $match_array_type) {
 		$json=array ();
 		$_is_assoc=TRUE;
 		if (!is_array($json_result)&&empty($json_result)) {
@@ -820,9 +817,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		}
 		foreach ( $json_result as $k => $v ) {
 			if ($_is_assoc) {
-				$json []=$this->_prep_args($k, TRUE).':'.$this->generate_json($v, $match_array_type);
+				$json[]=$this->_prep_args($k, TRUE).':'.$this->generate_json($v, $match_array_type);
 			} else {
-				$json []=$this->generate_json($v, $match_array_type);
+				$json[]=$this->generate_json($v, $match_array_type);
 			}
 		}
 		$json=implode(',', $json);
@@ -863,19 +860,9 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 			return ($result===TRUE) ? 'true' : 'false';
 		} elseif (is_string($result)||$is_key) {
 			return '"'.str_replace(array (
-					'\\',
-					"\t",
-					"\n",
-					"\r",
-					'"',
-					'/'
+					'\\',"\t","\n","\r",'"','/'
 			), array (
-					'\\\\',
-					'\\t',
-					'\\n',
-					"\\r",
-					'\"',
-					'\/'
+					'\\\\','\\t','\\n',"\\r",'\"','\/'
 			), $result).'"';
 		} elseif (is_scalar($result)) {
 			return $result;
@@ -1229,26 +1216,26 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 			switch(get_class($cdn)) {
 				case "Ajax\lib\CDNJQuery":
 					$hasJQuery=true;
-					$result [0]=$cdn;
+					$result[0]=$cdn;
 					break;
 				case "Ajax\lib\CDNJQuery":
 					$hasJQueryUI=true;
-					$result [1]=$cdn;
+					$result[1]=$cdn;
 					break;
 				case "Ajax\lib\CDNBootstrap":
 					$hasBootstrap=true;
-					$result [2]=$cdn;
+					$result[2]=$cdn;
 					break;
 			}
 		}
 		if ($hasJQuery===false) {
-			$result [0]=new CDNJQuery("x");
+			$result[0]=new CDNJQuery("x");
 		}
 		if ($hasJQueryUI===false&&isset($this->_ui)) {
-			$result [1]=new CDNGuiGen("x", $template);
+			$result[1]=new CDNGuiGen("x", $template);
 		}
 		if ($hasBootstrap===false&&isset($this->_bootstrap)) {
-			$result [2]=new CDNBootstrap("x");
+			$result[2]=new CDNBootstrap("x");
 		}
 		ksort($result);
 		return implode("\n", $result);
@@ -1258,18 +1245,14 @@ if (Version::get()==="1.3.4") {
 	class JsUtils extends _JsUtils {
 
 		public function setDi($di) {
-			$this->_di=$di;
-			if ($this->js!=null&&$di!=null)
-				$this->js->setDi($di);
+			$this->_setDi($di);
 		}
 	}
 } else {
 	class JsUtils extends _JsUtils {
 
 		public function setDi(DiInterface $di) {
-			$this->_di=$di;
-			if ($this->js!=null&&$di!=null)
-				$this->js->setDi($di);
+			$this->_setDi($di);
 		}
 	}
 }
