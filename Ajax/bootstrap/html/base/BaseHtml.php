@@ -188,7 +188,9 @@ abstract class BaseHtml extends BaseWidget {
 				try {
 					$this->$key($value);
 					unset($array[$key]);
-				} catch (\Exception $e) {}
+				} catch (\Exception $e) {
+					//Nothing to do
+				}
 			}else{
 				$setter="set".ucfirst($key);
 				if(method_exists($this, $setter)){
@@ -281,6 +283,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postOn($event,$url,$params="{}",$responseElement="",$parameters=array()){
+		$parameters["params"]=$params;
 		return $this->_ajaxOn("post", $event, $url,$responseElement,$parameters);
 	}
 
