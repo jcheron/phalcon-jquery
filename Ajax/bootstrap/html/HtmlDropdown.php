@@ -43,7 +43,7 @@ class HtmlDropdown extends HtmlButton {
 	/**
 	 * define the button style
 	 * avaible values : "btn-default","btn-primary","btn-success","btn-info","btn-warning","btn-danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlDropdown
 	 * default : "btn-default"
 	 */
@@ -69,7 +69,7 @@ class HtmlDropdown extends HtmlButton {
 	/**
 	 * define the buttons size
 	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
-	 * @param string/int $size
+	 * @param string|int $size
 	 * @return HtmlButtonsgroup
 	 * default : ""
 	 */
@@ -148,12 +148,10 @@ class HtmlDropdown extends HtmlButton {
 	}
 
 	public function setBtnClass($value){
-		//$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
 		$this->class=$value;
 	}
 
 	public function setMClass($value){
-		//$this->addToMemberCtrl($this->class, $value, CssRef::buttonStyles());
 		$this->mClass=$value;
 	}
 
@@ -205,7 +203,7 @@ class HtmlDropdown extends HtmlButton {
 	public function setAlignment($alignment){
 		if(is_int($alignment))
 			$alignment="dropdown-menu-".CssRef::alignment()[$alignment];
-		return $this->addToMemberCtrl("class", $alignment,CssRef::alignment());
+		return $this->addToMemberCtrl($this->class, $alignment,CssRef::alignment());
 	}
 
 	public function dropup(){

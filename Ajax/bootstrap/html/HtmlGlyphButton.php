@@ -5,7 +5,6 @@ namespace Ajax\bootstrap\html;
  * @author jc
  * @version 1.001
  */
-require_once 'HtmlButton.php';
 class HtmlGlyphButton extends HtmlButton {
 	protected $glyph;
 

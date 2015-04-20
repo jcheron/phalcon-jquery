@@ -31,7 +31,7 @@ class HtmlAlert extends HtmlDoubleElement {
 	/**
 	 * define the alert style
 	 * avaible values : "alert-success","alert-info","alert-warning","alert-danger"
-	 * @param string/int $cssStyle
+	 * @param string|int $cssStyle
 	 * @return \Ajax\bootstrap\html\HtmlAlert
 	 * default : "alert-succes"
 	 */

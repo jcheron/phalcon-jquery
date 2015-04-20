@@ -28,7 +28,7 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	/**
 	 * define the buttons size
 	 * available values : "btn-group-lg","","btn-group-sm","btn-group-xs"
-	 * @param string/int $size
+	 * @param string|int $size
 	 * @return HtmlButtongroups
 	 * default : ""
 	 */

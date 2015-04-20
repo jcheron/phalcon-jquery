@@ -18,7 +18,7 @@ class HtmlGlyphicon extends HtmlSingleElement {
 
 	/**
 	 * Defines the glyphicon with his name or his index
-	 * @param string/int $glyphicon
+	 * @param string|int $glyphicon
 	 * @return \Ajax\bootstrap\html\HtmlGlyphicon
 	 */
 	public function setGlyphicon($glyphicon){
@@ -38,7 +38,7 @@ class HtmlGlyphicon extends HtmlSingleElement {
 
 	/**
 	 * return an instance of GlyphButton with a glyph defined by string or index
-	 * @param string/int $index
+	 * @param string|int $glyph
 	 * @return \Ajax\bootstrap\html\HtmlGlyphicon
 	 */
 	public static function getGlyphicon($glyph){
