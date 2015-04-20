@@ -37,12 +37,7 @@ class CDNGuiGen extends CDNBase {
 		return "";
 	}
 	public function getUrl() {
-		if (isset($this->jsUrl))
-			return $this->jsUrl;
-		$version=$this->version;
-		if (array_search($version,$this->getVersions()) === false)
-			$version=$this->getLastVersion();
-		return $this->replaceVersion($this->data [$this->provider] ["core"],$version);
+		return $this->getUrlOrCss($this->jsUrl,"core");
 	}
 	public function getCss() {
 		if (isset($this->cssUrl))

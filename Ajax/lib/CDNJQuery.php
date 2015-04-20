@@ -10,12 +10,7 @@ class CDNJQuery extends CDNBase {
 		$this->data=$this->data ["JQuery"];
 	}
 	public function getUrl() {
-		if (isset($this->jsUrl))
-			return $this->jsUrl;
-		$version=$this->version;
-		if (array_search($version,$this->getVersions()) === false)
-			$version=$this->getLastVersion();
-		return $this->replaceVersion($this->data [$this->provider] ["url"],$version);
+		return $this->getUrlOrCss($this->jsUrl,"url");
 	}
 	public function __toString() {
 		$url=$this->getUrl();
