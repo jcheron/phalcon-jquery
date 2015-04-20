@@ -11,6 +11,7 @@ use Ajax\service\JArray;
 use Ajax\service\PhalconUtils;
 use Phalcon\DiInterface;
 use Phalcon\Version;
+use Phalcon\Mvc\View;
 
 require_once 'lib/CDNJQuery.php';
 require_once 'lib/CDNGuiGen.php';
@@ -662,7 +663,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $jsCodeIfFalse
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
-	function condition($condition, $jsCodeIfTrue, $jsCodeIfFalse = null, $immediatly = false) {
+	public function condition($condition, $jsCodeIfTrue, $jsCodeIfFalse = null, $immediatly = false) {
 		return $this->js->_condition ( $condition, $jsCodeIfTrue, $jsCodeIfFalse, $immediatly );
 	}
 	// --------------------------------------------------------------------
@@ -672,10 +673,12 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * gather together all script needing to be output
 	 *
 	 * @access public
-	 * @param string The element to attach the event to
+	 * @param View $view
+	 * @param $view_var
+	 * @param $script_tags
 	 * @return string
 	 */
-	function compile($view = NULL, $view_var = 'script_foot', $script_tags = TRUE) {
+	public function compile($view = NULL, $view_var = 'script_foot', $script_tags = TRUE) {
 		$bs = $this->_bootstrap;
 		if (isset ( $bs ) && isset ( $view )) {
 			$bs->compileHtml ( $this, $view );
@@ -690,7 +693,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @access public
 	 * @return void
 	 */
-	function clear_compile() {
+	public function clear_compile() {
 		$this->js->_clear_compile ();
 	}
 	// --------------------------------------------------------------------
@@ -700,10 +703,11 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * Outputs a <script> tag with the source as an external js file
 	 *
 	 * @access public
-	 * @param string The element to attach the event to
+	 * @param string $external_file
+	 * @param boolean $relative
 	 * @return string
 	 */
-	function external($external_file = '', $relative = FALSE) {
+	public function external($external_file = '', $relative = FALSE) {
 		$assets = $this->_di->get ( 'assets' );
 		$assets->addJs ( $external_file );
 		return $assets->outputJs ();
@@ -715,11 +719,11 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * Outputs a <script> tag
 	 *
 	 * @access public
-	 * @param string The element to attach the event to
-	 * @param boolean If a CDATA section should be added
+	 * @param string $script
+	 * @param boolean $cdata If a CDATA section should be added
 	 * @return string
 	 */
-	function inline($script, $cdata = TRUE) {
+	public function inline($script, $cdata = TRUE) {
 		$str = $this->_open_script ();
 		$str .= ($cdata) ? "\n// <![CDATA[\n{$script}\n// ]]>\n" : "\n{$script}\n";
 		$str .= $this->_close_script ();
@@ -732,10 +736,10 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * Outputs an opening <script>
 	 *
 	 * @access private
-	 * @param string
+	 * @param string $src
 	 * @return string
 	 */
-	function _open_script($src = '') {
+	private function _open_script($src = '') {
 		$str = '<script type="text/javascript" ';
 		$str .= ($src == '') ? '>' : ' src="' . $src . '">';
 		return $str;
@@ -750,7 +754,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $extra
 	 * @return string
 	 */
-	function _close_script($extra = "\n") {
+	private function _close_script($extra = "\n") {
 		return "</script>$extra";
 	}
 	/**
@@ -764,7 +768,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $callback callback function
 	 * @return string
 	 */
-	function update($element = 'this', $speed = '', $callback = '') {
+	public function update($element = 'this', $speed = '', $callback = '') {
 		return $this->js->_updater ( $element, $speed, $callback );
 	}
 	// --------------------------------------------------------------------
@@ -836,12 +840,12 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param type
 	 * @return type
 	 */
-	function _prep_args($result, $is_key = FALSE) {
+	public function _prep_args($result, $is_key = FALSE) {
 		if (is_null ( $result )) {
 			return 'null';
 		} elseif (is_bool ( $result )) {
 			return ($result === TRUE) ? 'true' : 'false';
-		} elseif (is_string ( $result ) or $is_key) {
+		} elseif (is_string ( $result ) || $is_key) {
 			return '"' . str_replace ( array (
 					'\\',
 					"\t",

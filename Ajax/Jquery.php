@@ -1203,7 +1203,7 @@ class Jquery {
 	protected function _correctAjaxUrl($url) {
 		if (PhalconUtils::endsWith($url,"/"))
 			$url=substr($url,0,strlen($url) - 1);
-		if (strncmp($url,'http://',7) != 0 and strncmp($url,'https://',8) != 0) {
+		if (strncmp($url,'http://',7) != 0 && strncmp($url,'https://',8) != 0) {
 			$url=$this->_di->get("url")->get($url);
 		}
 		return $url;
