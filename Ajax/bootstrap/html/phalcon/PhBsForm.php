@@ -30,7 +30,7 @@ class PhBsForm extends Form {
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
 		$result="";
 		foreach ( $this->_elements as $element ) {
-			if ($elementinstanceofPhBsElement)
+			if ($element instanceof PhBsElement)
 				$result.=$element->compile($js, $view);
 		}
 		return $result;
@@ -38,7 +38,7 @@ class PhBsForm extends Form {
 
 	public function run(JsUtils $js) {
 		foreach ( $this->_elements as $element ) {
-			if ($elementinstanceofPhBsElement)
+			if ($element instanceof PhBsElement)
 				$element->run($js);
 		}
 	}

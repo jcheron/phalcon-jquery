@@ -8,7 +8,7 @@ class HtmlElementAsContent extends BaseHtml {
 	protected $element;
 
 	public function __construct($element) {
-		if ($elementinstanceofHtmlSingleElement) {
+		if ($element instanceof HtmlSingleElement) {
 			$this->element=$element;
 		} elseif (is_string($element)) {
 			$this->element=new HtmlDoubleElement($element);

@@ -59,7 +59,7 @@ abstract class BaseHtml extends BaseWidget {
 			$v=$v.$separator.$value;
 		else
 			$v=$value;
-		
+
 		return $this->setProperty($name, $v);
 	}
 
@@ -237,7 +237,7 @@ abstract class BaseHtml extends BaseWidget {
 			} else {
 				$this->events [$event]=array (
 						$this->events [$event],
-						$jsCode 
+						$jsCode
 				);
 			}
 		} else {
@@ -264,13 +264,13 @@ abstract class BaseHtml extends BaseWidget {
 				if (is_array($jsCode)) {
 					$code="";
 					foreach ( $jsCode as $jsC ) {
-						if ($jsCinstanceofAjaxCall) {
+						if ($jsC instanceof AjaxCall) {
 							$code.="\n".$jsC->compile($js);
 						} else {
 							$code.="\n".$jsC;
 						}
 					}
-				} elseif ($jsCodeinstanceofAjaxCall) {
+				} elseif ($jsCode instanceof AjaxCall) {
 					$code=$jsCode->compile($js);
 				}
 				$this->_bsComponent->addEvent($event, $code);
@@ -281,7 +281,7 @@ abstract class BaseHtml extends BaseWidget {
 	private function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
 		$params=array (
 				"url" => $url,
-				"responseElement" => $responseElement 
+				"responseElement" => $responseElement
 		);
 		$params=array_merge($params, $parameters);
 		$this->_addEvent($event, new AjaxCall($operation, $params));
@@ -319,13 +319,13 @@ abstract class BaseHtml extends BaseWidget {
 			$flag=false;
 			$index=0;
 			while ( !$flag&&$index<sizeof($elements) ) {
-				if ($elements [$index]instanceofBaseHtml)
+				if ($elements [$index] instanceof BaseHtml)
 					$flag=($elements [$index]->getIdentifier()===$identifier);
 				$index++;
 			}
 			if ($flag===true)
 				return $elements [$index-1];
-		} elseif ($elementsinstanceofBaseHtml) {
+		} elseif ($elements instanceof BaseHtml) {
 			if ($elements->getIdentifier()===$identifier)
 				return $elements;
 		}

@@ -37,7 +37,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @var Bootstrap
 	 */
 	protected $_bootstrap;
-	
+
 	/**
 	 *
 	 * @var Config
@@ -100,7 +100,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 			}
 		} elseif (is_array($config)) {
 			$this->config=new Config($config);
-		} elseif ($configinstanceofConfig) {
+		} elseif ($config instanceof Config) {
 			$this->config=$config;
 		}
 		return $this->config;
@@ -126,7 +126,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 
 	public function __construct($params=array()) {
 		$defaults=array (
-				'driver' => 'Jquery' 
+				'driver' => 'Jquery'
 		);
 		foreach ( $defaults as $key => $val ) {
 			if (isset($params [$key])&&$params [$key]!=="") {
@@ -864,14 +864,14 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 					"\n",
 					"\r",
 					'"',
-					'/' 
+					'/'
 			), array (
 					'\\\\',
 					'\\t',
 					'\\n',
 					"\\r",
 					'\"',
-					'\/' 
+					'\/'
 			), $result).'"';
 		} elseif (is_scalar($result)) {
 			return $result;
@@ -1210,7 +1210,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	public function setCDNs($cdns) {
 		if (is_array($cdns)===false) {
 			$cdns=array (
-					$cdns 
+					$cdns
 			);
 		}
 		$this->cdns=$cdns;

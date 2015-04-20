@@ -46,11 +46,11 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	 */
 	public function run(JsUtils $js) {
 		parent::run($js);
-		if ($this->contentinstanceofHtmlDoubleElement) {
+		if ($this->content instanceof HtmlDoubleElement) {
 			$this->content->run($js);
 		} else if (is_array($this->content)) {
 			foreach ( $this->content as $itemContent ) {
-				if ($itemContentinstanceofHtmlDoubleElement) {
+				if ($itemContent instanceof HtmlDoubleElement) {
 					$itemContent->run($js);
 				}
 			}

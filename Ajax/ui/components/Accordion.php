@@ -17,7 +17,7 @@ class Accordion extends SimpleComponent {
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);
 		$this->params=array (
-				"active" => 0 
+				"active" => 0
 		);
 		$this->uiName="accordion";
 	}
@@ -49,7 +49,7 @@ class Accordion extends SimpleComponent {
 	 * @return $this
 	 */
 	public function setAnimate($value) {
-		if ($valueinstanceofAnimation)
+		if ($value instanceof Animation)
 			$value=$value->getParams();
 		else if (is_string($value)) {
 			$animation=new Animation();
@@ -115,7 +115,7 @@ class Accordion extends SimpleComponent {
 		return $this->setParamCtrl("heightStyle", $value, array (
 				"auto",
 				"fill",
-				"content" 
+				"content"
 		));
 	}
 

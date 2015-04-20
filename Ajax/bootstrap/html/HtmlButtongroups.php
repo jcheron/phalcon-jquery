@@ -65,10 +65,10 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	public function addElement($element) {
 		$result=$element;
 		$iid=sizeof($this->elements)+1;
-		if (($elementinstanceofHtmlDropdown)||($elementinstanceofHtmlSplitbutton)) {
+		if (($element instanceof HtmlDropdown)||($element instanceof HtmlSplitbutton)) {
 			$this->addExistingDropDown($element);
 			$this->elements []=$element;
-		} elseif ($elementinstanceofHtmlButton) {
+		} elseif ($element instanceof HtmlButton) {
 			$this->elements []=$element;
 		} elseif (is_array($element)) {
 			if (array_key_exists("glyph", $element))

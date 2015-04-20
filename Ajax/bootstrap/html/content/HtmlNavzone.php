@@ -53,7 +53,7 @@ class HtmlNavzone extends BaseHtml {
 		if (is_array($elements)) {
 			foreach ( $elements as $key => $element ) {
 				$iid=$this->getElementsCount()+1;
-				if ($elementinstanceofHtmlDropdownItem)
+				if ($element instanceof HtmlDropdownItem)
 					$this->elements []=$element;
 				else if (is_array($element)) {
 					if (is_string($key)===true) {

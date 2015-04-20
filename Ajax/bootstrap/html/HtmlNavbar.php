@@ -60,7 +60,7 @@ class HtmlNavbar extends BaseHtml {
 	public function setBrandImage($imageSrc) {
 		$this->brandImage=PhalconUtils::image(array (
 				$imageSrc,
-				"alt" => $this->brand 
+				"alt" => $this->brand
 		));
 		$this->brand="";
 		return $this;
@@ -84,7 +84,7 @@ class HtmlNavbar extends BaseHtml {
 
 	public function addElement($element, HtmlNavzone $zone=NULL) {
 		$zone=$this->getZoneToInsertIn($zone);
-		if ($elementinstanceofHtmlDropdown)
+		if ($element instanceof HtmlDropdown)
 			$element->setMTagName("li");
 		$zone->addElement($element);
 	}

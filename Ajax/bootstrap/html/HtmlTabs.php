@@ -28,7 +28,7 @@ class HtmlTabs extends HtmlDoubleElement {
 	protected function addTab_($tab, $index=null) {
 		if (isset($index)) {
 			$inserted=array (
-					$tab 
+					$tab
 			);
 			array_splice($this->tabs, $index, 0, $inserted);
 		} else
@@ -101,9 +101,9 @@ class HtmlTabs extends HtmlDoubleElement {
 	public function createTabContents() {
 		$tabContent=new HtmlTabContent("tabcontent-".$this->identifier);
 		foreach ( $this->tabs as $tab ) {
-			if ($tabinstanceofHtmlTabItem)
+			if ($tab instanceof HtmlTabItem)
 				$tabContent->addTabItem($tab->getHref());
-			elseif ($tabinstanceofHtmlDropdown) {
+			elseif ($tab instanceof HtmlDropdown) {
 				foreach ( $tab->getItems() as $dropdownItem ) {
 					$tabContent->addTabItem($dropdownItem->getHref());
 				}

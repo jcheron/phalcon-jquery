@@ -21,7 +21,7 @@ class HtmlButtontoolbar extends HtmlButtongroups {
 	 * @see \Ajax\bootstrap\html\HtmlButtongroups::addElement()
 	 */
 	public function addElement($element) {
-		if ($elementinstanceofHtmlButtongroups) {
+		if ($element instanceof HtmlButtongroups) {
 			$this->elements []=$element;
 		} else {
 			$this->getLastButtonGroup()->addElement($element);

@@ -111,7 +111,7 @@ class HtmlDropdown extends HtmlButton {
 					$dropDownItem=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 					$dropDownItem->fromArray($item);
 					$this->items []=$dropDownItem;
-				} else if ($iteminstanceofHtmlDropdownItem) {
+				} else if ($item instanceof HtmlDropdownItem) {
 					$this->items []=$item;
 				}
 			}
