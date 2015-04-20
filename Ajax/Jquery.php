@@ -168,12 +168,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery blur event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _blur($element='this', $js='') {
+	public function _blur($element='this', $js='') {
 		return $this->_add_event($element,$js,'blur');
 	}
 
@@ -184,12 +183,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery change event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _change($element='this', $js='') {
+	public function _change($element='this', $js='') {
 		return $this->_add_event($element,$js,'change');
 	}
 
@@ -200,13 +198,12 @@ class Jquery {
 	 *
 	 * Outputs a jQuery click event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @param boolean whether or not to return false
 	 * @return string
 	 */
-	private function _click($element='this', $js='', $ret_false=TRUE) {
+	public function _click($element='this', $js='', $ret_false=TRUE) {
 		if (! is_array($js)) {
 			$js=array (
 					$js
@@ -227,12 +224,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery dblclick event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _dblclick($element='this', $js='') {
+	public function _dblclick($element='this', $js='') {
 		return $this->_add_event($element,$js,'dblclick');
 	}
 
@@ -243,12 +239,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery error event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _error($element='this', $js='') {
+	public function _error($element='this', $js='') {
 		return $this->_add_event($element,$js,'error');
 	}
 
@@ -259,12 +254,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery focus event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _focus($element='this', $js='') {
+	public function _focus($element='this', $js='') {
 		return $this->_add_event($element,$js,'focus');
 	}
 
@@ -275,13 +269,12 @@ class Jquery {
 	 *
 	 * Outputs a jQuery hover event
 	 *
-	 * @access private
 	 * @param string - element
 	 * @param string - Javascript code for mouse over
 	 * @param string - Javascript code for mouse out
 	 * @return string
 	 */
-	private function _hover($element='this', $over, $out) {
+	public function _hover($element='this', $over, $out) {
 		$event="\n\t$(" . $this->_prep_element($element) . ").hover(\n\t\tfunction()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunction()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
 
 		$this->jquery_code_for_compile []=$event;
@@ -296,12 +289,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery keydown event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _keydown($element='this', $js='') {
+	public function _keydown($element='this', $js='') {
 		return $this->_add_event($element,$js,'keydown');
 	}
 
@@ -312,12 +304,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery keypress event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _keypress($element='this', $js='') {
+	public function _keypress($element='this', $js='') {
 		return $this->_add_event($element,$js,'keypress');
 	}
 
@@ -328,12 +319,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery keydown event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _keyup($element='this', $js='') {
+	public function _keyup($element='this', $js='') {
 		return $this->_add_event($element,$js,'keyup');
 	}
 
@@ -344,12 +334,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery load event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _load($element='this', $js='') {
+	public function _load($element='this', $js='') {
 		return $this->_add_event($element,$js,'load');
 	}
 
@@ -360,12 +349,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery mousedown event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _mousedown($element='this', $js='') {
+	public function _mousedown($element='this', $js='') {
 		return $this->_add_event($element,$js,'mousedown');
 	}
 
@@ -376,12 +364,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery mouseout event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _mouseout($element='this', $js='') {
+	public function _mouseout($element='this', $js='') {
 		return $this->_add_event($element,$js,'mouseout');
 	}
 
@@ -392,12 +379,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery mouseover event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _mouseover($element='this', $js='') {
+	public function _mouseover($element='this', $js='') {
 		return $this->_add_event($element,$js,'mouseover');
 	}
 
@@ -408,12 +394,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery mouseup event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _mouseup($element='this', $js='') {
+	public function _mouseup($element='this', $js='') {
 		return $this->_add_event($element,$js,'mouseup');
 	}
 
@@ -424,12 +409,11 @@ class Jquery {
 	 *
 	 * Outputs script directly
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _output($array_js='') {
+	public function _output($array_js='') {
 		if (! is_array($array_js)) {
 			$array_js=array (
 					$array_js
@@ -448,12 +432,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery resize event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _resize($element='this', $js='') {
+	public function _resize($element='this', $js='') {
 		return $this->_add_event($element,$js,'resize');
 	}
 
@@ -464,12 +447,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery scroll event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _scroll($element='this', $js='') {
+	public function _scroll($element='this', $js='') {
 		return $this->_add_event($element,$js,'scroll');
 	}
 
@@ -480,12 +462,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery unload event
 	 *
-	 * @access private
 	 * @param string The element to attach the event to
 	 * @param string The code to execute
 	 * @return string
 	 */
-	private function _unload($element='this', $js='') {
+	public function _unload($element='this', $js='') {
 		return $this->_add_event($element,$js,'unload');
 	}
 
@@ -498,12 +479,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery addClass event
 	 *
-	 * @access private
 	 * @param string - element
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _addClass($element='this', $class='', $immediatly=false) {
+	public function _addClass($element='this', $class='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$class=$this->_prep_value($class);
 		$str="$({$element}).addClass({$class});";
@@ -519,7 +499,7 @@ class Jquery {
 	 * @param string $value
 	 * @param boolean $immediatly delayed if false
 	 */
-	private function _attr($element='this', $attributeName, $value="", $immediatly=false) {
+	public function _attr($element='this', $attributeName, $value="", $immediatly=false) {
 		$element=$this->_prep_element($element);
 		if (isset($value)) {
 			$value=$this->_prep_value($value);
@@ -537,7 +517,7 @@ class Jquery {
 	 * @param string $value
 	 * @param boolean $immediatly delayed if false
 	 */
-	private function _html($element='this', $value="", $immediatly=false) {
+	public function _html($element='this', $value="", $immediatly=false) {
 		$element=$this->_prep_element($element);
 		if (isset($value)) {
 			$value=$this->_prep_value($value);
@@ -556,14 +536,14 @@ class Jquery {
 	 *
 	 * Outputs a jQuery animate event
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $params One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $speed
+	 * @param string $extra
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _animate($element='this', $params=array(), $speed='', $extra='', $immediatly=false) {
+	public function _animate($element='this', $params=array(), $speed='', $extra='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -630,13 +610,13 @@ class Jquery {
 	 * Outputs a jQuery hide event
 	 *
 	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _fadeIn($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _fadeIn($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -658,14 +638,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery hide event
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _fadeOut($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _fadeOut($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -687,14 +666,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery hide action
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _hide($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _hide($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -716,12 +694,12 @@ class Jquery {
 	 *
 	 * Outputs a jQuery remove class event
 	 *
-	 * @access private
-	 * @param string - element
+	 * @param string $element element
+	 * @param string $class
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _removeClass($element='this', $class='', $immediatly=false) {
+	public function _removeClass($element='this', $class='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$str="$({$element}).removeClass(\"$class\");";
 
@@ -737,14 +715,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery slideUp event
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _slideUp($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _slideUp($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -766,14 +743,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery slideDown event
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _slideDown($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _slideDown($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -795,14 +771,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery slideToggle event
 	 *
-	 * @access public
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _slideToggle($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _slideToggle($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -824,12 +799,11 @@ class Jquery {
 	 *
 	 * Outputs a jQuery toggle event
 	 *
-	 * @access private
-	 * @param string - element
+	 * @param string $element element
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _toggle($element='this', $immediatly=false) {
+	public function _toggle($element='this', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$str="$({$element}).toggle();";
 
@@ -845,12 +819,12 @@ class Jquery {
 	 *
 	 * Outputs a jQuery toggle class event
 	 *
-	 * @access private
-	 * @param string - element
+	 * @param string $element element
+	 * @param string $class
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _toggleClass($element='this', $class='', $immediatly=false) {
+	public function _toggleClass($element='this', $class='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$str="$({$element}).toggleClass(\"$class\");";
 
@@ -881,14 +855,13 @@ class Jquery {
 	 *
 	 * Outputs a jQuery show event
 	 *
-	 * @access private
-	 * @param string - element
-	 * @param string - One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string - Javascript callback function
+	 * @param string $element element
+	 * @param string $speed One of 'slow', 'normal', 'fast', or time in milliseconds
+	 * @param string $callback Javascript callback function
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _show($element='this', $speed='', $callback='', $immediatly=false) {
+	public function _show($element='this', $speed='', $callback='', $immediatly=false) {
 		$element=$this->_prep_element($element);
 		$speed=$this->_validate_speed($speed);
 
@@ -911,7 +884,7 @@ class Jquery {
 	 * @param boolean $immediatly delayed if false
 	 * @return string
 	 */
-	private function _condition($condition, $jsCodeIfTrue, $jsCodeIfFalse=null, $immediatly=false) {
+	public function _condition($condition, $jsCodeIfTrue, $jsCodeIfFalse=null, $immediatly=false) {
 		$str="if(" . $condition . "){" . $jsCodeIfTrue . "}";
 		if (isset($jsCodeIfFalse)) {
 			$str.="else{" . $jsCodeIfFalse . "}";
@@ -930,13 +903,12 @@ class Jquery {
 	 * An Ajax call that populates the designated DOM node with
 	 * returned content
 	 *
-	 * @access private
-	 * @param string The element to attach the event to
-	 * @param string the controller to run the call against
-	 * @param string optional parameters
+	 * @param string $container The element to attach the event to
+	 * @param string $controller the controller to run the call against
+	 * @param string $options optional parameters
 	 * @return string
 	 */
-	private function _updater($container='this', $controller, $options='') {
+	public function _updater($container='this', $controller='', $options='') {
 		$url=$this->_di->get("url");
 		$container=$this->_prep_element($container);
 
@@ -973,6 +945,8 @@ class Jquery {
 	 * Creates a jQuery sortable
 	 *
 	 * @access public
+	 * @param string $element
+	 * @param array $options
 	 * @return void
 	 */
 	public function sortable($element, $options=array()) {
@@ -995,8 +969,8 @@ class Jquery {
 	 * Table Sorter Plugin
 	 *
 	 * @access public
-	 * @param string table name
-	 * @param string plugin location
+	 * @param string $table table name
+	 * @param string $options plugin location
 	 * @return string
 	 */
 	public function tablesorter($table='', $options='') {
@@ -1012,15 +986,14 @@ class Jquery {
 	 *
 	 * Constructs the syntax for an event, and adds to into the array for compilation
 	 *
-	 * @access private
-	 * @param string The element to attach the event to
-	 * @param string The code to execute
-	 * @param string The event to pass
-	 * @param boolean preventDefault If set to true, the default action of the event will not be triggered.
-	 * @param boolean stopPropagation Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
+	 * @param string $element The element to attach the event to
+	 * @param string $js The code to execute
+	 * @param string $event The event to pass
+	 * @param boolean $preventDefault If set to true, the default action of the event will not be triggered.
+	 * @param boolean $stopPropagation Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
 	 * @return string
 	 */
-	private function _add_event($element, $js, $event, $preventDefault=false, $stopPropagation=false) {
+	public function _add_event($element, $js, $event, $preventDefault=false, $stopPropagation=false) {
 		if (is_array($js)) {
 			$js=implode("\n\t\t",$js);
 		}
@@ -1045,11 +1018,12 @@ class Jquery {
 	 *
 	 * As events are specified, they are stored in an array
 	 * This function compiles them all for output on a page
-	 *
-	 * @access private
+	 * @param view $view
+	 * @param string $view_var
+	 * @param boolean $script_tags
 	 * @return string
 	 */
-	private function _compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
+	public function _compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		// Components UI
 		$ui=$this->ui();
 		if ($this->ui() != NULL) {
@@ -1138,7 +1112,7 @@ class Jquery {
 	 * object, in which case no quotes are added
 	 *
 	 * @access public
-	 * @param string
+	 * @param string $element
 	 * @return string
 	 */
 	public function _prep_element($element) {
@@ -1156,7 +1130,7 @@ class Jquery {
 	 * object, in which case no quotes are added
 	 *
 	 * @access public
-	 * @param string
+	 * @param string $value
 	 * @return string
 	 */
 	public function _prep_value($value) {
@@ -1177,7 +1151,7 @@ class Jquery {
 	 * Ensures the speed parameter is valid for jQuery
 	 *
 	 * @access private
-	 * @param string
+	 * @param string|int $speed
 	 * @return string
 	 */
 	private function _validate_speed($speed) {
