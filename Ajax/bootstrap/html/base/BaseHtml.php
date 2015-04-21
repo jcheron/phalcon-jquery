@@ -154,14 +154,9 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function addToPropertyCtrl($name, $value, $typeCtrl) {
 		// if($this->ctrl($name, $value, $typeCtrl)===true){
-		if (@class_exists($typeCtrl, true))
-			$typeCtrl=$typeCtrl::getConstants();
-		if (is_array($typeCtrl)) {
-			$this->removeOldValues($this->properties [$name], $typeCtrl);
-		}
-		return $this->addToProperty($name, $value);
+		return $this->addToPropertyUnique($name, $value, $typeCtrl);
 		// }
-		return $this;
+		//return $this;
 	}
 
 	protected function removeOldValues(&$oldValue, $allValues) {
