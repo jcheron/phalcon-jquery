@@ -177,11 +177,9 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function fromArray($array) {
 		foreach ( $this as $key => $value ) {
-			if (array_key_exists($key, $array)) {
-				if (!PhalconUtils::startsWith($key, "_")) {
+			if (array_key_exists($key, $array) && !PhalconUtils::startsWith($key, "_")) {
 					$setter="set".ucfirst($key);
 					$this->$setter($array [$key]);
-				}
 				unset($array [$key]);
 			}
 		}
