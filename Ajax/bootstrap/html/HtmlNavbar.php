@@ -4,10 +4,11 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
-use Ajax\bootstrap\html\base\CssNavbar;
 use Ajax\bootstrap\components\Scrollspy;
 use Ajax\service\PhalconUtils;
-
+use Ajax\bootstrap\html\content\HtmlNavzone;
+use Ajax\bootstrap\html\base\CssNavbar;
+require_once 'base/CssRef.php';
 /**
  * Twitter Bootstrap HTML Navbar component
  * @author jc
@@ -23,6 +24,7 @@ class HtmlNavbar extends BaseHtml {
 	protected $scrollspy;
 	protected $hasScrollspy=false;
 	protected $scrollspyId="body";
+	protected $fluid="container-fluid";
 
 	/**
 	 *
@@ -35,6 +37,7 @@ class HtmlNavbar extends BaseHtml {
 		$this->class="navbar-default";
 		$this->brand=$brand;
 		$this->brandHref=$brandHref;
+
 	}
 
 	public function setClass($class) {
@@ -176,4 +179,14 @@ class HtmlNavbar extends BaseHtml {
 		$this->hasScrollspy=true;
 		$this->scrollspyId=$attachTo;
 	}
+
+	public function setFluid($fluid) {
+		if($fluid===true){
+			$this->fluid="container-fluid";
+		}else{
+			$this->fluid="container";
+		}
+		return $this;
+	}
+
 }

@@ -1,12 +1,14 @@
 <?php
 
-namespace Ajax\bootstrap\html;
+namespace Ajax\bootstrap\html\content;
 
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
+use Ajax\bootstrap\html\HtmlDropdown;
+use Ajax\bootstrap\html\HtmlLink;
 
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component

@@ -1,7 +1,7 @@
 <?php
 return '
 <nav class="navbar %class%" id="%identifier%">
-  <div class="container-fluid">
+  <div class="%fluid%">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#%identifier%">
