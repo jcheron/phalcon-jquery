@@ -3,7 +3,7 @@
 **A JQuery and UI library** (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
 
 [![Build Status](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite.svg?branch=master)](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite)
-[![Latest Stable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/stable.svg)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Total Downloads](https://poser.pugx.org/jcheron/phalcon-jquery/downloads)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Latest Unstable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/unstable.svg)](https://packagist.org/packages/jcheron/phalcon-jquery) [![License](https://poser.pugx.org/jcheron/phalcon-jquery/license.svg)](https://packagist.org/packages/jcheron/phalcon-jquery)
+[![Latest Stable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/stable)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Total Downloads](https://poser.pugx.org/jcheron/phalcon-jquery/downloads)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Latest Unstable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/unstable)](https://packagist.org/packages/jcheron/phalcon-jquery) [![License](https://poser.pugx.org/jcheron/phalcon-jquery/license)](https://packagist.org/packages/jcheron/phalcon-jquery)
 
  **Phalcon 1.3.4 and 2.0 compatible**
 
