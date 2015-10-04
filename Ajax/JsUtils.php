@@ -827,7 +827,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$params="{}";
 		$attr="id";
 		extract($parameters);
-		return $this->js->_getAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
+		return $this->js->_getOn($event, $element, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
 	}
 
 	/**
@@ -881,7 +881,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$jsCallback=null;
 		$attr="id";
 		extract($parameters);
-		return $this->js->_postAndBindTo($element, $event, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
+		return $this->js->_postOn($event, $element,  $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
 	}
 
 	/**
@@ -937,7 +937,7 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		$jsCallback=null;
 		$attr="id";
 		extract($parameters);
-		return $this->js->_postFormAndBindTo($element, $event, $url, $form, $responseElement, $preventDefault, $stopPropagation, $validation, $jsCallback, $attr);
+		return $this->js->_postFormOn($event,$element, $url, $form, $responseElement, $preventDefault, $stopPropagation, $validation, $jsCallback, $attr);
 	}
 
 	/**
