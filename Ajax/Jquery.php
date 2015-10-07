@@ -1203,7 +1203,7 @@ class Jquery {
 	 * @param string $jsCallback javascript code to execute after the request
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
-	public function _geOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
+	public function _getOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
 		$script=$this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 		return $script;
 	}
