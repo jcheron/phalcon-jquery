@@ -166,7 +166,7 @@ class Jquery {
 	 * Outputs a jQuery click event
 	 *
 	 * @param string $element The element to attach the event to
-	 * @param string|array $js The code to execute
+	 * @param mixed $js The code to execute
 	 * @param boolean $ret_false whether or not to return false
 	 * @return string
 	 */

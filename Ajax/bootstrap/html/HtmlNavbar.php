@@ -8,7 +8,6 @@ use Ajax\bootstrap\components\Scrollspy;
 use Ajax\service\PhalconUtils;
 use Ajax\bootstrap\html\content\HtmlNavzone;
 use Ajax\bootstrap\html\base\CssNavbar;
-require_once 'base/CssRef.php';
 /**
  * Twitter Bootstrap HTML Navbar component
  * @author jc
