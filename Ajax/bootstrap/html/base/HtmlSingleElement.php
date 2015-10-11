@@ -28,10 +28,6 @@ class HtmlSingleElement extends BaseHtml {
 		// TODO Auto-generated method stub
 	}
 
-	public function __toString() {
-		return $this->compile();
-	}
-
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::fromArray()

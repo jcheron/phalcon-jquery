@@ -1065,7 +1065,7 @@ class Jquery {
 		$retour.="\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
 	}
 
-	protected function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
+	public function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour="url='".$url."';\n";

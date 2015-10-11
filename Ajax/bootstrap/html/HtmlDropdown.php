@@ -87,9 +87,13 @@ class HtmlDropdown extends HtmlButton {
 	 * @return HtmlDropdownItem
 	 */
 	public function addItem($caption, $href="#") {
-		$iid=$this->getItemsCount()+1;
-		$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
-		$item->setCaption($caption)->setHref($href);
+		if($caption instanceof HtmlDropdownItem){
+			$item=$caption;
+		}elseif(is_string($caption)){
+			$iid=$this->getItemsCount()+1;
+			$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
+			$item->setCaption($caption)->setHref($href);
+		}
 		$this->items []=$item;
 		return $item;
 	}
@@ -182,7 +186,7 @@ class HtmlDropdown extends HtmlButton {
 	 */
 	public function setTagName($tagName) {
 		if ($tagName=="button")
-			$this->class="btn";
+			$this->class="btn dropdown-toggle";
 		return parent::setTagName($tagName);
 	}
 
@@ -254,4 +258,12 @@ class HtmlDropdown extends HtmlButton {
 	public function onHidden($jsCode) {
 		return $this->addEvent("hidden.bs.dropdown", $jsCode);
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addItem($function($object));
+	}
+
 }

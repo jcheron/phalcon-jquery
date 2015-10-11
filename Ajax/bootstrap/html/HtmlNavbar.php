@@ -188,4 +188,11 @@ class HtmlNavbar extends BaseHtml {
 		return $this;
 	}
 
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addElement($function($object));
+	}
+
 }

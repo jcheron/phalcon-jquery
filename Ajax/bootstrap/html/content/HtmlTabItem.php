@@ -56,4 +56,14 @@ class HtmlTabItem extends HtmlDoubleElement {
 		}
 		return parent::fromArray($array);
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseWidget::setIdentifier()
+	 */
+	public function setIdentifier($identifier) {
+		parent::setIdentifier($identifier);
+		if($this->content instanceof HtmlLink){
+			$this->content->setIdentifier("link-".$identifier);
+		}
+	}
 }

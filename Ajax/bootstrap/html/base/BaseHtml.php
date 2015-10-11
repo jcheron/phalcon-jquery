@@ -206,6 +206,18 @@ abstract class BaseHtml extends BaseWidget {
 		return $array;
 	}
 
+	public function fromDatabaseObjects($objects,$function) {
+		if(isset($objects)){
+			foreach ($objects as $object){
+				$this->fromDatabaseObject($object,$function);
+			}
+		}
+	}
+
+	public function fromDatabaseObject($object,$function){
+
+	}
+
 	public function wrap($before, $after="") {
 		$this->wrapBefore.=$before;
 		$this->wrapAfter=$after.$this->wrapAfter;
@@ -268,6 +280,7 @@ abstract class BaseHtml extends BaseWidget {
 				}
 				$this->_bsComponent->addEvent($event, $code);
 			}
+			$this->events=array();
 		}
 	}
 
@@ -323,5 +336,9 @@ abstract class BaseHtml extends BaseWidget {
 				return $elements;
 		}
 		return null;
+	}
+
+	public function __toString(){
+		return $this->compile();
 	}
 }

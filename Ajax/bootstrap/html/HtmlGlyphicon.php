@@ -2,9 +2,9 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\CssGlyphicon;
 use Ajax\bootstrap\html\base\HtmlSingleElement;
 use Ajax\service\PhalconUtils;
+use Ajax\bootstrap\html\base\CssGlyphicon;
 
 /**
  * Composant Twitter Bootstrap Glyphicon

@@ -72,7 +72,7 @@ class HtmlButton extends HtmlDoubleElement {
 	 */
 	public function setActive() {
 		return $this->addToPropertyCtrl("class", "active", array (
-				"active" 
+				"active"
 		));
 	}
 
@@ -82,16 +82,12 @@ class HtmlButton extends HtmlDoubleElement {
 	 */
 	public function setDisabled() {
 		return $this->addToPropertyCtrl("class", "disabled", array (
-				"disabled" 
+				"disabled"
 		));
 	}
 
 	public function setToggled() {
 		return $this->setProperty("data-toggle", "button");
-	}
-
-	public function __toString() {
-		return $this->compile();
 	}
 
 	/*

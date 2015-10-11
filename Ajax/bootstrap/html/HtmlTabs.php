@@ -18,6 +18,7 @@ use Phalcon\Mvc\View;
 class HtmlTabs extends HtmlDoubleElement {
 	protected $tabs=array ();
 	protected $_tabsType="tabs";
+	protected $stacked="";
 
 	public function __construct($identifier, $tagName="ul") {
 		parent::__construct($identifier, $tagName);
@@ -39,7 +40,7 @@ class HtmlTabs extends HtmlDoubleElement {
 		$iid=$this->countTabs()+1;
 		$tab=$element;
 		if (is_string($element)) {
-			$tab=new HtmlTabItem("tab-".$this->identifier, $element."-".$iid);
+			$tab=new HtmlTabItem("tab-".$this->identifier."-".$iid, $element);
 			$this->addTab_($tab, $index);
 		} elseif (is_array($element)) {
 			$tab=new HtmlTabItem("tab-".$this->identifier."-".$iid);
@@ -48,6 +49,7 @@ class HtmlTabs extends HtmlDoubleElement {
 		} else {
 			$this->addTab_($tab, $index);
 		}
+		return $tab;
 	}
 
 	/*
@@ -81,7 +83,7 @@ class HtmlTabs extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-		$this->setProperty("class", "nav nav-".$this->_tabsType);
+		$this->setProperty("class", "nav nav-".$this->_tabsType." ".$this->stacked);
 		return parent::compile($js, $view);
 	}
 
@@ -143,5 +145,18 @@ class HtmlTabs extends HtmlDoubleElement {
 				$this->content->getTabItem($index)->addToProperty("class", "fade");
 			}
 		}
+	}
+
+	public function setStacked($stacked=true){
+		if($stacked)
+			$this->stacked="nav-stacked";
+		else $this->stacked="";
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addTab($function($object));
 	}
 }

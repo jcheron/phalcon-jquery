@@ -35,7 +35,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 		$this->href="#";
 		$this->role="menuitem";
 		$this->target="_self";
-		$this->_template='<li id="%identifier%" class="%class%" role="%role%"><a role="%itemRole%" class="%itemClass%" tabindex="-1" href="%href%" target="%target%">%content%</a></li>';
+		$this->_template='<li id="%identifier%" class="%class%" role="%role%"><a id="a-%identifier%" role="%itemRole%" class="%itemClass%" tabindex="-1" href="%href%" target="%target%">%content%</a></li>';
 	}
 
 	public function setItemClass($itemClass) {
