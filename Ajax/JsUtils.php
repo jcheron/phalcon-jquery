@@ -11,19 +11,19 @@ use Ajax\service\JArray;
 use Ajax\service\PhalconUtils;
 use Phalcon\DiInterface;
 use Phalcon\Version;
-use Phalcon\Mvc\View;
+use Phalcon\Di\InjectionAwareInterface;
 
 /**
  * JQuery Phalcon library
  *
  * @author jcheron
- * @version 1.001
+ * @version 1.002
  * @license Apache 2 http://www.apache.org/licenses/
  */
 /**
  * JsUtils Class : Phalcon service to be injected
  */
-abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
+abstract class _JsUtils implements InjectionAwareInterface {
 	protected $_di;
 	protected $js;
 	protected $cdns;
@@ -652,17 +652,6 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 		return "</script>$extra";
 	}
 
-	/**
-	 * Outputs a javascript library slideDown event
-	 *
-	 * @param string $element
-	 * @param string $speed of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param string $callback callback function
-	 * @return string
-	 */
-	public function update($element='this', $speed='', $callback='') {
-		return $this->js->_updater($element, $speed, $callback);
-	}
 	// --------------------------------------------------------------------
 	/**
 	 * Can be passed a database result or associative array and returns a JSON formatted string
@@ -751,8 +740,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function get($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_get($url, $params, $responseElement, $jsCallback, $attr, true);
+	public function get($url, $responseElement="", $params="{}", $jsCallback=NULL) {
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, NULL, true);
 	}
 
 	/**
@@ -762,8 +751,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $method Method used
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function json($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_json($url, $method, $params, $jsCallback, $attr, true);
+	public function json($url, $method="get", $params="{}", $jsCallback=NULL) {
+		return $this->js->_json($url, $method, $params, $jsCallback, NULL, true);
 	}
 
 	/**
@@ -773,8 +762,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $method Method used
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function jsonDeferred($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_json($url, $method, $params, $jsCallback, $attr, false);
+	public function jsonDeferred($url, $method="get", $params="{}", $jsCallback=NULL) {
+		return $this->js->_json($url, $method, $params, $jsCallback, NULL, false);
 	}
 
 	/**
@@ -784,8 +773,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $method Method used
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function jsonArray($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, $attr, true);
+	public function jsonArray($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL) {
+		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, NULL, true);
 	}
 
 	/**
@@ -795,8 +784,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $method Method used
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function jsonArrayDeferred($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, $attr, false);
+	public function jsonArrayDeferred($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL) {
+		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, NULL, false);
 	}
 
 	/**
@@ -807,8 +796,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function getDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_get($url, $params, $responseElement, $jsCallback, $attr, false);
+	public function getDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL) {
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, NULL, false);
 	}
 
 	/**
@@ -849,8 +838,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function post($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_post($url, $params, $responseElement, $jsCallback, $attr, true);
+	public function post($url, $responseElement="", $params="{}", $jsCallback=NULL) {
+		return $this->js->_post($url, $params, $responseElement, $jsCallback, NULL, true);
 	}
 
 	/**
@@ -904,8 +893,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr, true);
+	public function postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL) {
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, true);
 	}
 
 	/**
@@ -916,8 +905,8 @@ abstract class _JsUtils implements \Phalcon\DI\InjectionAwareInterface {
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr, false);
+	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL) {
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, false);
 	}
 
 	/**

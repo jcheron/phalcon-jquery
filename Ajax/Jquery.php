@@ -3,28 +3,17 @@
 namespace Ajax;
 
 use Ajax\service\PhalconUtils;
+use Ajax\service\JString;
 
 /**
  * JQuery Phalcon library
  *
  * @author jcheron
- * @version 1.001
+ * @version 1.002
  * @license Apache 2 http://www.apache.org/licenses/
  */
-function __autoload($myClass) {
-	if (file_exists("ui/components/".$myClass.".php")) {
-		require_once ("ui/components/".$myClass.".php");
-	}
-	if (file_exists("bootstrap/html/".$myClass.".php")) {
-		require_once ("bootstrap/html/".$myClass.".php");
-	}
-	if (file_exists("bootstrap/html/phalcon/".$myClass.".php")) {
-		require_once ("bootstrap/html/phalcon/".$myClass.".php");
-	}
-}
 /**
- * Jquery Class
- * *
+ * jQuery Class
  */
 class Jquery {
 	protected $_di;
@@ -806,44 +795,6 @@ class Jquery {
 	}
 
 	// --------------------------------------------------------------------
-
-	/**
-	 * An Ajax call that populates the designated DOM node with
-	 * returned content
-	 *
-	 * @param string $container The element to attach the event to
-	 * @param string $controller the controller to run the call against
-	 * @param string $options optional parameters
-	 * @return string
-	 */
-	public function _updater($container='this', $controller='', $options='') {
-		$url=$this->_di->get("url");
-		$container=$this->_prep_element($container);
-
-		$controller=(strpos('://', $controller)===FALSE) ? $controller : $url->get($controller);
-
-		// ajaxStart and ajaxStop are better choices here... but this is a stop gap
-		if ($this->jquery_ajax_img=='') {
-			$loading_notifier="Loading...";
-		} else {
-			$loading_notifier=$this->_di->get("tag")->image($this->jquery_ajax_img);
-		}
-
-		$updater="$($container).empty();\n"; // anything that was in... get it out
-		$updater.="\t\t$($container).prepend(\"$loading_notifier\");\n"; // to replace with an image
-
-		$request_options='';
-		if ($options!='') {
-			$request_options.=", {";
-			$request_options.=(is_array($options)) ? "'".implode("', '", $options)."'" : "'".str_replace(":", "':'", $options)."'";
-			$request_options.="}";
-		}
-
-		$updater.="\t\t$($container).load('$controller'$request_options);";
-		return $updater;
-	}
-
-	// --------------------------------------------------------------------
 	// Plugins
 	// --------------------------------------------------------------------
 
@@ -1066,15 +1017,25 @@ class Jquery {
 	}
 
 	public function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
+		return $this->_ajax("get", $url,$params,$responseElement,$jsCallback,$attr,$immediatly);
+	}
+	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
+		return $this->_ajax("post", $url,$params,$responseElement,$jsCallback,$attr,$immediatly);
+	}
+
+	protected function _ajax($method,$url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
+		if(JString::isNull($params)){$params="{}";}
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour="url='".$url."';\n";
-		if ($attr=="value")
-			$retour.="url=url+'/'+$(this).val();\n";
-		else
-			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		if(JString::isNotNull($attr)){
+			if ($attr=="value")
+				$retour.="url=url+'/'+$(this).val();\n";
+			else
+				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		}
 		$this->addLoading($retour, $responseElement);
-		$retour.="$.get(url,".$params.").done(function( data ) {\n";
+		$retour.="$.".$method."(url,".$params.").done(function( data ) {\n";
 		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
 			$retour.="\t$({$responseElement}).html( data );\n";
@@ -1106,10 +1067,12 @@ class Jquery {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour="url='".$url."';\n";
-		if ($attr=="value")
-			$retour.="url=url+'/'+$(this).val();\n";
-		else
-			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		if(JString::isNotNull($attr)){
+			if ($attr=="value")
+				$retour.="url=url+'/'+$(this).val();\n";
+			else
+				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		}
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key).length){ if($('#'+key).is('[value]')) { $('#'+key).val(data[key]);} else { $('#'+key).html(data[key]); }}};\n";
 		$retour.="\t".$jsCallback."\n
@@ -1130,10 +1093,12 @@ class Jquery {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour="url='".$url."';\n";
-		if ($attr=="value")
-			$retour.="url=url+'/'+$(this).val();\n";
-		else
-			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		if(JString::isNotNull($attr)){
+			if ($attr=="value")
+				$retour.="url=url+'/'+$(this).val();\n";
+			else
+				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		}
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n"."\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();"."\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;"."\tvar newElm=$('#'+newId);\n"."\tif(!newElm.length){\n"."\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n"."\t\tnewElm.appendTo($('".$maskSelector."').parent());\n"."\t}\n"."\tfor(var key in value){\n"."\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n"."\t\t\tif(html.indexOf('[['+key+']]')>-1){\n"."\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n"."\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n"."\t\t\t}\n"."\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n"."\t\t\tvar selElm=$(sel,newElm);\n"."\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n"."\t\t}\n"."}\n"."\t$(newElm).show(true);"."});\n";
 
@@ -1143,35 +1108,16 @@ class Jquery {
 		return $retour;
 	}
 
-	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
-		$url=$this->_correctAjaxUrl($url);
-		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='".$url."';\n";
-		if ($attr=="value")
-			$retour.="url=url+'/'+$(this).val();\n";
-		else
-			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
-		$this->addLoading($retour, $responseElement);
-		$retour.="$.post(url,".$params.").done(function( data ) {\n";
-		if ($responseElement!=="") {
-			$responseElement=$this->_prep_value($responseElement);
-			$retour.="\t$({$responseElement}).html( data );\n";
-		}
-		$retour.="\t".$jsCallback."\n
-		});\n";
-		if ($immediatly)
-			$this->jquery_code_for_compile[]=$retour;
-		return $retour;
-	}
-
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour="url='".$url."';\n";
-		if ($attr=="value")
-			$retour.="url=url+'/'+$(this).val();\n";
-		else
-			$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		if(JString::isNotNull($attr)){
+			if ($attr=="value")
+				$retour.="url=url+'/'+$(this).val();\n";
+			else
+				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+		}
 		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
 		if ($responseElement!=="") {
@@ -1204,8 +1150,7 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _getOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
-		return $script;
+		return $this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1221,8 +1166,7 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _postOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element, $this->_post($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
-		return $script;
+		return $this->_add_event($element, $this->_post($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1238,8 +1182,7 @@ class Jquery {
 	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
 	 */
 	public function _postFormOn($event,$element, $url, $form, $responseElement="", $preventDefault=true, $stopPropagation=true, $validation=false, $jsCallback=NULL, $attr="id") {
-		$script=$this->_add_event($element, $this->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
-		return $script;
+		return $this->_add_event($element, $this->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1274,8 +1217,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _doJQueryOn($event, $element, $elementToModify, $jqueryCall, $param="", $preventDefault=false, $stopPropagation=false, $jsCallback="") {
-		$script=$this->_add_event($element, $this->_doJQueryOn($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
-		return $script;
+		return $this->_add_event($element, $this->_doJQueryOn($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1301,9 +1243,7 @@ class Jquery {
 	 * @return String
 	 */
 	public function _execOn($element, $event, $js, $preventDefault=false, $stopPropagation=false) {
-		$script=$this->_add_event($element, $this->_exec($js), $event, $preventDefault, $stopPropagation);
-		return $script;
+		return $this->_add_event($element, $this->_exec($js), $event, $preventDefault, $stopPropagation);
 	}
 }
-
 /* End of file Jquery.php */

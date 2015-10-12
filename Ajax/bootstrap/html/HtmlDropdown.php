@@ -89,7 +89,7 @@ class HtmlDropdown extends HtmlButton {
 	public function addItem($caption, $href="#") {
 		if($caption instanceof HtmlDropdownItem){
 			$item=$caption;
-		}elseif(is_string($caption)){
+		}else{
 			$iid=$this->getItemsCount()+1;
 			$item=new HtmlDropdownItem($this->identifier."-dropdown-item-".$iid);
 			$item->setCaption($caption)->setHref($href);
