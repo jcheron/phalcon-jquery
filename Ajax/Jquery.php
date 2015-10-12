@@ -1025,8 +1025,18 @@ class Jquery {
 
 	protected function _ajax($method,$url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
 		if(JString::isNull($params)){$params="{}";}
-		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
+		$retour=$this->_getAjaxUrl($url, $attr);
+		$this->addLoading($retour, $responseElement);
+		$retour.="$.".$method."(url,".$params.").done(function( data ) {\n";
+		$retour.=$this->_getOnAjaxDone($responseElement, $jsCallback)."});\n";
+		if ($immediatly)
+			$this->jquery_code_for_compile[]=$retour;
+		return $retour;
+	}
+
+	protected function _getAjaxUrl($url,$attr){
+		$url=$this->_correctAjaxUrl($url);
 		$retour="url='".$url."';\n";
 		if(JString::isNotNull($attr)){
 			if ($attr=="value")
@@ -1034,16 +1044,16 @@ class Jquery {
 			else
 				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		}
-		$this->addLoading($retour, $responseElement);
-		$retour.="$.".$method."(url,".$params.").done(function( data ) {\n";
+		return $retour;
+	}
+
+	protected function _getOnAjaxDone($responseElement,$jsCallback){
+		$retour="";
 		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
-			$retour.="\t$({$responseElement}).html( data );\n";
+			$retour="\t$({$responseElement}).html( data );\n";
 		}
-		$retour.="\t".$jsCallback."\n
-		});\n";
-		if ($immediatly)
-			$this->jquery_code_for_compile[]=$retour;
+		$retour.="\t".$jsCallback."\n";
 		return $retour;
 	}
 
@@ -1064,15 +1074,8 @@ class Jquery {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function _json($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id", $immediatly=false) {
-		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='".$url."';\n";
-		if(JString::isNotNull($attr)){
-			if ($attr=="value")
-				$retour.="url=url+'/'+$(this).val();\n";
-			else
-				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
-		}
+		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key).length){ if($('#'+key).is('[value]')) { $('#'+key).val(data[key]);} else { $('#'+key).html(data[key]); }}};\n";
 		$retour.="\t".$jsCallback."\n
@@ -1090,15 +1093,8 @@ class Jquery {
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
 	public function _jsonArray($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL, $attr="id", $immediatly=false) {
-		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='".$url."';\n";
-		if(JString::isNotNull($attr)){
-			if ($attr=="value")
-				$retour.="url=url+'/'+$(this).val();\n";
-			else
-				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
-		}
+		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
 		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n"."\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();"."\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;"."\tvar newElm=$('#'+newId);\n"."\tif(!newElm.length){\n"."\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n"."\t\tnewElm.appendTo($('".$maskSelector."').parent());\n"."\t}\n"."\tfor(var key in value){\n"."\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n"."\t\t\tif(html.indexOf('[['+key+']]')>-1){\n"."\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n"."\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n"."\t\t\t}\n"."\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n"."\t\t\tvar selElm=$(sel,newElm);\n"."\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n"."\t\t}\n"."}\n"."\t$(newElm).show(true);"."});\n";
 
@@ -1109,23 +1105,12 @@ class Jquery {
 	}
 
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
-		$url=$this->_correctAjaxUrl($url);
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
-		$retour="url='".$url."';\n";
-		if(JString::isNotNull($attr)){
-			if ($attr=="value")
-				$retour.="url=url+'/'+$(this).val();\n";
-			else
-				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
-		}
+		$retour=$this->_getAjaxUrl($url, $attr);
 		$this->addLoading($retour, $responseElement);
 		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
-		if ($responseElement!=="") {
-			$responseElement=$this->_prep_value($responseElement);
-			$retour.="\t$({$responseElement}).html( data );\n";
-		}
-		$retour.="\t".$jsCallback."\n
-		});\n";
+		$retour.=$this->_getOnAjaxDone($responseElement, $jsCallback)."});\n";
+
 		if ($validation) {
 			$retour="$('#".$form."').validate({submitHandler: function(form) {
 			".$retour."
@@ -1217,7 +1202,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _doJQueryOn($event, $element, $elementToModify, $jqueryCall, $param="", $preventDefault=false, $stopPropagation=false, $jsCallback="") {
-		return $this->_add_event($element, $this->_doJQueryOn($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
+		return $this->_add_event($element, $this->_doJQuery($elementToModify, $jqueryCall, $param, $jsCallback), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
