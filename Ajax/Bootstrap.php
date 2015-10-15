@@ -25,6 +25,7 @@ use Ajax\bootstrap\html\HtmlAccordion;
 use Ajax\bootstrap\html\HtmlCarousel;
 use Ajax\bootstrap\html\HtmlTabs;
 use Ajax\bootstrap\html\HtmlModal;
+use Ajax\bootstrap\html\HtmlSplitbutton;
 
 class Bootstrap extends BaseGui {
 
@@ -280,5 +281,18 @@ class Bootstrap extends BaseGui {
 	public function htmlModal($identifier, $title="", $content="", $buttonCaptions=array()) {
 		$modal=new HtmlModal($identifier, $title, $content, $buttonCaptions);
 		return $this->addHtmlComponent($modal);
+	}
+
+	/**
+	 * Return a new Bootstrap Html SplitButton
+	 * @param string $identifier
+	 * @param string $value
+	 * @param array $items
+	 * @param string $cssStyle
+	 * @param string $onClick
+	 */
+	public function htmlSplitbutton($identifier,$value="", $items=array(), $cssStyle="btn-default", $onClick=NULL) {
+		$split=new HtmlSplitbutton($identifier, $value, $items, $cssStyle,$onClick);
+		return $this->addHtmlComponent($split);
 	}
 }

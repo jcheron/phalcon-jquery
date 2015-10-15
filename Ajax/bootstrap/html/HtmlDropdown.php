@@ -259,6 +259,26 @@ class HtmlDropdown extends HtmlButton {
 		return $this->addEvent("hidden.bs.dropdown", $jsCode);
 	}
 
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::on()
+	 */
+	public function on($event, $jsCode, $stopPropagation = false, $preventDefault = false) {
+		foreach ($this->items as $item){
+			$item->on($event, $jsCode,$stopPropagation,$preventDefault);
+		}
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::onClick()
+	 */
+	public function onClick($jsCode, $stopPropagation=false, $preventDefault=false) {
+		foreach ($this->items as $item){
+			$item->onClick($jsCode,$stopPropagation,$preventDefault);
+		}
+	}
+
+
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
 	 */

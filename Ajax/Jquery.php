@@ -26,7 +26,7 @@ class Jquery {
 	protected $jquery_corner_active=FALSE;
 	protected $jquery_table_sorter_active=FALSE;
 	protected $jquery_table_sorter_pager_active=FALSE;
-	protected $jquery_ajax_img='';
+	protected $ajaxLoader='<span></span><span></span><span></span><span></span><span></span>';
 	protected $jquery_events=array (
 			"bind","blur","change","click","dblclick","delegate","die","error","focus","focusin","focusout","hover","keydown","keypress","keyup","live","load","mousedown","mousseenter","mouseleave","mousemove","mouseout","mouseover","mouseup","off","on","one","ready","resize","scroll","select","submit","toggle","trigger","triggerHandler","undind","undelegate","unload"
 	);
@@ -113,8 +113,8 @@ class Jquery {
 		$this->libraryFile=$name;
 	}
 
-	public function _setImageLoader($img) {
-		$this->jquery_ajax_img=$img;
+	public function _setAjaxLoader($loader) {
+		$this->ajaxLoader=$loader;
 	}
 
 	// --------------------------------------------------------------------
@@ -1004,14 +1004,13 @@ class Jquery {
 	}
 	// ------------------------------------------------------------------------
 	protected function addLoading(&$retour, $responseElement) {
-		if ($this->jquery_ajax_img=='') {
-			$loading_notifier="Loading...";
+		$loading_notifier='<div class="ajax-loader">';
+		if ($this->ajaxLoader=='') {
+			$loading_notifier.="Loading...";
 		} else {
-			$loading_notifier=$this->_di->get("tag")->image(array (
-					$this->jquery_ajax_img,"class" => "ajax-loader"
-			));
+			$loading_notifier.=$this->ajaxLoader;
 		}
-
+		$loading_notifier.='</div>';
 		$retour.="$(\"{$responseElement}\").empty();\n";
 		$retour.="\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
 	}

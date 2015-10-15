@@ -165,4 +165,12 @@ class HtmlButtongroups extends HtmlDoubleElement {
 	public function getElements() {
 		return $this->elements;
 	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addElement($function($object));
+	}
+
 }

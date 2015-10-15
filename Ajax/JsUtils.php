@@ -116,8 +116,8 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		return $this->_di;
 	}
 
-	public function setImageLoader($img) {
-		$this->js->_setImageLoader($img);
+	public function setAjaxLoader($loader) {
+		$this->js->_setAjaxLoader($loader);
 	}
 
 	public function __construct($params=array()) {
