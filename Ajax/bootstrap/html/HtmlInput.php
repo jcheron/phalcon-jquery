@@ -37,9 +37,6 @@ class HtmlInput extends HtmlSingleElement {
 		}
 	}
 
-	public function onClick($jsCode) {
-		return $this->addEvent("click", $jsCode);
-	}
 
 	/*
 	 * (non-PHPdoc)

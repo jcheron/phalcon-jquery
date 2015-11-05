@@ -64,10 +64,30 @@ class HtmlInputgroup extends HtmlInput {
 		return $this->addButton_(new HtmlButton($identifier), $value, $position);
 	}
 
+	public function createButtons($items, $position="left") {
+		$span=$this->createSpan("", $position);
+		$span->setClass("input-group-btn");
+		$span->setTagName("div");
+		$buttons=array();
+		$i=1;
+		foreach ($items as $item){
+			$bt=NULL;
+			if(is_string($item)){
+				$bt=new HtmlButton($this->identifier."-bt-".$i++,$item);
+			}elseif ($item instanceof HtmlButton){
+				$bt=$item;
+			}
+			if(isset($bt)){
+				$buttons[]=$bt;
+			}
+		}
+		$span->setContent($buttons);
+		return $span;
+	}
 	protected function addDropdown_(HtmlDropdown $dropdown, $caption="", $position="left", $items=array()) {
 		$dropdown->setBtnCaption($caption);
 		$dropdown->fromArray($items);
-		
+
 		if (strtolower($position)==="left")
 			$this->addonLeft=$dropdown;
 		else
@@ -99,15 +119,17 @@ class HtmlInputgroup extends HtmlInput {
 	 */
 	public function setSize($size) {
 		if (is_int($size)) {
-			return $this->addToProperty("class", CssRef::sizes("input-group")[$size]);
+			return $this->addToMemberCtrl($this->mClass, CssRef::sizes("input-group")[$size],CssRef::sizes("input-group"));
 		}
-		return $this->addToPropertyCtrl("class", $size, CssRef::sizes("input-group"));
+		return $this->addToMemberCtrl($this->mClass, $size, CssRef::sizes("input-group"));
 	}
 
 	public function run(JsUtils $js) {
+		parent::run($js);
 		if (isset($this->addonLeft))
 			$this->addonLeft->run($js);
 		if (isset($this->addonRight))
 			$this->addonRight->run($js);
 	}
+
 }

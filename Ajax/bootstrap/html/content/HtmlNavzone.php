@@ -35,7 +35,9 @@ class HtmlNavzone extends BaseHtml {
 	}
 
 	public function addElement($element) {
-		if (is_object($element)) {
+		if($element instanceof HtmlLink){
+			$this->addLink($element);
+		} else if (is_object($element)) {
 			$this->elements []=$element;
 		} else if (is_array($element)) {
 			$this->addLink(array_pop($element), array_pop($element));
@@ -81,7 +83,11 @@ class HtmlNavzone extends BaseHtml {
 	public function addLink($caption, $href="#") {
 		$iid=$this->getElementsCount()+1;
 		$li=new HtmlDoubleElement($this->identifier."-li-".$iid, "li");
-		$link=new HtmlLink($this->identifier."-link-".$iid, $href, $caption);
+		if($caption instanceof HtmlLink){
+			$link=$caption;
+		}else{
+			$link=new HtmlLink($this->identifier."-link-".$iid, $href, $caption);
+		}
 		$li->setContent($link);
 		$this->addElement($li);
 	}
@@ -122,5 +128,13 @@ class HtmlNavzone extends BaseHtml {
 
 	public function __toString() {
 		return $this->compile();
+	}
+
+	/**
+	 * @param int $index
+	 * @return BaseHtml
+	 */
+	public function getElement($index){
+		return $this->elements[$index];
 	}
 }

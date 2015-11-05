@@ -40,6 +40,10 @@ class HtmlCarousel extends BaseHtml {
 	}
 
 	public function setBase($_base) {
+		foreach ($this->slides as $slide){
+			$imgSrc=$slide->getImageSrc();
+			$slide->setImageSrc(str_replace($this->_base.$imgSrc, $_base.$imgSrc, $imgSrc));
+		}
 		$this->_base=$_base;
 		return $this;
 	}
@@ -91,19 +95,23 @@ class HtmlCarousel extends BaseHtml {
 	}
 
 	public function addImage($imageSrc, $imageAlt="", $caption=NULL, $description=NULL) {
-		$image=new HtmlCarouselItem("item-".$this->identifier);
-		$image->setImageSrc($this->_base.$imageSrc);
-		$image->setImageAlt($imageAlt);
-		$image->setClass("item");
-		if (isset($caption)) {
-			$optCaption="<h3>".$caption."</h3>";
-			if (isset($description)) {
-				$optCaption.="<p>".$description."</p>";
+		if(is_array($imageSrc)){
+			$this->addImage($imageSrc[0],@$imageSrc[1],@$imageSrc[2],@$imageSrc[3]);
+		}else{
+			$image=new HtmlCarouselItem("item-".$this->identifier);
+			$image->setImageSrc($this->_base.$imageSrc);
+			$image->setImageAlt($imageAlt);
+			$image->setClass("item");
+			if (isset($caption)) {
+				$optCaption="<h3>".$caption."</h3>";
+				if (isset($description)) {
+					$optCaption.="<p>".$description."</p>";
+				}
+				$image->setCaption($optCaption);
 			}
-			$image->setCaption($optCaption);
+			$this->slides []=$image;
+			$this->createIndicator();
 		}
-		$this->slides []=$image;
-		$this->createIndicator();
 	}
 
 	/*
@@ -111,7 +119,7 @@ class HtmlCarousel extends BaseHtml {
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromArray()
 	 */
 	public function fromArray($array) {
-		if (sizeof($array)>0) {
+		if (is_array($array) && sizeof($array)>0) {
 			foreach ( $array as $value ) {
 				if (is_array($value)) {
 					$this->addImage($value ["src"], @$value ["alt"], @$value ["caption"], @$value ["description"]);
@@ -140,5 +148,13 @@ class HtmlCarousel extends BaseHtml {
 		$this->indicators [0]->setClass("active");
 		$this->createControls();
 		return parent::compile($js, $view);
+	}
+
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addImage($function($object));
 	}
 }

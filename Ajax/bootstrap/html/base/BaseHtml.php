@@ -212,6 +212,7 @@ abstract class BaseHtml extends BaseWidget {
 				$this->fromDatabaseObject($object,$function);
 			}
 		}
+		return $this;
 	}
 
 	public function fromDatabaseObject($object,$function){
