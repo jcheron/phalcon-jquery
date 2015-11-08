@@ -6,6 +6,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\service\PhalconUtils;
+use Ajax\bootstrap\html\base\CssRef;
 
 class HtmlProgressbar extends HtmlDoubleElement {
 	protected $value;
@@ -27,26 +28,44 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	}
 
 	public function setActive($value) {
-		if ($value===true)
-			$this->active="active";
-		else
-			$this->active="";
+		if(is_array($this->content)){
+			foreach ($this->content as $pb){
+				$pb->setActive($value);
+			}
+		}else{
+			if ($value===true)
+				$this->active="active";
+			else
+				$this->active="";
+		}
 		return $this;
 	}
 
 	public function setStriped($value) {
-		if ($value===true)
-			$this->striped="progress-bar-striped";
-		else
-			$this->striped="";
+		if(is_array($this->content)){
+			foreach ($this->content as $pb){
+				$pb->setStriped($value);
+			}
+		}else{
+			if ($value===true)
+				$this->striped="progress-bar-striped";
+			else
+				$this->striped="";
+		}
 		return $this;
 	}
 
 	public function showCaption($value) {
-		if ($value===true)
-			$this->caption="%value%%";
-		else
-			$this->caption='<span class="sr-only">%value%% Complete (%style%)</span>';
+		if(is_array($this->content)){
+			foreach ($this->content as $pb){
+				$pb->showCaption($value);
+			}
+		}else{
+			if ($value===true)
+				$this->caption="%value%%";
+			else
+				$this->caption='<span class="sr-only">%value%% Complete (%style%)</span>';
+		}
 		return $this;
 	}
 
@@ -58,8 +77,8 @@ class HtmlProgressbar extends HtmlDoubleElement {
 		$this->_template='%content%';
 		$progressBar->setIsStacked(true);
 		$progressBar->showCaption($this->caption=="%value%%");
-		$progressBar->setStriped($this->striped!=="");
-		$progressBar->setActive($this->active==="active");
+		$progressBar->setStriped($this->striped!=="" || $progressBar->isStriped());
+		$progressBar->setActive($this->active==="active" || $progressBar->isActive());
 		if (is_array($this->content)===false) {
 			$this->content=array ();
 		}
@@ -105,15 +124,7 @@ class HtmlProgressbar extends HtmlDoubleElement {
 	 * @return \Ajax\bootstrap\html\HtmlProgressbar default : ""
 	 */
 	public function setStyle($cssStyle) {
-		if (PhalconUtils::startsWith($cssStyle, "progress-bar-")===true) {
-			$cssStyle=str_ireplace("progress-bar-", "", $cssStyle);
-		}
-		return $this->setMemberCtrl($this->style, $cssStyle, array (
-				"success",
-				"info",
-				"warning",
-				"danger" 
-		));
+		return $this->setMemberCtrl($this->style,CssRef::getStyle($cssStyle, "progress-bar"), CssRef::Styles("progress-bar"));
 	}
 
 	/*
@@ -127,4 +138,20 @@ class HtmlProgressbar extends HtmlDoubleElement {
 		}
 		return parent::compile($js, $view);
 	}
+
+	public function isStriped() {
+		return $this->striped;
+	}
+
+	public function isActive() {
+		return $this->active;
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->stack($function($object));
+	}
+
 }

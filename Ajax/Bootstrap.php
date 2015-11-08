@@ -26,6 +26,7 @@ use Ajax\bootstrap\html\HtmlCarousel;
 use Ajax\bootstrap\html\HtmlTabs;
 use Ajax\bootstrap\html\HtmlModal;
 use Ajax\bootstrap\html\HtmlSplitbutton;
+use Ajax\bootstrap\html\HtmlInputgroup;
 
 class Bootstrap extends BaseGui {
 
@@ -290,9 +291,20 @@ class Bootstrap extends BaseGui {
 	 * @param array $items
 	 * @param string $cssStyle
 	 * @param string $onClick
+	 * @return HtmlSplitbutton
 	 */
 	public function htmlSplitbutton($identifier,$value="", $items=array(), $cssStyle="btn-default", $onClick=NULL) {
 		$split=new HtmlSplitbutton($identifier, $value, $items, $cssStyle,$onClick);
 		return $this->addHtmlComponent($split);
+	}
+
+	/**
+	 * Return a new Bootstrap Html InputGroup
+	 * @param string $identifier
+	 * @return HtmlInputgroup
+	 */
+	public function htmlInputgroup($identifier){
+		$inputGroup=new HtmlInputgroup($identifier);
+		return $this->addHtmlComponent($inputGroup);
 	}
 }

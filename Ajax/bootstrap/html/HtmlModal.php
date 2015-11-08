@@ -5,6 +5,8 @@ namespace Ajax\bootstrap\html;
 use Phalcon\Mvc\View;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\BaseHtml;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\Controller;
 
 /**
  * Twitter Bootstrap HTML Modal component
@@ -42,7 +44,7 @@ class HtmlModal extends BaseHtml {
 	 * @return HtmlButton
 	 */
 	public function addButton($value="Okay", $style="btn-primary") {
-		$btn=new HtmlButton($value);
+		$btn=new HtmlButton($this->identifier."-".$value);
 		$btn->setStyle($style);
 		$btn->setValue($value);
 		$this->buttons []=$btn;
@@ -65,9 +67,9 @@ class HtmlModal extends BaseHtml {
 	 * @param string $value
 	 * @return HtmlButton
 	 */
-	public function addOkayButton($value="Okay") {
+	public function addOkayButton($value="Okay",$jsCode="") {
 		$btn=$this->addButton($value, "btn-primary");
-		$btn->onClick("if(".$this->getValidCondition().") $('#".$this->identifier."').modal('hide');");
+		$btn->onClick("if(".$this->getValidCondition()."){ ".$jsCode."$('#".$this->identifier."').modal('hide');}");
 		return $btn;
 	}
 
@@ -108,7 +110,7 @@ class HtmlModal extends BaseHtml {
 	}
 
 	/**
-	 * render the content of $controller::$action and set the response to the modal content
+	 * render the content of an existing view : $controller/$action and set the response to the modal content
 	 * @param View $view
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
@@ -121,13 +123,33 @@ class HtmlModal extends BaseHtml {
 		$this->content=$template;
 	}
 
+	/**
+	 * render the content of $controller::$action and set the response to the modal content
+	 * @param Controller $initialController
+	 * @param string $controller a Phalcon controller
+	 * @param string $action a Phalcon action
+	 */
+	public function forward($initialController,$controller,$action){
+		$dispatcher = $initialController->dispatcher;
+		$dispatcher->setControllerName($controller);
+		$dispatcher->setActionName($action);
+		$dispatcher->dispatch();
+		$template=$initialController->view->getRender($dispatcher->getControllerName(), $dispatcher->getActionName(),$dispatcher->getParams(), function ($view) {
+			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+		});
+		$this->content=$template;
+	}
+
 	/*
 	 * (non-PHPdoc)
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
+		if($this->content instanceof BaseHtml){
+			$this->content->run($js);
+		}
 		$this->_bsComponent=$js->bootstrap()->modal("#".$this->identifier, array (
-				"show" => $this->showOnStartup 
+				"show" => $this->showOnStartup
 		));
 		if ($this->draggable)
 			$this->_bsComponent->setDraggable(true);

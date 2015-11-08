@@ -36,7 +36,7 @@ class HtmlAlert extends HtmlDoubleElement {
 	 * define the alert style
 	 * avaible values : "alert-success","alert-info","alert-warning","alert-danger"
 	 * @param string|int $cssStyle
-	 * @return \Ajax\bootstrap\html\HtmlAlert default : "alert-succes"
+	 * @return \Ajax\bootstrap\html\HtmlAlert default : "alert-success"
 	 */
 	public function setStyle($cssStyle) {
 		return $this->addToPropertyCtrl("class", CssRef::getStyle($cssStyle, "alert"), CssRef::Styles("alert"));
@@ -47,11 +47,11 @@ class HtmlAlert extends HtmlDoubleElement {
 		$button->setProperties(array (
 				"class" => "close",
 				"data-dismiss" => "alert",
-				"aria-label" => "close" 
+				"aria-label" => "close"
 		));
 		$button->setValue('<span aria-hidden="true">&times;</span>');
 		$this->addToPropertyCtrl("class", "alert-dismissible", array (
-				"alert-dismissible" 
+				"alert-dismissible"
 		));
 		$this->button=$button;
 	}
