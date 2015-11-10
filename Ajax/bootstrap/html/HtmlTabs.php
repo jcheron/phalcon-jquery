@@ -27,6 +27,9 @@ class HtmlTabs extends HtmlDoubleElement {
 	}
 
 	protected function addTab_($tab, $index=null) {
+		if($tab instanceof HtmlDropdown){
+			$tab->setMTagName("li");
+		}
 		if (isset($index)) {
 			$inserted=array (
 					$tab
@@ -34,6 +37,16 @@ class HtmlTabs extends HtmlDoubleElement {
 			array_splice($this->tabs, $index, 0, $inserted);
 		} else
 			$this->tabs []=$tab;
+	}
+
+	public function setActive($index){
+		for ($i=0;$i<sizeof($this->tabs);$i++){
+			$this->tabs[$i]->setActive($i==$index);
+		}
+	}
+
+	public function disable($index){
+		$this->tabs[$index]->disable();
 	}
 
 	public function addTab($element, $index=null) {

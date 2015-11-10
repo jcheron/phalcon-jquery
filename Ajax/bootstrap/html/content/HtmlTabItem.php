@@ -16,7 +16,7 @@ class HtmlTabItem extends HtmlDoubleElement {
 
 	public function __construct($identifier, $caption="", $href="#") {
 		parent::__construct($identifier, "li");
-		$this->_template='<%tagName% id="%identifier%">%content%</%tagName%>';
+		$this->_template='<%tagName% id="%identifier%" %properties%>%content%</%tagName%>';
 		$this->content=new HtmlLink("link-".$identifier);
 		$this->content->setHref($href);
 		$this->content->setContent($caption);
@@ -65,5 +65,12 @@ class HtmlTabItem extends HtmlDoubleElement {
 		if($this->content instanceof HtmlLink){
 			$this->content->setIdentifier("link-".$identifier);
 		}
+	}
+	public function setActive($value=true){
+		$this->setProperty("class", ($value)?"active":"");
+	}
+
+	public function disable(){
+		$this->setProperty("class", "disabled");
 	}
 }
