@@ -7,7 +7,9 @@
 [![Build Status](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite.svg?branch=master)](https://travis-ci.org/jcheron/phalcon-jquery-tests-suite)
 [![Latest Stable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/stable)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Total Downloads](https://poser.pugx.org/jcheron/phalcon-jquery/downloads)](https://packagist.org/packages/jcheron/phalcon-jquery) [![Latest Unstable Version](https://poser.pugx.org/jcheron/phalcon-jquery/v/unstable)](https://packagist.org/packages/jcheron/phalcon-jquery) [![License](https://poser.pugx.org/jcheron/phalcon-jquery/license)](https://packagist.org/packages/jcheron/phalcon-jquery)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jcheron/phalcon-jquery/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jcheron/phalcon-jquery/?branch=master)
-[![Phalconist](jcheron/phalcon-jquery/default.svg)](jcheron/phalcon-jquery)
+<a href="http://phalconist.com/jcheron/phalcon-jquery" target="_blank">
+![Phalcon-jQuery](http://phalconist.com/jcheron/phalcon-jquery/default.svg)
+</a>
 
  **Phalcon 1.3.4 and 2.0 compatible**
 
