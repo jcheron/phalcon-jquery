@@ -37,7 +37,7 @@ class HtmlListgroup extends HtmlDoubleElement {
 			}
 			$element->setContent($text);
 		}
-		
+
 		$item=new HtmlListgroupItem($element);
 		if (is_array($text)===true) {
 			$item->setHeadingAndContent($text);
@@ -58,5 +58,12 @@ class HtmlListgroup extends HtmlDoubleElement {
 	public function getItem($index) {
 		if ($index<sizeof($this->content))
 			return $this->content [$index];
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addItem($function($object));
 	}
 }

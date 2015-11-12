@@ -37,6 +37,9 @@ class HtmlInput extends HtmlSingleElement {
 		}
 	}
 
+	public function setPlaceHolder($value){
+		$this->setProperty("placeholder", $value);
+	}
 
 	/*
 	 * (non-PHPdoc)

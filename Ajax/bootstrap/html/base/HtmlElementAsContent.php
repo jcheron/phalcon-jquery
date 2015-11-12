@@ -25,6 +25,14 @@ class HtmlElementAsContent extends BaseHtml {
 		return $this;
 	}
 
+	public function addBadge($caption, $leftSeparator="&nbsp;") {
+		return $this->element->addBadge($caption,$leftSeparator);
+	}
+
+	public function addLabel($caption, $style="label-default", $leftSeparator="&nbsp;") {
+		return $this->element->addLabel($caption,$style,$leftSeparator);
+	}
+
 	public function run(JsUtils $js) {
 		$this->element->run($js);
 	}

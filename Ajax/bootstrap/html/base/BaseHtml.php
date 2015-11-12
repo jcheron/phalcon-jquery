@@ -342,4 +342,38 @@ abstract class BaseHtml extends BaseWidget {
 	public function __toString(){
 		return $this->compile();
 	}
+
+	/**
+	 * Puts HTML values in quotes for use in jQuery code
+	 * unless the supplied value contains the Javascript 'this' or 'event'
+	 * object, in which case no quotes are added
+	 *
+	 * @param string $value
+	 * @return string
+	 */
+	public function _prep_value($value) {
+		if (is_array($value)) {
+			$value=implode(",", $value);
+		}
+		if (strrpos($value, 'this')===false&&strrpos($value, 'event')===false) {
+			$value='"'.$value.'"';
+		}
+		return $value;
+	}
+
+	public function jsDoJquery($jqueryCall, $param=""){
+		return "$('#".$this->identifier."').".$jqueryCall."(".$this->_prep_value($param).");";
+	}
+
+	public function jsHtml($content=""){
+		return $this->jsDoJquery("html",$content);
+	}
+
+	public function jsShow(){
+		return $this->jsDoJquery("show");
+	}
+
+	public function jsHide(){
+		return $this->jsDoJquery("hide");
+	}
 }

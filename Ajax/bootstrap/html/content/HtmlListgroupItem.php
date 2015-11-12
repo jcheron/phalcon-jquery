@@ -73,7 +73,7 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 		$element->setClass("list-group-item-text");
 		$this->element->setContent(array (
 				$elementHeader,
-				$element 
+				$element
 		));
 		return $this->element;
 	}

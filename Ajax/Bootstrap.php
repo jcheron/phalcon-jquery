@@ -134,8 +134,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlButton
 	 */
 	public function htmlButton($identifier, $value="", $cssStyle=null, $onClick=null) {
-		$button=new HtmlButton($identifier, $value, $cssStyle, $onClick);
-		return $this->addHtmlComponent($button);
+		return $this->addHtmlComponent(new HtmlButton($identifier, $value, $cssStyle, $onClick));
 	}
 
 	/**
@@ -148,8 +147,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlGlyphButton
 	 */
 	public function htmlGlyphButton($identifier, $glyphIcon=0, $value="", $cssStyle=NULL, $onClick=NULL) {
-		$button=new HtmlGlyphButton($identifier, $glyphIcon, $value, $cssStyle, $onClick);
-		return $this->addHtmlComponent($button);
+		return $this->addHtmlComponent(new HtmlGlyphButton($identifier, $glyphIcon, $value, $cssStyle, $onClick));
 	}
 
 	/**
@@ -275,10 +273,11 @@ class Bootstrap extends BaseGui {
 	 * Return a new Bootstrap Html listGroup
 	 * @param string $identifier
 	 * @param array $items array of items to add
+	 * @param string $tagName container tagName
 	 * @return HtmlListgroup
 	 */
-	public function htmlListgroup($identifier,$items=array()){
-		$listGroup=new HtmlListgroup($identifier);
+	public function htmlListgroup($identifier,$items=array(),$tagName="ul"){
+		$listGroup=new HtmlListgroup($identifier,$tagName);
 		$listGroup->addItems($items);
 		return $this->addHtmlComponent($listGroup);
 	}
@@ -305,8 +304,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlSplitbutton
 	 */
 	public function htmlSplitbutton($identifier,$value="", $items=array(), $cssStyle="btn-default", $onClick=NULL) {
-		$split=new HtmlSplitbutton($identifier, $value, $items, $cssStyle,$onClick);
-		return $this->addHtmlComponent($split);
+		return $this->addHtmlComponent(new HtmlSplitbutton($identifier, $value, $items, $cssStyle,$onClick));
 	}
 
 	/**
@@ -315,7 +313,6 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlInputgroup
 	 */
 	public function htmlInputgroup($identifier){
-		$inputGroup=new HtmlInputgroup($identifier);
-		return $this->addHtmlComponent($inputGroup);
+		return $this->addHtmlComponent(new HtmlInputgroup($identifier));
 	}
 }
