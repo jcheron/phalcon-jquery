@@ -1106,8 +1106,9 @@ class Jquery {
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
+		$retour.="\nvar params=$('#".$form."').serialize();\n";
 		$this->addLoading($retour, $responseElement);
-		$retour.="$.post(url,$('#".$form."').serialize()).done(function( data ) {\n";
+		$retour.="$.post(url,params).done(function( data ) {\n";
 		$retour.=$this->_getOnAjaxDone($responseElement, $jsCallback)."});\n";
 
 		if ($validation) {

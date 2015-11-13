@@ -7,8 +7,6 @@ use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNBootstrap;
-use Ajax\service\JArray;
-use Ajax\service\PhalconUtils;
 use Phalcon\DiInterface;
 use Phalcon\Version;
 use Phalcon\Di\InjectionAwareInterface;
