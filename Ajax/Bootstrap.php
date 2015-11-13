@@ -159,8 +159,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlButtongroups
 	 */
 	public function htmlButtongroups($identifier, $values=array(), $cssStyle=NULL, $size=NULL) {
-		$buttongroup=new HtmlButtongroups($identifier, $values, $cssStyle, $size);
-		return $this->addHtmlComponent($buttongroup);
+		return $this->addHtmlComponent(new HtmlButtongroups($identifier, $values, $cssStyle, $size));
 	}
 
 	/**
@@ -172,8 +171,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlDropdown
 	 */
 	public function htmlDropdown($identifier, $value="", $items=array(), $cssStyle=NULL, $size=NULL) {
-		$button=new HtmlDropdown($identifier, $value, $items, $cssStyle, $size);
-		return $this->addHtmlComponent($button);
+		return $this->addHtmlComponent(new HtmlDropdown($identifier, $value, $items, $cssStyle, $size));
 	}
 
 	/**
@@ -185,8 +183,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlButtontoolbar
 	 */
 	public function htmlButtontoolbar($identifier, $elements=array(), $cssStyle=NULL, $size=NULL) {
-		$button=new HtmlButtontoolbar($identifier, $elements, $cssStyle, $size);
-		return $this->addHtmlComponent($button);
+		return $this->addHtmlComponent(new HtmlButtontoolbar($identifier, $elements, $cssStyle, $size));
 	}
 
 	/**
@@ -197,8 +194,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlNavbar
 	 */
 	public function htmlNavbar($identifier, $brand="Brand", $brandHref="#") {
-		$nav=new HtmlNavbar($identifier, $brand, $brandHref);
-		return $this->addHtmlComponent($nav);
+		return $this->addHtmlComponent(new HtmlNavbar($identifier, $brand, $brandHref));
 	}
 
 	/**
@@ -210,8 +206,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlProgressbar
 	 */
 	public function htmlProgressbar($identifier, $style="info", $value=0, $max=100, $min=0) {
-		$pb=new HtmlProgressbar($identifier, $style, $value, $max, $min);
-		return $this->addHtmlComponent($pb);
+		return $this->addHtmlComponent(new HtmlProgressbar($identifier, $style, $value, $max, $min));
 	}
 
 	/**
@@ -223,8 +218,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlPanel
 	 */
 	public function htmlPanel($identifier, $content=NULL, $header=NULL, $footer=NULL) {
-		$panel=new HtmlPanel($identifier, $content, $header, $footer);
-		return $this->addHtmlComponent($panel);
+		return $this->addHtmlComponent(new HtmlPanel($identifier, $content, $header, $footer));
 	}
 
 	/**
@@ -235,8 +229,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlAlert
 	 */
 	public function htmlAlert($identifier, $message=NULL, $cssStyle="alert-warning") {
-		$alert=new HtmlAlert($identifier, $message, $cssStyle);
-		return $this->addHtmlComponent($alert);
+		return $this->addHtmlComponent(new HtmlAlert($identifier, $message, $cssStyle));
 	}
 
 	/**
@@ -245,8 +238,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlAccordion
 	 */
 	public function htmlAccordion($identifier) {
-		$accordion=new HtmlAccordion($identifier);
-		return $this->addHtmlComponent($accordion);
+		return $this->addHtmlComponent(new HtmlAccordion($identifier));
 	}
 
 	/**
@@ -256,8 +248,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlCarousel
 	 */
 	public function htmlCarousel($identifier, $images=NULL) {
-		$caroussel=new HtmlCarousel($identifier, $images);
-		return $this->addHtmlComponent($caroussel);
+		return $this->addHtmlComponent(new HtmlCarousel($identifier, $images));
 	}
 
 	/**
@@ -266,8 +257,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlTabs
 	 */
 	public function htmlTabs($identifier) {
-		$tabs=new HtmlTabs($identifier);
-		return $this->addHtmlComponent($tabs);
+		return $this->addHtmlComponent(new HtmlTabs($identifier));
 	}
 	/**
 	 * Return a new Bootstrap Html listGroup
@@ -290,8 +280,7 @@ class Bootstrap extends BaseGui {
 	 * @return HtmlModal
 	 */
 	public function htmlModal($identifier, $title="", $content="", $buttonCaptions=array()) {
-		$modal=new HtmlModal($identifier, $title, $content, $buttonCaptions);
-		return $this->addHtmlComponent($modal);
+		return $this->addHtmlComponent(new HtmlModal($identifier, $title, $content, $buttonCaptions));
 	}
 
 	/**
