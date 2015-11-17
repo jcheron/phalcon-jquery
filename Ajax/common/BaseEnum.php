@@ -36,6 +36,6 @@ abstract class BaseEnum {
 
 	public static function isValidValue($value) {
 		$values=array_values(self::getConstants());
-		return in_array($value, $values, $strict=true);
+		return in_array($value, $values, true);
 	}
 }

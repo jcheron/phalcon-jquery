@@ -3,7 +3,6 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\HtmlLink;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 

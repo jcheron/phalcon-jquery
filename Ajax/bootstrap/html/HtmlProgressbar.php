@@ -5,7 +5,6 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
-use Ajax\service\PhalconUtils;
 use Ajax\bootstrap\html\base\CssRef;
 
 class HtmlProgressbar extends HtmlDoubleElement {

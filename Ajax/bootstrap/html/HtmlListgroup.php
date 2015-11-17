@@ -3,9 +3,7 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
-use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\content\HtmlListgroupItem;
-use Ajax\bootstrap\html\base\HtmlElementAsContent;
 
 /**
  * Composant Twitter Bootstrap Listgroup

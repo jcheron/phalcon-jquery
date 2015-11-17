@@ -9,8 +9,6 @@ use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\content\HtmlCarouselItem;
 use Phalcon\Mvc\View;
-use Ajax\bootstrap\html\html5\HtmlImg;
-
 /**
  * Composant Twitter Bootstrap Carousel
  * @see http://getbootstrap.com/components/#carousel
