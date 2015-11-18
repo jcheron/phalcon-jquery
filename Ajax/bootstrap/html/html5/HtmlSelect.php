@@ -1,57 +1,76 @@
 <?php
-
 namespace Ajax\bootstrap\html\html5;
 
+/**
+ * HTML Select
+ * @author jc
+ * @version 1.001
+ */
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
+use Phalcon\Mvc\View;
+use Ajax\service\JArray;
+use Ajax\bootstrap\html\html5\HtmlOption;
 
 class HtmlSelect extends HtmlDoubleElement {
-
-	public function __construct($identifier) {
+	private $default;
+	private $options;
+	
+	public function __construct($identifier, $caption,$default=NULL) {
 		parent::__construct($identifier, "select");
+		$this->setProperty("name", $identifier);
+		$this->setProperty("class", "form-control");
+		$this->setProperty("value", "");
+		$this->default=$default;
+		$this->options=array();
 	}
-
-	public function setOptions($options) {
-		foreach ( $options as $key => $value ) {
-			$this->_addOption($key, $value);
+	
+	public function addOption($caption,$value,$selected=false){
+		$option=new HtmlOption($this->identifier."-".count($this->options), $caption,$value);
+		if($selected){
+			$option->select();
 		}
+		$this->options[]=$option;
 	}
-
-	private function _addOption($key, $value) {
-		$elm=new HtmlDoubleElement("opt-".$key);
-		$elm->setTagName("option");
-		$elm->setProperty("value", $key);
-		$elm->setContent($value);
-		$this->addContent($elm);
-	}
-
-	public function addOption($option) {
-		if (is_array($option)) {
-			if (sizeof($option)>1) {
-				$this->_addOption($option [0], $option [1]);
-			}
-		} else {
-			$this->_addOption(sizeof($this->content), $option);
-		}
-	}
-
+	
 	public function setValue($value) {
-		foreach ( $this->content as $option ) {
-			if ($option->getProperty("value")===$value) {
+		foreach ( $this->options as $option ) {
+			if (strcasecmp($option->getValue(),$value)===0) {
 				$option->setProperty("selected", "");
-				break;
 			}
 		}
+		$this->setProperty("value", $value);
 	}
-
-	public function setLabel($label, $before=true) {
-		if ($before===true) {
-			$this->wrap("<label for='".$this->identifier."'>".$label."</label>", "");
-		} else {
-			$this->wrap("", "<label for='".$this->identifier."'>&nbsp;".$label."</label>");
+	
+	/*
+	 * (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
+	 */
+	public function compile(JsUtils $js=NULL, View $view=NULL) {
+		$this->content=array();
+		if(isset($this->default)){
+			$default=new HtmlOption("", $this->default);
+			$this->content[]=$default;
 		}
+		foreach ($this->options as $option){
+			$this->content[]=$option;
+		}
+		return parent::compile($js, $view);
 	}
-
+	
+	public function fromArray($array){
+		if(JArray::isAssociative($array)){
+			foreach ($array as $k=>$v){
+				$this->addOption($v, $k);
+			}
+		}else{
+			foreach ($array as $v){
+				$this->addOption($v, $v);
+			}
+		}
+		return $this;
+	}
+	
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
@@ -62,11 +81,11 @@ class HtmlSelect extends HtmlDoubleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
-
+	
 	public function onChange($jsCode) {
 		return $this->addEvent("change", $jsCode);
 	}
-
+	
 	public function onKeypress($jsCode) {
 		return $this->addEvent("keypress", $jsCode);
 	}
