@@ -3,7 +3,7 @@ namespace Ajax\bootstrap\html\html5;
 /**
  * HTML Select
  * @author jc
- * @version 1.001
+ * @version 1.002
  */
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
