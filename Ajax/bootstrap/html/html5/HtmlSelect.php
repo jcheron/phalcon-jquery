@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html\html5;
 /**
  * HTML Select
  * @author jc
- * @version 1.001
+ * @version 1.002
  */
 use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
@@ -25,9 +25,13 @@ class HtmlSelect extends HtmlDoubleElement {
 		$this->options=array();
 	}
 	
-	public function addOption($caption,$value,$selected=false){
-		$option=new HtmlOption($this->identifier."-".count($this->options), $caption,$value);
-		if($selected){
+	public function addOption($element,$value="",$selected=false){
+		if($element instanceof HtmlOption){
+			$option=$element;
+		}else{
+			$option=new HtmlOption($this->identifier."-".count($this->options), $element,$value);
+		}
+		if($selected || $option->getValue()==$this->getProperty("value")){
 			$option->select();
 		}
 		$this->options[]=$option;
@@ -88,5 +92,12 @@ class HtmlSelect extends HtmlDoubleElement {
 	
 	public function onKeypress($jsCode) {
 		return $this->addEvent("keypress", $jsCode);
+	}
+	
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addOption($function($object));
 	}
 }
