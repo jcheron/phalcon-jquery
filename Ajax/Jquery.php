@@ -1015,18 +1015,20 @@ class Jquery {
 		$retour.="\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
 	}
 
-	public function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
-		return $this->_ajax("get", $url,$params,$responseElement,$jsCallback,$attr,$immediatly);
+	public function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
+		return $this->_ajax("get", $url,$params,$responseElement,$jsCallback,$attr,$hasLoader,$immediatly);
 	}
-	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
-		return $this->_ajax("post", $url,$params,$responseElement,$jsCallback,$attr,$immediatly);
+	public function _post($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
+		return $this->_ajax("post", $url,$params,$responseElement,$jsCallback,$attr,$hasLoader,$immediatly);
 	}
 
-	protected function _ajax($method,$url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $immediatly=false) {
+	protected function _ajax($method,$url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
 		if(JString::isNull($params)){$params="{}";}
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
-		$this->addLoading($retour, $responseElement);
+		if($hasLoader===true){
+			$this->addLoading($retour, $responseElement);
+		}
 		$retour.="$.".$method."(url,".$params.").done(function( data ) {\n";
 		$retour.=$this->_getOnAjaxDone($responseElement, $jsCallback)."});\n";
 		if ($immediatly)
@@ -1103,11 +1105,13 @@ class Jquery {
 		return $retour;
 	}
 
-	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $immediatly=false) {
+	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="\nvar params=$('#".$form."').serialize();\n";
-		$this->addLoading($retour, $responseElement);
+		if($hasLoader===true){
+			$this->addLoading($retour, $responseElement);
+		}
 		$retour.="$.post(url,params).done(function( data ) {\n";
 		$retour.=$this->_getOnAjaxDone($responseElement, $jsCallback)."});\n";
 
@@ -1128,14 +1132,18 @@ class Jquery {
 	 * @param string $element
 	 * @param string $event
 	 * @param string $url
-	 * @param string $params
+	 * @param string $params queryString parameters (JSON format). default : {}
 	 * @param string $responseElement
-	 * @param boolean $preventDefault
-	 * @param string $jsCallback javascript code to execute after the request
-	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
-	public function _getOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		return $this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
+	public function _getOn($event,$element, $url, $params="{}", $responseElement="", $parameters=array()) {
+		$preventDefault=true;
+		$stopPropagation=true;
+		$jsCallback=null;
+		$attr="id";
+		$hasLoader=true;
+		extract($parameters);
+		return $this->_add_event($element, $this->_get($url, $params, $responseElement, $jsCallback, $attr,$hasLoader), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1144,14 +1152,18 @@ class Jquery {
 	 * @param string $element
 	 * @param string $event
 	 * @param string $url
-	 * @param string $params
+	 * @param string $params queryString parameters (JSON format). default : {}
 	 * @param string $responseElement
-	 * @param boolean $preventDefault
-	 * @param string $jsCallback javascript code to execute after the request
-	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
-	public function _postOn($event,$element, $url, $params="{}", $responseElement="", $preventDefault=true, $stopPropagation=true, $jsCallback=NULL, $attr="id") {
-		return $this->_add_event($element, $this->_post($url, $params, $responseElement, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
+	public function _postOn($event,$element, $url, $params="{}", $responseElement="", $parameters=array()) {
+		$preventDefault=true;
+		$stopPropagation=true;
+		$jsCallback=null;
+		$attr="id";
+		$hasLoader=true;
+		extract($parameters);
+		return $this->_add_event($element, $this->_post($url, $params, $responseElement, $jsCallback, $attr,$hasLoader), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**
@@ -1162,12 +1174,17 @@ class Jquery {
 	 * @param string $url
 	 * @param string $form
 	 * @param string $responseElement
-	 * @param boolean $preventDefault
-	 * @param string $jsCallback javascript code to execute after the request
-	 * @param string $attr the attribute value to pass to the url (default : id attribute value)
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
-	public function _postFormOn($event,$element, $url, $form, $responseElement="", $preventDefault=true, $stopPropagation=true, $validation=false, $jsCallback=NULL, $attr="id") {
-		return $this->_add_event($element, $this->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr), $event, $preventDefault, $stopPropagation);
+	public function _postFormOn($event,$element, $url, $form, $responseElement="", $parameters=array()) {
+		$preventDefault=true;
+		$stopPropagation=true;
+		$validation=false;
+		$jsCallback=null;
+		$attr="id";
+		$hasLoader=true;
+		extract($parameters);
+		return $this->_add_event($element, $this->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr,$hasLoader), $event, $preventDefault, $stopPropagation);
 	}
 
 	/**

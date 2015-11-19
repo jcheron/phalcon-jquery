@@ -10,6 +10,7 @@ use Ajax\lib\CDNBootstrap;
 use Phalcon\DiInterface;
 use Phalcon\Version;
 use Phalcon\Di\InjectionAwareInterface;
+use Ajax\service\JArray;
 
 /**
  * JQuery Phalcon library
@@ -737,9 +738,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function get($url, $responseElement="", $params="{}", $jsCallback=NULL) {
-		return $this->js->_get($url, $params, $responseElement, $jsCallback, NULL, true);
+	public function get($url, $responseElement="", $params="{}", $jsCallback=NULL,$hasLoader=true) {
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, NULL, $hasLoader,true);
 	}
 
 	/**
@@ -805,16 +807,11 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $element
 	 * @param string $url The url of the request
 	 * @param string $responseElement The selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function getOn($event, $element, $url, $responseElement="", $parameters=array()) {
-		$preventDefault=true;
-		$stopPropagation=true;
-		$jsCallback=null;
-		$params="{}";
-		$attr="id";
-		extract($parameters);
-		return $this->js->_getOn($event, $element, $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
+		$params=JArray::getDefaultValue($parameters, "params", "{}");
+		return $this->js->_getOn($event, $element, $url, $params, $responseElement, $parameters);
 	}
 
 	/**
@@ -823,7 +820,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $element
 	 * @param string $url The url of the request
 	 * @param string $responseElement The selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"params"=>"{}","jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function getOnClick($element, $url, $responseElement="", $parameters=array()) {
 		return $this->getOn("click", $element, $url, $responseElement, $parameters);
@@ -835,9 +832,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function post($url, $responseElement="", $params="{}", $jsCallback=NULL) {
-		return $this->js->_post($url, $params, $responseElement, $jsCallback, NULL, true);
+	public function post($url, $responseElement="", $params="{}", $jsCallback=NULL,$hasLoader=true) {
+		return $this->js->_post($url, $params, $responseElement, $jsCallback, NULL, $hasLoader,true);
 	}
 
 	/**
@@ -847,9 +845,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function postDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id") {
-		return $this->js->_post($url, $params, $responseElement, $jsCallback, $attr, false);
+	public function postDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL, $attr="id",$hasLoader=true) {
+		return $this->js->_post($url, $params, $responseElement, $jsCallback, $attr, $hasLoader,false);
 	}
 
 	/**
@@ -860,15 +859,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $url The url of the request
 	 * @param string $params The parameters to send
 	 * @param string $responseElement selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function postOn($event, $element, $url, $params="{}", $responseElement="", $parameters=array()) {
-		$preventDefault=true;
-		$stopPropagation=true;
-		$jsCallback=null;
-		$attr="id";
-		extract($parameters);
-		return $this->js->_postOn($event, $element,  $url, $params, $responseElement, $preventDefault, $stopPropagation, $jsCallback, $attr);
+		return $this->js->_postOn($event, $element,  $url, $params, $responseElement, $parameters);
 	}
 
 	/**
@@ -878,7 +872,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $url The url of the request
 	 * @param string $params The parameters to send
 	 * @param string $responseElement selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function postOnClick($element, $url, $params="{}", $responseElement="", $parameters=array()) {
 		return $this->postOn("click", $element, $url, $params, $responseElement, $parameters);
@@ -890,9 +884,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $form The form HTML id
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL) {
-		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, true);
+	public function postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL,$hasLoader=true) {
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, $hasLoader,true);
 	}
 
 	/**
@@ -902,9 +897,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $form The form HTML id
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL) {
-		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, false);
+	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL,$hasLoader=true) {
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, $hasLoader,false);
 	}
 
 	/**
@@ -915,16 +911,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $url
 	 * @param string $form
 	 * @param string $responseElement selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function postFormOn($event, $element, $url, $form, $responseElement="", $parameters=array()) {
-		$preventDefault=true;
-		$stopPropagation=true;
-		$validation=false;
-		$jsCallback=null;
-		$attr="id";
-		extract($parameters);
-		return $this->js->_postFormOn($event,$element, $url, $form, $responseElement, $preventDefault, $stopPropagation, $validation, $jsCallback, $attr);
+		return $this->js->_postFormOn($event,$element, $url, $form, $responseElement, $parameters);
 	}
 
 	/**
@@ -934,7 +924,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $url
 	 * @param string $form
 	 * @param string $responseElement selector of the HTML element displaying the answer
-	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id")
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"validation"=>false,"jsCallback"=>NULL,"attr"=>"id","hasLoader"=>true)
 	 */
 	public function postFormOnClick($element, $url, $form, $responseElement="", $parameters=array()) {
 		return $this->postFormOn("click", $element, $url, $form, $responseElement, $parameters);
