@@ -5,6 +5,8 @@ namespace Ajax\bootstrap\html\base;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\HtmlBadge;
 use Ajax\bootstrap\html\HtmlLabel;
+use Ajax\bootstrap\html\HtmlGlyphButton;
+use Ajax\bootstrap\html\HtmlGlyphicon;
 
 class HtmlDoubleElement extends HtmlSingleElement {
 	/**
@@ -12,10 +14,12 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	 * @var mixed
 	 */
 	protected $content;
+	protected $wrapContentBefore="";
+	protected $wrapContentAfter="";	
 
 	public function __construct($identifier, $tagName="p") {
 		parent::__construct($identifier, $tagName);
-		$this->_template="<%tagName% id='%identifier%' %properties%>%content%</%tagName%>";
+		$this->_template="<%tagName% id='%identifier%' %properties%>%wrapContentBefore%%content%%wrapContentAfter%</%tagName%>";
 	}
 
 	public function setContent($content) {
@@ -70,5 +74,20 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	}
 
 	public function setValue($value) {
+	}
+	
+	public function wrapContent($before, $after="") {
+		$this->wrapContentBefore.=$before;
+		$this->wrapContentAfter=$after.$this->wrapContentAfter;
+		return $this;
+	}
+	
+	public function wrapContentWithGlyph($glyphBefore,$glyphAfter=""){
+		$before=HtmlGlyphicon::getGlyphicon($glyphBefore)."&nbsp;";
+		$after="";
+		if($glyphAfter!==""){
+			$after="énbsp;".HtmlGlyphicon::getGlyphicon($glyphAfter);
+		}
+		return $this->wrapContent($before,$after);
 	}
 }

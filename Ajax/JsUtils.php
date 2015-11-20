@@ -795,9 +795,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $params JSON parameters
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param string $attr the html attribute added to the request
 	 */
-	public function getDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL) {
-		return $this->js->_get($url, $params, $responseElement, $jsCallback, NULL, false);
+	public function getDeferred($url, $responseElement="", $params="{}", $jsCallback=NULL,$attr="id") {
+		return $this->js->_get($url, $params, $responseElement, $jsCallback, $attr, false);
 	}
 
 	/**
@@ -843,6 +844,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * to use on an event
 	 * @param string $url the request url
 	 * @param string $params JSON parameters
+	 * @param string $attr the html attribute added to the request
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
 	 * @param boolean $hasLoader true for showing ajax loader. default : true
@@ -897,10 +899,11 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $form The form HTML id
 	 * @param string $responseElement selector of the HTML element displaying the answer
 	 * @param string $jsCallback javascript code to execute after the request
+	 * @param string $attr the html attribute added to the request
 	 * @param boolean $hasLoader true for showing ajax loader. default : true
 	 */
-	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL,$hasLoader=true) {
-		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, NULL, $hasLoader,false);
+	public function postFormDeferred($url, $form, $responseElement, $validation=false, $jsCallback=NULL,$attr="id",$hasLoader=true) {
+		return $this->js->_postForm($url, $form, $responseElement, $validation, $jsCallback, $attr, $hasLoader,false);
 	}
 
 	/**

@@ -1042,7 +1042,7 @@ class Jquery {
 		if(JString::isNotNull($attr)){
 			if ($attr=="value")
 				$retour.="url=url+'/'+$(this).val();\n";
-			else
+			else if($attr!=null && $attr!=="")
 				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
 		}
 		return $retour;

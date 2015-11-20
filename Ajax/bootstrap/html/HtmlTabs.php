@@ -159,6 +159,13 @@ class HtmlTabs extends HtmlDoubleElement {
 			}
 		}
 	}
+	
+	public function on($event, $jsCode,$stopPropagation=false,$preventDefault=false){
+		foreach ($this->tabs as $tab){
+			$tab->on($event,$jsCode,$stopPropagation,$preventDefault);
+		}
+		return $this;
+	}
 
 	public function setStacked($stacked=true){
 		if($stacked)

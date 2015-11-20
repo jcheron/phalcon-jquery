@@ -114,8 +114,4 @@ class HtmlButton extends HtmlDoubleElement {
 		}
 		return $array;
 	}
-
-	public function onClick($jsCode, $stopPropagation=false, $preventDefault=false) {
-		return $this->addEvent("click", $jsCode, $stopPropagation, $preventDefault);
-	}
 }

@@ -87,11 +87,11 @@ class HtmlSelect extends HtmlDoubleElement {
 	}
 	
 	public function onChange($jsCode) {
-		return $this->addEvent("change", $jsCode);
+		return $this->on("change", $jsCode);
 	}
 	
 	public function onKeypress($jsCode) {
-		return $this->addEvent("keypress", $jsCode);
+		return $this->on("keypress", $jsCode);
 	}
 	
 	/* (non-PHPdoc)

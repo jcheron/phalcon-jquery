@@ -28,6 +28,7 @@ use Ajax\bootstrap\html\HtmlModal;
 use Ajax\bootstrap\html\HtmlSplitbutton;
 use Ajax\bootstrap\html\HtmlInputgroup;
 use Ajax\bootstrap\html\HtmlListgroup;
+use Ajax\bootstrap\html\HtmlBreadcrumbs;
 
 class Bootstrap extends BaseGui {
 
@@ -303,5 +304,16 @@ class Bootstrap extends BaseGui {
 	 */
 	public function htmlInputgroup($identifier){
 		return $this->addHtmlComponent(new HtmlInputgroup($identifier));
+	}
+	
+	/**
+	 * Return a new Bootstrap Html Breadcrumbs
+	 * @param string $identifier
+	 * @param array $elements
+	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true. default : true
+	 * @return HtmlBreadcrumbs
+	 */
+	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true){
+		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive));
 	}
 }
