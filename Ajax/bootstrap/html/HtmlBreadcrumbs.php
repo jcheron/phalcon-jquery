@@ -5,6 +5,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Phalcon\Mvc\Dispatcher;
 /**
  * Twitter Bootstrap Breadcrumbs component
  * @author jc
@@ -26,17 +27,33 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 	protected $attr;
 	
 	/**
+	 * @var boolean if set to true, the path of the elements is absolute
+	 */
+	protected $absolutePaths;
+	
+	/**
+	 * @var function the function who generates the href elements. default : function($e){return $e->getContent()}
+	 */
+	protected $_hrefFunction;
+		
+	/**
 	 * @param string $identifier
 	 * @param array $elements
 	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true
+	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 */
-	public function __construct($identifier,$elements=array(),$autoActive=true){
+	public function __construct($identifier,$elements=array(),$autoActive=true,$hrefFunction=NULL){
 		parent::__construct($identifier,"ol");
 		$this->setProperty("class", "breadcrumb");
 		$this->content=array();
 		$this->autoActive=$autoActive;
 		$this->root="";
 		$this->attr="data-ajax";
+		$this->absolutePaths;
+		$this->_hrefFunction=function ($e){return $e->getContent();};
+		if(isset($hrefFunction)){
+			$this->_hrefFunction=$hrefFunction;
+		}
 		$this->addElements($elements);
 	}
 	
@@ -45,13 +62,18 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 	 * @param string $href
 	 * @return \Ajax\bootstrap\html\HtmlLink
 	 */
-	public function addElement($element,$href=""){
+	public function addElement($element,$href="",$glyph=NULL){
 		$size=sizeof($this->content);
 		if(is_array($element)){
 			$elm=new HtmlLink("lnk-".$this->identifier."-".$size);
 			$elm->fromArray($element);
+		}else if($element instanceof HtmlLink){
+			$elm=$element;
 		}else{
 			$elm=new HtmlLink("lnk-".$this->identifier."-".$size,$href,$element);
+			if(isset($glyph)){
+				$elm->wrapContentWithGlyph($glyph);
+			}
 		}
 		$elm->wrap("<li>","</li>");
 		$this->content[]=$elm;
@@ -92,7 +114,11 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		if(!isset($index)){
 			$index=sizeof($this->content);
 		}
-		return $this->root.implode($separator, array_slice(array_map(function($e){return $e->getContent();}, $this->content),0,$index+1));
+		if($this->absolutePaths===true){
+			return $this->_hrefFunction($this->content[$index]);
+		}else{
+			return $this->root.implode($separator, array_slice(array_map(function($e){return $this->_hrefFunction($e);}, $this->content),0,$index+1));
+		}
 	}
 	
 	/*
@@ -163,6 +189,10 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		return implode("", $this->content);
 	}
 	
+	/**
+	 * Generate the jquery script to set the elements to the breadcrumbs
+	 * @param JsUtils $jsUtils
+	 */
 	public function jsSetContent(JsUtils $jsUtils){
 		$jsUtils->html("#".$this->identifier,str_replace("\"","'", $this->contentAsString()),true);
 	}
@@ -171,15 +201,55 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		return $this->content[$index];
 	}
 	
+	/**
+	 * Add a glyphicon to the element at index $index
+	 * @param mixed $glyph
+	 * @param int $index
+	 */
 	public function addGlyph($glyph,$index){
 		$elm=$this->getElement($index);
 		return $elm->wrapContentWithGlyph($glyph);
 	}
 	
+	/**
+	 * Add new elements in breadcrumbs corresponding to request dispatcher : controllerName, actionName, parameters
+	 * @param Dispatcher $dispatcher the request dispatcher
+	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
+	 */
 	public function setDispatcher($dispatcher){
 		$items=array($dispatcher->getControllerName(),$dispatcher->getActionName());
 		$items=array_merge($items,$dispatcher->getParams());
 		return $this->addElements($items);
 	}
+	
+	public function __call($method, $args) {
+		if(isset($this->$method) && is_callable($this->$method)) {
+			return call_user_func_array(
+					$this->$method,
+					$args
+					);
+		}
+	}
+	
+	/**
+	 * sets the function who generates the href elements. default : function($element){return $element->getContent()}
+	 * @param function $_hrefFunction
+	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
+	 */
+	public function setHrefFunction($_hrefFunction) {
+		$this->_hrefFunction = $_hrefFunction;
+		return $this;
+	}
+	
+	/**
+	 * Define the html attribute for each element url in ajax
+	 * @param string $attr html attribute
+	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
+	 */
+	public function setAttr($attr) {
+		$this->attr = $attr;
+		return $this;
+	}
+	
 	
 }

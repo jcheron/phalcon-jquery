@@ -311,9 +311,10 @@ class Bootstrap extends BaseGui {
 	 * @param string $identifier
 	 * @param array $elements
 	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true. default : true
+	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 * @return HtmlBreadcrumbs
 	 */
-	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true){
-		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive));
+	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true,$hrefFunction=NULL){
+		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive,$hrefFunction));
 	}
 }
