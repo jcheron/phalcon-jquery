@@ -7,6 +7,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
 /**
  * Twitter Bootstrap Buttongroups component
+ * @see http://getbootstrap.com/components/#btn-groups
  * @author jc
  * @version 1.001
  */

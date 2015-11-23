@@ -8,6 +8,7 @@ use Ajax\bootstrap\html\base\CssRef;
 
 /**
  * Twitter Bootstrap Button component
+ * @see http://getbootstrap.com/css/#buttons
  * @author jc
  * @version 1.001
  */

@@ -5,7 +5,6 @@ namespace Ajax\bootstrap\html\base;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\HtmlBadge;
 use Ajax\bootstrap\html\HtmlLabel;
-use Ajax\bootstrap\html\HtmlGlyphButton;
 use Ajax\bootstrap\html\HtmlGlyphicon;
 
 class HtmlDoubleElement extends HtmlSingleElement {

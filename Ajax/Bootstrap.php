@@ -29,6 +29,7 @@ use Ajax\bootstrap\html\HtmlSplitbutton;
 use Ajax\bootstrap\html\HtmlInputgroup;
 use Ajax\bootstrap\html\HtmlListgroup;
 use Ajax\bootstrap\html\HtmlBreadcrumbs;
+use Ajax\bootstrap\html\HtmlPagination;
 
 class Bootstrap extends BaseGui {
 
@@ -316,5 +317,18 @@ class Bootstrap extends BaseGui {
 	 */
 	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true,$hrefFunction=NULL){
 		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive,$hrefFunction));
+	}
+	
+	/**
+	 * Return a new Bootstrap Html Pagination
+	 * @see http://getbootstrap.com/components/#pagination
+	 * @param string $identifier
+	 * @param int $from default : 1
+	 * @param int $to default : 1
+	 * @param int $active The active page
+	 * @return HtmlPagination
+	 */
+	public function htmlPagination($identifier,$from=1,$to=1,$active=NULL,$countVisible=NULL){
+		return $this->addHtmlComponent(new HtmlPagination($identifier,$from,$to,$active,$countVisible));
 	}
 }

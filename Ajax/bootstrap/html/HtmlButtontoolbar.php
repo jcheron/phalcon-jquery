@@ -4,6 +4,7 @@ namespace Ajax\bootstrap\html;
 
 /**
  * Twitter Bootstrap HTML Button toolbar
+ * @see http://getbootstrap.com/components/#btn-groups-toolbar
  * @author jc
  * @version 1.001
  */

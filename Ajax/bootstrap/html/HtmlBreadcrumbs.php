@@ -6,25 +6,18 @@ use Ajax\bootstrap\html\HtmlLink;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
+use Ajax\bootstrap\html\base\HtmlNavElement;
 /**
  * Twitter Bootstrap Breadcrumbs component
+ * @see http://getbootstrap.com/components/#breadcrumbs
  * @author jc
  * @version 1.001
  */
-class HtmlBreadcrumbs extends HtmlDoubleElement {
+class HtmlBreadcrumbs extends HtmlNavElement {
 	/**
 	 * @var boolean $autoActive sets the last element's class to <b>active</b> if true
 	 */
 	protected $autoActive;
-	/**
-	 * @var string the root site
-	 */
-	protected $root;
-	
-	/**
-	 * @var String the html attribute which contains the elements url. default : data-ajax
-	 */
-	protected $attr;
 	
 	/**
 	 * @var boolean if set to true, the path of the elements is absolute
@@ -47,8 +40,6 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		$this->setProperty("class", "breadcrumb");
 		$this->content=array();
 		$this->autoActive=$autoActive;
-		$this->root="";
-		$this->attr="data-ajax";
 		$this->absolutePaths;
 		$this->_hrefFunction=function ($e){return $e->getContent();};
 		if(isset($hrefFunction)){
@@ -155,15 +146,6 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		return $this;
 	}
 	
-	public function getRoot() {
-		return $this->root;
-	}
-	
-	public function setRoot($root) {
-		$this->root = $root;
-		return $this;
-	}
-	
 	public function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
 		foreach ($this->content as $element){
 			$element->_ajaxOn($operation, $event, $url, $responseElement, $parameters);
@@ -186,15 +168,7 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 		if($this->autoActive){
 			$this->setActive();
 		}	
-		return implode("", $this->content);
-	}
-	
-	/**
-	 * Generate the jquery script to set the elements to the breadcrumbs
-	 * @param JsUtils $jsUtils
-	 */
-	public function jsSetContent(JsUtils $jsUtils){
-		$jsUtils->html("#".$this->identifier,str_replace("\"","'", $this->contentAsString()),true);
+		return parent::contentAsString();
 	}
 	
 	public function getElement($index){
@@ -216,20 +190,12 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
 	 */
-	public function setDispatcher($dispatcher){
+	public function fromDispatcher($dispatcher){
 		$items=array($dispatcher->getControllerName(),$dispatcher->getActionName());
 		$items=array_merge($items,$dispatcher->getParams());
 		return $this->addElements($items);
 	}
 	
-	public function __call($method, $args) {
-		if(isset($this->$method) && is_callable($this->$method)) {
-			return call_user_func_array(
-					$this->$method,
-					$args
-					);
-		}
-	}
 	
 	/**
 	 * sets the function who generates the href elements. default : function($element){return $element->getContent()}
@@ -239,17 +205,6 @@ class HtmlBreadcrumbs extends HtmlDoubleElement {
 	public function setHrefFunction($_hrefFunction) {
 		$this->_hrefFunction = $_hrefFunction;
 		return $this;
-	}
-	
-	/**
-	 * Define the html attribute for each element url in ajax
-	 * @param string $attr html attribute
-	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
-	 */
-	public function setAttr($attr) {
-		$this->attr = $attr;
-		return $this;
-	}
-	
+	}	
 	
 }

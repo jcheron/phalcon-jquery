@@ -236,7 +236,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	protected function _addEvent($event, $jsCode) {
+	public function _addEvent($event, $jsCode) {
 		if (array_key_exists($event, $this->events)) {
 			if (is_array($this->events [$event])) {
 				$this->events [$event] []=$jsCode;

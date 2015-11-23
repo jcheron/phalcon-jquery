@@ -172,6 +172,18 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function click($element='this', $js='', $ret_false=TRUE) {
 		return $this->js->_click($element, $js, $ret_false);
 	}
+	
+	/**
+	 * Outputs a javascript library contextmenu event
+	 *
+	 * @param string $element element to attach the event to
+	 * @param string $js code to execute
+	 * @return string
+	 */
+	public function contextmenu($element='this', $js='') {
+		return $this->js->_contextmenu($element, $js);
+	}
+	
 	// --------------------------------------------------------------------
 	/**
 	 * Outputs a javascript library dblclick event
@@ -362,7 +374,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	// Effects
 	// --------------------------------------------------------------------
 	/**
-	 * Outputs a javascript library addClass event
+	 * add class to element
 	 *
 	 * @param string $element
 	 * @param string $class to add
@@ -370,9 +382,31 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @return string
 	 */
 	public function addClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_addClass($element, $class, $immediatly);
+		return $this->js->_genericCallValue('addClass',$element, $class, $immediatly);
 	}
-
+	
+	/**
+	 * Insert content, specified by the parameter, after each element in the set of matched elements
+	 * @param string $to
+	 * @param string $element
+	 * @param boolean $immediatly defers the execution if set to false
+	 * @return string
+	 */
+	public function after($to, $element, $immediatly=false){
+		return $this->js->_genericCallElement('after',$to, $element, $immediatly);
+	}
+	
+	/**
+	 * Insert content, specified by the parameter, before each element in the set of matched elements
+	 * @param string $to
+	 * @param string $element
+	 * @param boolean $immediatly defers the execution if set to false
+	 * @return string
+	 */
+	public function before($to, $element, $immediatly=false){
+		return $this->js->_genericCallElement('before',$to, $element, $immediatly);
+	}
+	
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -380,8 +414,18 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $value
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
-	public function attr($element='this', $attributeName, $value='', $immediatly=false) {
+	public function attr($element='this', $attributeName='value', $value='', $immediatly=false) {
 		return $this->js->_attr($element, $attributeName, $value, $immediatly);
+	}
+	
+	/**
+	 * Get or set the value of the first element in the set of matched elements or set one or more attributes for every matched element.
+	 * @param string $element
+	 * @param string $value
+	 * @param boolean $immediatly defers the execution if set to false
+	 */
+	public function val($element='this',$value='',$immediatly=false){
+		return $this->js->_genericCallValue('val',$element,$value,$immediatly);
 	}
 
 	/**
@@ -391,7 +435,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 */
 	public function html($element='this', $value='', $immediatly=false) {
-		return $this->js->_html($element, $value, $immediatly);
+		return $this->js->_genericCallValue('html',$element, $value, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -415,9 +459,8 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 * @return string
 	 */
-	public function append($to='this', $element, $immediatly=false) {
-		$element=addslashes($element);
-		return $this->js->_append($to, $element, $immediatly);
+	public function append($to, $element, $immediatly=false) {
+		return $this->js->_genericCallElement('append',$to, $element, $immediatly);
 	}
 
 	/**
@@ -427,8 +470,8 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param boolean $immediatly defers the execution if set to false
 	 * @return string
 	 */
-	public function prepend($to='this', $element, $immediatly=false) {
-		return $this->js->_prepend($to, $element, $immediatly);
+	public function prepend($to, $element, $immediatly=false) {
+		return $this->js->_genericCallElement('prepend',$to, $element, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -479,7 +522,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @return string
 	 */
 	public function removeClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_removeClass($element, $class, $immediatly);
+		return $this->js->_genericCall('removeClass',$element, $class, $immediatly);
 	}
 	// --------------------------------------------------------------------
 	/**
@@ -540,7 +583,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @return string
 	 */
 	public function toggleClass($element='this', $class='', $immediatly=false) {
-		return $this->js->_toggleClass($element, $class, $immediatly);
+		return $this->js->_genericCallValue('toggleClass',$element, $class, $immediatly);
 	}
 
 	/**
@@ -751,10 +794,21 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 * @param string $method Method used
 	 * @param string $jsCallback javascript code to execute after the request
 	 */
-	public function json($url, $method="get", $params="{}", $jsCallback=NULL) {
-		return $this->js->_json($url, $method, $params, $jsCallback, NULL, true);
+	public function json($url, $method="get", $params="{}", $jsCallback=NULL, $attr="id", $context="document",$immediatly=false) {
+		return $this->js->_json($url, $method, $params, $jsCallback, $attr, $context,$immediatly);
 	}
 
+	/**
+	 * Makes an ajax request and receives the JSON data types by assigning DOM elements with the same name when $event fired on $element
+	 * @param string $element
+	 * @param string $event
+	 * @param string $url the request address
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","params"=>"{}","method"=>"get")
+	 */
+	public function jsonOn($event,$element, $url,$parameters=array()) {
+		return $this->js->_jsonOn($event, $element, $url,$parameters);
+	}
+	
 	/**
 	 * Prepares an ajax request delayed and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request url
@@ -779,6 +833,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 
 	/**
 	 * Peforms an ajax request delayed and receives a JSON array data types by copying and assigning them to the DOM elements with the same name
+	 * @param string $maskSelector the selector of the element to clone
 	 * @param string $url the request url
 	 * @param string $params JSON parameters
 	 * @param string $method Method used
@@ -786,6 +841,17 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 */
 	public function jsonArrayDeferred($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL) {
 		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, NULL, false);
+	}
+	
+	/**
+	 * Performs an ajax request and receives the JSON array data types by assigning DOM elements with the same name when $event fired on $element
+	 * @param string $element
+	 * @param string $event
+	 * @param string $url the request url
+	 * @param array $parameters default : array("preventDefault"=>true,"stopPropagation"=>true,"jsCallback"=>NULL,"attr"=>"id","params"=>"{}","method"=>"get")
+	 */
+	public function jsonArrayOn($event,$element,$maskSelector, $url,$parameters=array()) {
+		return $this->js->_jsonArrayOn($event,$element,$maskSelector, $url, $parameters);
 	}
 
 	/**
