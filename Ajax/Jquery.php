@@ -920,7 +920,7 @@ class Jquery {
 	 * @return string
 	 */
 	public function _prep_element($element) {
-		if (strrpos($element, 'this')===false&&strrpos($element, 'event')===false) {
+		if (strrpos($element, 'this')===false&&strrpos($element, 'event')===false&&strrpos($element, 'self')===false) {
 			$element='"'.addslashes($element).'"';
 		}
 		return $element;
@@ -938,7 +938,7 @@ class Jquery {
 		if (is_array($value)) {
 			$value=implode(",", $value);
 		}
-		if (strrpos($value, 'this')===false&&strrpos($value, 'event')===false) {
+		if (strrpos($value, 'this')===false&&strrpos($value, 'event')===false&&strrpos($value, 'self')===false) {
 			$value='"'.$value.'"';
 		}
 		return $value;
@@ -972,8 +972,8 @@ class Jquery {
 			$loading_notifier.=$this->ajaxLoader;
 		}
 		$loading_notifier.='</div>';
-		$retour.="$(\"{$responseElement}\").empty();\n";
-		$retour.="\t\t$(\"{$responseElement}\").prepend('{$loading_notifier}');\n";
+		$retour.="$({$responseElement}).empty();\n";
+		$retour.="\t\t$({$responseElement}).prepend('{$loading_notifier}');\n";
 	}
 
 	public function _get($url, $params="{}", $responseElement="", $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
@@ -987,6 +987,8 @@ class Jquery {
 		if(JString::isNull($params)){$params="{}";}
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
+		$responseElement=$this->_getResponseElement($responseElement);
+		$retour.="var self=this;\n";
 		if($hasLoader===true){
 			$this->addLoading($retour, $responseElement);
 		}
@@ -1000,11 +1002,14 @@ class Jquery {
 	protected function _getAjaxUrl($url,$attr){
 		$url=$this->_correctAjaxUrl($url);
 		$retour="url='".$url."';\n";
+		$slash="/";
+		if(PhalconUtils::endsWith($url, "/"))
+			$slash="";
 		if(JString::isNotNull($attr)){
 			if ($attr=="value")
-				$retour.="url=url+'/'+$(this).val();\n";
+				$retour.="url=url+'".$slash."'+$(this).val();\n";
 			else if($attr!=null && $attr!=="")
-				$retour.="url=url+'/'+$(this).attr('".$attr."');\n";
+				$retour.="url=url+'".$slash."'+$(this).attr('".$attr."');\n";
 		}
 		return $retour;
 	}
@@ -1012,11 +1017,17 @@ class Jquery {
 	protected function _getOnAjaxDone($responseElement,$jsCallback){
 		$retour="";
 		if ($responseElement!=="") {
-			$responseElement=$this->_prep_value($responseElement);
 			$retour="\t$({$responseElement}).html( data );\n";
 		}
 		$retour.="\t".$jsCallback."\n";
 		return $retour;
+	}
+	
+	protected function _getResponseElement($responseElement){
+		if ($responseElement!=="") {
+			$responseElement=$this->_prep_value($responseElement);
+		}
+		return $responseElement;
 	}
 
 	protected function _correctAjaxUrl($url) {
@@ -1039,7 +1050,8 @@ class Jquery {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
-		$retour.="\tdata=$.parseJSON(data);for(var key in data){if($('#'+key,".$context.").length){ if($('#'+key,".$context.").is('[value]')) { $('#'+key,".$context.").val(data[key]);} else { $('#'+key,".$context.").html(data[key]); }}};\n";
+		$retour.="\tdata=$.parseJSON(data);for(var key in data){"
+				."if($('#'+key,".$context.").length){ if($('#'+key,".$context.").is('[value]')) { $('#'+key,".$context.").val(data[key]);} else { $('#'+key,".$context.").html(data[key]); }}};\n";
 		$retour.="\t".$jsCallback."\n
 		});\n";
 		if ($immediatly)
@@ -1077,7 +1089,7 @@ class Jquery {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="$.{$method}(url,".$params.").done(function( data ) {\n";
-		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n"."\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();"."\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;"."\tvar newElm=$('#'+newId);\n"."\tif(!newElm.length){\n"."\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n"."\t\tnewElm.appendTo($('".$maskSelector."').parent());\n"."\t}\n"."\tfor(var key in value){\n"."\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n"."\t\t\tif(html.indexOf('[['+key+']]')>-1){\n"."\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n"."\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n"."\t\t\t}\n"."\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n"."\t\t\tvar selElm=$(sel,newElm);\n"."\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n"."\t\t}\n"."}\n"."\t$(newElm).show(true);"."});\n";
+		$retour.="\tdata=$.parseJSON(data);$.each(data, function(index, value) {\n"."\tvar created=false;var maskElm=$('".$maskSelector."').first();maskElm.hide();"."\tvar newId=(maskElm.attr('id') || 'mask')+'-'+index;"."\tvar newElm=$('#'+newId);\n"."\tif(!newElm.length){\n"."\t\tnewElm=maskElm.clone();newElm.attr('id',newId);\n"."\t\tnewElm.appendTo($('".$maskSelector."').parent());\n"."\t}\n"."\tfor(var key in value){\n"."\t\t\tvar html = $('<div />').append($(newElm).clone()).html();\n"."\t\t\tif(html.indexOf('[['+key+']]')>-1){\n"."\t\t\t\tcontent=$(html.split('[['+key+']]').join(value[key]));\n"."\t\t\t\t$(newElm).replaceWith(content);newElm=content;\n"."\t\t\t}\n"."\t\tvar sel='[data-id=\"'+key+'\"]';if($(sel,newElm).length){\n"."\t\t\tvar selElm=$(sel,newElm);\n"."\t\t\t if(selElm.is('[value]')) { selElm.attr('value',value[key]);selElm.val(value[key]);} else { selElm.html(value[key]); }\n"."\t\t}\n"."}\n"."\t$(newElm).show(true);"."\n"."\t$(newElm).removeClass('hide');"."});\n";
 
 		$retour.="\t".$jsCallback."\n"."});\n";
 		if ($immediatly)
@@ -1106,6 +1118,8 @@ class Jquery {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
 		$retour.="\nvar params=$('#".$form."').serialize();\n";
+		$responseElement=$this->_getResponseElement($responseElement);
+		$retour.="var self=this;\n";
 		if($hasLoader===true){
 			$this->addLoading($retour, $responseElement);
 		}
