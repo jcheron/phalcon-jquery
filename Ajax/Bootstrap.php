@@ -30,6 +30,7 @@ use Ajax\bootstrap\html\HtmlInputgroup;
 use Ajax\bootstrap\html\HtmlListgroup;
 use Ajax\bootstrap\html\HtmlBreadcrumbs;
 use Ajax\bootstrap\html\HtmlPagination;
+use Ajax\bootstrap\html\HtmlGridSystem;
 
 class Bootstrap extends BaseGui {
 
@@ -330,5 +331,16 @@ class Bootstrap extends BaseGui {
 	 */
 	public function htmlPagination($identifier,$from=1,$to=1,$active=NULL,$countVisible=NULL){
 		return $this->addHtmlComponent(new HtmlPagination($identifier,$from,$to,$active,$countVisible));
+	}
+	
+	/**
+	 * Return a new Bootstrap Html Grid system
+	 * @see http://getbootstrap.com/css/#grid
+	 * @param string $identifier
+	 * @param int $numRows
+	 * @return HtmlGridSystem
+	 */
+	public function htmlGridSystem($identifier,$numRows=1){
+		return $this->addHtmlComponent(new HtmlGridSystem($identifier,$numRows));
 	}
 }

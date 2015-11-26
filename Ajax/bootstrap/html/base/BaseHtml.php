@@ -220,7 +220,9 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function wrap($before, $after="") {
-		$this->wrapBefore.=$before;
+		if(isset($before)){
+			$this->wrapBefore.=$before;
+		}
 		$this->wrapAfter=$after.$this->wrapAfter;
 		return $this;
 	}
