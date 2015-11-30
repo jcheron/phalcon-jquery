@@ -62,12 +62,21 @@ class HtmlGridCol extends HtmlDoubleElement {
 		return $this;
 	}
 	
+	public function setWidth($size=CssSize::SIZE_MD,$width=1){
+		$this->positions[$size]=$width;
+		return $this;	
+	}
+	
 	public function setPosition($size=CssSize::SIZE_MD,$width=1){
 		return $this->addPosition($size,$width);
 	}
 	
-	public function getPosition($size){
+	public function getWidth($size){
 		return @$this->positions[$size];
+	}
+	
+	public function getOffest($size){
+		return @$this->offsets[$size];
 	}
 	
 	public function addClear(){

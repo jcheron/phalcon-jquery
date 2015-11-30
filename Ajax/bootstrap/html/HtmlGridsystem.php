@@ -16,24 +16,28 @@ use Phalcon\Mvc\View;
 class HtmlGridSystem extends HtmlDoubleElement {
 	private $rows;
 	
-	public function __construct($identifier,$numRows=1){
+	public function __construct($identifier,$numRows=1,$numCols=NULL){
 		parent::__construct($identifier,"div");
-		$this->setProperty("class", "container");
+		$this->setProperty("class", "container-fluid");
 		$this->rows=array();
-		$this->setNumRows($numRows);
+		$this->setNumRows($numRows,$numCols);
 	}
 	
 	/**
+	 * Add a new row
+	 * @param int $numCols 
 	 * @return \Ajax\bootstrap\html\content\HtmlGridRow
 	 */
-	public function addRow(){
-		$row=new HtmlGridRow($this->identifier."-row-".(sizeof($this->rows)+1));
+	public function addRow($numCols=NULL){
+		$row=new HtmlGridRow($this->identifier."-row-".(sizeof($this->rows)+1),$numCols);
 		$this->rows[]=$row;
 		return $row;
 	}
 	
 	/**
+	 * return the row at $index
 	 * @param int $index
+	 * @param boolean $force add the row at $index if true
 	 * @return \Ajax\bootstrap\html\content\HtmlGridRow
 	 */
 	public function getRow($index,$force=true){
@@ -46,9 +50,15 @@ class HtmlGridSystem extends HtmlDoubleElement {
 		return $result;
 	}
 	
-	public function setNumRows($numRows){
+	/**
+	 * Create $numRows rows
+	 * @param int $numRows
+	 * @param int $numCols
+	 * @return \Ajax\bootstrap\html\HtmlGridSystem
+	 */
+	public function setNumRows($numRows,$numCols=NULL){
 		for($i=sizeof($this->rows);$i<$numRows;$i++){
-			$this->addRow();
+			$this->addRow($numCols);
 		}
 		return $this;
 	}
@@ -56,6 +66,7 @@ class HtmlGridSystem extends HtmlDoubleElement {
 	/**
 	 * @param int $row
 	 * @param int $col
+	 * @param $force add the cell at $row,$col if true
 	 * @return HtmlGridCol
 	 */
 	public function getCell($row,$col,$force=true){
@@ -84,5 +95,10 @@ class HtmlGridSystem extends HtmlDoubleElement {
 			$this->addContent($row);
 		}
 		return parent::compile($js,$view);
+	}
+	public function setContentForAll($content){
+		foreach ($this->rows as $row){
+			$row->setContentForAll($content);
+		}
 	}
 }

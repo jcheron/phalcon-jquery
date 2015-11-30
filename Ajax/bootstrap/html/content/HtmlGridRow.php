@@ -14,15 +14,23 @@ use Phalcon\Mvc\View;
  */
 class HtmlGridRow extends HtmlDoubleElement {
 	private $cols;
-	public function __construct($identifier){
+	public function __construct($identifier,$numCols=NULL){
 		parent::__construct($identifier,"div");
 		$this->setProperty("class", "row");
 		$this->cols=array();
+		if(isset($numCols)){
+			$numCols=min(12,$numCols);
+			$numCols=max(1,$numCols);
+			$width=12/$numCols;
+			for ($i=0;$i<$numCols;$i++){
+				$this->addCol(CssSize::SIZE_MD,$width);
+			}
+		}
 	}
 	
 	public function addCol($size=CssSize::SIZE_MD,$width=1){
 		$col=new HtmlGridCol($this->identifier."-col-".(sizeof($this->cols)+1),$size,$width);
-		$this->row[]=$col;
+		$this->cols[]=$col;
 		return $col;
 	}
 	
@@ -36,7 +44,6 @@ class HtmlGridRow extends HtmlDoubleElement {
 			$result=$this->cols[$index-1];
 		}else if ($force){
 			$result=$this->addColAt(CssSize::SIZE_MD,1,$index);
-			$this->cols[]=$result;
 		}
 		return $result;
 	}
@@ -49,7 +56,7 @@ class HtmlGridRow extends HtmlDoubleElement {
 				break;
 			}
 		}
-		if(!isset($result)){
+		if(!$result || isset($result)==false){
 			$result=$this->getCol($offset,$force);
 		}
 		return $result;
@@ -61,5 +68,36 @@ class HtmlGridRow extends HtmlDoubleElement {
 			$this->addContent($col);
 		}
 		return parent::compile($js,$view);
+	}
+	public function getCols() {
+		return $this->cols;
+	}
+	
+	public function setContentForAll($content){
+		foreach ($this->cols as $col){
+			$col->setContent($content);
+		}
+	}
+	public function merge($size=CssSize::SIZE_MD,$start,$width){
+		$col=$this->getColAt($start,false);
+		if(isset($col)){
+			$col->setWidth($size,$width+1);
+			$this->delete($size,$start+1, $width);
+		}
+	}
+	public function delete($size=CssSize::SIZE_MD,$start,$width){
+		while($start<sizeof($this->cols)+1 && $width>0){
+			$col=$this->getColAt($start,false);
+			if(isset($col)){
+				$widthCol=$col->getWidth($size);
+				if($widthCol<=$width){
+					unset($this->cols[$start-1]);
+					$this->cols = array_values($this->cols);
+					$width=$width-$widthCol;
+				}
+			}else{
+				$width=0;
+			}
+		}
 	}
 }

@@ -338,9 +338,10 @@ class Bootstrap extends BaseGui {
 	 * @see http://getbootstrap.com/css/#grid
 	 * @param string $identifier
 	 * @param int $numRows
+	 * @param int $numCols
 	 * @return HtmlGridSystem
 	 */
-	public function htmlGridSystem($identifier,$numRows=1){
-		return $this->addHtmlComponent(new HtmlGridSystem($identifier,$numRows));
+	public function htmlGridSystem($identifier,$numRows=1,$numCols=NULL){
+		return $this->addHtmlComponent(new HtmlGridSystem($identifier,$numRows,$numCols));
 	}
 }
