@@ -81,6 +81,11 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 		$this->role="presentation";
 		$this->class="disabled";
 	}
+	
+	public function active() {
+		$this->role="menuitem";
+		$this->class="active";
+	}
 
 	/**
 	 * Set the item href

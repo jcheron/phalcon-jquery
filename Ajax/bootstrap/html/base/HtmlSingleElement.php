@@ -14,14 +14,17 @@ class HtmlSingleElement extends BaseHtml {
 
 	public function setClass($classNames) {
 		$this->setProperty("class", $classNames);
+		return $this;
 	}
 
 	public function setRole($value) {
 		$this->setProperty("role", $value);
+		return $this;
 	}
 
 	public function setTitle($value) {
 		$this->setProperty("title", $value);
+		return $this;
 	}
 
 	public function run(JsUtils $js) {
