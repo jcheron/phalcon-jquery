@@ -15,7 +15,7 @@ use Ajax\bootstrap\html\html5\HtmlOption;
 class HtmlSelect extends HtmlDoubleElement {
 	private $default;
 	private $options;
-	
+
 	public function __construct($identifier, $caption,$default=NULL) {
 		parent::__construct($identifier, "select");
 		$this->setProperty("name", $identifier);
@@ -24,7 +24,7 @@ class HtmlSelect extends HtmlDoubleElement {
 		$this->default=$default;
 		$this->options=array();
 	}
-	
+
 	public function addOption($element,$value="",$selected=false){
 		if($element instanceof HtmlOption){
 			$option=$element;
@@ -36,7 +36,7 @@ class HtmlSelect extends HtmlDoubleElement {
 		}
 		$this->options[]=$option;
 	}
-	
+
 	public function setValue($value) {
 		foreach ( $this->options as $option ) {
 			if (strcasecmp($option->getValue(),$value)===0) {
@@ -45,7 +45,7 @@ class HtmlSelect extends HtmlDoubleElement {
 		}
 		$this->setProperty("value", $value);
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
@@ -61,7 +61,7 @@ class HtmlSelect extends HtmlDoubleElement {
 		}
 		return parent::compile($js, $view);
 	}
-	
+
 	public function fromArray($array){
 		if(JArray::isAssociative($array)){
 			foreach ($array as $k=>$v){
@@ -74,7 +74,7 @@ class HtmlSelect extends HtmlDoubleElement {
 		}
 		return $this;
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
@@ -85,19 +85,23 @@ class HtmlSelect extends HtmlDoubleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
-	
+
 	public function onChange($jsCode) {
 		return $this->on("change", $jsCode);
 	}
-	
+
 	public function onKeypress($jsCode) {
 		return $this->on("keypress", $jsCode);
 	}
-	
+
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
 	 */
 	public function fromDatabaseObject($object, $function) {
 		$this->addOption($function($object));
+	}
+
+	public function setSize($size){
+		return $this->setProperty("size", $size);
 	}
 }
