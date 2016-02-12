@@ -44,11 +44,11 @@ Create the composer.json file in the app directory as follows:
 ```json
 {
     "require": {
-        "jcheron/phalcon-jquery": "dev-master"
+        "jcheron/phalcon-jquery": "~v1.0.0"
     }
 }
 ```
-Run the composer installer :
+In the app directory, run the composer installer :
 
 ```bash
 php composer.phar install
