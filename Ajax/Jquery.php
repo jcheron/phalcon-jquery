@@ -49,7 +49,11 @@ class Jquery {
 		return $this->_bootstrap;
 	}
 
-	public function __construct() {
+	public function __construct($params) {
+		$this->params=array();
+		foreach ( $params as $key => $val ) {
+				$this->params[$key]=$params[$key];
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -172,7 +176,7 @@ class Jquery {
 
 		return $this->_add_event($element, $js, 'click');
 	}
-	
+
 	/**
 	 * Outputs a jQuery contextmenu event
 	 *
@@ -424,7 +428,7 @@ class Jquery {
 			$this->jquery_code_for_compile[]=$str;
 		return $str;
 	}
-	
+
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -869,6 +873,10 @@ class Jquery {
 		$script.=implode('', $this->jquery_code_for_compile);
 		$script.='});';
 
+		$this->jquery_code_for_compile=array();
+		if($this->params["debug"]==false){
+			$script=$this->minify($script);
+		}
 		$output=($script_tags===FALSE) ? $script : $this->inline($script);
 
 		if ($view!=NULL)
@@ -1023,7 +1031,7 @@ class Jquery {
 		$retour.="\t".$jsCallback."\n";
 		return $retour;
 	}
-	
+
 	protected function _getResponseElement($responseElement){
 		if ($responseElement!=="") {
 			$responseElement=$this->_prep_value($responseElement);
@@ -1055,13 +1063,13 @@ class Jquery {
 		$retour.="\tdata=$.parseJSON(data);for(var key in data){"
 				."if($('#'+key,".$context.").length){ if($('#'+key,".$context.").is('[value]')) { $('#'+key,".$context.").val(data[key]);} else { $('#'+key,".$context.").html(data[key]); }}};\n";
 		$retour.="\t".$jsCallback."\n".
-		$retour.="\t$(document).trigger('jsonReady',[data]);\n";
+				"\t$(document).trigger('jsonReady',[data]);\n".
 		"});\n";
 		if ($immediatly)
 			$this->jquery_code_for_compile[]=$retour;
 		return $retour;
 	}
-	
+
 	/**
 	 * Makes an ajax request and receives the JSON data types by assigning DOM elements with the same name when $event fired on $element
 	 * @param string $element
@@ -1130,7 +1138,7 @@ class Jquery {
 		extract($parameters);
 		return $this->_add_event($element, $this->_jsonArray($maskSelector,$url,$method, $params,$jsCallback, $attr, $context), $event, $preventDefault, $stopPropagation,$immediatly);
 	}
-	
+
 	public function _postForm($url, $form, $responseElement, $validation=false, $jsCallback=NULL, $attr="id", $hasLoader=true,$immediatly=false) {
 		$jsCallback=isset($jsCallback) ? $jsCallback : "";
 		$retour=$this->_getAjaxUrl($url, $attr);
@@ -1281,5 +1289,30 @@ class Jquery {
 	public function _execOn($element, $event, $js, $preventDefault=false, $stopPropagation=false,$immediatly=true) {
 		return $this->_add_event($element, $this->_exec($js), $event, $preventDefault, $stopPropagation,$immediatly);
 	}
+
+	private function minify($input) {
+	if(trim($input) === "") return $input;
+	return preg_replace(
+			array(
+					// Remove comment(s)
+					'#\s*("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')\s*|\s*\/\*(?!\!|@cc_on)(?>[\s\S]*?\*\/)\s*|\s*(?<![\:\=])\/\/.*(?=[\n\r]|$)|^\s*|\s*$#',
+					// Remove white-space(s) outside the string and regex
+					'#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\'|\/\*(?>.*?\*\/)|\/(?!\/)[^\n\r]*?\/(?=[\s.,;]|[gimuy]|$))|\s*([!%&*\(\)\-=+\[\]\{\}|;:,.<>?\/])\s*#s',
+					// Remove the last semicolon
+					'#;+\}#',
+					// Minify object attribute(s) except JSON attribute(s). From `{'foo':'bar'}` to `{foo:'bar'}`
+					'#([\{,])([\'])(\d+|[a-z_][a-z0-9_]*)\2(?=\:)#i',
+					// --ibid. From `foo['bar']` to `foo.bar`
+					'#([a-z0-9_\)\]])\[([\'"])([a-z_][a-z0-9_]*)\2\]#i'
+			),
+			array(
+					'$1',
+					'$1$2',
+					'}',
+					'$1$3',
+					'$1.$3'
+			),
+			$input);
+}
 }
 /* End of file Jquery.php */

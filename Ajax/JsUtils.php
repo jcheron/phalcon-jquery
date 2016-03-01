@@ -121,7 +121,8 @@ abstract class _JsUtils implements InjectionAwareInterface {
 
 	public function __construct($params=array()) {
 		$defaults=array (
-				'driver' => 'Jquery'
+				'driver' => 'Jquery',
+				'debug' => true
 		);
 		foreach ( $defaults as $key => $val ) {
 			if (isset($params[$key])&&$params[$key]!=="") {
@@ -129,7 +130,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 			}
 		}
 		extract($defaults);
-		$this->js=new Jquery();
+		$this->js=new Jquery($defaults);
 		$this->cdns=array ();
 	}
 
