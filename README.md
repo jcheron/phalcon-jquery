@@ -126,7 +126,7 @@ In the corresponding view, insert the jquery variable for stylesheets and javasc
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<?=jquery?>
+		<?=$jquery?>
 	</head>
 ```
 
