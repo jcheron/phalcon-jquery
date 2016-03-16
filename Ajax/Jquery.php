@@ -1018,7 +1018,7 @@ class Jquery {
 			if ($attr=="value")
 				$retour.="url=url+'".$slash."'+$(this).val();\n";
 			else if($attr!=null && $attr!=="")
-				$retour.="url=url+'".$slash."'+$(this).attr('".$attr."');\n";
+				$retour.="url=url+'".$slash."'+($(this).attr('".$attr."')||'');\n";
 		}
 		return $retour;
 	}

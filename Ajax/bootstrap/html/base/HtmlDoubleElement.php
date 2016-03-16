@@ -14,7 +14,7 @@ class HtmlDoubleElement extends HtmlSingleElement {
 	 */
 	protected $content;
 	protected $wrapContentBefore="";
-	protected $wrapContentAfter="";	
+	protected $wrapContentAfter="";
 
 	public function __construct($identifier, $tagName="p") {
 		parent::__construct($identifier, $tagName);
@@ -62,30 +62,39 @@ class HtmlDoubleElement extends HtmlSingleElement {
 
 	public function addBadge($caption, $leftSeparator="&nbsp;") {
 		$badge=new HtmlBadge("badge-".$this->identifier, $caption);
-		$this->content.=$leftSeparator.$badge->compile();
+		$badge->wrap($leftSeparator);
+		$this->addContent($badge);
 		return $this;
 	}
 
 	public function addLabel($caption, $style="label-default", $leftSeparator="&nbsp;") {
 		$label=new HtmlLabel("label-".$this->identifier, $caption, $style);
-		$this->content.=$leftSeparator.$label->compile();
+		$label->wrap($leftSeparator);
+		$this->addContent($label);
+		return $this;
+	}
+
+	public function addGlyph($glyphicon,$index=0){
+		$glyph=new HtmlGlyphicon("");
+		$glyph->setGlyphicon($glyphicon);
+		$this->addContent($glyph);
 		return $this;
 	}
 
 	public function setValue($value) {
 	}
-	
+
 	public function wrapContent($before, $after="") {
 		$this->wrapContentBefore.=$before;
 		$this->wrapContentAfter=$after.$this->wrapContentAfter;
 		return $this;
 	}
-	
+
 	public function wrapContentWithGlyph($glyphBefore,$glyphAfter=""){
 		$before=HtmlGlyphicon::getGlyphicon($glyphBefore)."&nbsp;";
 		$after="";
 		if($glyphAfter!==""){
-			$after="énbsp;".HtmlGlyphicon::getGlyphicon($glyphAfter);
+			$after="&nbsp;".HtmlGlyphicon::getGlyphicon($glyphAfter);
 		}
 		return $this->wrapContent($before,$after);
 	}

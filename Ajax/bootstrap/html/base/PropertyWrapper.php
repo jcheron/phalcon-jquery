@@ -37,7 +37,10 @@ class PropertyWrapper {
 
 	public static function wrapObjects($input, $js=NULL, $separator=' ') {
 		return implode($separator, array_map(function ($v) use($js) {
-			return $v->compile($js);
+			if (is_object($v))
+				return $v->compile($js);
+			else
+				return $v;
 		}, $input));
 	}
 }

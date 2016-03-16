@@ -307,7 +307,7 @@ class Bootstrap extends BaseGui {
 	public function htmlInputgroup($identifier){
 		return $this->addHtmlComponent(new HtmlInputgroup($identifier));
 	}
-	
+
 	/**
 	 * Return a new Bootstrap Html Breadcrumbs
 	 * @param string $identifier
@@ -316,10 +316,10 @@ class Bootstrap extends BaseGui {
 	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 * @return HtmlBreadcrumbs
 	 */
-	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true,$hrefFunction=NULL){
-		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive,$hrefFunction));
+	public function htmlBreadcrumbs($identifier,$elements=array(),$autoActive=true,$startIndex=0,$hrefFunction=NULL){
+		return $this->addHtmlComponent(new HtmlBreadcrumbs($identifier,$elements,$autoActive,$startIndex,$hrefFunction));
 	}
-	
+
 	/**
 	 * Return a new Bootstrap Html Pagination
 	 * @see http://getbootstrap.com/components/#pagination
@@ -332,7 +332,7 @@ class Bootstrap extends BaseGui {
 	public function htmlPagination($identifier,$from=1,$to=1,$active=NULL,$countVisible=NULL){
 		return $this->addHtmlComponent(new HtmlPagination($identifier,$from,$to,$active,$countVisible));
 	}
-	
+
 	/**
 	 * Return a new Bootstrap Html Grid system
 	 * @see http://getbootstrap.com/css/#grid

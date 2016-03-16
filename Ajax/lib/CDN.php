@@ -4,6 +4,7 @@ return array (
 				"MaxCDN" => array (
 						"url" => "http://code.jquery.com/jquery-%version%.min.js",
 						"versions" => array (
+								"2.2.1",
 								"2.1.4",
 								"2.1.3",
 								"1.11.2"
@@ -12,6 +13,7 @@ return array (
 				"Google" => array (
 						"url" => "https://ajax.googleapis.com/ajax/libs/jquery/%version%/jquery.min.js",
 						"versions" => array (
+								"2.2.0",
 								"2.1.4",
 								"2.1.3",
 								"2.1.1",
@@ -102,6 +104,7 @@ return array (
 						"core" => "http://maxcdn.bootstrapcdn.com/bootstrap/%version%/js/bootstrap.min.js",
 						"css" => "http://maxcdn.bootstrapcdn.com/bootstrap/%version%/css/bootstrap.min.css",
 						"versions" => array (
+								"3.3.6",
 								"3.3.5"
 						),
 						"themes" => array ()

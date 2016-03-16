@@ -14,29 +14,36 @@ use Ajax\bootstrap\html\base\HtmlNavElement;
  * @version 1.001
  */
 class HtmlBreadcrumbs extends HtmlNavElement {
+
+	/**
+	 * @var integer the start index for href generation
+	 */
+	protected $startIndex=0;
 	/**
 	 * @var boolean $autoActive sets the last element's class to <b>active</b> if true
 	 */
 	protected $autoActive;
-	
+
 	/**
 	 * @var boolean if set to true, the path of the elements is absolute
 	 */
 	protected $absolutePaths;
-	
+
 	/**
 	 * @var function the function who generates the href elements. default : function($e){return $e->getContent()}
 	 */
 	protected $_hrefFunction;
-		
+
+
 	/**
 	 * @param string $identifier
 	 * @param array $elements
 	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true
 	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 */
-	public function __construct($identifier,$elements=array(),$autoActive=true,$hrefFunction=NULL){
+	public function __construct($identifier,$elements=array(),$autoActive=true,$startIndex=0,$hrefFunction=NULL){
 		parent::__construct($identifier,"ol");
+		$this->startIndex=$startIndex;
 		$this->setProperty("class", "breadcrumb");
 		$this->content=array();
 		$this->autoActive=$autoActive;
@@ -47,7 +54,7 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		}
 		$this->addElements($elements);
 	}
-	
+
 	/**
 	 * @param mixed $element
 	 * @param string $href
@@ -71,7 +78,7 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		$elm->setProperty($this->attr, $this->getHref($size));
 		return $elm;
 	}
-	
+
 	public function setActive($index=null){
 		if(!isset($index)){
 			$index=sizeof($this->content)-1;
@@ -81,20 +88,20 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		$li->setContent($this->content[$index]->getContent());
 		$this->content[$index]=$li;
 	}
-	
+
 	public function addElements($elements){
 		foreach ( $elements as $element ) {
 			$this->addElement($element);
 		}
 		return $this;
 	}
-	
+
 	public function fromArray($array){
 		$array=parent::fromArray($array);
 		$this->addElements($array);
 		return $array;
 	}
-	
+
 	/**
 	 * Return the url of the element at $index or the breadcrumbs url if $index is ommited
 	 * @param int $index
@@ -108,10 +115,10 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		if($this->absolutePaths===true){
 			return $this->_hrefFunction($this->content[$index]);
 		}else{
-			return $this->root.implode($separator, array_slice(array_map(function($e){return $this->_hrefFunction($e);}, $this->content),0,$index+1));
+			return $this->root.implode($separator, array_slice(array_map(function($e){return $this->_hrefFunction($e);}, $this->content),$this->startIndex,$index+1));
 		}
 	}
-	
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
@@ -122,14 +129,14 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		}
 		return parent::compile($js, $view);
 	}
-	
+
 	/* (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
 	 */
 	public function fromDatabaseObject($object, $function) {
 		return $this->addElement($function($object));
 	}
-	
+
 		/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::on()
@@ -140,63 +147,68 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		}
 		return $this;
 	}
-	
+
 	public function setAutoActive($autoActive) {
 		$this->autoActive = $autoActive;
 		return $this;
 	}
-	
+
 	public function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
 		foreach ($this->content as $element){
 			$element->_ajaxOn($operation, $event, $url, $responseElement, $parameters);
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * Associate an ajax get to the breadcrumbs elements, displayed in $targetSelector
 	 * $attr member is used to build each element url
 	 * @param string $targetSelector the target of the get
-	 * @param string $attr the html attribute used to build the elements url 
+	 * @param string $attr the html attribute used to build the elements url
 	 * @return HtmlBreadcrumbs
 	 */
 	public function autoGetOnClick($targetSelector){
 		return $this->getOnClick($this->root, $targetSelector,array("attr"=>$this->attr));
 	}
-	
+
 	public function contentAsString(){
 		if($this->autoActive){
 			$this->setActive();
-		}	
+		}
 		return parent::contentAsString();
 	}
-	
+
 	public function getElement($index){
 		return $this->content[$index];
 	}
-	
+
 	/**
 	 * Add a glyphicon to the element at index $index
 	 * @param mixed $glyph
 	 * @param int $index
 	 */
-	public function addGlyph($glyph,$index){
+	public function addGlyph($glyph,$index=0){
 		$elm=$this->getElement($index);
 		return $elm->wrapContentWithGlyph($glyph);
 	}
-	
+
 	/**
 	 * Add new elements in breadcrumbs corresponding to request dispatcher : controllerName, actionName, parameters
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
 	 */
 	public function fromDispatcher($dispatcher){
-		$items=array($dispatcher->getControllerName(),$dispatcher->getActionName());
-		$items=array_merge($items,$dispatcher->getParams());
+		$params=$dispatcher->getParams();
+		$action=$dispatcher->getActionName();
+		$items=array($dispatcher->getControllerName());
+		if(\sizeof($params)>0 || \strtolower($action)!="index" ){
+			$items[]=$action;
+			$items=array_merge($items,$params);
+		}
 		return $this->addElements($items);
 	}
-	
-	
+
+
 	/**
 	 * sets the function who generates the href elements. default : function($element){return $element->getContent()}
 	 * @param function $_hrefFunction
@@ -205,6 +217,12 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 	public function setHrefFunction($_hrefFunction) {
 		$this->_hrefFunction = $_hrefFunction;
 		return $this;
-	}	
-	
+	}
+
+	public function setStartIndex($startIndex) {
+		$this->startIndex=$startIndex;
+		return $this;
+	}
+
+
 }
