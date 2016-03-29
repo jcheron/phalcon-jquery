@@ -27,8 +27,8 @@ Using the dependency injection, the jQuery object can be injected into the **$di
 * Twitter Bootstrap >= 3.3.2 [optional]
 
 ##Resources
-* [API](http://api.kobject.net/phalcon-jquery/) : in progress
-* [Documentation](http://slamwiki.kobject.net/en/slam4/php/phalcon/jquery) : in progress
+* [API](http://api.kobject.net/phalcon-jquery/)
+* [Documentation](http://slamwiki.kobject.net/en/slam4/php/phalcon/jquery)
 
 ##I - Installation
 
