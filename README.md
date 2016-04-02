@@ -1,6 +1,6 @@
 ![Phalcon jquery](http://angular.kobject.net/git/phalconist/phalcon-jquery-git.png "Phalcon jquery")
 
-**A JQuery and UI library** (JQuery UI, Twitter Bootstrap) for Phalcon MVC framework
+**A JQuery and UI library** (JQuery UI, Twitter Bootstrap, Semantic-UI) for Phalcon MVC framework
 
 [Phalcon-jQuery website](http://phalcon-jquery.kobject.net/)
 
@@ -14,7 +14,7 @@
  **Phalcon 1.3.4 and 2.0 compatible**
 
 ##What's Phalcon-jquery ?
-phalcon-jquery is a PHP library for the Phalcon framework : a Phalcon PHP wrapper for JQuery and UI components (JQuery UI and Twitter Bootstrap).
+phalcon-jquery is a PHP library for the Phalcon framework : a Phalcon PHP wrapper for JQuery and UI components (JQuery UI, Twitter Bootstrap or Semantic UI).
 
 Using the dependency injection, the jQuery object can be injected into the **$di** object, allowing for the generation of jQuery scripts in Phalcon controllers, respecting the MVC design pattern.
 
@@ -25,6 +25,7 @@ Using the dependency injection, the jQuery object can be injected into the **$di
 * JQuery >= 2.0.3
 * JQuery UI >= 1.10 [optional]
 * Twitter Bootstrap >= 3.3.2 [optional]
+* Semantic UI >= 2.1 [optional]
 
 ##Resources
 * [API](http://api.kobject.net/phalcon-jquery/)
