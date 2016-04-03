@@ -1,6 +1,6 @@
 <?php
 
-namespace Ajax\bootstrap\html\base;
+namespace Ajax\common\html;
 
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
@@ -44,7 +44,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function setProperty($name, $value) {
-		$this->properties [$name]=$value;
+		$this->properties[$name]=$value;
 		return $this;
 	}
 
@@ -54,7 +54,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function addToProperty($name, $value, $separator=" ") {
-		$v=$this->properties [$name];
+		$v=@$this->properties[$name];
 		if (isset($v)&&$v!=="")
 			$v=$v.$separator.$value;
 		else
@@ -226,7 +226,7 @@ abstract class BaseHtml extends BaseWidget {
 		$this->wrapAfter=$after.$this->wrapAfter;
 		return $this;
 	}
-	
+
 	public function addEvent($event, $jsCode, $stopPropagation=false, $preventDefault=false) {
 		if ($stopPropagation===true) {
 			$jsCode="event.stopPropagation();".$jsCode;

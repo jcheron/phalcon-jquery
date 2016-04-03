@@ -1,8 +1,9 @@
 <?php
 
-namespace Ajax\bootstrap\html\html5;
+namespace Ajax\common\html\html5;
 
-use Ajax\bootstrap\html\base\HtmlSingleElement;
+
+use Ajax\common\html\HtmlSingleElement;
 
 class HtmlImg extends HtmlSingleElement {
 

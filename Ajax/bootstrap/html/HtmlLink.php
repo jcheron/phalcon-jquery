@@ -2,10 +2,10 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 
-class HtmlLink extends HtmlDoubleElement {
+class HtmlLink extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $href="#", $content="Link") {
 		parent::__construct($identifier, "a");

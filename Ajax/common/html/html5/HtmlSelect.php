@@ -1,16 +1,12 @@
 <?php
-namespace Ajax\bootstrap\html\html5;
+namespace Ajax\common\html\html5;
 
+use Ajax\common\html\HtmlDoubleElement;
 /**
  * HTML Select
  * @author jc
  * @version 1.002
  */
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
-use Ajax\JsUtils;
-use Phalcon\Mvc\View;
-use Ajax\service\JArray;
-use Ajax\bootstrap\html\html5\HtmlOption;
 
 class HtmlSelect extends HtmlDoubleElement {
 	private $default;

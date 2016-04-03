@@ -3,6 +3,7 @@
 namespace Ajax\bootstrap\html\base;
 
 use Ajax\JsUtils;
+use Ajax\common\html\BaseHtml;
 
 class HtmlElementAsContent extends BaseHtml {
 	protected $element;
@@ -11,7 +12,7 @@ class HtmlElementAsContent extends BaseHtml {
 		if ($element instanceof HtmlSingleElement) {
 			$this->element=$element;
 		} elseif (is_string($element)) {
-			$this->element=new HtmlDoubleElement($element);
+			$this->element=new HtmlBsDoubleElement($element);
 		}
 		$this->identifier=$element->getIdentifier();
 	}

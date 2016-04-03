@@ -2,12 +2,12 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
-use Ajax\bootstrap\html\html5\HtmlSelect;
+use Ajax\common\html\html5\HtmlSelect;
 
-class HtmlForm extends HtmlDoubleElement {
+class HtmlForm extends HtmlBsDoubleElement {
 	protected $formElementsPrefix;
 	protected $futureElements;
 	protected $formGroups;
@@ -101,7 +101,7 @@ class HtmlForm extends HtmlDoubleElement {
 	public function addGroup($identifier="") {
 		if ($identifier==="")
 			$identifier="form-".$this->identifier;
-		$group=new HtmlDoubleElement($identifier);
+		$group=new HtmlBsDoubleElement($identifier);
 		$group->setTagName("div");
 		$group->setClass("form-group");
 		$this->formGroups []=$group;

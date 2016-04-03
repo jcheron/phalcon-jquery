@@ -19,6 +19,7 @@ class Jquery {
 	protected $_di;
 	protected $_ui;
 	protected $_bootstrap;
+	protected $_semantic;
 	protected $libraryFile;
 	protected $_javascript_folder='js';
 	protected $jquery_code_for_load=array ();
@@ -47,6 +48,13 @@ class Jquery {
 			$this->_bootstrap=$bootstrap;
 		}
 		return $this->_bootstrap;
+	}
+
+	public function semantic($semantic=NULL) {
+		if ($semantic!==NULL) {
+			$this->_semantic=$semantic;
+		}
+		return $this->_semantic;
 	}
 
 	public function __construct($params) {
@@ -849,11 +857,19 @@ class Jquery {
 			}
 		}
 
-		// Components UI
+		// Components BS
 		$bootstrap=$this->bootstrap();
 		if ($this->bootstrap()!=NULL) {
 			if ($bootstrap->isAutoCompile()) {
 				$bootstrap->compile(true);
+			}
+		}
+
+		// Components Seamntic
+		$semantic=$this->semantic();
+		if ($semantic!=NULL) {
+			if ($semantic->isAutoCompile()) {
+				$semantic->compile(true);
 			}
 		}
 

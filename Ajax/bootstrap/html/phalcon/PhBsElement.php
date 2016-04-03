@@ -3,7 +3,7 @@
 namespace Ajax\bootstrap\html\phalcon;
 
 use Phalcon\Forms\Element;
-use Ajax\bootstrap\html\base\HtmlSingleElement;
+use Ajax\common\html\HtmlSingleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 

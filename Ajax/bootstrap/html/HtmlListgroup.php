@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlListgroupItem;
 
 /**
@@ -11,7 +11,7 @@ use Ajax\bootstrap\html\content\HtmlListgroupItem;
  * @author jc
  * @version 1.001
  */
-class HtmlListgroup extends HtmlDoubleElement {
+class HtmlListgroup extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $tagName="ul") {
 		parent::__construct($identifier, $tagName);
@@ -26,7 +26,7 @@ class HtmlListgroup extends HtmlDoubleElement {
 		} else {
 			switch($this->tagName) {
 				case "ul":
-					$element=new HtmlDoubleElement("list-gi-".$this->identifier);
+					$element=new HtmlBsDoubleElement("list-gi-".$this->identifier);
 					$element->setTagName("li");
 					break;
 				default:

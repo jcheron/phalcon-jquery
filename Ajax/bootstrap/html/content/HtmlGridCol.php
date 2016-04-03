@@ -1,10 +1,10 @@
 <?php
 namespace Ajax\bootstrap\html\content;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssSize;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap Grid col
@@ -12,7 +12,7 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlGridCol extends HtmlDoubleElement {
+class HtmlGridCol extends HtmlBsDoubleElement {
 	private $positions;
 	private $offsets;
 	public function __construct($identifier,$size=CssSize::SIZE_MD,$width=1){
@@ -35,12 +35,12 @@ class HtmlGridCol extends HtmlDoubleElement {
 		}
 		return implode(" ", $result);
 	}
-	
+
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
 		$this->setProperty("class", $this->_generateClass());
 		return parent::compile($js,$view);
 	}
-	
+
 	public function setOffset($size,$offset){
 		$this->offsets[$size]=$offset;
 		return $this;
@@ -53,7 +53,7 @@ class HtmlGridCol extends HtmlDoubleElement {
 		unset($value);
 		return $this;
 	}
-	
+
 	public function setWidthForAll($newWidth){
 		foreach ($this->positions as &$pos){
 			$pos=$newWidth;
@@ -61,24 +61,24 @@ class HtmlGridCol extends HtmlDoubleElement {
 		unset($pos);
 		return $this;
 	}
-	
+
 	public function setWidth($size=CssSize::SIZE_MD,$width=1){
 		$this->positions[$size]=$width;
-		return $this;	
+		return $this;
 	}
-	
+
 	public function setPosition($size=CssSize::SIZE_MD,$width=1){
 		return $this->addPosition($size,$width);
 	}
-	
+
 	public function getWidth($size){
 		return @$this->positions[$size];
 	}
-	
+
 	public function getOffest($size){
 		return @$this->offsets[$size];
 	}
-	
+
 	public function addClear(){
 		$this->wrap("","<div class='clearfix'></div>");
 	}
@@ -86,7 +86,7 @@ class HtmlGridCol extends HtmlDoubleElement {
 		$this->offsets = $offsets;
 		return $this;
 	}
-	
+
 	public function copy($identifier){
 		$result=new HtmlGridCol($identifier);
 		$result->setPositions($this->positions);
@@ -100,7 +100,7 @@ class HtmlGridCol extends HtmlDoubleElement {
 	public function getOffsets() {
 		return $this->offsets;
 	}
-	
-	
-	
+
+
+
 }

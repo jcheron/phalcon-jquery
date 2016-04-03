@@ -3,7 +3,7 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\CssRef;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Twitter Bootstrap Buttongroups component
@@ -11,7 +11,7 @@ use Ajax\bootstrap\html\base\HtmlDoubleElement;
  * @author jc
  * @version 1.001
  */
-class HtmlButtongroups extends HtmlDoubleElement {
+class HtmlButtongroups extends HtmlBsDoubleElement {
 	protected $elements;
 
 	public function __construct($identifier, $elements=array(), $cssStyle=NULL, $size=NULL, $tagName="div") {

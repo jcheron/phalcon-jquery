@@ -3,12 +3,12 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\content\HtmlCarouselControl;
 use Ajax\bootstrap\html\base\CssRef;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlCarouselItem;
 use Phalcon\Mvc\View;
+use Ajax\common\html\BaseHtml;
 /**
  * Composant Twitter Bootstrap Carousel
  * @see http://getbootstrap.com/components/#carousel
@@ -130,7 +130,7 @@ class HtmlCarousel extends BaseHtml {
 	}
 
 	private function createIndicator() {
-		$indicator=new HtmlDoubleElement("indicator-".$this->identifier);
+		$indicator=new HtmlBsDoubleElement("indicator-".$this->identifier);
 		$indicator->setProperty("data-target", "#".$this->identifier);
 		$indicator->setProperty("data-slide-to", sizeof($this->indicators));
 		$indicator->setTagName("li");

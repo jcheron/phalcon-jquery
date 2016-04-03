@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
 use Phalcon\Mvc\View;
@@ -13,7 +13,7 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlAlert extends HtmlDoubleElement {
+class HtmlAlert extends HtmlBsDoubleElement {
 	/**
 	 *
 	 * @var string|HtmlButton

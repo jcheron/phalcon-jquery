@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Twitter Bootstrap Collapse component
@@ -51,7 +51,7 @@ class HtmlCollapse extends HtmlElementAsContent {
 	public function createCollapsedZone($content="", $attachTo=NULL) {
 		if (isset($attachTo))
 			$this->attachTo($attachTo);
-		$collapsedZone=new HtmlDoubleElement($this->getAttachedZone());
+		$collapsedZone=new HtmlBsDoubleElement($this->getAttachedZone());
 		$collapsedZone->setProperty("class", "collapse");
 		$collapsedZone->setContent($content);
 		return $collapsedZone;

@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html\content;
 
-use Ajax\bootstrap\html\base\BaseHtml;
+use Ajax\common\html\BaseHtml;
 use Ajax\JsUtils;
 
 class HtmlCarouselItem extends BaseHtml {

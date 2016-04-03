@@ -3,12 +3,12 @@
 namespace Ajax\bootstrap\html\content;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\BaseHtml;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\content\HtmlDropdownItem;
 use Ajax\bootstrap\html\HtmlDropdown;
 use Ajax\bootstrap\html\HtmlLink;
+use Ajax\common\html\BaseHtml;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap HTML Navbar component
@@ -33,7 +33,7 @@ class HtmlNavzone extends BaseHtml {
 	public function setClass($value) {
 		$this->setMemberCtrl($this->class, $value, CssRef::navbarZoneClasses());
 	}
-	
+
 	public function asForm() {
 		$this->addToMember($this->class, "navbar-form");
 	}
@@ -86,7 +86,7 @@ class HtmlNavzone extends BaseHtml {
 
 	public function addLink($caption, $href="#") {
 		$iid=$this->getElementsCount()+1;
-		$li=new HtmlDoubleElement($this->identifier."-li-".$iid, "li");
+		$li=new HtmlBsDoubleElement($this->identifier."-li-".$iid, "li");
 		if($caption instanceof HtmlLink){
 			$link=$caption;
 		}else{
@@ -110,7 +110,7 @@ class HtmlNavzone extends BaseHtml {
 		$result=new HtmlNavzone($identifier);
 		return $result->setValues("navbar-right", "ul", $elements);
 	}
-	
+
 	public static function formRight($identifier, $elements=array()) {
 		$result=new HtmlNavzone($identifier);
 		return $result->setValues("navbar-right navbar-form", "ul", $elements);

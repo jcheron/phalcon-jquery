@@ -3,18 +3,17 @@
 namespace Ajax\bootstrap\html\content;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\html\HtmlBadge;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\HtmlGlyphicon;
 use Ajax\service\PhalconUtils;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
  * @version 1.001
  */
-class HtmlDropdownItem extends HtmlDoubleElement {
+class HtmlDropdownItem extends HtmlBsDoubleElement {
 	protected $_htmlDropdown;
 	protected $class;
 	protected $itemClass;
@@ -81,7 +80,7 @@ class HtmlDropdownItem extends HtmlDoubleElement {
 		$this->role="presentation";
 		$this->class="disabled";
 	}
-	
+
 	public function active() {
 		$this->role="menuitem";
 		$this->class="active";

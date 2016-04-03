@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\JsUtils;
 use Ajax\service\PhalconUtils;
@@ -13,7 +13,7 @@ use Ajax\service\PhalconUtils;
  * @author jc
  * @version 1.001
  */
-class HtmlPanel extends HtmlDoubleElement {
+class HtmlPanel extends HtmlBsDoubleElement {
 	protected $header;
 	protected $footer;
 	protected $_collapsable;
@@ -57,7 +57,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	}
 
 	public function addHeader($content) {
-		$header=new HtmlDoubleElement("header-".$this->identifier);
+		$header=new HtmlBsDoubleElement("header-".$this->identifier);
 		$header->setTagName("div");
 		$header->setClass("panel-heading");
 		$header->setContent($content);
@@ -66,7 +66,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	}
 
 	public function addHeaderH($content, $niveau="1") {
-		$headerH=new HtmlDoubleElement("header-h-".$this->identifier);
+		$headerH=new HtmlBsDoubleElement("header-h-".$this->identifier);
 		$headerH->setContent($content);
 		$headerH->setTagName("h".$niveau);
 		$headerH->setClass("panel-title");
@@ -74,7 +74,7 @@ class HtmlPanel extends HtmlDoubleElement {
 	}
 
 	public function addFooter($content) {
-		$footer=new HtmlDoubleElement("footer-".$this->identifier);
+		$footer=new HtmlBsDoubleElement("footer-".$this->identifier);
 		$footer->setTagName("div");
 		$footer->setClass("panel-footer");
 		$footer->setContent($content);

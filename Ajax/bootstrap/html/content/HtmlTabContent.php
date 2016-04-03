@@ -2,14 +2,14 @@
 
 namespace Ajax\bootstrap\html\content;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 /**
  * Twitter Bootstrap HTML TabContent component
  * @author jc
  * @version 1.001
  */
-class HtmlTabContent extends HtmlDoubleElement {
+class HtmlTabContent extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $tagName="div") {
 		parent::__construct($identifier, $tagName);

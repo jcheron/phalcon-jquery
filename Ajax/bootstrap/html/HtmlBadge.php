@@ -8,9 +8,9 @@ namespace Ajax\bootstrap\html;
  * @author jc
  * @version 1.001
  */
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
-class HtmlBadge extends HtmlDoubleElement {
+class HtmlBadge extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $caption="") {
 		parent::__construct($identifier, "span");

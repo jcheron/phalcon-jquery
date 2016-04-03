@@ -5,14 +5,14 @@ namespace Ajax\bootstrap\html\content;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\bootstrap\components\Tab;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap HTML Dropdown component
  * @author jc
  * @version 1.001
  */
-class HtmlTabItem extends HtmlDoubleElement {
+class HtmlTabItem extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $caption="", $href="#") {
 		parent::__construct($identifier, "li");

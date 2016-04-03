@@ -3,7 +3,7 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 
 /**
@@ -23,7 +23,7 @@ class HtmlInputgroup extends HtmlInput {
 
 	public function createSpan($text, $position="left") {
 		$id=$position."-".$this->identifier;
-		$span=new HtmlDoubleElement($id);
+		$span=new HtmlBsDoubleElement($id);
 		$span->setTagName("span");
 		$this->setProperty("aria-describedby", $id);
 		$span->setContent($text);

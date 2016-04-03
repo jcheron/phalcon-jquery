@@ -1,10 +1,10 @@
 <?php
 namespace Ajax\bootstrap\html\content;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssSize;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap Grid row
@@ -12,7 +12,7 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlGridRow extends HtmlDoubleElement {
+class HtmlGridRow extends HtmlBsDoubleElement {
 	private $cols;
 	public function __construct($identifier,$numCols=NULL){
 		parent::__construct($identifier,"div");
@@ -27,18 +27,18 @@ class HtmlGridRow extends HtmlDoubleElement {
 			}
 		}
 	}
-	
+
 	public function addCol($size=CssSize::SIZE_MD,$width=1){
 		$col=new HtmlGridCol($this->identifier."-col-".(sizeof($this->cols)+1),$size,$width);
 		$this->cols[]=$col;
 		return $col;
 	}
-	
+
 	public function addColAt($size=CssSize::SIZE_MD,$width=1,$offset=1){
 		$col=$this->addCol($size,$width);
 		return $col->setOffset($size, max($offset,sizeof($this->cols)+1));
 	}
-	
+
 	public function getCol($index,$force=true){
 		if($index<sizeof($this->cols)+1){
 			$result=$this->cols[$index-1];
@@ -47,7 +47,7 @@ class HtmlGridRow extends HtmlDoubleElement {
 		}
 		return $result;
 	}
-	
+
 	public function getColAt($offset,$force=true){
 		$result=null;
 		foreach ($this->cols as $col){
@@ -61,9 +61,9 @@ class HtmlGridRow extends HtmlDoubleElement {
 		}
 		return $result;
 	}
-	
+
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-	
+
 		foreach ($this->cols as $col){
 			$this->addContent($col);
 		}
@@ -72,7 +72,7 @@ class HtmlGridRow extends HtmlDoubleElement {
 	public function getCols() {
 		return $this->cols;
 	}
-	
+
 	public function setContentForAll($content){
 		foreach ($this->cols as $col){
 			$col->setContent($content);

@@ -2,13 +2,13 @@
 
 namespace Ajax\bootstrap\html\content;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\service\PhalconUtils;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
  * Inner element for Twitter Bootstrap HTML Listgroup component
@@ -65,10 +65,10 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 			$content=JArray::getValue($array, "content", 1);
 			$niveau=JArray::getValue($array, "niveau", 2);
 		}
-		$elementHeader=new HtmlDoubleElement("", "h".$niveau);
+		$elementHeader=new HtmlBsDoubleElement("", "h".$niveau);
 		$elementHeader->setContent($title);
 		$elementHeader->setClass("list-group-item-heading");
-		$element=new HtmlDoubleElement("", "p");
+		$element=new HtmlBsDoubleElement("", "p");
 		$element->setContent($content);
 		$element->setClass("list-group-item-text");
 		$this->element->setContent(array (

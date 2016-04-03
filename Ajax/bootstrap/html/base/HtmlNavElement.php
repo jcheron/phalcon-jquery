@@ -1,31 +1,30 @@
 <?php
 namespace Ajax\bootstrap\html\base;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 use Ajax\JsUtils;
 /**
- * Bse class for navigation elements : Breadcrumbs and Pagination
+ * Bs class for navigation elements : Breadcrumbs and Pagination
  * @author jc
  * @version 1.001
  */
-abstract class HtmlNavElement extends HtmlDoubleElement {
+abstract class HtmlNavElement extends HtmlBsDoubleElement {
 	/**
 	 * @var string the root site
 	 */
 	protected $root;
-	
+
 	/**
 	 * @var String the html attribute which contains the elements url. default : data-ajax
 	 */
 	protected $attr;
-	
-	
+
+
 	public function __construct($identifier,$tagName){
 		parent::__construct($identifier,$tagName);
 		$this->root="";
 		$this->attr="data-ajax";
 	}
-	
+
 	/**
 	 * Associate an ajax get to the elements, displayed in $targetSelector
 	 * $attr member is used to build each element url
@@ -36,11 +35,11 @@ abstract class HtmlNavElement extends HtmlDoubleElement {
 	public function autoGetOnClick($targetSelector){
 		return $this->getOnClick($this->root, $targetSelector,array("attr"=>$this->attr));
 	}
-	
+
 	public function contentAsString(){
 		return implode("", $this->content);
 	}
-	
+
 	/**
 	 * Generate the jquery script to set the elements to the HtmlNavElement
 	 * @param JsUtils $jsUtils
@@ -48,7 +47,7 @@ abstract class HtmlNavElement extends HtmlDoubleElement {
 	public function jsSetContent(JsUtils $jsUtils){
 		$jsUtils->html("#".$this->identifier,str_replace("\"","'", $this->contentAsString()),true);
 	}
-	
+
 	public function getRoot() {
 		return $this->root;
 	}
@@ -59,7 +58,7 @@ abstract class HtmlNavElement extends HtmlDoubleElement {
 	public function getAttr() {
 		return $this->attr;
 	}
-	
+
 	/**
 	 * Define the html attribute for each element url in ajax
 	 * @param string $attr html attribute
@@ -78,7 +77,7 @@ abstract class HtmlNavElement extends HtmlDoubleElement {
 					);
 		}
 	}
-	
+
 	public abstract function fromDispatcher($dispatcher);
-	
+
 }

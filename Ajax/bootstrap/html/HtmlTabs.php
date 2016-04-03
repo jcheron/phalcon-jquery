@@ -11,11 +11,11 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\content\HtmlTabItem;
 use Ajax\JsUtils;
 use Ajax\bootstrap\components\Tabs;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlTabContent;
 use Phalcon\Mvc\View;
 
-class HtmlTabs extends HtmlDoubleElement {
+class HtmlTabs extends HtmlBsDoubleElement {
 	protected $tabs=array ();
 	protected $_tabsType="tabs";
 	protected $stacked="";

@@ -2,13 +2,13 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\service\JArray;
 
-class HtmlProgressbar extends HtmlDoubleElement {
+class HtmlProgressbar extends HtmlBsDoubleElement {
 	protected $value;
 	protected $max;
 	protected $min;
@@ -137,10 +137,8 @@ class HtmlProgressbar extends HtmlDoubleElement {
 		if(isset($this->styleLimits)&& JArray::isAssociative($this->styleLimits)){
 			foreach ($this->styleLimits as $k=>$v){
 				$actualStyle=$k;
-				if($v>=$this->value)
+				if($v>$this->value)
 					break;
-					else
-						$actualStyle=$this->style;
 			}
 		}
 		$this->style=$actualStyle;
@@ -170,6 +168,12 @@ class HtmlProgressbar extends HtmlDoubleElement {
 		return $this->styleLimits;
 	}
 
+	/**
+	 * Permet de modifier le style de la progressbar à partir de sa valeur actuelle
+	 * $styleLimits est de la forme ["success"=>50, "warning"=>100] pour obtenir un style success de 0 à 50 et warning de 50 à 100
+	 * @param array $styleLimits tableau associatif des couples style=>valeur possibles
+	 * @return \Ajax\bootstrap\html\HtmlProgressbar
+	 */
 	public function setStyleLimits($styleLimits) {
 		$this->styleLimits=$styleLimits;
 		return $this;

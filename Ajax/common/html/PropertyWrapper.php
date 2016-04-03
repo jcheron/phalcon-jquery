@@ -1,9 +1,8 @@
 <?php
 
-namespace Ajax\bootstrap\html\base;
+namespace Ajax\common\html;
 
 use Ajax\service\JArray;
-use Ajax\service\AjaxCall;
 
 class PropertyWrapper {
 

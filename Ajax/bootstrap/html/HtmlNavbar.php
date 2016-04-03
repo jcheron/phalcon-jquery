@@ -3,11 +3,11 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\BaseHtml;
 use Ajax\bootstrap\components\Scrollspy;
 use Ajax\service\PhalconUtils;
 use Ajax\bootstrap\html\content\HtmlNavzone;
 use Ajax\bootstrap\html\base\CssNavbar;
+use Ajax\common\html\BaseHtml;
 /**
  * Twitter Bootstrap HTML Navbar component
  * @author jc

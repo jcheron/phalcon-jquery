@@ -39,6 +39,11 @@ abstract class _JsUtils implements InjectionAwareInterface {
 
 	/**
 	 *
+	 * @var Semantic
+	 */
+	protected $_semantic;
+	/**
+	 *
 	 * @var Config
 	 */
 	protected $config;
@@ -87,6 +92,26 @@ abstract class _JsUtils implements InjectionAwareInterface {
 			}
 		}
 		return $this->_bootstrap;
+	}
+
+	/**
+	 *
+	 * @param Semantic $semantic
+	 * @return \Ajax\Semantic
+	 */
+	public function semantic($semantic=NULL) {
+		if ($semantic!==NULL) {
+			$this->_semantic=$semantic;
+			if ($this->js!=null) {
+				$this->js->semantic($semantic);
+				$semantic->setJs($this);
+			}
+			$ui=$this->ui();
+			if (isset($ui)) {
+				$this->conflict();
+			}
+		}
+		return $this->_semantic;
 	}
 
 	protected function conflict() {
@@ -173,7 +198,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function click($element='this', $js='', $ret_false=TRUE) {
 		return $this->js->_click($element, $js, $ret_false);
 	}
-	
+
 	/**
 	 * Outputs a javascript library contextmenu event
 	 *
@@ -184,7 +209,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function contextmenu($element='this', $js='') {
 		return $this->js->_contextmenu($element, $js);
 	}
-	
+
 	// --------------------------------------------------------------------
 	/**
 	 * Outputs a javascript library dblclick event
@@ -385,7 +410,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function addClass($element='this', $class='', $immediatly=false) {
 		return $this->js->_genericCallValue('addClass',$element, $class, $immediatly);
 	}
-	
+
 	/**
 	 * Insert content, specified by the parameter, after each element in the set of matched elements
 	 * @param string $to
@@ -396,7 +421,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function after($to, $element, $immediatly=false){
 		return $this->js->_genericCallElement('after',$to, $element, $immediatly);
 	}
-	
+
 	/**
 	 * Insert content, specified by the parameter, before each element in the set of matched elements
 	 * @param string $to
@@ -407,7 +432,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function before($to, $element, $immediatly=false){
 		return $this->js->_genericCallElement('before',$to, $element, $immediatly);
 	}
-	
+
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -418,7 +443,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function attr($element='this', $attributeName='value', $value='', $immediatly=false) {
 		return $this->js->_attr($element, $attributeName, $value, $immediatly);
 	}
-	
+
 	/**
 	 * Get or set the value of the first element in the set of matched elements or set one or more attributes for every matched element.
 	 * @param string $element
@@ -634,6 +659,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		if (isset($bs)&&isset($view)) {
 			$bs->compileHtml($this, $view);
 		}
+		$sem=$this->_semantic;
+		if (isset($sem)&&isset($view)) {
+			$sem->compileHtml($this, $view);
+		}
 		return $this->js->_compile($view, $view_var, $script_tags);
 	}
 
@@ -810,7 +839,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function jsonOn($event,$element, $url,$parameters=array()) {
 		return $this->js->_jsonOn($event, $element, $url,$parameters);
 	}
-	
+
 	/**
 	 * Prepares an ajax request delayed and receives the JSON data types by assigning DOM elements with the same name
 	 * @param string $url the request url
@@ -844,7 +873,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function jsonArrayDeferred($maskSelector, $url, $method="get", $params="{}", $jsCallback=NULL) {
 		return $this->js->_jsonArray($maskSelector, $url, $method, $params, $jsCallback, NULL, false);
 	}
-	
+
 	/**
 	 * Performs an ajax request and receives the JSON array data types by assigning DOM elements with the same name when $event fired on $element
 	 * @param string $element

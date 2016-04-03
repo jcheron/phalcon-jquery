@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 
@@ -12,7 +12,7 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlAccordion extends HtmlDoubleElement {
+class HtmlAccordion extends HtmlBsDoubleElement {
 
 	public function __construct($identifier, $tagName="div") {
 		parent::__construct($identifier, $tagName);

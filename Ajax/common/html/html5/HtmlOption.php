@@ -1,11 +1,11 @@
 <?php
-namespace Ajax\bootstrap\html\html5;
+namespace Ajax\common\html\html5;
+use Ajax\common\html\HtmlDoubleElement;
 /**
  * HTML Select
  * @author jc
  * @version 1.002
  */
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
 
 class HtmlOption extends HtmlDoubleElement {
 	protected $value;
@@ -17,12 +17,12 @@ class HtmlOption extends HtmlDoubleElement {
 		$this->value=$value;
 		$this->selected="";
 	}
-	
+
 	public function select(){
 		$this->selected="selected";
 		return $this;
 	}
-	
+
 	public function getValue() {
 		return $this->value;
 	}
@@ -30,5 +30,5 @@ class HtmlOption extends HtmlDoubleElement {
 		$this->value = $value;
 		return $this;
 	}
-	
+
 }

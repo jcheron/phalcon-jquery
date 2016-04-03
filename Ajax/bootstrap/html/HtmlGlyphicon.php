@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlSingleElement;
+use Ajax\common\html\HtmlSingleElement;
 use Ajax\service\PhalconUtils;
 use Ajax\bootstrap\html\base\CssGlyphicon;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ajax\bootstrap\html\base;
+namespace Ajax\common\html;
 
 /**
- * BaseWidget for Twitter Bootstrap components
+ * BaseWidget for Twitter Bootstrap or Semantic components
  * @author jc
  * @version 1.001
  */

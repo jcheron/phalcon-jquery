@@ -1,7 +1,7 @@
 <?php
 namespace Ajax\bootstrap\html;
 
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlGridRow;
 use Ajax\bootstrap\html\content\HtmlGridCol;
 use Ajax\JsUtils;
@@ -13,7 +13,7 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlGridSystem extends HtmlDoubleElement {
+class HtmlGridSystem extends HtmlBsDoubleElement {
 	private $rows;
 	
 	public function __construct($identifier,$numRows=1,$numCols=NULL){

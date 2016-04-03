@@ -3,7 +3,7 @@
 namespace Ajax\bootstrap\html;
 
 use Ajax\JsUtils;
-use Ajax\bootstrap\html\base\HtmlDoubleElement;
+use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\base\CssRef;
 
 /**
@@ -12,7 +12,7 @@ use Ajax\bootstrap\html\base\CssRef;
  * @author jc
  * @version 1.001
  */
-class HtmlButton extends HtmlDoubleElement {
+class HtmlButton extends HtmlBsDoubleElement {
 
 	/**
 	 * Constructs an HTML Bootstrap button
