@@ -5,8 +5,9 @@
     "keywords": [
         "jquery",
         "phalcon",
-        "bootstrap",
+        "twitter bootstrap",
         "jquery ui",
+        "semantic ui",
         "framework"
     ],
     "require": {
