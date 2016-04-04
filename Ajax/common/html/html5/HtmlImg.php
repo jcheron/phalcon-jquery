@@ -7,8 +7,10 @@ use Ajax\common\html\HtmlSingleElement;
 
 class HtmlImg extends HtmlSingleElement {
 
-	public function __construct($identifier) {
+	public function __construct($identifier,$src="",$alt="") {
 		parent::__construct($identifier, "img");
+		$this->setSrc($src);
+		$this->setAlt($alt);
 	}
 
 	public function getSrc() {

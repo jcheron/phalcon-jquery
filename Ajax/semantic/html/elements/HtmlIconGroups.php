@@ -1,25 +1,20 @@
 <?php
 
-namespace Ajax\semantic\html;
+namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\HtmlDoubleElement;
-use Ajax\semantic\html\base\IconSize;
+use Ajax\semantic\html\base\HtmlSemDoubleElement;
 /**
  * Semantic Icons group component
  * @see http://semantic-ui.com/elements/icon.html#/definition
  * @author jc
  * @version 1.001
  */
-class HtmlGroupIcons extends HtmlDoubleElement {
+class HtmlIconGroups extends HtmlSemDoubleElement {
 
 	public function __construct($identifier,$size="") {
 		parent::__construct($identifier, "i");
 		$this->setProperty("class", "icons");
 		$this->setSize($size);
-	}
-
-	public function setSize($size){
-		return $this->addToPropertyCtrl("class", $size, IconSize::getConstants());
 	}
 
 	public function addIcon($icon,$size=""){

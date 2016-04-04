@@ -4,6 +4,7 @@ namespace Ajax\bootstrap\html\base;
 
 use Ajax\JsUtils;
 use Ajax\common\html\BaseHtml;
+use Ajax\common\html\HtmlSingleElement;
 
 class HtmlElementAsContent extends BaseHtml {
 	protected $element;

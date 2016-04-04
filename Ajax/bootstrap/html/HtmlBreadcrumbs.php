@@ -204,7 +204,7 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 		if(\sizeof($params)>0 || \strtolower($action)!="index" ){
 			$items[]=$action;
 			foreach ($params as $p){
-				if(\is_object($p)==false)
+				if(\is_object($p)===false)
 				$items[]=$p;
 			}
 		}

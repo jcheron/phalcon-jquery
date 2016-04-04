@@ -1,9 +1,9 @@
 <?php
 
-namespace Ajax\semantic\html;
+namespace Ajax\semantic\html\elements;
 
 use Ajax\common\html\HtmlSingleElement;
-use Ajax\semantic\html\base\IconSize;
+use Ajax\semantic\html\base\Size;
 use Ajax\semantic\html\base\Color;
 /**
  * Semantic Icon component
@@ -42,7 +42,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @see \Ajax\common\html\HtmlSingleElement::setSize()
 	 */
 	public function setSize($size) {
-		$this->setMemberCtrl($this->size, $size,IconSize::getConstants());
+		$this->setMemberCtrl($this->size, $size,Size::getConstants());
 		return $this;
 	}
 
@@ -92,7 +92,7 @@ class HtmlIcon extends HtmlSingleElement {
 
 	public function setCircular($inverted=false){
 		$invertedStr="";
-		if($inverted)
+		if($inverted!==false)
 			$invertedStr=" inverted";
 		return $this->addToMember($this->attributes, "circular".$invertedStr);
 	}
@@ -110,7 +110,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 */
 	public function setBordered($inverted=false){
 		$invertedStr="";
-		if($inverted)
+		if($inverted!==false)
 			$invertedStr=" inverted";
 			return $this->addToMember($this->attributes, "bordered".$invertedStr);
 	}

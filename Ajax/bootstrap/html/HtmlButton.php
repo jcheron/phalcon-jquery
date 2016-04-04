@@ -104,6 +104,8 @@ class HtmlButton extends HtmlBsDoubleElement {
 		return $this->_bsComponent;
 	}
 
+
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::fromArray()

@@ -5,6 +5,7 @@ use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\base\HtmlNavElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\service\PhalconUtils;
+use Ajax\common\html\BaseHtml;
 
 /**
  * Twitter Bootstrap Pagination component
