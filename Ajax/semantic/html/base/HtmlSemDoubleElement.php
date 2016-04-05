@@ -81,6 +81,14 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return $iconO;
 	}
 
+	/**
+	 * show a loading indicator
+	 * @return \Ajax\semantic\html\base\HtmlSemDoubleElement
+	 */
+	public function asLoader(){
+		return $this->addToProperty("class", "loading");
+	}
+
 	public function compile(JsUtils $js=NULL, View $view=NULL){
 		if(isset($this->_popup))
 			$this->_popup->compile();

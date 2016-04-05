@@ -5,6 +5,7 @@ namespace Ajax\common\html\html5;
 use Ajax\common\html\HtmlDoubleElement;
 
 abstract class HtmlCollection extends HtmlDoubleElement {
+
 	public function __construct($identifier,$tagName="div"){
 		parent::__construct($identifier,$tagName);
 		$this->content=array();
@@ -60,6 +61,21 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 
 	public function count(){
 		return \sizeof($this->content);
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addItems($function($object));
+	}
+
+	/*
+	 * (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\HtmlSingleElement::fromArray()
+	 */
+	public function fromArray($array) {
+		$this->addItems($array);
 	}
 	/**
 	 * The item factory

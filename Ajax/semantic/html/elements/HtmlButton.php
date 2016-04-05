@@ -125,14 +125,6 @@ class HtmlButton extends HtmlSemDoubleElement {
 	}
 
 	/**
-	 * show a loading indicator
-	 * @return \Ajax\semantic\html\elements\HtmlButton
-	 */
-	public function asLoader(){
-		return $this->addToProperty("class", "loading");
-	}
-
-	/**
 	 * hint towards a positive consequence
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
