@@ -76,7 +76,23 @@ class HtmlDropdownItem extends HtmlSemDoubleElement {
 		$this->setClass("divider");
 	}
 
+	public function asHeader($caption=NULL,$icon=NULL){
+		$this->setClass("header");
+		$this->content=$caption;
+		if(isset($icon))
+			$this->addIcon($icon,true);
+		return $this;
+	}
+
 	public static function searchInput($placeholder=NULL,$icon=NULL){
 		return (new HtmlDropdownItem(""))->asSearchInput($placeholder,$icon);
+	}
+
+	public static function divider($placeholder=NULL,$icon=NULL){
+		return (new HtmlDropdownItem(""))->asDivider();
+	}
+
+	public static function header($caption=NULL,$icon=NULL){
+		return (new HtmlDropdownItem(""))->asHeader($caption,$icon);
 	}
 }
