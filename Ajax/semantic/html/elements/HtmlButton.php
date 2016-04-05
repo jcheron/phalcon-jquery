@@ -109,14 +109,6 @@ class HtmlButton extends HtmlSemDoubleElement {
 	}
 
 	/**
-	 * can be formatted to appear on dark backgrounds
-	 * @return \Ajax\semantic\html\elements\HtmlButton
-	 */
-	public function setInverted(){
-		return $this->addToProperty("class", "inverted");
-	}
-
-	/**
 	 *  show it is currently the active user selection
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */

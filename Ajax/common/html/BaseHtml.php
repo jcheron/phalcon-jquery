@@ -9,7 +9,7 @@ use Ajax\service\PhalconUtils;
 use Ajax\service\JString;
 
 /**
- * BaseHtml for Twitter Bootstrap HTML components
+ * BaseHtml for HTML components
  * @author jc
  * @version 1.001
  */

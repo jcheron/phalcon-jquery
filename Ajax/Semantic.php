@@ -18,6 +18,9 @@ use Ajax\semantic\components\Dropdown;
 use Ajax\semantic\html\collections\HtmlMessage;
 use Ajax\semantic\html\elements\HtmlSegment;
 use Ajax\semantic\html\elements\HtmlSegmentGroups;
+use Ajax\common\html\HtmlDoubleElement;
+use Ajax\semantic\html\modules\HtmlPopup;
+use Ajax\common\html\BaseHtml;
 
 class Semantic extends BaseGui {
 
@@ -155,5 +158,13 @@ class Semantic extends BaseGui {
 	 */
 	public function htmlSegmentGroups($identifier, $items=array()){
 		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier,$items));
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param mixed $content
+	 */
+	public function htmlPopup(BaseHtml $container,$identifier,$content){
+		return $this->addHtmlComponent(new HtmlPopup($container,$identifier,$content));
 	}
 }

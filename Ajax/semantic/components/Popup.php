@@ -33,5 +33,14 @@ class Popup extends SimpleExtComponent {
 	public function setExclusive($value){
 		return $this->setParam("exclusive", $value);
 	}
+
+	/**
+	 * Defines the css selector of the displayed popup
+	 * @param string $popup the css selector of the popup
+	 * @return \Ajax\semantic\components\Popup
+	 */
+	public function setPopup($popup){
+		return $this->setParam("popup", $popup);
+	}
 	//TODO other events implementation
 }

@@ -2,16 +2,15 @@
 
 namespace Ajax\semantic\html\collections;
 
-use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\bootstrap\html\HtmlLink;
-use Ajax\common\html\HtmlDoubleElement;
+use Ajax\common\html\html5\HtmlCollection;
 /**
  * Semantic Menu component
  * @see http://semantic-ui.com/collections/menu.html
  * @author jc
  * @version 1.001
  */
-class HtmlMenu extends HtmlSemDoubleElement {
+class HtmlMenu extends HtmlCollection {
 
 	public function __construct($identifier, $items=array()) {
 		parent::__construct($identifier, "div");
@@ -30,34 +29,32 @@ class HtmlMenu extends HtmlSemDoubleElement {
 		return $this->addToPropertyCtrl("class", $type, array("","item","text"));
 	}
 
-	public function addItem($item){
-		$itemO=$item;
-		if(\is_string($item)){
-				$itemO=new HtmlLink("item-".\sizeof($this->content),"",$item);
-				$itemO->setClass("item");
-		}
-		$this->addContent($itemO);
-	}
-
-	/**
-	 * Return the item at index
-	 * @param int $index
-	 * @return HtmlDoubleElement
-	 */
-	public function getItem($index) {
-		if (is_int($index))
-			return $this->content[$index];
-			else {
-				$elm=$this->getElementById($index, $this->content);
-				return $elm;
-			}
-	}
-
 	public function setActiveItem($index){
 		$item=$this->getItem($index);
 		if($item!==null){
 			$item->addToProperty("class", "active");
 		}
 		return $this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\html5\HtmlCollection::addItem()
+	 */
+	public function addItem($item){
+		$item=parent::addItem($item);
+		$item->addToProperty("class", "item");
+	}
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\html5\HtmlCollection::createItem()
+	 */
+	protected function createItem($value) {
+		$itemO=new HtmlLink("item-".\sizeof($this->content),"",$value);
+		return $itemO->setClass("item");
+	}
+
+	public function setInverted(){
+		return $this->addToProperty("class", "inverted");
 	}
 }

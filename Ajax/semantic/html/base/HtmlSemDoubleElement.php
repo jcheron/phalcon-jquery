@@ -62,6 +62,13 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 	}
 
 	/**
+	 * can be formatted to appear on dark backgrounds
+	 */
+	public function setInverted(){
+		$this->addToProperty("class", "inverted");
+	}
+
+	/**
 	 * Adds an icon before or after
 	 * @param string|HtmlIcon $icon
 	 * @param boolean $before
