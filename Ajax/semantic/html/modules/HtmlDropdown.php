@@ -8,6 +8,7 @@ use Ajax\JsUtils;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\common\html\html5\HtmlInput;
 use Ajax\service\JArray;
+use Ajax\service\JString;
 
 class HtmlDropdown extends HtmlSemDoubleElement {
 	protected $mClass="menu";
@@ -32,7 +33,9 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	public function addItem($item,$value=NULL,$image=NULL){
 		$itemO=$item;
 		if(\is_object($item)===false){
-			$itemO=new HtmlDropdownItem("dd-item-".$this->identifier,$item,$value,$image);
+			$itemO=new HtmlDropdownItem("dd-item-".$this->identifier."-".\sizeof($this->items),$item,$value,$image);
+		}elseif($itemO instanceof HtmlDropdownItem){
+			$this->addToProperty("class", "vertical");
 		}
 		$this->items[]=$itemO;
 		return $itemO;
@@ -57,7 +60,31 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		}
 	}
 
-	public function asButton(){
+	/**
+	 * @param boolean $dropdown
+	 */
+	public function asDropdown($dropdown){
+		if($dropdown===false){
+			$this->_template=include dirname(__FILE__).'/../templates/tplDropdownMenu.php';
+			$dropdown="menu";
+		}else{
+			$dropdown="dropdown";
+			$this->mClass="menu";
+		}
+		return $this->addToPropertyCtrl("class", $dropdown,array("menu","dropdown"));
+	}
+
+	public function setVertical(){
+		return $this->addToPropertyCtrl("class", "vertical",array("vertical"));
+	}
+
+	public function setSimple(){
+		return $this->addToPropertyCtrl("class", "simple",array("simple"));
+	}
+
+	public function asButton($floating=false){
+		if($floating)
+			$this->addToProperty("class", "floating");
 		return $this->addToProperty("class", "button");
 	}
 
@@ -94,6 +121,21 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		return $this;
 	}
 
+	public function asSubmenu($pointing=false,$sens=""){
+		$this->setClass("ui dropdown link item");
+		if($pointing===true){
+			$this->setPointing($sens);
+		}
+		return $this;
+	}
+
+	public function setPointing($sens=""){
+		$this->addToProperty("class", "pointing");
+		if(JString::isNotNull($sens))
+			$this->addToPropertyCtrl("class", $sens, array("left","right"));
+		return $this;
+	}
+
 	public function setValue($value){
 		if(isset($this->input)){
 			$this->input->setProperty("value", $value);
@@ -108,9 +150,11 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	 * @see BaseHtml::run()
 	 */
 	public function run(JsUtils $js) {
-		$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->params);
-		$this->addEventsOnRun($js);
-		return $this->_bsComponent;
+		if($this->propertyContains("class", "simple")===false){
+			$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->params);
+			$this->addEventsOnRun($js);
+			return $this->_bsComponent;
+		}
 	}
 
 	public function setAction($action){

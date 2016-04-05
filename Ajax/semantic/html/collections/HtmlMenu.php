@@ -5,7 +5,12 @@ namespace Ajax\semantic\html\collections;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\common\html\HtmlDoubleElement;
-
+/**
+ * Semantic Menu component
+ * @see http://semantic-ui.com/collections/menu.html
+ * @author jc
+ * @version 1.001
+ */
 class HtmlMenu extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $items=array()) {

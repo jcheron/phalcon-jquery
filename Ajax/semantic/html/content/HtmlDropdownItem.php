@@ -11,7 +11,7 @@ use Ajax\service\JArray;
 class HtmlDropdownItem extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $content="",$value=NULL,$image=NULL) {
-		parent::__construct($identifier, "div");
+		parent::__construct($identifier, "a");
 		$this->setClass("item");
 		$this->setContent($content);
 		if($value!==NULL)

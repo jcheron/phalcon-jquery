@@ -6,6 +6,7 @@ use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\service\AjaxCall;
 use Ajax\service\PhalconUtils;
+use Ajax\service\JString;
 
 /**
  * BaseHtml for Twitter Bootstrap HTML components
@@ -105,6 +106,14 @@ abstract class BaseHtml extends BaseWidget {
 			}
 		}
 		return true;
+	}
+
+	protected function propertyContains($propertyName,$value){
+		$values=$this->getProperty($propertyName);
+		if(isset($values)){
+			return JString::contains($values, $value);
+		}
+		return false;
 	}
 
 	protected function setPropertyCtrl($name, $value, $typeCtrl) {
