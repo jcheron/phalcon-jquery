@@ -2,16 +2,16 @@
 
 namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\common\JsCode;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Carousel
  * @author jc
  * @version 1.001
  */
-class Carousel extends SimpleBsComponent {
+class Carousel extends SimpleExtComponent {
 
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);

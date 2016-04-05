@@ -1,18 +1,20 @@
 <?php
 
-namespace Ajax\bootstrap\components;
+namespace Ajax\common\components;
 
-class GenericComponent extends SimpleBsComponent {
+use Ajax\common\components\SimpleExtComponent;
+
+class GenericComponent extends SimpleExtComponent {
 
 	/*
 	 * (non-PHPdoc)
-	 * @see \Ajax\bootstrap\components\SimpleBsComponent::getScript()
+	 * @see \Ajax\common\components\SimpleExtComponent::getScript()
 	 */
 	public function getScript() {
 		$this->jquery_code_for_compile=array ();
 		foreach ( $this->jsCodes as $jsCode ) {
 			$this->jquery_code_for_compile []=$jsCode->compile(array (
-					"identifier" => $this->attachTo 
+					"identifier" => $this->attachTo
 			));
 		}
 		$this->compileEvents();

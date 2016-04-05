@@ -5,7 +5,7 @@ namespace Ajax\ui\Components;
 use Phalcon\Text;
 use Ajax\JsUtils;
 use Ajax;
-use Ajax\common\BaseComponent;
+use Ajax\common\components\BaseComponent;
 
 /**
  * JQuery UI Button for the Dialog Component

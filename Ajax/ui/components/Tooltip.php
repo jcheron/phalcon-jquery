@@ -4,7 +4,7 @@ namespace Ajax\ui\Components;
 
 use Ajax\JsUtils;
 use Ajax\ui\Properties\Position;
-use Ajax\common\SimpleComponent;
+use Ajax\common\components\SimpleComponent;
 
 /**
  * Composant JQuery UI Menu

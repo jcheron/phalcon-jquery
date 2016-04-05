@@ -2,16 +2,16 @@
 
 namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Tooltip
  * @author jc
  * @version 1.001
  */
-class Tooltip extends SimpleBsComponent {
+class Tooltip extends SimpleExtComponent {
 
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);

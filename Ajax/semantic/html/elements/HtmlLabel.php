@@ -42,21 +42,6 @@ class HtmlLabel extends HtmlSemDoubleElement {
 	}
 
 	/**
-	 * Adds an icon before or after
-	 * @param string|HtmlIcon $icon
-	 * @param boolean $before
-	 * @return \Ajax\semantic\html\elements\HtmlIcon
-	 */
-	public function addIcon($icon,$before=true){
-		$iconO=$icon;
-		if(\is_string($icon)){
-			$iconO=new HtmlIcon("icon-".$this->identifier, $icon);
-		}
-		$this->addContent($iconO,$before);
-		return $iconO;
-	}
-
-	/**
 	 * Adds an image to emphasize
 	 * @param string $src
 	 * @param string $alt

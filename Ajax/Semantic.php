@@ -11,11 +11,29 @@ use Ajax\semantic\html\elements\HtmlButtonGroups;
 use Ajax\semantic\html\elements\HtmlContainer;
 use Ajax\semantic\html\elements\HtmlDivider;
 use Ajax\semantic\html\elements\HtmlLabel;
+use Ajax\semantic\html\collections\HtmlMenu;
+use Ajax\semantic\components\Popup;
+use Ajax\semantic\html\modules\HtmlDropdown;
+use Ajax\semantic\components\Dropdown;
 
 class Semantic extends BaseGui {
 
 	public function __construct($autoCompile=true) {
 		parent::__construct($autoCompile=true);
+	}
+
+	/**
+	 *
+	 * @param string $attachTo
+	 * @param string|array $params
+	 * @return $this
+	 */
+	public function popup($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Popup($this->js), $attachTo, $params);
+	}
+
+	public function dropdown($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Dropdown($this->js), $attachTo, $params);
 	}
 
 	/**
@@ -47,11 +65,11 @@ class Semantic extends BaseGui {
 		$group=new HtmlIconGroups($identifier,$size);
 		if(JArray::isAssociative($icons)){
 			foreach ($icons as $icon=>$size){
-				$group->addIcon($icon,$size);
+				$group->add($icon,$size);
 			}
 		}else{
 			foreach ($icons as $icon){
-				$group->addIcon($icon);
+				$group->add($icon);
 			}
 		}
 		return $this->addHtmlComponent($group);
@@ -83,7 +101,29 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlDivider($identifier, $content,$tagName));
 	}
 
+	/**
+	 * @param string $identifier
+	 * @param string $content
+	 * @param string $tagName
+	 */
 	public function htmlLabel($identifier,$content="",$tagName="div"){
 		return $this->addHtmlComponent(new HtmlLabel($identifier, $content,$tagName));
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param array $items
+	 */
+	public function htmlMenu($identifier,$items=array()){
+		return $this->addHtmlComponent(new HtmlMenu($identifier,$items));
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param string $value
+	 * @param array $items
+	 */
+	public function htmlDropdown($identifier, $value="", $items=array()){
+		return $this->addHtmlComponent(new HtmlDropdown($identifier,$value,$items));
 	}
 }

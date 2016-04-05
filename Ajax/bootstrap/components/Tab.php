@@ -3,13 +3,14 @@
 namespace Ajax\bootstrap\components;
 
 use Ajax\JsUtils;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Tab
  * @author jc
  * @version 1.001
  */
-class Tab extends SimpleBsComponent {
+class Tab extends SimpleExtComponent {
 
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);

@@ -865,7 +865,7 @@ class Jquery {
 			}
 		}
 
-		// Components Seamntic
+		// Components Semantic
 		$semantic=$this->semantic();
 		if ($semantic!=NULL) {
 			if ($semantic->isAutoCompile()) {

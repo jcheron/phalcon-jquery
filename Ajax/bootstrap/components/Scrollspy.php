@@ -2,15 +2,15 @@
 
 namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Scrollspy
  * @author jc
  * @version 1.001
  */
-class Scrollspy extends SimpleBsComponent {
+class Scrollspy extends SimpleExtComponent {
 
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);
@@ -19,7 +19,7 @@ class Scrollspy extends SimpleBsComponent {
 
 	/*
 	 * (non-PHPdoc)
-	 * @see \Ajax\common\SimpleComponent::attach()
+	 * @see \Ajax\common\components\SimpleComponent::attach()
 	 */
 	public function attach($identifier) {
 		parent::attach($identifier);

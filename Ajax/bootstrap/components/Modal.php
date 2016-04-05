@@ -4,13 +4,14 @@ namespace Ajax\bootstrap\components;
 
 use Ajax\JsUtils;
 use Ajax\bootstrap\components\js\Draggable;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Modal
  * @author jc
  * @version 1.001
  */
-class Modal extends SimpleBsComponent {
+class Modal extends SimpleExtComponent {
 
 	public function __construct(JsUtils $js) {
 		parent::__construct($js);

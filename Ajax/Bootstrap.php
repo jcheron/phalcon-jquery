@@ -9,7 +9,7 @@ use Ajax\bootstrap\components\Dropdown;
 use Ajax\bootstrap\components\Tab;
 use Ajax\bootstrap\components\Collapse;
 use Ajax\bootstrap\components\Carousel;
-use Ajax\bootstrap\components\GenericComponent;
+use Ajax\common\components\GenericComponent;
 use Ajax\bootstrap\html\HtmlButton;
 use Ajax\bootstrap\html\HtmlButtongroups;
 use Ajax\bootstrap\html\HtmlGlyphButton;

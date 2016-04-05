@@ -2,16 +2,16 @@
 
 namespace Ajax\bootstrap\components;
 
-use Ajax\bootstrap\components\SimpleBsComponent;
 use Ajax\JsUtils;
 use Ajax\common\JsCode;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * Composant Twitter Bootstrap Collapse
  * @author jc
  * @version 1.001
  */
-class Collapse extends SimpleBsComponent {
+class Collapse extends SimpleExtComponent {
 	protected $collapsed;
 
 	public function __construct(JsUtils $js) {

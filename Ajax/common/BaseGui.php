@@ -4,6 +4,7 @@ namespace Ajax\common;
 
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\common\components\SimpleComponent;
 
 /**
  * BaseGui Phalcon library

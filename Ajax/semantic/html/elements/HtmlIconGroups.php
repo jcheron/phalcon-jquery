@@ -17,7 +17,7 @@ class HtmlIconGroups extends HtmlSemDoubleElement {
 		$this->setSize($size);
 	}
 
-	public function addIcon($icon,$size=""){
+	public function add($icon,$size=""){
 		$iconO=$icon;
 		if(\is_string($icon)){
 			$iconO=new HtmlIcon("icon-".$this->identifier, $icon);

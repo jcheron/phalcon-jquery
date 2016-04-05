@@ -2,7 +2,7 @@
 
 namespace Ajax\ui\Properties;
 
-use Ajax\common\BaseComponent;
+use Ajax\common\components\BaseComponent;
 
 /**
  * Composant JQuery UI Animation property

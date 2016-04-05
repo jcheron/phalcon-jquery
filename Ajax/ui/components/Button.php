@@ -3,7 +3,7 @@
 namespace Ajax\ui\Components;
 
 use Phalcon\Text;
-use Ajax\common\SimpleComponent;
+use Ajax\common\components\SimpleComponent;
 use Ajax\JsUtils;
 
 /**
