@@ -38,6 +38,16 @@ class HtmlIcon extends HtmlSingleElement {
 	}
 
 	/**
+	 * adds to the icon
+	 * @param string $icon
+	 * @return \Ajax\semantic\html\HtmlIcon
+	 */
+	public function addToIcon($icon) {
+		return $this->addToMember($this->icon, $icon);
+	}
+
+
+	/**
 	 * {@inheritDoc}
 	 * @see \Ajax\common\html\HtmlSingleElement::setSize()
 	 */

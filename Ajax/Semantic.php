@@ -15,6 +15,7 @@ use Ajax\semantic\html\collections\HtmlMenu;
 use Ajax\semantic\components\Popup;
 use Ajax\semantic\html\modules\HtmlDropdown;
 use Ajax\semantic\components\Dropdown;
+use Ajax\semantic\html\collections\HtmlMessage;
 
 class Semantic extends BaseGui {
 
@@ -125,5 +126,13 @@ class Semantic extends BaseGui {
 	 */
 	public function htmlDropdown($identifier, $value="", $items=array()){
 		return $this->addHtmlComponent(new HtmlDropdown($identifier,$value,$items));
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param string $content
+	 */
+	public function htmlMessage($identifier, $content=""){
+		return $this->addHtmlComponent(new HtmlMessage($identifier,$content));
 	}
 }
