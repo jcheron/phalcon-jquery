@@ -3,6 +3,7 @@
 namespace Ajax\common\html\html5;
 
 use Ajax\common\html\HtmlDoubleElement;
+use Ajax\common\html\HtmlCollection;
 /**
  * Html list (ul or ol)
  * @author jc

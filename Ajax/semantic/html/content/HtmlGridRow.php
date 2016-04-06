@@ -2,8 +2,14 @@
 
 namespace Ajax\semantic\html\content;
 
-use Ajax\common\html\html5\HtmlCollection;
-
+use Ajax\common\html\HtmlCollection;
+use Ajax\semantic\html\base\Wide;
+/**
+ * A row for the Semantic Grid component
+ * @see http://semantic-ui.com/collections/grid.html
+ * @author jc
+ * @version 1.001
+ */
 class HtmlGridRow extends HtmlCollection{
 
 	private $_colSize;
@@ -25,6 +31,19 @@ class HtmlGridRow extends HtmlCollection{
 	}
 
 	/**
+	 * Defines the row width
+	 * @param int $width
+	 * @return \Ajax\semantic\html\content\HtmlGridRow
+	 */
+	public function setWidth($width){
+		if(\is_int($width)){
+			$width=Wide::getConstants()["W".$width];
+		}
+		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
+		return $this->addToPropertyCtrl("class", "column",array("column"));
+	}
+
+	/**
 	 * return the col at $index
 	 * @param int $index
 	 * @return \Ajax\semantic\html\collections\HtmlGridCol
@@ -33,6 +52,18 @@ class HtmlGridRow extends HtmlCollection{
 		return $this->getItem($index);
 	}
 
+	/**
+	 * stretch the row contents to take up the entire column height
+	 * @return \Ajax\semantic\html\content\HtmlGridRow
+	 */
+	public function setStretched(){
+		return $this->addToProperty("class", "stretched");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\HtmlCollection::createItem()
+	 */
 	protected function createItem($value){
 		$col=new HtmlGridCol($this->identifier."-col-".($this->count()+1),$value);
 		return $col;

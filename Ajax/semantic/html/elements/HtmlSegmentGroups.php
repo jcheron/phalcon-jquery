@@ -2,7 +2,7 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\html5\HtmlCollection;
+use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\base\SegmentType;
 
 class HtmlSegmentGroups extends HtmlCollection{

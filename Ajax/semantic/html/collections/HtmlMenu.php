@@ -3,7 +3,7 @@
 namespace Ajax\semantic\html\collections;
 
 use Ajax\bootstrap\html\HtmlLink;
-use Ajax\common\html\html5\HtmlCollection;
+use Ajax\common\html\HtmlCollection;
 /**
  * Semantic Menu component
  * @see http://semantic-ui.com/collections/menu.html

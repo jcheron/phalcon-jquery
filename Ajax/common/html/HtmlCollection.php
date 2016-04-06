@@ -1,6 +1,6 @@
 <?php
 
-namespace Ajax\common\html\html5;
+namespace Ajax\common\html;
 
 use Ajax\common\html\HtmlDoubleElement;
 
@@ -57,6 +57,10 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	public function setItem($index, $value) {
 		$this->content[$index]=$value;
 		return $this;
+	}
+
+	public function removeItem($index){
+		return array_splice($this->content, $index, 1);
 	}
 
 	public function count(){

@@ -2,10 +2,15 @@
 
 namespace Ajax\semantic\html\collections;
 
-use Ajax\common\html\html5\HtmlCollection;
+use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\content\HtmlGridRow;
 use Ajax\semantic\html\base\Wide;
-
+/**
+ * Semantic Grid component
+ * @see http://semantic-ui.com/collections/grid.html
+ * @author jc
+ * @version 1.001
+ */
 class HtmlGrid extends HtmlCollection{
 
 	private $_createCols;
@@ -60,6 +65,34 @@ class HtmlGrid extends HtmlCollection{
 		return $col;
 	}
 
+	/**
+	 * Adds dividers between columns ($vertically=false) or between rows ($vertically=true)
+	 * @param boolean $vertically
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
+	public function setDivided($vertically=false){
+		$value=($vertically===true)?"vertically divided":"divided";
+		return $this->addToProperty("class", $value);
+	}
+
+	/**
+	 * Divides rows into cells
+	 * @param boolean $internal true for internal cells
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
+	public function setCelled($internal=false){
+		$value=($internal===true)?"internal celled":"celled";
+		return $this->addToProperty("class", $value);
+	}
+
+	public function setEqualWidth(){
+		return $this->addToProperty("class", "equal width");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\HtmlCollection::createItem()
+	 */
 	protected function createItem($value){
 		if($this->_createCols===false)
 			$value=null;
