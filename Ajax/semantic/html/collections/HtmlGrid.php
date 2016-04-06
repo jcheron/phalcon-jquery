@@ -5,6 +5,8 @@ namespace Ajax\semantic\html\collections;
 use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\content\HtmlGridRow;
 use Ajax\semantic\html\base\Wide;
+use Ajax\semantic\html\base\TextAlignment;
+
 /**
  * Semantic Grid component
  * @see http://semantic-ui.com/collections/grid.html
@@ -85,8 +87,36 @@ class HtmlGrid extends HtmlCollection{
 		return $this->addToProperty("class", $value);
 	}
 
+	/**
+	 * automatically resize all elements to split the available width evenly
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
 	public function setEqualWidth(){
 		return $this->addToProperty("class", "equal width");
+	}
+
+	/**
+	 * Adds vertical or/and horizontal gutters
+	 * @param string $value
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
+	public function setPadded($value=NULL){
+		if(isset($value))
+			$this->addToPropertyCtrl("class", $value,array("vertically","horizontally"));
+		return $this->addToProperty("class", "padded");
+	}
+
+	/**
+	 * @param boolean $very
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
+	public function setRelaxed($very=false){
+		$value=($very===true)?"very relaxed":"relaxed";
+		return $this->addToProperty("class", $value);
+	}
+
+	public function setTextAlignment($value=TextAlignment::LEFT){
+		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
 	/**

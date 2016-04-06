@@ -4,7 +4,7 @@ namespace Ajax\semantic\html\base;
 
 use Ajax\common\BaseEnum;
 
-class Color extends BaseEnum {
+abstract class Color extends BaseEnum {
 	const RED="red",ORANGE="orange",YELLOW="yellow",
 	OLIVE="olive",GREEN="green",TEAL="teal",
 	BLUE="blue",VIOLET="violet",PURPLE="purple",

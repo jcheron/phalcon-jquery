@@ -4,6 +4,7 @@ namespace Ajax\semantic\html\elements;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\SegmentType;
+use Ajax\semantic\html\base\TextAlignment;
 
 /**
  * Semantic Segment element
@@ -56,8 +57,8 @@ class HtmlSegment extends HtmlSemDoubleElement {
 		return $this->addToPropertyCtrl("class", "floated ".$value,array("floated right","floated left"));
 	}
 
-	public function setTextAlignment($value="left"){
-		return $this->addToPropertyCtrl("class", "aligned ".$value,array("aligned right","aligned left","aligned center"));
+	public function setTextAlignment($value=TextAlignment::LEFT){
+		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
 	public function setCompact(){

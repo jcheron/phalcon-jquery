@@ -4,6 +4,9 @@ namespace Ajax\semantic\html\content;
 
 use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\base\Wide;
+use Ajax\semantic\html\base\Color;
+use Ajax\semantic\html\base\TextAlignment;
+
 /**
  * A row for the Semantic Grid component
  * @see http://semantic-ui.com/collections/grid.html
@@ -58,6 +61,18 @@ class HtmlGridRow extends HtmlCollection{
 	 */
 	public function setStretched(){
 		return $this->addToProperty("class", "stretched");
+	}
+
+	/**
+	 * @param string $color
+	 * @return \Ajax\semantic\html\content\HtmlGridRow
+	 */
+	public function setColor($color){
+		return $this->addToPropertyCtrl("class", $color,Color::getConstants());
+	}
+
+	public function setTextAlignment($value=TextAlignment::LEFT){
+		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
 	/**
