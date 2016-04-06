@@ -21,6 +21,7 @@ use Ajax\semantic\html\elements\HtmlSegmentGroups;
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\common\html\BaseHtml;
+use Ajax\semantic\html\collections\HtmlGrid;
 
 class Semantic extends BaseGui {
 
@@ -166,5 +167,9 @@ class Semantic extends BaseGui {
 	 */
 	public function htmlPopup(BaseHtml $container,$identifier,$content){
 		return $this->addHtmlComponent(new HtmlPopup($container,$identifier,$content));
+	}
+
+	public function htmlGrid($identifier,$numRows=1,$numCols=NULL){
+		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols));
 	}
 }

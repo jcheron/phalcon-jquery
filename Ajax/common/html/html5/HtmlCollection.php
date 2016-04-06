@@ -33,7 +33,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 */
 	public function addItem($item){
 		$itemO=$item;
-		if(\is_string($item)){
+		if(\is_object($item)===false){
 			$itemO=$this->createItem($item);
 		}
 		$this->addContent($itemO);
