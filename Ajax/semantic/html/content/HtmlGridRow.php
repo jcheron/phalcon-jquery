@@ -75,6 +75,19 @@ class HtmlGridRow extends HtmlCollection{
 		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
+	public function setValues($values,$force=false){
+		$count=$this->count();
+		if($force===true){
+			for($i=$count;$i<\sizeof($values);$i++){
+				$this->addItem(new HtmlGridCol($this->identifier."-col-".($this->count()+1),null));
+			}
+		}
+		$count=\min(array($this->count(),\sizeof($values)));
+		for($i=0;$i<$count;$i++){
+			$this->content[$i]->setValue($values[$i]);
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * @see \Ajax\common\html\HtmlCollection::createItem()

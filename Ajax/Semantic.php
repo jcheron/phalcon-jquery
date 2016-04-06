@@ -169,7 +169,7 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlPopup($container,$identifier,$content));
 	}
 
-	public function htmlGrid($identifier,$numRows=1,$numCols=NULL){
-		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols));
+	public function htmlGrid($identifier,$numRows=1,$numCols=NULL,$createCols=true){
+		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols,$createCols));
 	}
 }

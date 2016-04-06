@@ -6,6 +6,7 @@ use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\content\HtmlGridRow;
 use Ajax\semantic\html\base\Wide;
 use Ajax\semantic\html\base\TextAlignment;
+use Ajax\semantic\html\base\VerticalAlignment;
 
 /**
  * Semantic Grid component
@@ -21,9 +22,9 @@ class HtmlGrid extends HtmlCollection{
 		parent::__construct( $identifier, "div");
 		$this->_createCols=$createCols;
 		if(isset($numCols)){
-			if($this->_createCols){
+			//if($this->_createCols){
 				$this->_colSizing=false;
-			}
+			//}
 			$cols=Wide::getConstants()["W".$numCols];
 			$this->setClass($cols." column");
 		}
@@ -119,6 +120,10 @@ class HtmlGrid extends HtmlCollection{
 		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
+	public function setVerticalAlignment($value=VerticalAlignment::MIDDLE){
+		return $this->addToPropertyCtrl("class", $value,VerticalAlignment::getConstants());
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * @see \Ajax\common\html\HtmlCollection::createItem()
@@ -128,6 +133,20 @@ class HtmlGrid extends HtmlCollection{
 			$value=null;
 		$item=new HtmlGridRow($this->identifier."-row-".($this->count()+1),$value,$this->_colSizing);
 		return $item;
+	}
+
+	public function setValues($values){
+		$count=$this->count();
+		if($this->_createCols===false){
+			for($i=$count;$i<\sizeof($values);$i++){
+				$colSize=\sizeof($values[$i]);
+				$this->addItem(new HtmlGridRow($this->identifier."-row-".($this->count()+1),$colSize,$this->_colSizing));
+			}
+		}
+		$count=\min(array($this->count(),\sizeof($values)));
+		for($i=0;$i<$count;$i++){
+			$this->content[$i]->setValues($values[$i],$this->_createCols===false);
+		}
 	}
 
 }

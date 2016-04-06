@@ -45,4 +45,8 @@ class HtmlGridCol extends HtmlSemDoubleElement{
 	public function setTextAlignment($value=TextAlignment::LEFT){
 		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
+
+	public function setValue($value){
+		$this->content=$value;
+	}
 }
