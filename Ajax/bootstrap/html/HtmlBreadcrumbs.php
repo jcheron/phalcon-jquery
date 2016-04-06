@@ -197,7 +197,8 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
 	 */
-	public function fromDispatcher($dispatcher){
+	public function fromDispatcher($dispatcher,$startIndex=0){
+		$this->startIndex=$startIndex;
 		$params=$dispatcher->getParams();
 		$action=$dispatcher->getActionName();
 		$items=array($dispatcher->getControllerName());

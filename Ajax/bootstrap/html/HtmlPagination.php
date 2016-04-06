@@ -115,7 +115,7 @@ class HtmlPagination extends HtmlNavElement {
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlPagination
 	 */
-	public function fromDispatcher($dispatcher){
+	public function fromDispatcher($dispatcher,$startIndex=0){
 		$items=array($dispatcher->getControllerName(),$dispatcher->getActionName());
 		$items=array_merge($items,$dispatcher->getParams());
 		$url=implode("/", $items);
