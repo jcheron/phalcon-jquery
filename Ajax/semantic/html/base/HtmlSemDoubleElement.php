@@ -7,37 +7,21 @@ use Ajax\JsUtils;
 use Ajax\semantic\html\content\InternalPopup;
 use Phalcon\Mvc\View;
 use Ajax\semantic\html\elements\HtmlIcon;
+use Ajax\semantic\html\base\traits\BaseTrait;
 
-
+/**
+ * Base class for Semantic double elements
+ * @author jc
+ * @version 1.001
+ */
 class HtmlSemDoubleElement extends HtmlDoubleElement {
+	use BaseTrait;
 	protected $_popup=NULL;
 
-	public function __construct($identifier, $tagName="p") {
+	public function __construct($identifier, $tagName="p",$baseClass="ui") {
 		parent::__construct($identifier, $tagName);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @see \Ajax\common\html\HtmlSingleElement::setSize()
-	 */
-	public function setSize($size){
-		return $this->addToPropertyCtrl("class", $size, Size::getConstants());
-	}
-
-	/**
-	 * show it is currently unable to be interacted with
-	 * @return \Ajax\semantic\html\elements\HtmlSemDoubleElement
-	 */
-	public function setDisabled(){
-		return $this->addToProperty("class", "disabled");
-	}
-
-	/**
-	 * @param string $color
-	 * @return \Ajax\semantic\html\base\HtmlSemDoubleElement
-	 */
-	public function setColor($color){
-		return $this->addToPropertyCtrl("class", $color,Color::getConstants());
+		$this->_baseClass=$baseClass;
+		$this->setClass($baseClass);
 	}
 
 	public function setPopupAttributes($variation=NULL,$popupEvent=NULL){
@@ -55,17 +39,6 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		$this->_popup->setHtml($html);
 		$this->_popup->setAttributes($variation,$params);
 		return $this;
-	}
-
-	public function setFluid(){
-		$this->addToProperty("class", "fluid");
-	}
-
-	/**
-	 * can be formatted to appear on dark backgrounds
-	 */
-	public function setInverted(){
-		$this->addToProperty("class", "inverted");
 	}
 
 	/**
@@ -88,14 +61,6 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return $iconO;
 	}
 
-	/**
-	 * show a loading indicator
-	 * @return \Ajax\semantic\html\base\HtmlSemDoubleElement
-	 */
-	public function asLoader(){
-		return $this->addToProperty("class", "loading");
-	}
-
 	public function compile(JsUtils $js=NULL, View $view=NULL){
 		if(isset($this->_popup))
 			$this->_popup->compile();
@@ -109,4 +74,31 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 			//return $this->_bsComponent;
 		}
 	}
+/*
+	public function __call($name, $arguments){
+		$type=\substr($name, 0,3);
+		$name=\strtolower(\substr($name, 3));
+		$names=\array_merge($this->_variations,$this->_states);
+		$argument=@$arguments[0];
+		if(\array_search($name, $names)!==FALSE){
+			switch ($type){
+				case "set":
+					if($argument===false){
+						$this->removePropertyValue("class", $name);
+					}else {
+						$this->setProperty("class", $this->_baseClass." ".$name);
+					}
+					break;
+				case "add":
+					$this->addToPropertyCtrl("class", $name,array($name));
+					break;
+				default:
+					throw new \Exception("Méthode ".$type.$name." inexistante.");
+			}
+		}else{
+			throw new \Exception("Propriété ".$name." inexistante.");
+		}
+		return $this;
+	}
+	*/
 }

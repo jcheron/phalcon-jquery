@@ -3,8 +3,12 @@
 namespace Ajax\semantic\html\elements;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
-use Ajax\semantic\html\base\SegmentType;
-use Ajax\semantic\html\base\TextAlignment;
+use Ajax\semantic\html\base\constants\SegmentType;
+use Ajax\semantic\html\base\traits\AttachedTrait;
+use Ajax\semantic\html\base\constants\State;
+use Ajax\semantic\html\base\constants\Variation;
+use Ajax\semantic\html\base\constants\Emphasis;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 /**
  * Semantic Segment element
@@ -13,11 +17,12 @@ use Ajax\semantic\html\base\TextAlignment;
  * @version 1.001
  */
 class HtmlSegment extends HtmlSemDoubleElement {
-
+	use AttachedTrait,TextAlignmentTrait;
 	public function __construct($identifier, $content="") {
-		parent::__construct($identifier, "div");
+		parent::__construct($identifier, "div","ui segment");
+		$this->_variations=\array_merge($this->_variations,[Variation::PADDED,Variation::COMPACT]);
+		$this->_states=\array_merge($this->_states,[State::LOADING]);
 		$this->content=$content;
-		$this->setClass("ui segment");
 	}
 
 	/**
@@ -33,16 +38,9 @@ class HtmlSegment extends HtmlSemDoubleElement {
 		return $this->addToPropertyCtrl("class", $sens, array("vertical","horizontal"));
 	}
 
-	public function setInverted(){
-		return $this->addToProperty("class", "inverted");
-	}
 
-	public function setAttached(){
-		return $this->addToProperty("class", "attached");
-	}
-
-	public function setEmphasis($value="secondary"){
-		return $this->addToPropertyCtrl("class", $value, array("secondary","tertiary",""));
+	public function setEmphasis($value=Emphasis::SECONDARY){
+		return $this->addToPropertyCtrl("class", $value, Emphasis::getConstants());
 	}
 
 	public function setCircular(){
@@ -55,10 +53,6 @@ class HtmlSegment extends HtmlSemDoubleElement {
 
 	public function setFloating($value="left"){
 		return $this->addToPropertyCtrl("class", "floated ".$value,array("floated right","floated left"));
-	}
-
-	public function setTextAlignment($value=TextAlignment::LEFT){
-		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
 	public function setCompact(){

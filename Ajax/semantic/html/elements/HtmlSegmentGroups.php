@@ -2,15 +2,15 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\HtmlCollection;
-use Ajax\semantic\html\base\SegmentType;
+use Ajax\semantic\html\base\constants\SegmentType;
+use Ajax\semantic\html\base\HtmlSemCollection;
+use Ajax\semantic\html\base\constants\Sens;
 
-class HtmlSegmentGroups extends HtmlCollection{
+class HtmlSegmentGroups extends HtmlSemCollection{
 
 
 	public function __construct( $identifier, $items=array()){
-		parent::__construct( $identifier, "div");
-		$this->setClass("ui segments");
+		parent::__construct( $identifier, "div","ui segments");
 		$this->addItems($items);
 	}
 
@@ -28,12 +28,11 @@ class HtmlSegmentGroups extends HtmlCollection{
 		return $this->addToPropertyCtrl("class", $type, SegmentType::getConstants());
 	}
 
-	public function setSens($sens="vertical"){
-		return $this->addToPropertyCtrl("class", $sens, array("vertical","horizontal"));
+	public function setSens($sens=Sens::VERTICAL){
+		return $this->addToPropertyCtrl("class", $sens, Sens::getConstants());
 	}
 
-
-	public static function group($identifier,$items=array(),$type="",$sens="vertical"){
+	public static function group($identifier,$items=array(),$type="",$sens=Sens::VERTICAL){
 		$group=new HtmlSegmentGroups($identifier,$items);
 		$group->setSens($sens);
 		return $group->setType($type);

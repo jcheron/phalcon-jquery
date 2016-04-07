@@ -12,8 +12,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 class HtmlIconGroups extends HtmlSemDoubleElement {
 
 	public function __construct($identifier,$size="") {
-		parent::__construct($identifier, "i");
-		$this->setProperty("class", "icons");
+		parent::__construct($identifier, "i","icons");
 		$this->setSize($size);
 	}
 

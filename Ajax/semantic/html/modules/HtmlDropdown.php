@@ -8,8 +8,7 @@ use Ajax\JsUtils;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\common\html\html5\HtmlInput;
 use Ajax\service\JArray;
-use Ajax\service\JString;
-use Ajax\semantic\html\base\Pointing;
+use Ajax\semantic\html\base\constants\Direction;
 
 class HtmlDropdown extends HtmlSemDoubleElement {
 	protected $mClass="menu";
@@ -130,8 +129,8 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		return $this;
 	}
 
-	public function setPointing($value=Pointing::POINTING){
-		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
+	public function setPointing($value=Direction::NONE){
+		return $this->addToPropertyCtrl("class", $value." pointing",Direction::getConstantValues("pointing"));
 	}
 
 	public function setValue($value){

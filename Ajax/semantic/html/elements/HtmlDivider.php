@@ -12,8 +12,7 @@ use Ajax\common\html\HtmlDoubleElement;
 class HtmlDivider extends HtmlDoubleElement {
 
 	public function __construct($identifier, $content="",$tagName="div") {
-		parent::__construct($identifier, $tagName);
-		$this->setClass("ui divider");
+		parent::__construct($identifier, $tagName,"ui divider");
 		$this->content=$content;
 	}
 

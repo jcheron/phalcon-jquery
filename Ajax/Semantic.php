@@ -24,6 +24,7 @@ use Ajax\semantic\html\collections\HtmlGrid;
 use Ajax\semantic\html\collections\HtmlIconMenu;
 use Ajax\semantic\html\collections\HtmlLabeledIconMenu;
 use Ajax\semantic\html\elements\HtmlHeader;
+use Ajax\semantic\html\elements\HtmlInput;
 
 class Semantic extends BaseGui {
 
@@ -198,7 +199,17 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols,$createCols,$implicitRows));
 	}
 
+	/**
+	 * @param string $identifier
+	 * @param number $niveau
+	 * @param mixed $content
+	 * @param string $type
+	 */
 	public function htmlHeader($identifier,$niveau=1,$content=NULL,$type="page"){
 		return $this->addHtmlComponent(new HtmlHeader($identifier,$niveau,$content,$type));
+	}
+
+	public function htmlInput($identifier,$value="",$type="text",$placeholder=""){
+		return $this->addHtmlComponent(new HtmlInput($identifier,$value="",$type="text",$placeholder=""));
 	}
 }

@@ -3,8 +3,8 @@
 namespace Ajax\semantic\html\content;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
-use Ajax\semantic\html\base\Wide;
-use Ajax\semantic\html\base\TextAlignment;
+use Ajax\semantic\html\base\constants\Wide;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 /**
  * A col in the Semantic Grid component
@@ -13,6 +13,7 @@ use Ajax\semantic\html\base\TextAlignment;
  * @version 1.001
  */
 class HtmlGridCol extends HtmlSemDoubleElement{
+	use TextAlignmentTrait;
 	public function __construct($identifier,$width){
 		parent::__construct($identifier,"div");
 		$this->setClass("column");
@@ -42,9 +43,6 @@ class HtmlGridCol extends HtmlSemDoubleElement{
 		return $this->addToProperty("class", $value." floated");
 	}
 
-	public function setTextAlignment($value=TextAlignment::LEFT){
-		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
-	}
 
 	public function setValue($value){
 		$this->content=$value;

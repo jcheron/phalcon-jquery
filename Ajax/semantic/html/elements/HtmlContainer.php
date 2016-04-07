@@ -12,9 +12,8 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 class HtmlContainer extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $content="") {
-		parent::__construct($identifier, "div");
+		parent::__construct($identifier, "div","ui container");
 		$this->content=$content;
-		$this->setProperty("class", "ui container");
 	}
 
 	public function setAlignement($value="justified"){

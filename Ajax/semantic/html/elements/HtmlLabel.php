@@ -5,13 +5,12 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlImg;
 use Ajax\common\html\HtmlDoubleElement;
-use Ajax\semantic\html\base\Pointing;
+use Ajax\semantic\html\base\constants\Direction;
 
 class HtmlLabel extends HtmlSemDoubleElement {
 
 	public function __construct($identifier,$caption="",$tagName="div") {
-		parent::__construct($identifier,$tagName);
-		$this->setProperty("class", "ui label");
+		parent::__construct($identifier,$tagName,"ui label");
 		$this->content=$caption;
 	}
 
@@ -19,8 +18,8 @@ class HtmlLabel extends HtmlSemDoubleElement {
 	 * @param string $side
 	 * @return \Ajax\semantic\html\elements\HtmlLabel
 	 */
-	public function setPointing($value=Pointing::POINTING){
-		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
+	public function setPointing($value=Direction::NONE){
+		return $this->addToPropertyCtrl("class", $value." pointing",Direction::getConstantValues("pointing"));
 	}
 
 	/**

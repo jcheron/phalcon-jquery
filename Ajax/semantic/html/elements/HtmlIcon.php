@@ -3,8 +3,8 @@
 namespace Ajax\semantic\html\elements;
 
 use Ajax\common\html\HtmlSingleElement;
-use Ajax\semantic\html\base\Size;
-use Ajax\semantic\html\base\Color;
+use Ajax\semantic\html\base\constants\Size;
+use Ajax\semantic\html\base\constants\Color;
 /**
  * Semantic Icon component
  * @see http://semantic-ui.com/elements/icon.html

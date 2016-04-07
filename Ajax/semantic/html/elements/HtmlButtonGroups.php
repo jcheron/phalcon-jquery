@@ -12,8 +12,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 class HtmlButtonGroups extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $elements=array(),$asIcons=false) {
-		parent::__construct($identifier, "div");
-		$this->setProperty("class", "ui buttons");
+		parent::__construct($identifier, "div","ui buttons");
 		$this->content=array();
 		if($asIcons===true)
 			$this->asIcons();
@@ -40,8 +39,7 @@ class HtmlButtonGroups extends HtmlSemDoubleElement {
 	}
 
 	public function insertOr($aferIndex=0,$or="OR"){
-		$orElement=new HtmlSemDoubleElement("or-".$this->identifier,"div");
-		$orElement->setClass("or");
+		$orElement=new HtmlSemDoubleElement("or-".$this->identifier,"div","or");
 		$orElement->setProperty("data-text", $or);
 		array_splice($this->content, $aferIndex+1, 0, array($orElement));
 		return $this;

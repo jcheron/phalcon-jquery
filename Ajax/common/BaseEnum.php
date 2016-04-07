@@ -23,8 +23,12 @@ abstract class BaseEnum {
 		return self::$constCacheArray [$calledClass];
 	}
 
-	public static function getConstantValues(){
-		return \array_values(self::getConstants());
+	public static function getConstantValues($postFix=""){
+		if($postFix!=="")
+			return \array_values(self::getConstants());
+		else{
+			return \array_map(function ($elem) use ($postFix) {return $elem." ".$postFix;},\array_values(self::getConstants()));
+		}
 	}
 
 	public static function isValidName($name, $strict=false) {

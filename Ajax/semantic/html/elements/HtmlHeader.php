@@ -3,15 +3,14 @@
 namespace Ajax\semantic\html\elements;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
-use Ajax\semantic\html\base\Size;
+use Ajax\semantic\html\base\constants\Size;
 use Ajax\common\html\HtmlDoubleElement;
 
 class HtmlHeader extends HtmlSemDoubleElement {
 	protected $image;
 	public function __construct($identifier, $niveau=1,$content=NULL,$type="page") {
-		parent::__construct($identifier, "div");
+		parent::__construct($identifier, "div","ui header");
 		$this->_template="<%tagName% %properties%>%image%%content%</%tagName%>";
-		$this->setClass("ui header");
 		if(isset($type)){
 			if($type=="page"){
 				$this->asPageHeader($niveau);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ajax\semantic\html\base;
+namespace Ajax\semantic\html\base\constants;
 
 use Ajax\common\BaseEnum;
 

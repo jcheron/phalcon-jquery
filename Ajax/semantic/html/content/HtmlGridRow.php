@@ -2,12 +2,12 @@
 
 namespace Ajax\semantic\html\content;
 
-use Ajax\common\html\HtmlCollection;
-use Ajax\semantic\html\base\Wide;
-use Ajax\semantic\html\base\Color;
-use Ajax\semantic\html\base\TextAlignment;
+use Ajax\semantic\html\base\constants\Wide;
+use Ajax\semantic\html\base\constants\Color;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
+use Ajax\semantic\html\base\HtmlSemCollection;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 
 /**
@@ -16,14 +16,14 @@ use Phalcon\Mvc\View;
  * @author jc
  * @version 1.001
  */
-class HtmlGridRow extends HtmlCollection{
+class HtmlGridRow extends HtmlSemCollection{
+	use TextAlignmentTrait;
 
 	private $_colSize;
 	private $_implicite=false;
 	public function __construct( $identifier,$numCols=NULL,$colSizing=false,$implicite=false){
-		parent::__construct( $identifier,"div");
+		parent::__construct( $identifier,"div","row");
 		$this->_implicite=$implicite;
-		$this->setClass("row");
 		$width=null;
 		if(isset($numCols)){
 			$numCols=min(16,$numCols);
@@ -74,10 +74,6 @@ class HtmlGridRow extends HtmlCollection{
 	 */
 	public function setColor($color){
 		return $this->addToPropertyCtrl("class", $color,Color::getConstants());
-	}
-
-	public function setTextAlignment($value=TextAlignment::LEFT){
-		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
 
 	public function setValues($values,$force=false){

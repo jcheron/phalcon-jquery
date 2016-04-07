@@ -5,6 +5,11 @@ namespace Ajax\common\html;
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\service\JArray;
 
+/**
+ * Base class for Html collections
+ * @author jc
+ * @version 1.001
+ */
 abstract class HtmlCollection extends HtmlDoubleElement {
 
 	public function __construct($identifier,$tagName="div"){

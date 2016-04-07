@@ -4,9 +4,10 @@ namespace Ajax\semantic\html\collections;
 
 use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\content\HtmlGridRow;
-use Ajax\semantic\html\base\Wide;
-use Ajax\semantic\html\base\TextAlignment;
-use Ajax\semantic\html\base\VerticalAlignment;
+use Ajax\semantic\html\base\constants\Wide;
+use Ajax\semantic\html\base\constants\VerticalAlignment;
+use Ajax\semantic\html\base\HtmlSemCollection;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 /**
  * Semantic Grid component
@@ -14,13 +15,13 @@ use Ajax\semantic\html\base\VerticalAlignment;
  * @author jc
  * @version 1.001
  */
-class HtmlGrid extends HtmlCollection{
-
+class HtmlGrid extends HtmlSemCollection{
+	use TextAlignmentTrait;
 	private $_createCols;
 	private $_colSizing=true;
 	private $_implicitRows=false;
 	public function __construct( $identifier,$numRows=1,$numCols=NULL,$createCols=true,$implicitRows=false){
-		parent::__construct( $identifier, "div");
+		parent::__construct( $identifier, "div","ui grid");
 		$this->_implicitRows=$implicitRows;
 		$this->_createCols=$createCols;
 		if(isset($numCols)){
@@ -28,9 +29,8 @@ class HtmlGrid extends HtmlCollection{
 				$this->_colSizing=false;
 			//}
 			$cols=Wide::getConstants()["W".$numCols];
-			$this->setClass($cols." column");
+			$this->addToProperty("class",$cols." column");
 		}
-		$this->addToProperty("class","ui grid");
 		$this->setNumRows($numRows,$numCols);
 	}
 
@@ -118,12 +118,8 @@ class HtmlGrid extends HtmlCollection{
 		return $this->addToProperty("class", $value);
 	}
 
-	public function setTextAlignment($value=TextAlignment::LEFT){
-		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
-	}
-
 	public function setVerticalAlignment($value=VerticalAlignment::MIDDLE){
-		return $this->addToPropertyCtrl("class", $value,VerticalAlignment::getConstants());
+		return $this->addToPropertyCtrl("class", $value." aligned",VerticalAlignment::getConstantValues("aligned"));
 	}
 
 	/**

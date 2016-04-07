@@ -6,7 +6,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlList;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\JsUtils;
-use Ajax\semantic\html\base\Style;
+use Ajax\semantic\html\base\constants\Style;
 use Ajax\common\html\HtmlDoubleElement;
 /**
  * Semantic Message component

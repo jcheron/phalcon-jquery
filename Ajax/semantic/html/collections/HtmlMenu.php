@@ -4,8 +4,8 @@ namespace Ajax\semantic\html\collections;
 
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\common\html\HtmlCollection;
-use Ajax\semantic\html\base\Pointing;
 use Ajax\common\html\HtmlDoubleElement;
+use Ajax\semantic\html\base\constants\Direction;
 
 /**
  * Semantic Menu component
@@ -75,8 +75,8 @@ class HtmlMenu extends HtmlCollection {
 		return $this->addToPropertyCtrl("class", $value,array("right","left"));
 	}
 
-	public function setPointing($value=Pointing::POINTING){
-		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
+	public function setPointing($value=Direction::NONE){
+		return $this->addToPropertyCtrl("class", $value." pointing",Direction::getConstantValues("pointing"));
 	}
 
 	public function asTab($vertical=false){

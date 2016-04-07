@@ -20,8 +20,7 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * @param string $onClick JS Code for click event
 	 */
 	public function __construct($identifier, $value="", $cssStyle=null, $onClick=null) {
-		parent::__construct($identifier, "button");
-		$this->setProperty("class", "ui button");
+		parent::__construct($identifier, "button","ui button");
 		$this->content=$value;
 		if (isset($cssStyle)) {
 			$this->setStyle($cssStyle);
