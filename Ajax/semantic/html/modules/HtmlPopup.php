@@ -19,7 +19,11 @@ class HtmlPopup extends HtmlSemDoubleElement {
 	}
 
 	public function setFlowing(){
-		$this->addToProperty("class", "flowing");
+		return $this->addToProperty("class", "flowing");
+	}
+
+	public function setBasic(){
+		return $this->addToProperty("class", "basic");
 	}
 
 	/**

@@ -18,8 +18,10 @@ class HtmlGrid extends HtmlCollection{
 
 	private $_createCols;
 	private $_colSizing=true;
-	public function __construct( $identifier,$numRows=1,$numCols=NULL,$createCols=true){
+	private $_implicitRows=false;
+	public function __construct( $identifier,$numRows=1,$numCols=NULL,$createCols=true,$implicitRows=false){
 		parent::__construct( $identifier, "div");
+		$this->_implicitRows=$implicitRows;
 		$this->_createCols=$createCols;
 		if(isset($numCols)){
 			//if($this->_createCols){
@@ -131,7 +133,7 @@ class HtmlGrid extends HtmlCollection{
 	protected function createItem($value){
 		if($this->_createCols===false)
 			$value=null;
-		$item=new HtmlGridRow($this->identifier."-row-".($this->count()+1),$value,$this->_colSizing);
+		$item=new HtmlGridRow($this->identifier."-row-".($this->count()+1),$value,$this->_colSizing,$this->_implicitRows);
 		return $item;
 	}
 
@@ -140,7 +142,7 @@ class HtmlGrid extends HtmlCollection{
 		if($this->_createCols===false){
 			for($i=$count;$i<\sizeof($values);$i++){
 				$colSize=\sizeof($values[$i]);
-				$this->addItem(new HtmlGridRow($this->identifier."-row-".($this->count()+1),$colSize,$this->_colSizing));
+				$this->addItem(new HtmlGridRow($this->identifier."-row-".($this->count()+1),$colSize,$this->_colSizing,$this->_implicitRows));
 			}
 		}
 		$count=\min(array($this->count(),\sizeof($values)));

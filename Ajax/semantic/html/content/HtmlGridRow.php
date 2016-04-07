@@ -6,6 +6,9 @@ use Ajax\common\html\HtmlCollection;
 use Ajax\semantic\html\base\Wide;
 use Ajax\semantic\html\base\Color;
 use Ajax\semantic\html\base\TextAlignment;
+use Ajax\JsUtils;
+use Phalcon\Mvc\View;
+
 
 /**
  * A row for the Semantic Grid component
@@ -16,8 +19,10 @@ use Ajax\semantic\html\base\TextAlignment;
 class HtmlGridRow extends HtmlCollection{
 
 	private $_colSize;
-	public function __construct( $identifier,$numCols=NULL,$colSizing=false){
+	private $_implicite=false;
+	public function __construct( $identifier,$numCols=NULL,$colSizing=false,$implicite=false){
 		parent::__construct( $identifier,"div");
+		$this->_implicite=$implicite;
 		$this->setClass("row");
 		$width=null;
 		if(isset($numCols)){
@@ -95,5 +100,12 @@ class HtmlGridRow extends HtmlCollection{
 	protected function createItem($value){
 		$col=new HtmlGridCol($this->identifier."-col-".($this->count()+1),$value);
 		return $col;
+	}
+
+	public function compile(JsUtils $js=NULL,View $view=NULL){
+		if($this->_implicite===true){
+			$this->_template="%wrapContentBefore%%content%%wrapContentAfter%";
+		}
+		return parent::compile($js,$view);
 	}
 }

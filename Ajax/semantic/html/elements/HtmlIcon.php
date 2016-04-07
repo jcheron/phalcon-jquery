@@ -38,7 +38,7 @@ class HtmlIcon extends HtmlSingleElement {
 	}
 
 	/**
-	 * adds to the icon
+	 * adds an icon in icon element
 	 * @param string $icon
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */

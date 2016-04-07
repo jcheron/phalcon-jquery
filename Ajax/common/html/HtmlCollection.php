@@ -3,6 +3,7 @@
 namespace Ajax\common\html;
 
 use Ajax\common\html\HtmlDoubleElement;
+use Ajax\service\JArray;
 
 abstract class HtmlCollection extends HtmlDoubleElement {
 
@@ -12,8 +13,14 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	}
 
 	public function addItems($items){
-		foreach ($items as $item){
-			$this->addItem($item);
+		if(JArray::isAssociative($items)){
+			foreach ($items as $k=>$v){
+				$this->addItem([$k,$v]);
+			}
+		}else{
+			foreach ($items as $item){
+				$this->addItem($item);
+			}
 		}
 	}
 
@@ -72,6 +79,12 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 */
 	public function fromDatabaseObject($object, $function) {
 		$this->addItems($function($object));
+	}
+
+	public function apply($callBack){
+		foreach ($this->content as $item){
+			$callBack($item);
+		}
 	}
 
 	/*

@@ -18,10 +18,12 @@ use Ajax\semantic\components\Dropdown;
 use Ajax\semantic\html\collections\HtmlMessage;
 use Ajax\semantic\html\elements\HtmlSegment;
 use Ajax\semantic\html\elements\HtmlSegmentGroups;
-use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\common\html\BaseHtml;
 use Ajax\semantic\html\collections\HtmlGrid;
+use Ajax\semantic\html\collections\HtmlIconMenu;
+use Ajax\semantic\html\collections\HtmlLabeledIconMenu;
+use Ajax\semantic\html\elements\HtmlHeader;
 
 class Semantic extends BaseGui {
 
@@ -125,6 +127,22 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlMenu($identifier,$items));
 	}
 
+	/**Adds an icon menu
+	 * @param string $identifier
+	 * @param array $items icons
+	 */
+	public function htmlIconMenu($identifier,$items=array()){
+		return $this->addHtmlComponent(new HtmlIconMenu($identifier,$items));
+	}
+
+	/**Adds an labeled icon menu
+	 * @param string $identifier
+	 * @param array $items icons
+	 */
+	public function htmlLabeledIconMenu($identifier,$items=array()){
+		return $this->addHtmlComponent(new HtmlLabeledIconMenu($identifier,$items));
+	}
+
 	/**
 	 * @param string $identifier
 	 * @param string $value
@@ -169,7 +187,18 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlPopup($container,$identifier,$content));
 	}
 
-	public function htmlGrid($identifier,$numRows=1,$numCols=NULL,$createCols=true){
-		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols,$createCols));
+	/**
+	 * @param string $identifier
+	 * @param int $numRows
+	 * @param int $numCols
+	 * @param boolean $createCols
+	 * @param boolean $implicitRows
+	 */
+	public function htmlGrid($identifier,$numRows=1,$numCols=NULL,$createCols=true,$implicitRows=false){
+		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols,$createCols,$implicitRows));
+	}
+
+	public function htmlHeader($identifier,$niveau=1,$content=NULL,$type="page"){
+		return $this->addHtmlComponent(new HtmlHeader($identifier,$niveau,$content,$type));
 	}
 }

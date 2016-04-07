@@ -9,6 +9,7 @@ use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\common\html\html5\HtmlInput;
 use Ajax\service\JArray;
 use Ajax\service\JString;
+use Ajax\semantic\html\base\Pointing;
 
 class HtmlDropdown extends HtmlSemDoubleElement {
 	protected $mClass="menu";
@@ -121,19 +122,16 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		return $this;
 	}
 
-	public function asSubmenu($pointing=false,$sens=""){
+	public function asSubmenu($pointing=NULL){
 		$this->setClass("ui dropdown link item");
-		if($pointing===true){
-			$this->setPointing($sens);
+		if(isset($pointing)){
+			$this->setPointing($pointing);
 		}
 		return $this;
 	}
 
-	public function setPointing($sens=""){
-		$this->addToProperty("class", "pointing");
-		if(JString::isNotNull($sens))
-			$this->addToPropertyCtrl("class", $sens, array("left","right"));
-		return $this;
+	public function setPointing($value=Pointing::POINTING){
+		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
 	}
 
 	public function setValue($value){

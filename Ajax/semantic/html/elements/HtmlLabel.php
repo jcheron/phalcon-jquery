@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlImg;
 use Ajax\common\html\HtmlDoubleElement;
+use Ajax\semantic\html\base\Pointing;
 
 class HtmlLabel extends HtmlSemDoubleElement {
 
@@ -18,8 +19,8 @@ class HtmlLabel extends HtmlSemDoubleElement {
 	 * @param string $side
 	 * @return \Ajax\semantic\html\elements\HtmlLabel
 	 */
-	public function setPointing($side=""){
-		return $this->addToPropertyCtrl("class", $side." pointing",array("right pointing","left pointing"," pointing"));
+	public function setPointing($value=Pointing::POINTING){
+		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
 	}
 
 	/**

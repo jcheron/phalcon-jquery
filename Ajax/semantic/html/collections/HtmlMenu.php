@@ -4,6 +4,9 @@ namespace Ajax\semantic\html\collections;
 
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\common\html\HtmlCollection;
+use Ajax\semantic\html\base\Pointing;
+use Ajax\common\html\HtmlDoubleElement;
+
 /**
  * Semantic Menu component
  * @see http://semantic-ui.com/collections/menu.html
@@ -15,9 +18,7 @@ class HtmlMenu extends HtmlCollection {
 	public function __construct($identifier, $items=array()) {
 		parent::__construct($identifier, "div");
 		$this->setClass("ui menu");
-		foreach ($items as $item){
-			$this->addItem($item);
-		}
+		$this->addItems($items);
 	}
 
 	/**
@@ -43,7 +44,11 @@ class HtmlMenu extends HtmlCollection {
 	 */
 	public function addItem($item){
 		$item=parent::addItem($item);
-		$item->addToProperty("class", "item");
+		if(!$item instanceof HtmlMenu)
+			$item->addToPropertyCtrl("class", "item",array("item"));
+		else{
+			$this->setSecondary();
+		}
 	}
 	/**
 	 * {@inheritDoc}
@@ -56,5 +61,45 @@ class HtmlMenu extends HtmlCollection {
 
 	public function setInverted(){
 		return $this->addToProperty("class", "inverted");
+	}
+
+	public function setSecondary(){
+		return $this->addToProperty("class", "secondary");
+	}
+
+	public function setVertical(){
+		return $this->addToProperty("class", "vertical");
+	}
+
+	public function setPosition($value="right"){
+		return $this->addToPropertyCtrl("class", $value,array("right","left"));
+	}
+
+	public function setPointing($value=Pointing::POINTING){
+		return $this->addToPropertyCtrl("class", $value,Pointing::getConstants());
+	}
+
+	public function asTab($vertical=false){
+		$this->apply(function(HtmlDoubleElement &$item){$item->setTagName("a");});
+		if($vertical===true)
+			$this->setVertical();
+		return $this->addToProperty("class", "tabular");
+	}
+
+	public function asPagination(){
+		$this->apply(function(HtmlDoubleElement &$item){$item->setTagName("a");});
+			return $this->addToProperty("class", "pagination");
+	}
+
+	public function setFixed(){
+		return $this->addToProperty("class", "fixed");
+	}
+
+	public function setFluid(){
+		return $this->addToProperty("class", "fluid");
+	}
+
+	public function setCompact(){
+		return $this->addToProperty("class", "compact");
 	}
 }

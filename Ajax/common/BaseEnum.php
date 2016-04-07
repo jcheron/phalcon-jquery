@@ -23,13 +23,17 @@ abstract class BaseEnum {
 		return self::$constCacheArray [$calledClass];
 	}
 
+	public static function getConstantValues(){
+		return \array_values(self::getConstants());
+	}
+
 	public static function isValidName($name, $strict=false) {
 		$constants=self::getConstants();
-		
+
 		if ($strict) {
 			return array_key_exists($name, $constants);
 		}
-		
+
 		$keys=array_map('strtolower', array_keys($constants));
 		return in_array(strtolower($name), $keys);
 	}
