@@ -6,9 +6,10 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlImg;
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\base\traits\LabeledIconTrait;
 
 class HtmlLabel extends HtmlSemDoubleElement {
-
+	use LabeledIconTrait;
 	public function __construct($identifier,$caption="",$tagName="div") {
 		parent::__construct($identifier,$tagName,"ui label");
 		$this->content=$caption;
@@ -35,6 +36,13 @@ class HtmlLabel extends HtmlSemDoubleElement {
 	 */
 	public function asTag(){
 		return $this->addToProperty("class", "tag");
+	}
+
+	/**
+	 * @return \Ajax\semantic\html\elements\HtmlLabel
+	 */
+	public function asLink(){
+		return $this->setTagName("a");
 	}
 
 	public function setBasic(){

@@ -209,7 +209,7 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlHeader($identifier,$niveau,$content,$type));
 	}
 
-	public function htmlInput($identifier,$value="",$type="text",$placeholder=""){
-		return $this->addHtmlComponent(new HtmlInput($identifier,$value="",$type="text",$placeholder=""));
+	public function htmlInput($identifier,$type="text",$value="",$placeholder=""){
+		return $this->addHtmlComponent(new HtmlInput($identifier,$type,$value,$placeholder));
 	}
 }

@@ -3,6 +3,7 @@
 namespace Ajax\semantic\html\elements;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
+use Ajax\semantic\html\base\traits\LabeledIconTrait;
 
 /**
  * Semantic Button component
@@ -11,7 +12,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
  * @version 1.001
  */
 class HtmlButton extends HtmlSemDoubleElement {
-
+	use LabeledIconTrait;
 	/**
 	 * Constructs an HTML Semantic button
 	 * @param string $identifier HTML id

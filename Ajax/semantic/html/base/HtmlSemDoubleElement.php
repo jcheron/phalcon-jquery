@@ -6,7 +6,6 @@ use Ajax\common\html\HtmlDoubleElement;
 use Ajax\JsUtils;
 use Ajax\semantic\html\content\InternalPopup;
 use Phalcon\Mvc\View;
-use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\semantic\html\base\traits\BaseTrait;
 
 /**
@@ -39,26 +38,6 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		$this->_popup->setHtml($html);
 		$this->_popup->setAttributes($variation,$params);
 		return $this;
-	}
-
-	/**
-	 * Adds an icon before or after
-	 * @param string|HtmlIcon $icon
-	 * @param boolean $before
-	 * @param boolean $labeled
-	 * @return \Ajax\semantic\html\elements\HtmlIcon
-	 */
-	public function addIcon($icon,$before=true,$labeled=false){
-		$iconO=$icon;
-		if(\is_string($icon)){
-			$iconO=new HtmlIcon("icon-".$this->identifier, $icon);
-		}
-		if($labeled!==false){
-			$this->addToProperty("class", "labeled icon");
-			$this->tagName="div";
-		}
-		$this->addContent($iconO,$before);
-		return $iconO;
 	}
 
 	public function compile(JsUtils $js=NULL, View $view=NULL){
