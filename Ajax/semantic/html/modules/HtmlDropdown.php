@@ -21,7 +21,7 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		parent::__construct($identifier, "div");
 		$this->_template=include dirname(__FILE__).'/../templates/tplDropdown.php';
 		$this->setProperty("class", "ui dropdown");
-		$content=new HtmlSemDoubleElement("","div");
+		$content=new HtmlSemDoubleElement("text-".$this->identifier,"div");
 		$content->setClass("text");
 		$content->setContent($value);
 		$content->wrap("",new HtmlIcon("", "dropdown"));
@@ -139,6 +139,9 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		}else{
 			$this->setProperty("value", $value);
 		}
+		$textElement=$this->getElementById("text-".$this->identifier, $this->content);
+		if(isset($textElement))
+			$textElement->setContent($value);
 		return $this;
 	}
 
@@ -148,7 +151,8 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	 */
 	public function run(JsUtils $js) {
 		if($this->propertyContains("class", "simple")===false){
-			$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->params);
+			if(isset($this->_bsComponent)===false)
+				$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->params);
 			$this->addEventsOnRun($js);
 			return $this->_bsComponent;
 		}

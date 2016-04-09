@@ -134,6 +134,7 @@ class Semantic extends BaseGui {
 	/**
 	 * @param string $identifier
 	 * @param array $items
+	 * @return Ajax\semantic\html\collections\HtmlMenu
 	 */
 	public function htmlMenu($identifier,$items=array()){
 		return $this->addHtmlComponent(new HtmlMenu($identifier,$items));

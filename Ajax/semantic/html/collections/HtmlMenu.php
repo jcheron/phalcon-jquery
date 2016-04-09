@@ -3,9 +3,10 @@
 namespace Ajax\semantic\html\collections;
 
 use Ajax\bootstrap\html\HtmlLink;
-use Ajax\common\html\HtmlCollection;
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\base\HtmlSemCollection;
+use Ajax\semantic\html\base\HtmlSemDoubleElement;
 
 /**
  * Semantic Menu component
@@ -13,7 +14,7 @@ use Ajax\semantic\html\base\constants\Direction;
  * @author jc
  * @version 1.001
  */
-class HtmlMenu extends HtmlCollection {
+class HtmlMenu extends HtmlSemCollection {
 
 	public function __construct($identifier, $items=array()) {
 		parent::__construct($identifier, "div");
@@ -43,6 +44,11 @@ class HtmlMenu extends HtmlCollection {
 	 * @see \Ajax\common\html\html5\HtmlCollection::addItem()
 	 */
 	public function addItem($item){
+		if($item instanceof \Ajax\semantic\html\elements\HtmlInput){
+			$itemO=new HtmlSemDoubleElement("item-".$this->identifier,"div");
+			$itemO->setContent($item);
+			$item=$itemO;
+		}
 		$item=parent::addItem($item);
 		if(!$item instanceof HtmlMenu)
 			$item->addToPropertyCtrl("class", "item",array("item"));
