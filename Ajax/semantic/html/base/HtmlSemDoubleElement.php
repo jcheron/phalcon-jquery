@@ -7,6 +7,7 @@ use Ajax\JsUtils;
 use Ajax\semantic\html\content\InternalPopup;
 use Phalcon\Mvc\View;
 use Ajax\semantic\html\base\traits\BaseTrait;
+use Ajax\common\components\GenericComponent;
 
 /**
  * Base class for Semantic double elements
@@ -46,12 +47,13 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return parent::compile($js,$view);
 	}
 	public function run(JsUtils $js){
+		$this->_bsComponent=$js->semantic()->generic("#".$this->identifier);
 		parent::run($js);
+		$this->addEventsOnRun($js);
 		if(isset($this->_popup)){
 			$this->_popup->run($js);
-			//$this->addEventsOnRun($js);
-			//return $this->_bsComponent;
 		}
+		return $this->_bsComponent;
 	}
 /*
 	public function __call($name, $arguments){

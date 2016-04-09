@@ -25,6 +25,8 @@ use Ajax\semantic\html\collections\HtmlIconMenu;
 use Ajax\semantic\html\collections\HtmlLabeledIconMenu;
 use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\elements\HtmlInput;
+use Ajax\semantic\html\elements\HtmlList;
+use Ajax\common\components\GenericComponent;
 
 class Semantic extends BaseGui {
 
@@ -32,6 +34,15 @@ class Semantic extends BaseGui {
 		parent::__construct($autoCompile=true);
 	}
 
+	/**
+	 *
+	 * @param string $attachTo
+	 * @param string|array $params
+	 * @return $this
+	 */
+	public function generic($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new GenericComponent($this->js), $attachTo, $params);
+	}
 	/**
 	 *
 	 * @param string $attachTo
@@ -211,5 +222,9 @@ class Semantic extends BaseGui {
 
 	public function htmlInput($identifier,$type="text",$value="",$placeholder=""){
 		return $this->addHtmlComponent(new HtmlInput($identifier,$type,$value,$placeholder));
+	}
+
+	public function htmlList($identifier,$items=array()){
+		return $this->addHtmlComponent(new HtmlList($identifier,$items));
 	}
 }

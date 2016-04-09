@@ -4,6 +4,7 @@ namespace Ajax\common\html;
 
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\service\JArray;
+use Ajax\JsUtils;
 
 /**
  * Base class for Html collections
@@ -83,7 +84,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
 	 */
 	public function fromDatabaseObject($object, $function) {
-		$this->addItems($function($object));
+		$this->addItem($function($object));
 	}
 
 	public function apply($callBack){
@@ -104,4 +105,11 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 * @param string|HtmlDoubleElement $value
 	 */
 	protected abstract function createItem($value);
+
+	public function run(JsUtils $js) {
+		foreach ( $this->content as $content ) {
+			$content->run($js);
+		}
+		parent::run($js);
+	}
 }

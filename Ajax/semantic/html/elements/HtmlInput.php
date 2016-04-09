@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\State;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\base\constants\Variation;
 
 class HtmlInput extends HtmlSemDoubleElement{
 	private $_hasIcon=false;
@@ -12,8 +13,8 @@ class HtmlInput extends HtmlSemDoubleElement{
 	public function __construct($identifier,$type="text",$value="",$placeholder=""){
 		parent::__construct("div-".$identifier,"div","ui input");
 		$this->content=new \Ajax\common\html\html5\HtmlInput($identifier,$type,$value,$placeholder);
-		$this->_states=[State::DISABLED,State::FOCUS,State::ERROR,State::LOADING];
-		$this->_variations=[];
+		$this->_states=[State::DISABLED,State::FOCUS,State::ERROR];
+		$this->_variations=[Variation::TRANSPARENT];
 	}
 
 	public function setFocus(){
