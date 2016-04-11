@@ -27,6 +27,7 @@ use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\elements\HtmlInput;
 use Ajax\semantic\html\elements\HtmlList;
 use Ajax\common\components\GenericComponent;
+use Ajax\semantic\html\collections\HtmlBreadcrumb;
 
 class Semantic extends BaseGui {
 
@@ -227,5 +228,9 @@ class Semantic extends BaseGui {
 
 	public function htmlList($identifier,$items=array()){
 		return $this->addHtmlComponent(new HtmlList($identifier,$items));
+	}
+
+	public function htmlBreadcrumb( $identifier,$items=array(),$autoActive=true,$startIndex=0,$hrefFunction=NULL){
+		return $this->addHtmlComponent(new HtmlBreadcrumb($identifier,$items,$autoActive,$startIndex,$hrefFunction));
 	}
 }

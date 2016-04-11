@@ -46,7 +46,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 */
 	public function addItem($item){
 		$itemO=$item;
-		if(\is_object($item)===false){
+		if($this->createCondition($item)===true){
 			$itemO=$this->createItem($item);
 		}
 		$this->addContent($itemO);
@@ -106,10 +106,18 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 */
 	protected abstract function createItem($value);
 
+	protected function createCondition($value){
+		return \is_object($value)===false;
+	}
+
+	/*
+	 * (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
+	 */
 	public function run(JsUtils $js) {
-		foreach ( $this->content as $content ) {
-			$content->run($js);
-		}
 		parent::run($js);
+		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
+		$this->addEventsOnRun($js);
+		return $this->_bsComponent;
 	}
 }

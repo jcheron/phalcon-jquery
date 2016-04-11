@@ -30,8 +30,12 @@ class HtmlSingleElement extends BaseHtml {
 		return $this;
 	}
 
+	/*
+	 * (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
+	 */
 	public function run(JsUtils $js) {
-		// TODO Auto-generated method stub
+
 	}
 
 	/*

@@ -20,4 +20,13 @@ class Dropdown extends SimpleExtComponent {
 	public function setAction($action){
 		return $this->setParamCtrl("action", $action,array("select","auto","activate","combo","nothing","hide"));
 	}
+
+	/**
+	 * Define the event which trigger dropdown
+	 * @param string $event Event used to trigger dropdown (Hover, Click, Custom Event)
+	 * @return \Ajax\semantic\components\Dropdown
+	 */
+	public function setOn($event){
+		return $this->setParam("on", $event);
+	}
 }

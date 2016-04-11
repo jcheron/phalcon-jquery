@@ -19,6 +19,10 @@ class HtmlSegmentGroups extends HtmlSemCollection{
 		return new HtmlSegment("segment-".$this->count(),$value);
 	}
 
+	protected function createCondition($value){
+		return !($value instanceof HtmlSegment);
+	}
+
 	/**
 	 * Defines the group type
 	 * @param string $type one of "raised","stacked","piled" default : ""

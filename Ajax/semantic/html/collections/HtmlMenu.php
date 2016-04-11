@@ -56,6 +56,21 @@ class HtmlMenu extends HtmlSemCollection {
 			$this->setSecondary();
 		}
 	}
+	public function generateMenuAsItem($menu,$header=null){
+		$count=$this->count();
+		$item=new HtmlSemDoubleElement("item-".$this->identifier."-".$count,"div");
+		if(isset($header)){
+			$headerItem=new HtmlSemDoubleElement("item-header-".$this->identifier."-".$count,"div","header");
+			$headerItem->setContent($header);
+			$item->addContent($headerItem);
+		}
+		$menu->setClass("menu");
+		$item->addContent($menu);
+		return $item;
+	}
+	public function addMenuAsItem($menu,$header=null){
+		return $this->addItem($this->generateMenuAsItem($menu,$header));
+	}
 	/**
 	 * {@inheritDoc}
 	 * @see \Ajax\common\html\html5\HtmlCollection::createItem()
@@ -107,5 +122,16 @@ class HtmlMenu extends HtmlSemCollection {
 
 	public function setCompact(){
 		return $this->addToProperty("class", "compact");
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$return=$function($object);
+		if(\is_array($return))
+			$this->addItems($return);
+		else
+		$this->addItem($return);
 	}
 }

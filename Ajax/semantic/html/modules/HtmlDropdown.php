@@ -14,7 +14,7 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	protected $mClass="menu";
 	protected $mTagName="div";
 	protected $items=array ();
-	protected $params=array("action"=>"select");
+	protected $params=array("action"=>"auto","on"=>"hover");
 	protected $input;
 
 	public function __construct($identifier, $value="", $items=array()) {
@@ -39,6 +39,13 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		}
 		$this->items[]=$itemO;
 		return $itemO;
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$this->addItem($function($object));
 	}
 
 	public function addInput($name){
