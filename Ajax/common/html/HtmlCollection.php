@@ -120,4 +120,10 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
 	}
+
+	protected function contentAs($tagName){
+		foreach ($this->content as $item){
+			$item->setTagName($tagName);
+		}
+	}
 }

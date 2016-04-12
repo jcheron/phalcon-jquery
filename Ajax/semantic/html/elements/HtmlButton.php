@@ -4,6 +4,7 @@ namespace Ajax\semantic\html\elements;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\traits\LabeledIconTrait;
+use Ajax\semantic\html\base\constants\Emphasis;
 
 /**
  * Semantic Button component
@@ -50,8 +51,13 @@ class HtmlButton extends HtmlSemDoubleElement {
 		return $this->addToProperty("class",$cssStyle);
 	}
 
-	public function setFocusable(){
-		$this->setProperty("tabindex", "0");
+	public function setFocusable($value=true){
+		if($value===true)
+			$this->setProperty("tabindex", "0");
+		else{
+			$this->removeProperty("tabindex");
+		}
+		return $this;
 	}
 
 	public function setAnimated($content,$animation=""){
@@ -153,5 +159,9 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 */
 	public function setBasic(){
 		return $this->addToProperty("class", "basic");
+	}
+
+	public function setEmphasis($value){
+		return $this->addToPropertyCtrl("class", $value, Emphasis::getConstants());
 	}
 }

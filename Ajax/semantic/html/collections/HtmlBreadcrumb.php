@@ -7,6 +7,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\semantic\html\elements\HtmlIcon;
+
 /**
  * Semantic UI Breadcrumb component
  * @see http://semantic-ui.com/collections/breadcrumb.html
@@ -145,7 +146,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement{
 		}
 		$count=$this->count();
 		for($i=1;$i<$count;$i++){
-			$this->content[$i]->wrap($this->_contentSeparator);
+			$this->content[$i]->wrap($this->getContentDivider($i-1));
 		}
 		return parent::compile($js, $view);
 	}
@@ -156,7 +157,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement{
 	 */
 	public function on($event, $jsCode, $stopPropagation=false, $preventDefault=false) {
 		foreach ($this->content as $element){
-			$element->on($event,$jsCode,$stopPropagation,$preventDefault);
+				$element->on($event,$jsCode,$stopPropagation,$preventDefault);
 		}
 		return $this;
 	}
@@ -164,7 +165,8 @@ class HtmlBreadcrumb extends HtmlSemNavElement{
 
 	public function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
 		foreach ($this->content as $element){
-			$element->_ajaxOn($operation, $event, $url, $responseElement, $parameters);
+			if($element->getProperty($this->attr)!=NULL)
+				$element->_ajaxOn($operation, $event, $url, $responseElement, $parameters);
 		}
 		return $this;
 	}
@@ -191,6 +193,20 @@ class HtmlBreadcrumb extends HtmlSemNavElement{
 			$icon=new HtmlIcon("icon-".$this->identifier, $icon);
 			$item->wrapContent($icon);
 		}
+	}
+
+	public function addItem($item){
+		$itemO=parent::addItem($item);
+		$this->addToPropertyCtrl("class", "section", array("section"));
+		return $itemO;
+	}
+
+	public function asLinks(){
+		$this->contentAs("a");
+	}
+
+	public function asTexts(){
+		$this->contentAs("div");
 	}
 
 }

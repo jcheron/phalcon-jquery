@@ -2,6 +2,7 @@
 namespace Ajax\semantic\html\base;
 
 use Ajax\JsUtils;
+use Ajax\service\JArray;
 /**
  * Sem class for navigation elements : Breadcrumbs and Pagination
  * @author jc
@@ -39,7 +40,7 @@ abstract class HtmlSemNavElement extends HtmlSemCollection {
 	}
 
 	public function contentAsString(){
-		return implode($this->_contentSeparator, $this->content);
+		return JArray::implode($this->_contentSeparator, $this->content);
 	}
 
 	/**
@@ -83,9 +84,32 @@ abstract class HtmlSemNavElement extends HtmlSemCollection {
 	public abstract function fromDispatcher($dispatcher,$startIndex=0);
 
 
-	public function setContentSeparator($contentSeparator) {
-		$this->_contentSeparator=$contentSeparator;
+	public function setContentDivider($divider,$index=NULL) {
+		$divider="<div class='divider'> {$divider} </div>";
+		return $this->setDivider($divider, $index);
+	}
+
+	public function setIconContentDivider($iconContentDivider,$index=NULL) {
+		$contentDivider="<i class='".$iconContentDivider." icon divider'></i>";
+		return $this->setDivider($contentDivider, $index);
+	}
+
+	protected function setDivider($divider,$index){
+		if(isset($index)){
+			if(\is_array($this->_contentSeparator)===false)
+				$this->_contentSeparator=array_fill (0, $this->count()-1,$this->_contentSeparator);
+			$this->_contentSeparator[$index]=$divider;
+		}else{
+			$this->_contentSeparator=$divider;
+		}
 		return $this;
+	}
+
+	protected function getContentDivider($index){
+		if(\is_array($this->_contentSeparator)===true){
+			return @$this->_contentSeparator[$index];
+		}
+		return $this->_contentSeparator;
 	}
 
 

@@ -6,10 +6,10 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\State;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\base\constants\Variation;
+use Ajax\semantic\html\base\traits\IconTrait;
 
 class HtmlInput extends HtmlSemDoubleElement{
-	private $_hasIcon=false;
-
+	use IconTrait;
 	public function __construct($identifier,$type="text",$value="",$placeholder=""){
 		parent::__construct("div-".$identifier,"div","ui input");
 		$this->content=new \Ajax\common\html\html5\HtmlInput($identifier,$type,$value,$placeholder);
@@ -19,32 +19,6 @@ class HtmlInput extends HtmlSemDoubleElement{
 
 	public function setFocus(){
 		$this->addToProperty("class", State::FOCUS);
-	}
-
-	public function addIcon($icon,$direction=Direction::LEFT){
-		if($this->_hasIcon===false){
-			$iconO=$icon;
-			if(\is_string($icon)){
-				$iconO=new HtmlIcon("icon-".$this->identifier, $icon);
-			}
-			$this->addToPropertyCtrl("class", $direction." icon", Direction::getConstantValues("icon"));
-			$this->addContent($iconO,false);
-			$this->_hasIcon=true;
-		}else{
-			$iconO=$this->getIcon();
-			$iconO->setIcon($icon);
-			$this->addToPropertyCtrl("class", $direction." icon", Direction::getConstantValues("icon"));
-		}
-		return $iconO;
-	}
-
-	public function getIcon(){
-		if(\is_array($this->content)){
-			foreach ($this->content as $item){
-				if($item instanceof HtmlIcon)
-					return $item;
-			}
-		}
 	}
 
 	public function addLoading(){

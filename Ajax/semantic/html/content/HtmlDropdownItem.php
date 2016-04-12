@@ -7,9 +7,10 @@ use Ajax\common\html\HtmlDoubleElement;
 use Ajax\common\html\html5\HtmlImg;
 use Ajax\common\html\html5\HtmlInput;
 use Ajax\service\JArray;
+use Ajax\semantic\html\base\traits\IconTrait;
 
 class HtmlDropdownItem extends HtmlSemDoubleElement {
-
+	use IconTrait;
 	public function __construct($identifier, $content="",$value=NULL,$image=NULL) {
 		parent::__construct($identifier, "a");
 		$this->setClass("item");

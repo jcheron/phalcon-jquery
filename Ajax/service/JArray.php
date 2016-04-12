@@ -23,4 +23,20 @@ class JArray {
 		} else
 			return $default;
 	}
+
+	public static function implode($glue,$pieces){
+		$result="";
+		if(\is_array($glue)){
+			$size=\sizeof($pieces);
+			if($size>0){
+				for($i=0;$i<$size-1;$i++){
+					$result.=$pieces[$i].@$glue[$i];
+				}
+				$result.=$pieces[$size-1];
+			}
+		}else{
+			$result=\implode($glue, $pieces);
+		}
+		return $result;
+	}
 }

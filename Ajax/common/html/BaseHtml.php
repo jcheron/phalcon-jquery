@@ -139,6 +139,13 @@ abstract class BaseHtml extends BaseWidget {
 
 	protected function removePropertyValue($name,$value){
 		$this->properties[$name]=\str_replace($value, "", $this->properties[$name]);
+		return $this;
+	}
+
+	protected function removeProperty($name){
+		if(\array_key_exists($name, $this->properties))
+			unset($this->properties[$name]);
+		return $this;
 	}
 
 	protected function addToMemberCtrl(&$name, $value, $typeCtrl, $separator=" ") {
