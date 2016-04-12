@@ -69,7 +69,8 @@ class HtmlButton extends HtmlSemDoubleElement {
 		$hidden=new HtmlSemDoubleElement("hidden-".$this->identifier,"div");
 		$hidden->setClass("hidden content");
 		$hidden->setContent($content);
-		$this->content=$visible.$hidden;
+		$this->content=array($visible,$hidden);
+		return $hidden;
 	}
 
 	/**
