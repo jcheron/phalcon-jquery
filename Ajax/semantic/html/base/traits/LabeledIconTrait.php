@@ -19,7 +19,7 @@ trait LabeledIconTrait {
 			$iconO=new HtmlIcon("icon-".$this->identifier, $icon);
 		}
 		if($labeled!==false){
-			$direction=($before===true)?Direction::RIGHT:Direction::LEFT;
+			$direction=($before===true)?Direction::LEFT:Direction::RIGHT;
 			$this->addToProperty("class", $direction." labeled icon");
 			$this->tagName="div";
 		}

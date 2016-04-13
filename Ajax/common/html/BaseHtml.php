@@ -398,4 +398,15 @@ abstract class BaseHtml extends BaseWidget {
 	public function jsHide(){
 		return $this->jsDoJquery("hide");
 	}
+
+	protected function setWrapBefore($wrapBefore) {
+		$this->wrapBefore=$wrapBefore;
+		return $this;
+	}
+
+	protected function setWrapAfter($wrapAfter) {
+		$this->wrapAfter=$wrapAfter;
+		return $this;
+	}
+
 }

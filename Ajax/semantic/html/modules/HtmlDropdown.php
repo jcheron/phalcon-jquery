@@ -9,12 +9,16 @@ use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\common\html\html5\HtmlInput;
 use Ajax\service\JArray;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\base\traits\LabeledIconTrait;
 
 class HtmlDropdown extends HtmlSemDoubleElement {
+	use LabeledIconTrait {
+		addIcon as addIconP;
+	}
 	protected $mClass="menu";
 	protected $mTagName="div";
 	protected $items=array ();
-	protected $params=array("action"=>"auto","on"=>"hover");
+	protected $params=array("action"=>"nothing","on"=>"hover");
 	protected $input;
 
 	public function __construct($identifier, $value="", $items=array()) {
@@ -31,13 +35,37 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	}
 
 	public function addItem($item,$value=NULL,$image=NULL){
+		$itemO=$this->beforeAddItem($item,$value,$image);
+		$this->items[]=$itemO;
+		return $itemO;
+	}
+
+	public function addIcon($icon,$before=true,$labeled=false){
+		$this->addIconP($icon,$before,$labeled);
+		return $this->getElementById("text-".$this->identifier, $this->content)->setWrapAfter("");
+	}
+	/**
+	 * Insert an item at a position
+	 * @param mixed $item
+	 * @param number $position
+	 * @return \Ajax\semantic\html\content\HtmlDropdownItem|unknown
+	 */
+	public function insertItem($item,$position=0){
+		$itemO=$this->beforeAddItem($item);
+		 $start = array_slice($this->items, 0, $position);
+		 $end = array_slice($this->items, $position);
+		 $start[] = $item;
+		 $this->items=array_merge($start, $end);
+		 return $itemO;
+	}
+
+	protected function beforeAddItem($item,$value=NULL,$image=NULL){
 		$itemO=$item;
-		if(\is_object($item)===false){
+		if(!$item instanceof HtmlDropdownItem){
 			$itemO=new HtmlDropdownItem("dd-item-".$this->identifier."-".\sizeof($this->items),$item,$value,$image);
 		}elseif($itemO instanceof HtmlDropdownItem){
 			$this->addToProperty("class", "vertical");
 		}
-		$this->items[]=$itemO;
 		return $itemO;
 	}
 
@@ -67,6 +95,9 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 		}
 	}
 
+	public function count(){
+		return \sizeof($this->items);
+	}
 	/**
 	 * @param boolean $dropdown
 	 */
@@ -167,5 +198,9 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 
 	public function setAction($action){
 		$this->params["action"]=$action;
+	}
+
+	public function setFullTextSearch($value){
+		$this->params["fullTextSearch"]=$value;
 	}
 }

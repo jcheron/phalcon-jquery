@@ -29,4 +29,8 @@ class Dropdown extends SimpleExtComponent {
 	public function setOn($event){
 		return $this->setParam("on", $event);
 	}
+
+	public function setFullTextSearch($value){
+		return $this->setParam("fullTextSearch", $value);
+	}
 }

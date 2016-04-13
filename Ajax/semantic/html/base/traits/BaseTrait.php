@@ -52,13 +52,13 @@ trait BaseTrait {
 	}
 
 	public function setFluid(){
-		$this->addToProperty("class", "fluid");
+		return $this->addToProperty("class", "fluid");
 	}
 
 	/**
 	 * can be formatted to appear on dark backgrounds
 	 */
 	public function setInverted(){
-		$this->addToProperty("class", "inverted");
+		return $this->addToProperty("class", "inverted");
 	}
 }

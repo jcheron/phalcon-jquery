@@ -38,7 +38,7 @@ class HtmlButtonGroups extends HtmlSemDoubleElement {
 		return $this;
 	}
 
-	public function insertOr($aferIndex=0,$or="OR"){
+	public function insertOr($aferIndex=0,$or="or"){
 		$orElement=new HtmlSemDoubleElement("or-".$this->identifier,"div","or");
 		$orElement->setProperty("data-text", $or);
 		array_splice($this->content, $aferIndex+1, 0, array($orElement));
@@ -53,6 +53,9 @@ class HtmlButtonGroups extends HtmlSemDoubleElement {
 	}
 
 	public function asIcons(){
+		foreach ($this->content as $item){
+			$item->asIcon($item->getContent());
+		}
 		return $this->addToProperty("class", "icons");
 	}
 

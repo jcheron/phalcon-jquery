@@ -165,4 +165,8 @@ class HtmlButton extends HtmlSemDoubleElement {
 	public function setEmphasis($value){
 		return $this->addToPropertyCtrl("class", $value, Emphasis::getConstants());
 	}
+
+	public function setLoading(){
+		return $this->addToProperty("class", "loading");
+	}
 }
