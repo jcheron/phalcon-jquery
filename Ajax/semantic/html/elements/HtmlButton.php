@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\traits\LabeledIconTrait;
 use Ajax\semantic\html\base\constants\Emphasis;
+use Ajax\semantic\html\base\constants\Social;
 
 /**
  * Semantic Button component
@@ -168,5 +169,13 @@ class HtmlButton extends HtmlSemDoubleElement {
 
 	public function setLoading(){
 		return $this->addToProperty("class", "loading");
+	}
+
+	public static function getSocial($identifier,$social,$value=NULL){
+		if($value===NULL)
+			$value=\ucfirst($social);
+		$return=new HtmlButton($identifier,$value);
+		$return->addIcon($social);
+		return $return->addToPropertyCtrl("class", $social, Social::getConstants());
 	}
 }

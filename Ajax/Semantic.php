@@ -28,6 +28,8 @@ use Ajax\semantic\html\elements\HtmlInput;
 use Ajax\semantic\html\elements\HtmlList;
 use Ajax\common\components\GenericComponent;
 use Ajax\semantic\html\collections\HtmlBreadcrumb;
+use Ajax\semantic\html\modules\HtmlAccordion;
+use Ajax\semantic\components\Accordion;
 
 class Semantic extends BaseGui {
 
@@ -56,6 +58,10 @@ class Semantic extends BaseGui {
 
 	public function dropdown($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Dropdown($this->js), $attachTo, $params);
+	}
+
+	public function accordion($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Accordion($this->js), $attachTo, $params);
 	}
 
 	/**
@@ -230,7 +236,24 @@ class Semantic extends BaseGui {
 		return $this->addHtmlComponent(new HtmlList($identifier,$items));
 	}
 
+	/**
+	 * Return a new Seamntic Html Breadcrumb
+	 * @param string $identifier
+	 * @param array $elements
+	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true. default : true
+	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
+	 * @return HtmlBreadcrumb
+	 */
 	public function htmlBreadcrumb( $identifier,$items=array(),$autoActive=true,$startIndex=0,$hrefFunction=NULL){
 		return $this->addHtmlComponent(new HtmlBreadcrumb($identifier,$items,$autoActive,$startIndex,$hrefFunction));
+	}
+
+	/**
+	 * Return a new Seamntic Accordion
+	 * @param string $identifier
+	 * @return HtmlAccordion
+	 */
+	public function htmlAccordion($identifier) {
+		return $this->addHtmlComponent(new HtmlAccordion($identifier));
 	}
 }

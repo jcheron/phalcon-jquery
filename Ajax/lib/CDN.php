@@ -116,7 +116,7 @@ return array (
 		"Semantic" => array (
 				"cdnjs" => array (
 						"core" => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/%version%/semantic.min.js",
-						"css" => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/%version%/semantic.min.js",
+						"css" => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/%version%/semantic.min.css",
 						"versions" => array (
 								"2.1.8"
 						),
