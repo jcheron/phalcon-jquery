@@ -4,13 +4,15 @@ namespace Ajax\lib;
 
 use Ajax\service\PhalconUtils;
 
-class CDNBootstrap extends CDNBase {
+class CDNCoreCss extends CDNBase {
 	protected $cssUrl;
 	protected $localCss;
+	protected $framework;
 
-	public function __construct($version, $provider="MaxCDN") {
+	public function __construct($framework,$version, $provider="MaxCDN") {
 		parent::__construct($version, $provider);
-		$this->data=$this->data ["Bootstrap"];
+		$this->framework=$framework;
+		$this->data=$this->data [$framework];
 	}
 
 	public function getUrl() {
@@ -45,4 +47,9 @@ class CDNBootstrap extends CDNBase {
 		$this->localCss=$localCss;
 		return $this;
 	}
+
+	public function getFramework() {
+		return $this->framework;
+	}
+
 }

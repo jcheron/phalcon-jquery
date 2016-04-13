@@ -4,6 +4,7 @@ return array (
 				"MaxCDN" => array (
 						"url" => "http://code.jquery.com/jquery-%version%.min.js",
 						"versions" => array (
+								"2.2.3",
 								"2.2.1",
 								"2.1.4",
 								"2.1.3",
@@ -13,6 +14,8 @@ return array (
 				"Google" => array (
 						"url" => "https://ajax.googleapis.com/ajax/libs/jquery/%version%/jquery.min.js",
 						"versions" => array (
+								"2.2.2",
+								"2.2.1",
 								"2.2.0",
 								"2.1.4",
 								"2.1.3",
@@ -106,6 +109,16 @@ return array (
 						"versions" => array (
 								"3.3.6",
 								"3.3.5"
+						),
+						"themes" => array ()
+				)
+		),
+		"Semantic" => array (
+				"cdnjs" => array (
+						"core" => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/%version%/semantic.min.js",
+						"css" => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/%version%/semantic.min.js",
+						"versions" => array (
+								"2.1.8"
 						),
 						"themes" => array ()
 				)

@@ -6,7 +6,7 @@ use Ajax\config\DefaultConfig;
 use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
-use Ajax\lib\CDNBootstrap;
+use Ajax\lib\CDNCoreCss;
 use Phalcon\DiInterface;
 use Phalcon\Version;
 use Phalcon\Di\InjectionAwareInterface;
@@ -1117,6 +1117,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		$hasJQuery=false;
 		$hasJQueryUI=false;
 		$hasBootstrap=false;
+		$hasSemantic=false;
 		$result=array ();
 		foreach ( $this->cdns as $cdn ) {
 			switch(get_class($cdn)) {
@@ -1128,9 +1129,13 @@ abstract class _JsUtils implements InjectionAwareInterface {
 					$hasJQueryUI=true;
 					$result[1]=$cdn;
 					break;
-				case "Ajax\lib\CDNBootstrap":
-					$hasBootstrap=true;
-					$result[2]=$cdn;
+				case "Ajax\lib\CDNCoreCss":
+					if($cdn->getFramework()==="Bootstrap")
+						$hasBootstrap=true;
+					elseif($cdn->getFramework()==="Semantic")
+						$hasSemantic=true;
+					if($hasSemantic || $hasBootstrap)
+						$result[2]=$cdn;
 					break;
 			}
 		}
@@ -1141,7 +1146,10 @@ abstract class _JsUtils implements InjectionAwareInterface {
 			$result[1]=new CDNGuiGen("x", $template);
 		}
 		if ($hasBootstrap===false&&isset($this->_bootstrap)) {
-			$result[2]=new CDNBootstrap("x");
+			$result[2]=new CDNCoreCss("Bootstrap","x");
+		}
+		if ($hasSemantic===false&&isset($this->_semantic)) {
+			$result[2]=new CDNCoreCss("Semantic","x");
 		}
 		ksort($result);
 		return implode("\n", $result);
