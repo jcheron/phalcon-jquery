@@ -88,6 +88,11 @@ class HtmlButton extends HtmlSemDoubleElement {
 		return $this;
 	}
 
+	public function asSubmit(){
+		$this->setProperty("type","submit");
+		return $this->setTagName("button");
+	}
+
 	/**
 	 * Add and return a button label
 	 * @param string $caption

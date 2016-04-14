@@ -21,5 +21,9 @@ class Accordion extends SimpleExtComponent {
 		return $this->setParam("on", $value);
 	}
 
+	public function setExclusive($value=true) {
+		return $this->setParam("exclusive", $value);
+	}
+
 	//TODO other events implementation
 }

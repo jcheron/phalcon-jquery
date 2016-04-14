@@ -39,4 +39,17 @@ class HtmlAccordion extends HtmlSemCollection{
 			$this->addEventsOnRun($js);
 			return $this->_bsComponent;
 	}
+
+	public function setStyled(){
+		return $this->addToProperty("class", "styled");
+	}
+
+	public function setActive($index){
+		$this->getItem($index)->setActive(true);
+		return $this;
+	}
+
+	public function setExclusive($value){
+		$this->params["exclusive"]=$value;
+	}
 }

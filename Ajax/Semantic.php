@@ -11,7 +11,7 @@ use Ajax\semantic\html\elements\HtmlButtonGroups;
 use Ajax\semantic\html\elements\HtmlContainer;
 use Ajax\semantic\html\elements\HtmlDivider;
 use Ajax\semantic\html\elements\HtmlLabel;
-use Ajax\semantic\html\collections\HtmlMenu;
+use Ajax\semantic\html\collections\menus\HtmlMenu;
 use Ajax\semantic\components\Popup;
 use Ajax\semantic\html\modules\HtmlDropdown;
 use Ajax\semantic\components\Dropdown;
@@ -21,8 +21,8 @@ use Ajax\semantic\html\elements\HtmlSegmentGroups;
 use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\common\html\BaseHtml;
 use Ajax\semantic\html\collections\HtmlGrid;
-use Ajax\semantic\html\collections\HtmlIconMenu;
-use Ajax\semantic\html\collections\HtmlLabeledIconMenu;
+use Ajax\semantic\html\collections\menus\HtmlIconMenu;
+use Ajax\semantic\html\collections\menus\HtmlLabeledIconMenu;
 use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\elements\HtmlInput;
 use Ajax\semantic\html\elements\HtmlList;
@@ -30,6 +30,8 @@ use Ajax\common\components\GenericComponent;
 use Ajax\semantic\html\collections\HtmlBreadcrumb;
 use Ajax\semantic\html\modules\HtmlAccordion;
 use Ajax\semantic\components\Accordion;
+use Ajax\semantic\html\collections\menus\HtmlAccordionMenu;
+use Ajax\semantic\html\collections\form\HtmlForm;
 
 class Semantic extends BaseGui {
 
@@ -237,7 +239,7 @@ class Semantic extends BaseGui {
 	}
 
 	/**
-	 * Return a new Seamntic Html Breadcrumb
+	 * Return a new Semantic Html Breadcrumb
 	 * @param string $identifier
 	 * @param array $elements
 	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true. default : true
@@ -249,11 +251,29 @@ class Semantic extends BaseGui {
 	}
 
 	/**
-	 * Return a new Seamntic Accordion
+	 * Return a new Semantic Accordion
 	 * @param string $identifier
 	 * @return HtmlAccordion
 	 */
 	public function htmlAccordion($identifier) {
 		return $this->addHtmlComponent(new HtmlAccordion($identifier));
+	}
+
+	/**
+	 * Return a new Semantic Menu Accordion
+	 * @param string $identifier
+	 * @return HtmlAccordion
+	 */
+	public function htmlAccordionMenu($identifier,$items=array()) {
+		return $this->addHtmlComponent(new HtmlAccordionMenu($identifier,$items));
+	}
+
+	/**
+	 * Return a new Semantic Form
+	 * @param string $identifier
+	 * @param array $elements
+	 */
+	public function htmlForm($identifier,$elements=array()) {
+		return $this->addHtmlComponent(new HtmlForm($identifier,$elements));
 	}
 }

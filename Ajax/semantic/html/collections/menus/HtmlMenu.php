@@ -1,6 +1,6 @@
 <?php
 
-namespace Ajax\semantic\html\collections;
+namespace Ajax\semantic\html\collections\menus;
 
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\common\html\HtmlDoubleElement;
@@ -89,7 +89,7 @@ class HtmlMenu extends HtmlSemCollection {
 	}
 
 	public function setVertical(){
-		return $this->addToProperty("class", "vertical");
+		return $this->addToPropertyCtrl("class", "vertical",array("vertical"));
 	}
 
 	public function setPosition($value="right"){
