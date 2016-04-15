@@ -64,4 +64,8 @@ class HtmlHeader extends HtmlSemDoubleElement {
 		return $this->image;
 	}
 
+	public function setDividing(){
+		$this->addToProperty("class", "dividing");
+	}
+
 }

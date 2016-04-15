@@ -11,7 +11,7 @@ use Ajax\semantic\html\base\traits\BaseTrait;
  */
 abstract class HtmlSemCollection extends HtmlCollection{
 	use BaseTrait;
-	public function __construct( $identifier, $tagName="div",$baseClass="ui"){
+	public function __construct( $identifier, $tagName="div",$baseClass=""){
 		parent::__construct( $identifier, $tagName);
 		$this->_baseClass=$baseClass;
 		$this->setClass($baseClass);

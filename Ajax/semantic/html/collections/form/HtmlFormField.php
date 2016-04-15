@@ -3,10 +3,11 @@
 namespace Ajax\semantic\html\collections\form;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
+use Ajax\semantic\html\base\constants\Wide;
 
 class HtmlFormField extends HtmlSemDoubleElement {
 	public function __construct($identifier, $field,$label=NULL) {
-		parent::__construct($identifier, "div","ui field");
+		parent::__construct($identifier, "div","field");
 		$this->content=array();
 		if(isset($label))
 			$this->setLabel($label);
@@ -27,18 +28,42 @@ class HtmlFormField extends HtmlSemDoubleElement {
 		$this->content["field"]=$field;
 	}
 
+	/**
+	 * Returns the label or null
+	 * @return mixed
+	 */
 	public function getLabel(){
 		if(\array_key_exists("label", $this->content))
 			return $this->content["label"];
 	}
 
+	/**
+	 * Return the field
+	 * @return mixed
+	 */
 	public function getField(){
 		return $this->content["field"];
 	}
 
+	/**
+	 * puts the label before or behind
+	 */
 	public function swapLabel(){
 		$label=$this->getLabel();
 		unset($this->content["label"]);
 		$this->content["label"]=$label;
+	}
+
+	/**
+	 * Defines the field width
+	 * @param int $width
+	 * @return \Ajax\semantic\html\collections\form\HtmlFormField
+	 */
+	public function setWidth($width){
+		if(\is_int($width)){
+			$width=Wide::getConstants()["W".$width];
+		}
+		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
+		return $this->addToPropertyCtrl("class", "wide",array("wide"));
 	}
 }

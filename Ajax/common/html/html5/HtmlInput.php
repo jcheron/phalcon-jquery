@@ -7,20 +7,27 @@ use Ajax\service\JString;
 
 class HtmlInput extends HtmlSingleElement {
 
-	public function __construct($identifier,$type="text",$value="",$placeholder="") {
+	public function __construct($identifier,$type="text",$value=NULL,$placeholder=NULL) {
 		parent::__construct($identifier, "input");
 		$this->setProperty("name", $identifier);
-		$this->setProperty("value", $value);
-		if(JString::isNotNull($placeholder))
-			$this->setProperty("placeholder", $placeholder);
+		$this->setValue($value);
+		$this->setPlaceholder($placeholder);
 		$this->setProperty("type", $type);
 	}
 
 	public function setValue($value) {
+		if(isset($value))
 		$this->setProperty("value", $value);
+		return $this;
 	}
 
 	public function setInputType($value) {
-		$this->setProperty("type", $value);
+		return $this->setProperty("type", $value);
+	}
+
+	public function setPlaceholder($value){
+		if(JString::isNotNull($value))
+			$this->setProperty("placeholder", $value);
+		return $this;
 	}
 }
