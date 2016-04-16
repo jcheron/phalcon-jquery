@@ -66,4 +66,12 @@ class HtmlFormField extends HtmlSemDoubleElement {
 		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
 		return $this->addToPropertyCtrl("class", "wide",array("wide"));
 	}
+
+	/**
+	 * Field displays an error state
+	 * @return \Ajax\semantic\html\collections\form\HtmlFormField
+	 */
+	public function setError(){
+		return $this->addToProperty("class", "error");
+	}
 }

@@ -39,17 +39,28 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 		return $this->content;
 	}
 
+	protected function getItemToAdd($item){
+		$itemO=$item;
+		if($this->createCondition($item)===true){
+			$itemO=$this->createItem($item);
+		}
+		return $itemO;
+	}
+
 	/**
 	 * adds and returns an item
 	 * @param HtmlDoubleElement|string $item
 	 * @return \Ajax\common\html\HtmlDoubleElement
 	 */
 	public function addItem($item){
-		$itemO=$item;
-		if($this->createCondition($item)===true){
-			$itemO=$this->createItem($item);
-		}
+		$itemO=$this->getItemToAdd($item);
 		$this->addContent($itemO);
+		return $itemO;
+	}
+
+	public function insertItem($item,$position=0){
+		$itemO=$this->getItemToAdd($item);
+		\array_splice( $this->content, $position, 0, array($itemO));
 		return $itemO;
 	}
 
