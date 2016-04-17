@@ -164,7 +164,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function addToCompile($jsScript) {
 		$this->js->_addToCompile($jsScript);
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Outputs the called javascript to the screen
 	 *
@@ -174,7 +174,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function output($js) {
 		return $this->js->_output($js);
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Document ready method
 	 *
@@ -185,7 +185,6 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		return $this->js->_document_ready($js);
 	}
 
-	// --------------------------------------------------------------------
 	/**
 	 * gather together all script needing to be output
 	 *
@@ -214,7 +213,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	public function clear_compile() {
 		$this->js->_clear_compile();
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Outputs a <script> tag with the source as an external js file
 	 *
@@ -227,7 +226,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		$assets->addJs($external_file);
 		return $assets->outputJs();
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Outputs a <script> tag
 	 *
@@ -241,7 +240,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		$str.=$this->_close_script();
 		return $str;
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Outputs an opening <script>
 	 *
@@ -253,7 +252,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		$str.=($src=='') ? '>' : ' src="'.$src.'">';
 		return $str;
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Outputs an closing </script>
 	 *
@@ -264,7 +263,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		return "</script>$extra";
 	}
 
-	// --------------------------------------------------------------------
+
 	/**
 	 * Can be passed a database result or associative array and returns a JSON formatted string
 	 *
@@ -307,7 +306,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		$json=implode(',', $json);
 		return $_is_assoc ? "{".$json."}" : "[".$json."]";
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Checks for an associative array
 	 *
@@ -322,7 +321,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		}
 		return FALSE;
 	}
-	// --------------------------------------------------------------------
+
 	/**
 	 * Ensures a standard json value and escapes values
 	 *

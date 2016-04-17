@@ -3,6 +3,8 @@
 namespace Ajax\common\traits;
 
 trait JqueryActionsTrait {
+	public abstract function _prep_element($element);
+	public abstract function _prep_value($value);
 
 	/**
 	 * Get or set the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
@@ -377,5 +379,22 @@ trait JqueryActionsTrait {
 	 */
 	public function _execOn($element, $event, $js, $preventDefault=false, $stopPropagation=false,$immediatly=true) {
 		return $this->_add_event($element, $this->_exec($js), $event, $preventDefault, $stopPropagation,$immediatly);
+	}
+
+	/**
+	 * Ensures the speed parameter is valid for jQuery
+	 * @param string|int $speed
+	 * @return string
+	 */
+	private function _validate_speed($speed) {
+		if (in_array($speed, array (
+				'slow','normal','fast'
+		))) {
+			$speed='"'.$speed.'"';
+		} elseif (preg_match("/[^0-9]/", $speed)) {
+			$speed='';
+		}
+
+		return $speed;
 	}
 }

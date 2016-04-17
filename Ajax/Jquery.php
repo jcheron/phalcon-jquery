@@ -29,7 +29,7 @@ class Jquery {
 	protected $jquery_corner_active=FALSE;
 	protected $jquery_table_sorter_active=FALSE;
 	protected $jquery_table_sorter_pager_active=FALSE;
-	protected $ajaxLoader='<span></span><span></span><span></span><span></span><span></span>';
+
 	protected $jquery_events=array (
 			"bind","blur","change","click","dblclick","delegate","die","error","focus","focusin","focusout","hover","keydown","keypress","keyup","live","load","mousedown","mousseenter","mouseleave","mousemove","mouseout","mouseover","mouseup","off","on","one","ready","resize","scroll","select","submit","toggle","trigger","triggerHandler","undind","undelegate","unload"
 	);
@@ -66,7 +66,6 @@ class Jquery {
 		}
 	}
 
-	// --------------------------------------------------------------------
 
 	/**
 	 * Inline
@@ -86,8 +85,6 @@ class Jquery {
 		return $str;
 	}
 
-	// --------------------------------------------------------------------
-
 	/**
 	 * Open Script
 	 *
@@ -102,8 +99,6 @@ class Jquery {
 		$str.=($src=='') ? '>' : ' src="'.$src.'">';
 		return $str;
 	}
-
-	// --------------------------------------------------------------------
 
 	/**
 	 * Close Script
@@ -131,10 +126,6 @@ class Jquery {
 		$this->ajaxLoader=$loader;
 	}
 
-
-
-	// --------------------------------------------------------------------
-
 	/**
 	 * Outputs script directly
 	 *
@@ -153,13 +144,6 @@ class Jquery {
 			$this->jquery_code_for_compile[]="\t$js\n";
 		}
 	}
-
-	// --------------------------------------------------------------------
-	// Effects
-	// --------------------------------------------------------------------
-
-
-
 
 	/**
 	 * Execute a generic jQuery call with a value.
@@ -195,12 +179,6 @@ class Jquery {
 			$this->jquery_code_for_compile[]=$str;
 			return $str;
 	}
-	// --------------------------------------------------------------------
-
-
-	// --------------------------------------------------------------------
-	// Plugins
-	// --------------------------------------------------------------------
 
 	/**
 	 * Creates a jQuery sortable
@@ -223,8 +201,6 @@ class Jquery {
 		return "$(".$this->_prep_element($element).").sortable({".$sort_options."\n\t});";
 	}
 
-	// --------------------------------------------------------------------
-
 	/**
 	 * Table Sorter Plugin
 	 *
@@ -235,10 +211,6 @@ class Jquery {
 	public function tablesorter($table='', $options='') {
 		$this->jquery_code_for_compile[]="\t$(".$this->_prep_element($table).").tablesorter($options);\n";
 	}
-
-	// --------------------------------------------------------------------
-	// Class functions
-	// --------------------------------------------------------------------
 
 	/**
 	 * Constructs the syntax for an event, and adds to into the array for compilation
@@ -268,8 +240,6 @@ class Jquery {
 			$this->jquery_code_for_compile[]=$event;
 		return $event;
 	}
-
-	// --------------------------------------------------------------------
 
 	/**
 	 * As events are specified, they are stored in an array
@@ -335,8 +305,6 @@ class Jquery {
 		$this->jquery_code_for_compile[]=$jsScript;
 	}
 
-	// --------------------------------------------------------------------
-
 	/**
 	 * Clears the array of script events collected for output
 	 *
@@ -346,11 +314,8 @@ class Jquery {
 		$this->jquery_code_for_compile=array ();
 	}
 
-	// --------------------------------------------------------------------
-
 	/**
 	 * A wrapper for writing document.ready()
-	 *
 	 * @return string
 	 */
 	public function _document_ready($js) {
@@ -364,8 +329,6 @@ class Jquery {
 			$this->jquery_code_for_compile[]=$script;
 		}
 	}
-
-	// --------------------------------------------------------------------
 
 	/**
 	 * Puts HTML element in quotes for use in jQuery code
@@ -400,26 +363,6 @@ class Jquery {
 		return $value;
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Ensures the speed parameter is valid for jQuery
-	 *
-	 * @param string|int $speed
-	 * @return string
-	 */
-	private function _validate_speed($speed) {
-		if (in_array($speed, array (
-				'slow','normal','fast'
-		))) {
-			$speed='"'.$speed.'"';
-		} elseif (preg_match("/[^0-9]/", $speed)) {
-			$speed='';
-		}
-
-		return $speed;
-	}
-
 	private function minify($input) {
 	if(trim($input) === "") return $input;
 	return preg_replace(
@@ -443,6 +386,5 @@ class Jquery {
 					'$1.$3'
 			),
 			$input);
+	}
 }
-}
-/* End of file Jquery.php */

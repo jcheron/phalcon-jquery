@@ -5,6 +5,11 @@ namespace Ajax\common\traits;
 use Ajax\service\JString;
 use Ajax\service\PhalconUtils;
 trait JqueryAjaxTrait {
+
+	protected $ajaxLoader='<span></span><span></span><span></span><span></span><span></span>';
+
+	public abstract function _prep_value($value);
+	public abstract function _add_event($element, $js, $event, $preventDefault=false, $stopPropagation=false,$immediatly=true);
 	protected function addLoading(&$retour, $responseElement) {
 		$loading_notifier='<div class="ajax-loader">';
 		if ($this->ajaxLoader=='') {
