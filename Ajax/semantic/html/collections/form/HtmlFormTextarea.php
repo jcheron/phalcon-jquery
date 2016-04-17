@@ -4,6 +4,7 @@ namespace Ajax\semantic\html\collections\form;
 
 use Ajax\semantic\html\collections\form\HtmlFormField;
 use Ajax\common\html\html5\HtmlTextarea;
+use Ajax\semantic\html\collections\form\traits\TextFieldsTrait;
 
 class HtmlFormTextarea extends HtmlFormField {
 	use TextFieldsTrait;

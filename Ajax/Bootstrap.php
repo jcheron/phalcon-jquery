@@ -4,12 +4,8 @@ namespace Ajax;
 
 use Ajax\common\BaseGui;
 use Ajax\bootstrap\components\Modal;
-use Ajax\bootstrap\components\Tooltip;
 use Ajax\bootstrap\components\Dropdown;
-use Ajax\bootstrap\components\Tab;
-use Ajax\bootstrap\components\Collapse;
 use Ajax\bootstrap\components\Carousel;
-use Ajax\common\components\GenericComponent;
 use Ajax\bootstrap\html\HtmlButton;
 use Ajax\bootstrap\html\HtmlButtongroups;
 use Ajax\bootstrap\html\HtmlGlyphButton;
@@ -18,7 +14,6 @@ use Ajax\bootstrap\components\Splitbutton;
 use Ajax\bootstrap\html\HtmlButtontoolbar;
 use Ajax\bootstrap\html\HtmlNavbar;
 use Ajax\bootstrap\html\HtmlProgressbar;
-use Ajax\bootstrap\components\Popover;
 use Ajax\bootstrap\html\HtmlPanel;
 use Ajax\bootstrap\html\HtmlAlert;
 use Ajax\bootstrap\html\HtmlAccordion;
@@ -31,102 +26,14 @@ use Ajax\bootstrap\html\HtmlListgroup;
 use Ajax\bootstrap\html\HtmlBreadcrumbs;
 use Ajax\bootstrap\html\HtmlPagination;
 use Ajax\bootstrap\html\HtmlGridSystem;
+use Ajax\bootstrap\traits\BootstrapComponentsTrait;
 
 class Bootstrap extends BaseGui {
-
+	use BootstrapComponentsTrait;
 	public function __construct($autoCompile=true) {
 		parent::__construct($autoCompile);
 	}
 
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function generic($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new GenericComponent($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function modal($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Modal($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function tooltip($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Tooltip($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function popover($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Popover($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function dropdown($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Dropdown($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function splitbutton($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Splitbutton($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function tab($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Tab($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function collapse($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Collapse($this->js), $attachTo, $params);
-	}
-
-	/**
-	 *
-	 * @param string $attachTo
-	 * @param string|array $params
-	 * @return $this
-	 */
-	public function carousel($attachTo=NULL, $params=NULL) {
-		return $this->addComponent(new Carousel($this->js), $attachTo, $params);
-	}
 
 	/**
 	 * Return a new Bootstrap Html Button

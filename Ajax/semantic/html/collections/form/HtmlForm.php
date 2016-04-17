@@ -5,8 +5,8 @@ namespace Ajax\semantic\html\collections\form;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\collections\HtmlMessage;
-use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\base\constants\State;
+use Ajax\semantic\html\collections\form\traits\FieldsTrait;
 /**
  * Semantic Form component
  * @see http://semantic-ui.com/collections/form.html
@@ -34,21 +34,25 @@ class HtmlForm extends HtmlSemCollection{
 		return $this->addItem($header);
 	}
 
-	public function addFields($fields,$label=NULL){
-		if(!$fields instanceof HtmlFormFields){
-			if(\is_array($fields)===false){
-				$fields = \func_get_args();
-				$end=\end($fields);
-				if(\is_string($end)){
-					$label=$end;
-					\array_pop($fields);
-				}else $label=NULL;
+	public function addFields($fields=NULL,$label=NULL){
+		if(isset($fields)){
+			if(!$fields instanceof HtmlFormFields){
+				if(\is_array($fields)===false){
+					$fields = \func_get_args();
+					$end=\end($fields);
+					if(\is_string($end)){
+						$label=$end;
+						\array_pop($fields);
+					}else $label=NULL;
+				}
+				$this->_fields=\array_merge($this->_fields,$fields);
+				$fields=new HtmlFormFields("fields-".$this->identifier."-".$this->count(),$fields);
 			}
-			$this->_fields=\array_merge($this->_fields,$fields);
-			$fields=new HtmlFormFields("fields-".$this->identifier."-".$this->count(),$fields);
+			if(isset($label))
+			 $fields=new HtmlFormField("", $fields,$label);
+		}else{
+			$fields=new HtmlFormFields("fields-".$this->identifier."-".$this->count());
 		}
-		if(isset($label))
-		 $fields=new HtmlFormField("", $fields,$label);
 		$this->addItem($fields);
 		return $fields;
 	}
@@ -104,33 +108,6 @@ class HtmlForm extends HtmlSemCollection{
 		if(isset($type))
 			$message->setStyle($type);
 		return $this->addItem($message);
-	}
-
-	public function addInputs($inputs,$fieldslabel=null){
-		$fields=array();
-		foreach ($inputs as $input){
-			\extract($input);
-			$f=new HtmlFormInput("","");
-			$f->fromArray($input);
-			$fields[]=$f;
-		}
-		return $this->addFields($fields,$fieldslabel);
-	}
-
-	public function addDropdown($identifier,$items=array(), $label=NULL,$value=NULL,$multiple=false){
-		return $this->addItem(new HtmlFormDropdown($identifier,$items,$label,$value,$multiple));
-	}
-
-	public function addInput($identifier, $label=NULL,$type="text",$value=NULL,$placeholder=NULL){
-		return $this->addItem(new HtmlFormInput($identifier,$label,$type,$value,$placeholder));
-	}
-
-	public function addButton($identifier,$value,$cssStyle=NULL,$onClick=NULL){
-		return $this->addItem(new HtmlButton($identifier,$value,$cssStyle,$onClick));
-	}
-
-	public function addCheckbox($identifier, $label=NULL,$value=NULL,$type=NULL){
-		return $this->addItem(new HtmlFormCheckbox($identifier,$label,$value,$type));
 	}
 
 	public function setLoading(){

@@ -3,6 +3,7 @@
 namespace Ajax\semantic\html\collections\form;
 
 use Ajax\common\html\html5\HtmlInput;
+use Ajax\semantic\html\collections\form\traits\TextFieldsTrait;
 
 class HtmlFormInput extends HtmlFormField {
 	use TextFieldsTrait;

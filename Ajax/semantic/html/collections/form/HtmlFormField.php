@@ -7,6 +7,7 @@ use Ajax\semantic\html\base\constants\Wide;
 use Ajax\semantic\html\base\constants\State;
 
 class HtmlFormField extends HtmlSemDoubleElement {
+	protected $_container;
 	public function __construct($identifier, $field,$label=NULL) {
 		parent::__construct($identifier, "div","field");
 		$this->content=array();
@@ -66,6 +67,9 @@ class HtmlFormField extends HtmlSemDoubleElement {
 			$width=Wide::getConstants()["W".$width];
 		}
 		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
+		if(isset($this->_container)){
+			$this->_container->setEqualWidth(false);
+		}
 		return $this->addToPropertyCtrl("class", "wide",array("wide"));
 	}
 
@@ -80,4 +84,10 @@ class HtmlFormField extends HtmlSemDoubleElement {
 	public function jsState($state){
 		return $this->jsDoJquery("addClass",$state);
 	}
+
+	public function setContainer($_container) {
+		$this->_container=$_container;
+		return $this;
+	}
+
 }

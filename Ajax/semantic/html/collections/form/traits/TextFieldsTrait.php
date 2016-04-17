@@ -1,6 +1,6 @@
 <?php
 
-namespace Ajax\semantic\html\collections\form;
+namespace Ajax\semantic\html\collections\form\traits;
 
 trait TextFieldsTrait {
 	public function setPlaceholder($value){

@@ -7,6 +7,7 @@ use Ajax\semantic\html\base\constants\Wide;
 use Ajax\JsUtils;
 use Phalcon\Mvc\View;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
+use Ajax\semantic\html\collections\form\traits\FieldsTrait;
 
 class HtmlFormFields extends HtmlSemCollection {
 
@@ -18,6 +19,25 @@ class HtmlFormFields extends HtmlSemCollection {
 		parent::__construct($identifier, "div");
 		$this->_equalWidth=$equalWidth;
 		$this->addItems($fields);
+	}
+
+	public function addFields($fields=NULL,$label=NULL){
+		if(!$fields instanceof HtmlFormFields){
+			if(\is_array($fields)===false){
+				$fields = \func_get_args();
+				$end=\end($fields);
+				if(\is_string($end)){
+					$label=$end;
+					\array_pop($fields);
+				}else $label=NULL;
+			}
+		}
+		if(isset($label))
+			$this->setLabel($label);
+		foreach ($fields as $field){
+			$this->addItem($field);
+		}
+		return $this;
 	}
 
 	/**
@@ -32,7 +52,11 @@ class HtmlFormFields extends HtmlSemCollection {
 		$this->insertItem($labelO,0);
 		return $labelO;
 	}
-
+	public function addItem($item){
+		$item=parent::addItem($item);
+		$item->setContainer($this);
+		return $item;
+	}
 	public function compile(JsUtils $js=NULL,View $view=NULL){
 		if($this->_equalWidth){
 			$count=$this->count();
@@ -77,5 +101,11 @@ class HtmlFormFields extends HtmlSemCollection {
 			$radios->setLabel($label)->setProperty("for", $name);
 		return $radios;
 	}
+
+	public function setEqualWidth($_equalWidth) {
+		$this->_equalWidth=$_equalWidth;
+		return $this;
+	}
+
 
 }
