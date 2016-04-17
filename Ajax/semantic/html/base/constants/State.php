@@ -5,5 +5,5 @@ namespace Ajax\semantic\html\base\constants;
 use Ajax\common\BaseEnum;
 
 abstract class State extends BaseEnum {
-	const ACTIVE="active",DISABLED="disabled",ERROR="error",FOCUS="focus",LOADING="loading";
+	const ACTIVE="active",DISABLED="disabled",ERROR="error",FOCUS="focus",LOADING="loading",SUCCESS="success",WARNING="warning";
 }

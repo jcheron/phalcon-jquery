@@ -4,11 +4,13 @@ namespace Ajax\semantic\html\collections\form;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Wide;
+use Ajax\semantic\html\base\constants\State;
 
 class HtmlFormField extends HtmlSemDoubleElement {
 	public function __construct($identifier, $field,$label=NULL) {
 		parent::__construct($identifier, "div","field");
 		$this->content=array();
+		$this->_states=[State::ERROR,State::DISABLED];
 		if(isset($label))
 			$this->setLabel($label);
 		$this->setField($field);
@@ -73,5 +75,9 @@ class HtmlFormField extends HtmlSemDoubleElement {
 	 */
 	public function setError(){
 		return $this->addToProperty("class", "error");
+	}
+
+	public function jsState($state){
+		return $this->jsDoJquery("addClass",$state);
 	}
 }

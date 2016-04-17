@@ -8,7 +8,7 @@ class HtmlFormInput extends HtmlFormField {
 	use TextFieldsTrait;
 
 	public function __construct($identifier, $label=NULL,$type="text",$value=NULL,$placeholder=NULL) {
-		if(!isset($placeholder))
+		if(!isset($placeholder) && $type==="text")
 			$placeholder=$label;
 		parent::__construct("field-".$identifier, new HtmlInput($identifier,$type,$value,$placeholder), $label);
 	}

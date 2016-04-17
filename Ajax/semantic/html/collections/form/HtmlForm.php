@@ -5,6 +5,8 @@ namespace Ajax\semantic\html\collections\form;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\collections\HtmlMessage;
+use Ajax\semantic\html\elements\HtmlButton;
+use Ajax\semantic\html\base\constants\State;
 /**
  * Semantic Form component
  * @see http://semantic-ui.com/collections/form.html
@@ -19,6 +21,7 @@ class HtmlForm extends HtmlSemCollection{
 
 	public function __construct( $identifier, $elements=array()){
 		parent::__construct( $identifier, "form", "ui form");
+		$this->_states=[State::ERROR,State::SUCCESS,State::WARNING,State::DISABLED];
 		$this->setProperty("name", $this->identifier);
 		$this->_fields=array();
 		$this->addItems($elements);
@@ -89,14 +92,17 @@ class HtmlForm extends HtmlSemCollection{
 	 * @param string $content
 	 * @param string $header
 	 * @param string $icon
+	 * @param string $type
 	 * @return \Ajax\semantic\html\collections\HtmlMessage
 	 */
-	public function addMessage($identifier,$content,$header=NULL,$icon=NULL){
+	public function addMessage($identifier,$content,$header=NULL,$icon=NULL,$type=NULL){
 		$message=new HtmlMessage($identifier,$content);
 		if(isset($header))
 			$message->addHeader($header);
 		if(isset($icon))
 			$message->setIcon($icon);
+		if(isset($type))
+			$message->setStyle($type);
 		return $this->addItem($message);
 	}
 
@@ -109,5 +115,29 @@ class HtmlForm extends HtmlSemCollection{
 			$fields[]=$f;
 		}
 		return $this->addFields($fields,$fieldslabel);
+	}
+
+	public function addDropdown($identifier,$items=array(), $label=NULL,$value=NULL,$multiple=false){
+		return $this->addItem(new HtmlFormDropdown($identifier,$items,$label,$value,$multiple));
+	}
+
+	public function addInput($identifier, $label=NULL,$type="text",$value=NULL,$placeholder=NULL){
+		return $this->addItem(new HtmlFormInput($identifier,$label,$type,$value,$placeholder));
+	}
+
+	public function addButton($identifier,$value,$cssStyle=NULL,$onClick=NULL){
+		return $this->addItem(new HtmlButton($identifier,$value,$cssStyle,$onClick));
+	}
+
+	public function addCheckbox($identifier, $label=NULL,$value=NULL,$type=NULL){
+		return $this->addItem(new HtmlFormCheckbox($identifier,$label,$value,$type));
+	}
+
+	public function setLoading(){
+		return $this->addToProperty("class", "loading");
+	}
+
+	public function jsState($state){
+		return $this->jsDoJquery("addClass",$state);
 	}
 }

@@ -66,6 +66,7 @@ class Semantic extends BaseGui {
 		return $this->addComponent(new Accordion($this->js), $attachTo, $params);
 	}
 
+
 	/**
 	 * Return a new Semantic Html Button
 	 * @param string $identifier
