@@ -4,6 +4,7 @@ namespace Ajax\semantic\html\collections\form;
 
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\elements\HtmlHeader;
+use Ajax\semantic\html\collections\HtmlMessage;
 /**
  * Semantic Form component
  * @see http://semantic-ui.com/collections/form.html
@@ -81,5 +82,32 @@ class HtmlForm extends HtmlSemCollection{
 	 */
 	public function addField($field){
 		return $this->addItem($field);
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param string $content
+	 * @param string $header
+	 * @param string $icon
+	 * @return \Ajax\semantic\html\collections\HtmlMessage
+	 */
+	public function addMessage($identifier,$content,$header=NULL,$icon=NULL){
+		$message=new HtmlMessage($identifier,$content);
+		if(isset($header))
+			$message->addHeader($header);
+		if(isset($icon))
+			$message->setIcon($icon);
+		return $this->addItem($message);
+	}
+
+	public function addInputs($inputs,$fieldslabel=null){
+		$fields=array();
+		foreach ($inputs as $input){
+			\extract($input);
+			$f=new HtmlFormInput("","");
+			$f->fromArray($input);
+			$fields[]=$f;
+		}
+		return $this->addFields($fields,$fieldslabel);
 	}
 }
