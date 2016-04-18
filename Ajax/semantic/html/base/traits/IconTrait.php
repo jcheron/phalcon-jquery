@@ -7,6 +7,9 @@ use Ajax\semantic\html\base\constants\Direction;
 trait IconTrait {
 	private $_hasIcon=false;
 
+	protected abstract function addToPropertyCtrl($name, $value, $typeCtrl);
+	public abstract function addContent($content,$before=false);
+
 	public function addIcon($icon,$direction=Direction::LEFT){
 		if($this->_hasIcon===false){
 			$iconO=$icon;

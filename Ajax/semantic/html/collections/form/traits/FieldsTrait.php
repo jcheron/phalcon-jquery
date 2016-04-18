@@ -9,6 +9,8 @@ use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
 use Ajax\semantic\html\collections\form\HtmlFormRadio;
 trait FieldsTrait {
+	public abstract function addFields($fields=NULL,$label=NULL);
+	public abstract function addItem($item);
 
 	protected function createItem($value){
 		if(\is_array($value)){

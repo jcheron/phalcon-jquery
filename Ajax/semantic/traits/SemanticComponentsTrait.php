@@ -5,7 +5,10 @@ use Ajax\common\components\GenericComponent;
 use Ajax\semantic\components\Popup;
 use Ajax\semantic\components\Dropdown;
 use Ajax\semantic\components\Accordion;
+use Ajax\common\components\SimpleComponent;
 trait SemanticComponentsTrait {
+
+	public abstract function addComponent(SimpleComponent $component, $attachTo, $params);
 	/**
 	 *
 	 * @param string $attachTo
