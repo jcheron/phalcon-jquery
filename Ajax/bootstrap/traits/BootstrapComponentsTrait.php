@@ -12,9 +12,11 @@ use Ajax\bootstrap\components\Tab;
 use Ajax\bootstrap\components\Carousel;
 use Ajax\bootstrap\components\Collapse;
 use Ajax\Bootstrap;
+use Ajax\common\components\SimpleComponent;
 
 trait BootstrapComponentsTrait {
 
+	public abstract function addComponent(SimpleComponent $component, $attachTo, $params);
 	/**
 	 *
 	 * @param string $attachTo
@@ -29,7 +31,7 @@ trait BootstrapComponentsTrait {
 	 *
 	 * @param string $attachTo
 	 * @param string|array $params
-	 * @return Bootstrap
+	 * @return Modal
 	 */
 	public function modal($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Modal($this->js), $attachTo, $params);

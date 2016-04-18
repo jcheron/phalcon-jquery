@@ -9,6 +9,10 @@ trait BaseTrait {
 	protected $_states=[];
 	protected $_baseClass;
 
+	protected abstract function setPropertyCtrl($name, $value, $typeCtrl);
+	protected abstract function addToPropertyCtrl($name, $value, $typeCtrl);
+	public abstract function addToProperty($name, $value, $separator=" ");
+
 	public function addVariation($variation){
 		return $this->addToPropertyCtrl("class", $variation, $this->_variations);
 	}

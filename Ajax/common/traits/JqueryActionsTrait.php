@@ -3,6 +3,7 @@
 namespace Ajax\common\traits;
 
 trait JqueryActionsTrait {
+	public abstract function _add_event($element, $js, $event, $preventDefault=false, $stopPropagation=false,$immediatly=true);
 	public abstract function _prep_element($element);
 	public abstract function _prep_value($value);
 

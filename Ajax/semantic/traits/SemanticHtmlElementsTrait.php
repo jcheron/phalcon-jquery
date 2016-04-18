@@ -17,6 +17,9 @@ use Ajax\service\JArray;
 
 
 trait SemanticHtmlElementsTrait {
+
+	public abstract function addHtmlComponent($htmlComponent);
+
 	/**
 	 * Return a new Semantic Html Button
 	 * @param string $identifier
