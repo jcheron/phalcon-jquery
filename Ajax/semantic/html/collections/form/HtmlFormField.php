@@ -90,4 +90,8 @@ class HtmlFormField extends HtmlSemDoubleElement {
 		return $this;
 	}
 
+	public function setReadonly(){
+		$this->getField()->setProperty("readonly", "");
+	}
+
 }
