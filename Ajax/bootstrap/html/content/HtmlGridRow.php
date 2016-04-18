@@ -40,6 +40,7 @@ class HtmlGridRow extends HtmlBsDoubleElement {
 	}
 
 	public function getCol($index,$force=true){
+		$result=null;
 		if($index<sizeof($this->cols)+1){
 			$result=$this->cols[$index-1];
 		}else if ($force){

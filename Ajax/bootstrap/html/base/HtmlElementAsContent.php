@@ -7,6 +7,10 @@ use Ajax\common\html\BaseHtml;
 use Ajax\common\html\HtmlSingleElement;
 
 class HtmlElementAsContent extends BaseHtml {
+
+	/**
+	 * @var HtmlBsDoubleElement
+	 */
 	protected $element;
 
 	public function __construct($element) {
