@@ -11,6 +11,7 @@ use Ajax\semantic\html\elements\HtmlIcon;
 /**
  * Semantic UI Breadcrumb component
  * @see http://semantic-ui.com/collections/breadcrumb.html
+ * @method _hrefFunction($e)
  * @author jc
  * @version 1.001
  */
@@ -30,7 +31,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement{
 	protected $absolutePaths;
 
 	/**
-	 * @var function the function who generates the href elements. default : function($e){return $e->getContent()}
+	 * @var object<Closure> the function who generates the href elements. default : function($e){return $e->getContent()}
 	 */
 	protected $_hrefFunction;
 

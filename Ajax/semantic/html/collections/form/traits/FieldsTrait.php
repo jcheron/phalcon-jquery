@@ -9,6 +9,7 @@ use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
 use Ajax\semantic\html\collections\form\HtmlFormRadio;
 trait FieldsTrait {
+
 	protected function createItem($value){
 		if(\is_array($value)){
 			$itemO=new HtmlFormInput(JArray::getDefaultValue($value, "id",""),JArray::getDefaultValue($value, "label",null),JArray::getDefaultValue($value, "type", "text"),JArray::getDefaultValue($value, "value",""),JArray::getDefaultValue($value, "placeholder",JArray::getDefaultValue($value, "label",null)));
@@ -33,7 +34,7 @@ trait FieldsTrait {
 	 * @param array $items
 	 * @param string $label
 	 * @param string $value
-	 * @param string $multiple
+	 * @param boolean $multiple
 	 * @return \Ajax\common\html\HtmlDoubleElement
 	 */
 	public function addDropdown($identifier,$items=array(), $label=NULL,$value=NULL,$multiple=false){

@@ -12,6 +12,7 @@ use Ajax\bootstrap\html\base\HtmlNavElement;
  * @see http://getbootstrap.com/components/#breadcrumbs
  * @author jc
  * @version 1.001
+ * @method _hrefFunction($e)
  */
 class HtmlBreadcrumbs extends HtmlNavElement {
 
@@ -30,7 +31,7 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 	protected $absolutePaths;
 
 	/**
-	 * @var function the function who generates the href elements. default : function($e){return $e->getContent()}
+	 * @var object<Closure> the function who generates the href elements. default : function($e){return $e->getContent()}
 	 */
 	protected $_hrefFunction;
 
@@ -164,7 +165,6 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 	 * Associate an ajax get to the breadcrumbs elements, displayed in $targetSelector
 	 * $attr member is used to build each element url
 	 * @param string $targetSelector the target of the get
-	 * @param string $attr the html attribute used to build the elements url
 	 * @return HtmlBreadcrumbs
 	 */
 	public function autoGetOnClick($targetSelector){
