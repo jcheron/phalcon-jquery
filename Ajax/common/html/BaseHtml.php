@@ -7,6 +7,7 @@ use Phalcon\Mvc\View;
 use Ajax\service\AjaxCall;
 use Ajax\service\PhalconUtils;
 use Ajax\service\JString;
+use Ajax\common\components\SimpleExtComponent;
 
 /**
  * BaseHtml for HTML components
@@ -184,6 +185,10 @@ abstract class BaseHtml extends BaseWidget {
 		$oldValue=trim($oldValue);
 	}
 
+	/**
+	 * @param JsUtils $js
+	 * @return SimpleExtComponent
+	 */
 	abstract public function run(JsUtils $js);
 
 	public function getTagName() {
