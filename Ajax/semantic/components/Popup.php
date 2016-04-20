@@ -42,5 +42,13 @@ class Popup extends SimpleExtComponent {
 	public function setPopup($popup){
 		return $this->setParam("popup", $popup);
 	}
+
+	public function setInline($value){
+		return $this->setParam("inline", $value);
+	}
+
+	public function setPosition($value){
+		return $this->setParam("position", $value);
+	}
 	//TODO other events implementation
 }

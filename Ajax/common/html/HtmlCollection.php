@@ -28,6 +28,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 				$this->addItem($item);
 			}
 		}
+		return $this;
 	}
 
 	public function setItems($items){
@@ -95,13 +96,14 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::fromDatabaseObject()
 	 */
 	public function fromDatabaseObject($object, $function) {
-		$this->addItem($function($object));
+		return $this->addItem($function($object));
 	}
 
 	public function apply($callBack){
 		foreach ($this->content as $item){
 			$callBack($item);
 		}
+		return $this;
 	}
 
 	/*
@@ -110,6 +112,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	 */
 	public function fromArray($array) {
 		$this->addItems($array);
+		return $this;
 	}
 	/**
 	 * The item factory
@@ -136,5 +139,6 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 		foreach ($this->content as $item){
 			$item->setTagName($tagName);
 		}
+		return $this;
 	}
 }

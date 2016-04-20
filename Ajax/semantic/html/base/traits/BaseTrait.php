@@ -55,6 +55,9 @@ trait BaseTrait {
 		return $this->addToPropertyCtrl("class", $color,Color::getConstants());
 	}
 
+	/**
+	 * @return \Ajax\semantic\html\base\HtmlSemDoubleElement
+	 */
 	public function setFluid(){
 		return $this->addToProperty("class", "fluid");
 	}

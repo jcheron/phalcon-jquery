@@ -60,6 +60,14 @@ class HtmlGridRow extends HtmlSemCollection{
 		return $this->getItem($index);
 	}
 
+	public function setNumCols($numCols){
+		$count=$this->count();
+		for($i=$count;$i<$numCols;$i++){
+			$this->addItem(null);
+		}
+		return $this;
+	}
+
 	/**
 	 * stretch the row contents to take up the entire column height
 	 * @return \Ajax\semantic\html\content\HtmlGridRow

@@ -28,10 +28,15 @@ class HtmlGrid extends HtmlSemCollection{
 			//if($this->_createCols){
 				$this->_colSizing=false;
 			//}
-			$cols=Wide::getConstants()["W".$numCols];
-			$this->addToProperty("class",$cols." column");
+			$this->setWide($numCols);
 		}
 		$this->setNumRows($numRows,$numCols);
+	}
+
+	public function setWide($wide){
+		$wide=Wide::getConstants()["W".$wide];
+		$this->addToPropertyCtrl("class", $wide, Wide::getConstants());
+		return $this->addToPropertyCtrl("class","column",array("column"));
 	}
 
 	/**
@@ -45,6 +50,16 @@ class HtmlGrid extends HtmlSemCollection{
 		for($i=$count;$i<$numRows;$i++){
 			$this->addItem($numCols);
 		}
+		return $this;
+	}
+
+	public function setNumCols($numCols){
+		$count=$this->count();
+		for($i=0;$i<$count;$i++){
+			$this->getItem($i)->setNumCols($numCols);
+		}
+		//if($this->_colSizing===false)
+			$this->setWide($numCols);
 		return $this;
 	}
 
@@ -77,7 +92,7 @@ class HtmlGrid extends HtmlSemCollection{
 	 */
 	public function setDivided($vertically=false){
 		$value=($vertically===true)?"vertically divided":"divided";
-		return $this->addToProperty("class", $value);
+		return $this->addToPropertyCtrl("class", $value,array("divided"));
 	}
 
 	/**
@@ -145,6 +160,18 @@ class HtmlGrid extends HtmlSemCollection{
 		for($i=0;$i<$count;$i++){
 			$this->content[$i]->setValues($values[$i],$this->_createCols===false);
 		}
+	}
+
+	public function rowCount(){
+		return $this->count();
+	}
+
+	public function colCount(){
+		$result=0;
+		if($this->count()>0){
+			$result=$this->content[0]->count();
+		}
+		return $result;
 	}
 
 }

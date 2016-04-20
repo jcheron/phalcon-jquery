@@ -7,6 +7,13 @@ use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
+use Ajax\semantic\html\base\constants\Wide;
+use Ajax\common\html\html5\HtmlImg;
+use Ajax\bootstrap\html\HtmlInput;
+use Ajax\semantic\html\modules\HtmlDropdown;
+use Ajax\common\html\BaseHtml;
+use Ajax\semantic\html\modules\HtmlPopup;
+use Ajax\semantic\html\elements\HtmlIcon;
 
 /**
  * Semantic Menu component
@@ -44,8 +51,8 @@ class HtmlMenu extends HtmlSemCollection {
 	 * @see \Ajax\common\html\html5\HtmlCollection::addItem()
 	 */
 	public function addItem($item){
-		if($item instanceof \Ajax\semantic\html\elements\HtmlInput){
-			$itemO=new HtmlSemDoubleElement("item-".$this->identifier,"div");
+		if($item instanceof HtmlInput || $item instanceof HtmlImg){
+			$itemO=new HtmlSemDoubleElement("item-".$this->identifier,"div","");
 			$itemO->setContent($item);
 			$item=$itemO;
 		}
@@ -55,7 +62,9 @@ class HtmlMenu extends HtmlSemCollection {
 		else{
 			$this->setSecondary();
 		}
+		return $item;
 	}
+
 	public function generateMenuAsItem($menu,$header=null){
 		$count=$this->count();
 		$item=new HtmlSemDoubleElement("item-".$this->identifier."-".$count,"div");
@@ -70,6 +79,24 @@ class HtmlMenu extends HtmlSemCollection {
 	}
 	public function addMenuAsItem($menu,$header=null){
 		return $this->addItem($this->generateMenuAsItem($menu,$header));
+	}
+
+	public function addPopupAsItem($value,$identifier, $content=""){
+		$value=new HtmlSemDoubleElement($identifier,"a","browse item",$value);
+		$value->addContent(new HtmlIcon("", "dropdown"));
+		$value=$this->addItem($value);
+		$popup=new HtmlPopup($value,"popup-".$this->identifier."-".$this->count(),$content);
+		$popup->setFlowing()->setPosition("bottom left")->setOn("click");
+		$this->addContent($popup);
+		return $popup;
+	}
+
+	public function addDropdownAsItem($value,$items=NULL){
+		$dd=$value;
+		if(\is_string($value)){
+			$dd=new HtmlDropdown("dropdown-".$this->identifier."-".$this->count(),$value,$items);
+		}
+		return $this->addItem($dd);
 	}
 	/**
 	 * {@inheritDoc}
@@ -133,5 +160,22 @@ class HtmlMenu extends HtmlSemCollection {
 			$this->addItems($return);
 		else
 		$this->addItem($return);
+	}
+
+	/**
+	 * Defines the menu width
+	 * @param int $width
+	 * @return \Ajax\semantic\html\collections\menus\HtmlMenu
+	 */
+	public function setWidth($width){
+		if(\is_int($width)){
+			$width=Wide::getConstants()["W".$width];
+		}
+		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
+		return $this->addToPropertyCtrl("class", "item",array("item"));
+	}
+
+	public function addImage($identifier, $src="", $alt=""){
+		return $this->addItem(new HtmlImg($identifier,$src,$alt));
 	}
 }
