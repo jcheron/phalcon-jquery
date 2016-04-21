@@ -87,7 +87,7 @@ class HtmlMenu extends HtmlSemCollection {
 		$value=$this->addItem($value);
 		$popup=new HtmlPopup($value,"popup-".$this->identifier."-".$this->count(),$content);
 		$popup->setFlowing()->setPosition("bottom left")->setOn("click");
-		$this->addContent($popup);
+		$this->wrap("",$popup);
 		return $popup;
 	}
 

@@ -25,7 +25,7 @@ class HtmlList extends HtmlSemCollection{
 	}
 
 	public function addHeader($niveau,$content){
-		return $this->insertItem(new HtmlHeader("header-".$this->identifier,$niveau,$content,"page"));
+		return $this->wrap(new HtmlHeader("header-".$this->identifier,$niveau,$content,"page"));
 	}
 
 	public function itemsAs($tagName){

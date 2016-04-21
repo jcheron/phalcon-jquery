@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\content;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
+use Ajax\semantic\html\base\constants\Direction;
 
 /**
  * A col in the Semantic Grid component
@@ -14,7 +15,7 @@ use Ajax\semantic\html\base\traits\TextAlignmentTrait;
  */
 class HtmlGridCol extends HtmlSemDoubleElement{
 	use TextAlignmentTrait;
-	public function __construct($identifier,$width){
+	public function __construct($identifier,$width=NULL){
 		parent::__construct($identifier,"div");
 		$this->setClass("column");
 		if(isset($width))
@@ -36,15 +37,20 @@ class HtmlGridCol extends HtmlSemDoubleElement{
 
 	/**
 	 * Defines the coll floating
-	 * @param string $value left or right
+	 * @param Direction $value left or right
 	 * @return \Ajax\semantic\html\content\HtmlGridCol
 	 */
 	public function setFloated($value="left"){
-		return $this->addToProperty("class", $value." floated");
+		return $this->addToPropertyCtrl("class", $value." floated",Direction::getConstantValues("floated"));
 	}
 
 
 	public function setValue($value){
 		$this->content=$value;
+		return $this;
+	}
+
+	public function setValues($value){
+		return $this->setValue($value);
 	}
 }

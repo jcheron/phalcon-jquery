@@ -21,6 +21,7 @@ class HtmlGridRow extends HtmlSemCollection{
 
 	private $_colSize;
 	private $_implicite=false;
+
 	public function __construct( $identifier,$numCols=NULL,$colSizing=false,$implicite=false){
 		parent::__construct( $identifier,"div","row");
 		$this->_implicite=$implicite;
@@ -60,10 +61,13 @@ class HtmlGridRow extends HtmlSemCollection{
 		return $this->getItem($index);
 	}
 
-	public function setNumCols($numCols){
-		$count=$this->count();
-		for($i=$count;$i<$numCols;$i++){
-			$this->addItem(null);
+	public function setColsCount($colsCount,$toCreate=true){
+		$this->setWidth($colsCount);
+		if($toCreate===true){
+			$count=$this->count();
+			for($i=$count;$i<$colsCount;$i++){
+				$this->addItem(null);
+			}
 		}
 		return $this;
 	}

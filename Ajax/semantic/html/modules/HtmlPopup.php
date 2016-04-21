@@ -22,7 +22,7 @@ class HtmlPopup extends HtmlSemDoubleElement {
 
 	public function addList($items=array(),$header=NULL){
 		if(!$this->content instanceof HtmlGrid){
-			$this->content=new HtmlGrid("grid-".$this->identifier,1);
+			$this->content=new HtmlGrid("grid-".$this->identifier,0);
 		}
 		$grid=$this->content;
 
@@ -35,7 +35,7 @@ class HtmlPopup extends HtmlSemDoubleElement {
 			$list->addHeader(4,$header);
 		}
 		$grid->getCell(0,$colCount-1)->setContent($list);
-		$grid->setDivided();
+		$grid->setDivided()->setRelaxed(true);
 		return $list;
 	}
 

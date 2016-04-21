@@ -19,8 +19,8 @@ abstract class BaseHtml extends BaseWidget {
 	protected $tagName;
 	protected $properties=array ();
 	protected $events=array ();
-	protected $wrapBefore="";
-	protected $wrapAfter="";
+	protected $_wrapBefore=array();
+	protected $_wrapAfter=array();
 	protected $_bsComponent;
 
 	public function getBsComponent() {
@@ -32,8 +32,8 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	protected function getTemplate() {
-		return $this->wrapBefore.$this->_template.$this->wrapAfter;
+	protected function getTemplate(JsUtils $js=NULL) {
+		return PropertyWrapper::wrap($this->_wrapBefore, $js).$this->_template.PropertyWrapper::wrap($this->_wrapAfter, $js);
 	}
 
 	public function getProperties() {
@@ -71,7 +71,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-		$result=$this->getTemplate();
+		$result=$this->getTemplate($js);
 		foreach ( $this as $key => $value ) {
 			if (PhalconUtils::startsWith($key, "_")===false&&$key!=="events") {
 				if (is_array($value)) {
@@ -189,7 +189,7 @@ abstract class BaseHtml extends BaseWidget {
 	 * @param JsUtils $js
 	 * @return SimpleExtComponent
 	 */
-	abstract public function run(JsUtils $js);
+	public abstract function run(JsUtils $js);
 
 	public function getTagName() {
 		return $this->tagName;
@@ -246,9 +246,9 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function wrap($before, $after="") {
 		if(isset($before)){
-			$this->wrapBefore.=$before;
+			$this->_wrapBefore[]=$before;
 		}
-		$this->wrapAfter=$after.$this->wrapAfter;
+		$this->_wrapAfter[]=$after;
 		return $this;
 	}
 
@@ -405,12 +405,12 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	protected function setWrapBefore($wrapBefore) {
-		$this->wrapBefore=$wrapBefore;
+		$this->_wrapBefore=$wrapBefore;
 		return $this;
 	}
 
 	protected function setWrapAfter($wrapAfter) {
-		$this->wrapAfter=$wrapAfter;
+		$this->_wrapAfter=$wrapAfter;
 		return $this;
 	}
 
