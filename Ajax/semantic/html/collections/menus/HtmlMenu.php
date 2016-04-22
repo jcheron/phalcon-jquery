@@ -178,4 +178,8 @@ class HtmlMenu extends HtmlSemCollection {
 	public function addImage($identifier, $src="", $alt=""){
 		return $this->addItem(new HtmlImg($identifier,$src,$alt));
 	}
+
+	public static function vertical($identifier,$items=array()){
+		return (new HtmlMenu($identifier,$items))->setVertical();
+	}
 }

@@ -10,14 +10,14 @@ use Ajax\semantic\html\elements\HtmlList;
 
 
 class HtmlPopup extends HtmlSemDoubleElement {
-	private $params;
+	private $_params;
 	private $_container;
 	public function __construct(BaseHtml $container,$identifier, $content="") {
 		parent::__construct($identifier, "div");
 		$this->_container=$container;
 		$this->setClass("ui popup");
 		$this->content=$content;
-		$this->params=array("on"=>"hover");
+		$this->_params=array("on"=>"hover");
 	}
 
 	public function addList($items=array(),$header=NULL){
@@ -27,7 +27,7 @@ class HtmlPopup extends HtmlSemDoubleElement {
 		$grid=$this->content;
 
 		$colCount=$grid->colCount();
-		$grid->setNumCols(++$colCount);
+		$grid->setColsCount(++$colCount);
 
 		$list=new HtmlList("",$items);
 		$list->asLink();
@@ -58,22 +58,22 @@ class HtmlPopup extends HtmlSemDoubleElement {
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::run()
 	 */
 	public function run(JsUtils $js){
-		$this->params["popup"]="#".$this->identifier;
-		$js->semantic()->popup("#".$this->_container->getIdentifier(),$this->params);
+		$this->_params["popup"]="#".$this->identifier;
+		$js->semantic()->popup("#".$this->_container->getIdentifier(),$this->_params);
 	}
 
 	public function setOn($event="click"){
-		$this->params["on"]=$event;
+		$this->_params["on"]=$event;
 		return $this;
 	}
 
 	public function setInline($value=true){
-		$this->params["inline"]=$value;
+		$this->_params["inline"]=$value;
 		return $this;
 	}
 
 	public function setPosition($position){
-		$this->params["position"]=$position;
+		$this->_params["position"]=$position;
 		return $this;
 	}
 }

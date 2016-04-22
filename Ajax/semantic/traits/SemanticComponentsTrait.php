@@ -6,6 +6,7 @@ use Ajax\semantic\components\Popup;
 use Ajax\semantic\components\Dropdown;
 use Ajax\semantic\components\Accordion;
 use Ajax\common\components\SimpleComponent;
+use Ajax\semantic\components\Sticky;
 trait SemanticComponentsTrait {
 
 	public abstract function addComponent(SimpleComponent $component, $attachTo, $params);
@@ -44,6 +45,10 @@ trait SemanticComponentsTrait {
 	 */
 	public function accordion($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Accordion($this->js), $attachTo, $params);
+	}
+
+	public function sticky($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Sticky($this->js), $attachTo, $params);
 	}
 
 }

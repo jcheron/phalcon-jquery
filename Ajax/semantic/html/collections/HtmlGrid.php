@@ -41,7 +41,24 @@ class HtmlGrid extends HtmlSemCollection{
 	}
 
 	public function addRow($colsCount=NULL){
-		return $this->addItem($colsCount);
+		$rowCount=$this->rowCount()+1;
+		$this->setRowsCount($rowCount,$colsCount,true);
+		return $this->content[$rowCount-1];
+	}
+
+	public function addCol($width=NULL){
+		$colCount=$this->colCount()+1;
+		$this->setColsCount($colCount,true,$width);
+		if($this->hasOnlyCols($this->count()))
+			return $this->content[$colCount-1];
+		return $this;
+	}
+
+	public function addCols($sizes=array()){
+		foreach ($sizes as $size){
+			$this->addCol($size);
+		}
+		return $this;
 	}
 
 	/**
@@ -50,9 +67,9 @@ class HtmlGrid extends HtmlSemCollection{
 	 * @param int $colsCount
 	 * @return \Ajax\semantic\html\collections\HtmlGrid
 	 */
-	public function setRowsCount($rowsCount,$colsCount=NULL){
+	public function setRowsCount($rowsCount,$colsCount=NULL,$force=false){
 		$count=$this->count();
-		if($rowsCount<2){
+		if($rowsCount<2 && $force===false){
 			for($i=$count;$i<$colsCount;$i++){
 				$this->addItem(new HtmlGridCol("col-".$this->identifier."-".$i));
 			}
@@ -75,17 +92,18 @@ class HtmlGrid extends HtmlSemCollection{
 		return $count>0 && $this->content[0] instanceof HtmlGridCol;
 	}
 
-	public function setColsCount($numCols,$toCreate=true){
-		$this->setWide($numCols);
+	public function setColsCount($numCols,$toCreate=true,$width=NULL){
+		if(isset($width)===false)
+			$this->setWide($numCols);
 		if($toCreate==true){
 			$count=$this->count();
 			if($count==0 || $this->hasOnlyCols($count)){
 				for($i=$count;$i<$numCols;$i++){
-					$this->addItem(new HtmlGridCol("col-".$this->identifier."-".$i));
+					$this->addItem(new HtmlGridCol("col-".$this->identifier."-".$i,$width));
 				}
 			}else{
 				for($i=0;$i<$count;$i++){
-					$this->getItem($i)->setNumCols($numCols);
+					$this->getItem($i)->setColsCount($numCols);
 				}
 			}
 		}
@@ -99,6 +117,22 @@ class HtmlGrid extends HtmlSemCollection{
 	 */
 	public function getRow($index){
 		return $this->getItem($index);
+	}
+
+	public function rowCount(){
+		$count=$this->count();
+		if($this->hasOnlyCols($count))
+			return 0;
+		return $count;
+	}
+
+	public function colCount(){
+		$count=$this->count();
+		if($this->hasOnlyCols($count))
+			return $count;
+		if($count>0)
+			return $this->getItem(0)->count();
+		return 0;
 	}
 
 	/**
@@ -134,6 +168,13 @@ class HtmlGrid extends HtmlSemCollection{
 	public function setCelled($internally=false){
 		$value=($internally===true)?"internally celled":"celled";
 		return $this->addToPropertyCtrl("class", $value,array("celled","internally celled"));
+	}
+
+	/**
+	 * A grid can have its columns centered
+	 */
+	public function setCentered(){
+		return $this->addToPropertyCtrl("class", "centered",array("centered"));
 	}
 
 	/**
@@ -191,22 +232,6 @@ class HtmlGrid extends HtmlSemCollection{
 		for($i=0;$i<$count;$i++){
 			$this->content[$i]->setValues($values[$i],$this->_createCols===false);
 		}
-	}
-
-	public function rowCount(){
-		return $this->count();
-	}
-
-	public function colCount(){
-		$result=0;
-		$count=$this->count();
-		if($count>0){
-			if($this->content[0] instanceof HtmlGridCol)
-				$result=$count;
-			else
-				$result=$this->content[0]->count();
-		}
-		return $result;
 	}
 
 	/**

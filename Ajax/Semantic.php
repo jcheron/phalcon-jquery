@@ -18,6 +18,7 @@ use Ajax\semantic\html\collections\menus\HtmlAccordionMenu;
 use Ajax\semantic\html\collections\form\HtmlForm;
 use Ajax\semantic\traits\SemanticComponentsTrait;
 use Ajax\semantic\traits\SemanticHtmlElementsTrait;
+use Ajax\semantic\html\modules\HtmlSticky;
 
 class Semantic extends BaseGui {
 	use SemanticComponentsTrait,SemanticHtmlElementsTrait;
@@ -127,5 +128,9 @@ class Semantic extends BaseGui {
 	 */
 	public function htmlForm($identifier,$elements=array()) {
 		return $this->addHtmlComponent(new HtmlForm($identifier,$elements));
+	}
+
+	public function htmlSticky($identifier,$content=array()) {
+		return $this->addHtmlComponent(new HtmlSticky($identifier,$content));
 	}
 }
