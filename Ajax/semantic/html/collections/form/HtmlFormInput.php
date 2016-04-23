@@ -13,4 +13,8 @@ class HtmlFormInput extends HtmlFormField {
 			$placeholder=$label;
 		parent::__construct("field-".$identifier, new HtmlInput($identifier,$type,$value,$placeholder), $label);
 	}
+
+	public function setReadonly(){
+		$this->getField()->setProperty("readonly", "");
+	}
 }

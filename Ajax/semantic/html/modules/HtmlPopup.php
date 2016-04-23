@@ -22,7 +22,7 @@ class HtmlPopup extends HtmlSemDoubleElement {
 
 	public function addList($items=array(),$header=NULL){
 		if(!$this->content instanceof HtmlGrid){
-			$this->content=new HtmlGrid("grid-".$this->identifier,0);
+			$this->content=new HtmlGrid("Grid-".$this->identifier,0);
 		}
 		$grid=$this->content;
 

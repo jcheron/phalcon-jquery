@@ -2,7 +2,6 @@
 
 namespace Ajax\semantic\html\collections\form;
 
-use Ajax\semantic\html\base\constants\CheckboxType;
 /**
  * Semantic Checkbox component
  * @see http://semantic-ui.com/collections/form.html#checkbox
@@ -11,13 +10,9 @@ use Ajax\semantic\html\base\constants\CheckboxType;
  */
 class HtmlFormCheckbox extends AbstractHtmlFormRadioCheckbox {
 	public function __construct($identifier, $label=NULL,$value=NULL,$type=NULL) {
-		parent::__construct($identifier, NULL,$label,$value);
+		parent::__construct($identifier, NULL,$label,$value,$type);
 		$this->_input->setClass("ui checkbox");
 		if(isset($type))
 			$this->setType($type);
-	}
-
-	public function setType($checkboxType){
-		return $this->_input->addToPropertyCtrl("class", $checkboxType, CheckboxType::getConstants());
 	}
 }

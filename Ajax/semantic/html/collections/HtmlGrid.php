@@ -21,6 +21,7 @@ class HtmlGrid extends HtmlSemCollection{
 	private $_createCols;
 	private $_colSizing=true;
 	private $_implicitRows=false;
+
 	public function __construct( $identifier,$numRows=1,$numCols=NULL,$createCols=true,$implicitRows=false){
 		parent::__construct( $identifier, "div","ui grid");
 		$this->_implicitRows=$implicitRows;
@@ -34,18 +35,41 @@ class HtmlGrid extends HtmlSemCollection{
 		$this->setRowsCount($numRows,$numCols);
 	}
 
+	/**
+	 * Defines the grid width (alias for setWidth)
+	 * @param int $wide
+	 */
 	public function setWide($wide){
 		$wide=Wide::getConstants()["W".$wide];
 		$this->addToPropertyCtrl("class", $wide, Wide::getConstants());
 		return $this->addToPropertyCtrl("class","column",array("column"));
 	}
 
+	/**
+	 * Defines the grid width
+	 * @param int $width
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
+	public function setWidth($width){
+	return $this->setWide($width);
+	}
+
+	/**
+	 * Adds a row with $colsCount columns
+	 * @param int $colsCount number of columns to create
+	 * @return mixed
+	 */
 	public function addRow($colsCount=NULL){
 		$rowCount=$this->rowCount()+1;
 		$this->setRowsCount($rowCount,$colsCount,true);
 		return $this->content[$rowCount-1];
 	}
 
+	/**
+	 * Adds a col
+	 * @param int $width with of the column to add
+	 * @return mixed|\Ajax\semantic\html\collections\HtmlGrid
+	 */
 	public function addCol($width=NULL){
 		$colCount=$this->colCount()+1;
 		$this->setColsCount($colCount,true,$width);
@@ -54,6 +78,10 @@ class HtmlGrid extends HtmlSemCollection{
 		return $this;
 	}
 
+	/**
+	 * @param array $sizes array of width of the columns to create
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
 	public function addCols($sizes=array()){
 		foreach ($sizes as $size){
 			$this->addCol($size);
@@ -92,6 +120,13 @@ class HtmlGrid extends HtmlSemCollection{
 		return $count>0 && $this->content[0] instanceof HtmlGridCol;
 	}
 
+	/**
+	 * Defines the number of columns in the grid
+	 * @param int $numCols
+	 * @param boolean $toCreate
+	 * @param int $width
+	 * @return \Ajax\semantic\html\collections\HtmlGrid
+	 */
 	public function setColsCount($numCols,$toCreate=true,$width=NULL){
 		if(isset($width)===false)
 			$this->setWide($numCols);
@@ -119,6 +154,10 @@ class HtmlGrid extends HtmlSemCollection{
 		return $this->getItem($index);
 	}
 
+	/**
+	 * Returns the row count
+	 * @return int
+	 */
 	public function rowCount(){
 		$count=$this->count();
 		if($this->hasOnlyCols($count))
@@ -126,6 +165,10 @@ class HtmlGrid extends HtmlSemCollection{
 		return $count;
 	}
 
+	/**
+	 * Returns the column count
+	 * @return int
+	 */
 	public function colCount(){
 		$count=$this->count();
 		if($this->hasOnlyCols($count))
@@ -136,6 +179,7 @@ class HtmlGrid extends HtmlSemCollection{
 	}
 
 	/**
+	 * Returns the cell (HtmlGridCol) at position rrow,$col
 	 * @param int $row
 	 * @param int $col
 	 * @return \Ajax\semantic\html\collections\HtmlGridCol
@@ -220,6 +264,10 @@ class HtmlGrid extends HtmlSemCollection{
 		return $item;
 	}
 
+	/**
+	 * Sets $values to the grid
+	 * @param array $values
+	 */
 	public function setValues($values){
 		$count=$this->count();
 		if($this->_createCols===false){

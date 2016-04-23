@@ -74,6 +74,7 @@ class HtmlFormFields extends HtmlSemCollection {
 	public function setInline(){
 		$this->_equalWidth=false;
 		$this->addToProperty("class", "inline");
+		return $this;
 	}
 
 	public function setGrouped(){
@@ -90,11 +91,15 @@ class HtmlFormFields extends HtmlSemCollection {
 		return $this;
 	}
 
-	public static function radios($name,$items=array(),$label=NULL){
+	public static function radios($name,$items=array(),$label=NULL,$value=null,$type=NULL){
 		$fields=array();
 		$i=0;
-		foreach ($items as $item){
-			$fields[]=new HtmlFormRadio($name."-".$i++,$name,$item,$item);
+		foreach ($items as $val=>$caption){
+			$itemO=new HtmlFormRadio($name."-".$i++,$name,$caption,$val,$type);
+			if($val===$value){
+				$itemO->getInput()->getField()->setProperty("checked", "");
+			}
+			$fields[]=$itemO;
 		}
 		$radios=new HtmlFormFields("fields-".$name,$fields);
 		if(isset($label))

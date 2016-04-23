@@ -79,6 +79,10 @@ class HtmlGridRow extends HtmlSemCollection{
 		return $this;
 	}
 
+	public function addCol($width=NULL){
+		return $this->addItem($width);
+	}
+
 	/**
 	 * stretch the row contents to take up the entire column height
 	 * @return \Ajax\semantic\html\content\HtmlGridRow

@@ -20,7 +20,7 @@ class HtmlFormField extends HtmlSemDoubleElement {
 	public function setLabel($label){
 		$labelO=$label;
 		if(\is_string($label)){
-			$labelO=new HtmlSemDoubleElement("","label");
+			$labelO=new HtmlSemDoubleElement("","label","");
 			$labelO->setContent($label);
 			$labelO->setProperty("for", \str_replace("field-", "",$this->identifier));
 		}
