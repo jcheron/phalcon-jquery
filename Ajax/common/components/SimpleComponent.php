@@ -21,6 +21,9 @@ abstract class SimpleComponent extends BaseComponent {
 
 	protected function compileEvents() {
 		foreach ( $this->events as $event => $jsCode ) {
+			if($event=="execute"){
+				$this->jquery_code_for_compile []=$jsCode;
+			}else
 			$this->jquery_code_for_compile []="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function( event, data ) {".$jsCode."});";
 		}
 	}

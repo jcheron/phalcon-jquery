@@ -11,10 +11,11 @@ use Ajax\semantic\html\base\constants\CheckboxType;
  */
 abstract class AbstractHtmlFormRadioCheckbox extends HtmlFormField {
 	protected $_input;
+	protected $_params=array();
 
 	public function __construct($identifier, $name=NULL,$label=NULL,$value=NULL,$type=NULL) {
 		$input=new HtmlFormInput($identifier,$label,"checkbox",$value);
-		parent::__construct("rField-".$identifier, $input);
+		parent::__construct("field-".$identifier, $input);
 		if(isset($label)){
 			$input->swapLabel();
 			$label=$input->getLabel();

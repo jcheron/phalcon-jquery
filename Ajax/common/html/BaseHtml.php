@@ -18,7 +18,7 @@ abstract class BaseHtml extends BaseWidget {
 	protected $_template;
 	protected $tagName;
 	protected $properties=array ();
-	protected $events=array ();
+	protected $_events=array ();
 	protected $_wrapBefore=array();
 	protected $_wrapAfter=array();
 	protected $_bsComponent;
@@ -259,23 +259,23 @@ abstract class BaseHtml extends BaseWidget {
 		if ($preventDefault===true) {
 			$jsCode="event.preventDefault();".$jsCode;
 		}
-		$this->_addEvent($event, $jsCode);
-		return $this;
+		return $this->_addEvent($event, $jsCode);
 	}
 
 	public function _addEvent($event, $jsCode) {
-		if (array_key_exists($event, $this->events)) {
-			if (is_array($this->events [$event])) {
-				$this->events [$event] []=$jsCode;
+		if (array_key_exists($event, $this->_events)) {
+			if (is_array($this->_events [$event])) {
+				$this->_events [$event] []=$jsCode;
 			} else {
-				$this->events [$event]=array (
-						$this->events [$event],
+				$this->_events [$event]=array (
+						$this->_events [$event],
 						$jsCode
 				);
 			}
 		} else {
-			$this->events [$event]=$jsCode;
+			$this->_events [$event]=$jsCode;
 		}
+		return $this;
 	}
 
 	public function on($event, $jsCode, $stopPropagation=false, $preventDefault=false) {
@@ -292,7 +292,7 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function addEventsOnRun(JsUtils $js) {
 		if (isset($this->_bsComponent)) {
-			foreach ( $this->events as $event => $jsCode ) {
+			foreach ( $this->_events as $event => $jsCode ) {
 				$code=$jsCode;
 				if (is_array($jsCode)) {
 					$code="";
@@ -308,7 +308,7 @@ abstract class BaseHtml extends BaseWidget {
 				}
 				$this->_bsComponent->addEvent($event, $code);
 			}
-			$this->events=array();
+			$this->_events=array();
 		}
 	}
 
@@ -390,6 +390,10 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function jsDoJquery($jqueryCall, $param=""){
 		return "$('#".$this->identifier."').".$jqueryCall."(".$this->_prep_value($param).");";
+	}
+
+	public function executeOnRun($jsCode){
+		return $this->_addEvent("execute", $jsCode);
 	}
 
 	public function jsHtml($content=""){

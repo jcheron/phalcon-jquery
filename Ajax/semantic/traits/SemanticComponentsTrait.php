@@ -7,6 +7,7 @@ use Ajax\semantic\components\Dropdown;
 use Ajax\semantic\components\Accordion;
 use Ajax\common\components\SimpleComponent;
 use Ajax\semantic\components\Sticky;
+use Ajax\semantic\components\Checkbox;
 trait SemanticComponentsTrait {
 
 	public abstract function addComponent(SimpleComponent $component, $attachTo, $params);
@@ -49,6 +50,10 @@ trait SemanticComponentsTrait {
 
 	public function sticky($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Sticky($this->js), $attachTo, $params);
+	}
+
+	public function checkbox($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Checkbox($this->js), $attachTo, $params);
 	}
 
 }

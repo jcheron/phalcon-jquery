@@ -107,6 +107,22 @@ class HtmlFormFields extends HtmlSemCollection {
 		return $radios;
 	}
 
+	public static function checkeds($name,$items=array(),$label=NULL,$values=array(),$type=NULL){
+		$fields=array();
+		$i=0;
+		foreach ($items as $val=>$caption){
+			$itemO=new HtmlFormCheckbox($name."-".$i++,$name,$caption,$val,$type);
+			if(\array_search($val, $values)!==false){
+				$itemO->getInput()->getField()->setProperty("checked", "");
+			}
+			$fields[]=$itemO;
+		}
+		$radios=new HtmlFormFields("fields-".$name,$fields);
+		if(isset($label))
+			$radios->setLabel($label)->setProperty("for", $name);
+			return $radios;
+	}
+
 	public function setEqualWidth($_equalWidth) {
 		$this->_equalWidth=$_equalWidth;
 		return $this;

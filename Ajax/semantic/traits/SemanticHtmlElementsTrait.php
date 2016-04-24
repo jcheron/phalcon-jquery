@@ -14,6 +14,7 @@ use Ajax\semantic\html\elements\HtmlList;
 use Ajax\semantic\html\elements\HtmlSegment;
 use Ajax\semantic\html\elements\HtmlSegmentGroups;
 use Ajax\service\JArray;
+use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
 
 
 trait SemanticHtmlElementsTrait {
@@ -151,5 +152,9 @@ trait SemanticHtmlElementsTrait {
 	 */
 	public function htmlSegmentGroups($identifier, $items=array()){
 		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier,$items));
+	}
+
+	public function htmlCheckbox($identifier, $label=NULL,$value=NULL,$type=NULL){
+		return $this->addHtmlComponent(new HtmlFormCheckbox($identifier,$label,$value,$type));
 	}
 }

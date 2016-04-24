@@ -18,7 +18,7 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	protected $mClass="menu";
 	protected $mTagName="div";
 	protected $items=array ();
-	protected $params=array("action"=>"nothing","on"=>"hover");
+	protected $_params=array("action"=>"nothing","on"=>"hover");
 	protected $input;
 
 	public function __construct($identifier, $value="", $items=array()) {
@@ -190,17 +190,17 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 	public function run(JsUtils $js) {
 		if($this->propertyContains("class", "simple")===false){
 			if(isset($this->_bsComponent)===false)
-				$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->params);
+				$this->_bsComponent=$js->semantic()->dropdown("#".$this->identifier,$this->_params);
 			$this->addEventsOnRun($js);
 			return $this->_bsComponent;
 		}
 	}
 
 	public function setAction($action){
-		$this->params["action"]=$action;
+		$this->_params["action"]=$action;
 	}
 
 	public function setFullTextSearch($value){
-		$this->params["fullTextSearch"]=$value;
+		$this->_params["fullTextSearch"]=$value;
 	}
 }
