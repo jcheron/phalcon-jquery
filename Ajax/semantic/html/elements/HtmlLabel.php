@@ -10,9 +10,11 @@ use Ajax\semantic\html\base\traits\LabeledIconTrait;
 
 class HtmlLabel extends HtmlSemDoubleElement {
 	use LabeledIconTrait;
-	public function __construct($identifier,$caption="",$tagName="div") {
+	public function __construct($identifier,$caption="",$icon=NULL,$tagName="div") {
 		parent::__construct($identifier,$tagName,"ui label");
 		$this->content=$caption;
+		if(isset($icon))
+			$this->addIcon($icon);
 	}
 
 	/**

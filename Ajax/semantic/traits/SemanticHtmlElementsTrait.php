@@ -1,6 +1,7 @@
 <?php
 namespace Ajax\semantic\traits;
 
+use Ajax\service\JArray;
 use Ajax\semantic\html\elements\HtmlButtonGroups;
 use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\elements\HtmlContainer;
@@ -13,8 +14,12 @@ use Ajax\semantic\html\elements\HtmlLabel;
 use Ajax\semantic\html\elements\HtmlList;
 use Ajax\semantic\html\elements\HtmlSegment;
 use Ajax\semantic\html\elements\HtmlSegmentGroups;
-use Ajax\service\JArray;
 use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
+use Ajax\semantic\html\base\constants\CheckboxType;
+use Ajax\semantic\html\elements\HtmlReveal;
+use Ajax\semantic\html\base\constants\RevealType;
+use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\elements\HtmlStep;
 
 
 trait SemanticHtmlElementsTrait {
@@ -154,7 +159,28 @@ trait SemanticHtmlElementsTrait {
 		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier,$items));
 	}
 
+	/**
+	 * @param string $identifier
+	 * @param string $label
+	 * @param mixed $value
+	 * @param CheckboxType $type
+	 */
 	public function htmlCheckbox($identifier, $label=NULL,$value=NULL,$type=NULL){
 		return $this->addHtmlComponent(new HtmlFormCheckbox($identifier,$label,$value,$type));
+	}
+
+	/**
+	 * @param string $identifier
+	 * @param string|HtmlSemDoubleElement $visibleContent
+	 * @param string|HtmlSemDoubleElement $hiddenContent
+	 * @param RevealType|string $type
+	 * @param Direction|string $attributeType
+	 */
+	public function htmlReveal($identifier, $visibleContent,$hiddenContent,$type=RevealType::FADE,$attributeType=NULL){
+		return $this->addHtmlComponent(new HtmlReveal($identifier,$visibleContent,$hiddenContent,$type,$attributeType));
+	}
+
+	public function htmlStep($identifier, $steps=array()){
+		return $this->addHtmlComponent(new HtmlStep($identifier,$steps));
 	}
 }

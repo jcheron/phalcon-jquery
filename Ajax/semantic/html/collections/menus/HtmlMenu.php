@@ -24,8 +24,7 @@ use Ajax\semantic\html\elements\HtmlIcon;
 class HtmlMenu extends HtmlSemCollection {
 
 	public function __construct($identifier, $items=array()) {
-		parent::__construct($identifier, "div");
-		$this->setClass("ui menu");
+		parent::__construct($identifier, "div","ui menu");
 		$this->addItems($items);
 	}
 

@@ -143,6 +143,11 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
+	protected function removePropertyValues($name,$values){
+		$this->removeOldValues($this->properties[$name], $values);
+		return $this;
+	}
+
 	protected function removeProperty($name){
 		if(\array_key_exists($name, $this->properties))
 			unset($this->properties[$name]);

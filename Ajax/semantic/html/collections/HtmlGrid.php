@@ -35,6 +35,10 @@ class HtmlGrid extends HtmlSemCollection{
 		$this->setRowsCount($numRows,$numCols);
 	}
 
+	public function asSegment(){
+		return $this->addToPropertyCtrl("class", "segment", array("segment"));
+	}
+
 	/**
 	 * Defines the grid width (alias for setWidth)
 	 * @param int $wide
@@ -268,9 +272,9 @@ class HtmlGrid extends HtmlSemCollection{
 	 * Sets $values to the grid
 	 * @param array $values
 	 */
-	public function setValues($values){
+	public function setValues($values,$force=true){
 		$count=$this->count();
-		if($this->_createCols===false){
+		if($this->_createCols===false || $force===true){
 			for($i=$count;$i<\sizeof($values);$i++){
 				$colSize=\sizeof($values[$i]);
 				$this->addItem(new HtmlGridRow($this->identifier."-row-".($this->count()+1),$colSize,$this->_colSizing,$this->_implicitRows));

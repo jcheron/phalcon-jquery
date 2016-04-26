@@ -18,7 +18,22 @@ class JArray {
 			return $values [$pos];
 	}
 
-	public static function getDefaultValue($array, $key, $default) {
+	public static function getConditionalValue($array,$key,$condition){
+		$result=NULL;
+		if (array_key_exists($key, $array)) {
+			$result=$array [$key];
+			if($condition($result)===true)
+				return $result;
+		}
+		$values=array_values($array);
+		foreach ($values as $val){
+			if($condition($val)===true)
+				return $val;
+		}
+		return $result;
+	}
+
+	public static function getDefaultValue($array, $key, $default=NULL) {
 		if (array_key_exists($key, $array)) {
 			return $array [$key];
 		} else

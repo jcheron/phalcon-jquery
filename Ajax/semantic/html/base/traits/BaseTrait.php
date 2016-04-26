@@ -68,4 +68,8 @@ trait BaseTrait {
 	public function setInverted(){
 		return $this->addToProperty("class", "inverted");
 	}
+
+	public function setCircular(){
+		return $this->addToProperty("class", "circular");
+	}
 }
