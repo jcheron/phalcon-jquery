@@ -93,9 +93,9 @@ class Semantic extends BaseGui {
 
 
 	/**
-	 * Return a new Semantic Html Breadcrumb
+	 * Returns a new Semantic Html Breadcrumb
 	 * @param string $identifier
-	 * @param array $elements
+	 * @param array $items
 	 * @param boolean $autoActive sets the last element's class to <b>active</b> if true. default : true
 	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 * @return HtmlBreadcrumb
@@ -105,7 +105,7 @@ class Semantic extends BaseGui {
 	}
 
 	/**
-	 * Return a new Semantic Accordion
+	 * Returns a new Semantic Accordion
 	 * @param string $identifier
 	 * @return HtmlAccordion
 	 */
@@ -123,7 +123,7 @@ class Semantic extends BaseGui {
 	}
 
 	/**
-	 * Return a new Semantic Form
+	 * Returns a new Semantic Form
 	 * @param string $identifier
 	 * @param array $elements
 	 */

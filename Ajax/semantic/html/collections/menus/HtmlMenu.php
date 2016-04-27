@@ -2,7 +2,6 @@
 
 namespace Ajax\semantic\html\collections\menus;
 
-use Ajax\bootstrap\html\HtmlLink;
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\base\HtmlSemCollection;
@@ -14,6 +13,7 @@ use Ajax\semantic\html\modules\HtmlDropdown;
 use Ajax\common\html\BaseHtml;
 use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\semantic\html\elements\HtmlIcon;
+use Ajax\semantic\html\elements\html5\HtmlLink;
 
 /**
  * Semantic Menu component
