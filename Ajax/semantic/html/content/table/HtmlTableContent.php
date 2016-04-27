@@ -4,16 +4,32 @@ namespace Ajax\semantic\html\content\table;
 
 use Ajax\semantic\html\base\HtmlSemCollection;
 
+/**
+ * a table content (thead, tbody or tfoot)
+ * @author jc
+ *
+ */
 class HtmlTableContent extends HtmlSemCollection{
 
 	protected $_tdTagNames=["thead"=>"th","tbody"=>"td","tfoot"=>"th"];
 
+	/**
+	 * @param string $identifier
+	 * @param string $tagName
+	 * @param int $rowCount
+	 * @param int $colCount
+	 */
 	public function __construct( $identifier,$tagName="tbody",$rowCount=NULL,$colCount=NULL){
 		parent::__construct( $identifier, $tagName, "");
 		if(isset($rowCount) && isset($colCount))
 			$this->setRowCount($rowCount, $colCount);
 	}
 
+	/**
+	 * @param int $rowCount
+	 * @param int $colCount
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
 	public function setRowCount($rowCount,$colCount){
 		$count=$this->count();
 		for($i=$count;$i<$rowCount;$i++){
@@ -27,6 +43,10 @@ class HtmlTableContent extends HtmlSemCollection{
 		return $this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\HtmlCollection::createItem()
+	 */
 	protected function createItem($value){
 		$count=$this->count();
 		$tr= new HtmlTR("", $value);
@@ -48,18 +68,32 @@ class HtmlTableContent extends HtmlSemCollection{
 		return $col;
 	}
 
+	/**
+	 * @param int $index
+	 * @return \Ajax\semantic\html\content\HtmlTR
+	 */
 	public function getRow($index){
 		return $this->getItem($index);
 	}
 
+	/**
+	 * @param int $row
+	 * @param int $col
+	 * @param mixed $value
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
 	public function setCellValue($row,$col,$value=""){
 		$cell=$this->getCell($row, $col);
-		if(isset($cell)){
+		if(isset($cell)===true){
 			$cell->setValue($value);
 		}
 		return $this;
 	}
 
+	/**
+	 * Sets the cells values
+	 * @param mixed $values
+	 */
 	public function setValues($values=array()){
 		$count=$this->count();
 		if(\is_array($values)===false){
@@ -73,10 +107,18 @@ class HtmlTableContent extends HtmlSemCollection{
 		}
 	}
 
+	/**
+	 * Returns the number of rows (TR)
+	 * @return int
+	 */
 	public function getRowCount(){
 		return $this->count();
 	}
 
+	/**
+	 * Returns the number of columns (TD)
+	 * @return int
+	 */
 	public function getColCount(){
 		$result=0;
 		if($this->count()>0)
@@ -84,6 +126,12 @@ class HtmlTableContent extends HtmlSemCollection{
 		return $result;
 	}
 
+	/**
+	 * Removes the cell at position $rowIndex,$colIndex
+	 * @param int $rowIndex
+	 * @param int $colIndex
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
 	public function delete($rowIndex,$colIndex=NULL){
 		if(isset($colIndex)){
 			$row=$this->getItem($rowIndex);

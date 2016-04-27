@@ -116,7 +116,7 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 	}
 	/**
 	 * The item factory
-	 * @param string|HtmlDoubleElement $value
+	 * @param mixed $value
 	 */
 	protected abstract function createItem($value);
 

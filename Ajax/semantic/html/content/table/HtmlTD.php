@@ -8,6 +8,11 @@ class HtmlTD extends HtmlSemDoubleElement {
 	private $_container;
 	private $_row;
 	private $_col;
+	/**
+	 * @param string $identifier
+	 * @param mixed $content
+	 * @param string $tagName
+	 */
 	public function __construct($identifier,$content=NULL,$tagName="td") {
 		parent::__construct($identifier, $tagName, "", $content);
 	}

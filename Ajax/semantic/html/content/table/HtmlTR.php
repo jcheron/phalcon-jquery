@@ -4,6 +4,10 @@ namespace Ajax\semantic\html\content\table;
 
 use Ajax\semantic\html\base\HtmlSemCollection;
 
+/**
+ * @author jc
+ *
+ */
 class HtmlTR extends HtmlSemCollection{
 
 	private $_tdTagName;
@@ -24,6 +28,10 @@ class HtmlTR extends HtmlSemCollection{
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\HtmlCollection::createItem()
+	 */
 	protected function createItem($value){
 		$count=$this->count();
 		$td=new HtmlTD("",$this->_container,$value,$this->_tdTagName);
@@ -35,11 +43,20 @@ class HtmlTR extends HtmlSemCollection{
 		$this->_tdTagName=$tagName;
 	}
 
+	/**
+	 * Define the container (HtmlTableContent) and the num of the row
+	 * @param HtmlTableContent $container
+	 * @param int $row
+	 */
 	public function setContainer($container,$row){
 		$this->_container=$container;
 		$this->_row=$row;
 	}
 
+	/**
+	 * Sets values to the row cols
+	 * @param mixed $values
+	 */
 	public function setValues($values=array()){
 		$count=$this->count();
 		if(\is_array($values)===false){
@@ -53,6 +70,11 @@ class HtmlTR extends HtmlSemCollection{
 		}
 	}
 
+	/**
+	 * Removes the col at $index
+	 * @param int $index the index of the col to remove
+	 * @return \Ajax\semantic\html\content\table\HtmlTR
+	 */
 	public function delete($index){
 		$this->removeItem($index);
 		return $this;
