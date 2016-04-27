@@ -19,9 +19,10 @@ use Ajax\semantic\html\collections\form\HtmlForm;
 use Ajax\semantic\traits\SemanticComponentsTrait;
 use Ajax\semantic\traits\SemanticHtmlElementsTrait;
 use Ajax\semantic\html\modules\HtmlSticky;
+use Ajax\semantic\traits\SemanticHtmlCollectionsTrait;
 
 class Semantic extends BaseGui {
-	use SemanticComponentsTrait,SemanticHtmlElementsTrait;
+	use SemanticComponentsTrait,SemanticHtmlElementsTrait,SemanticHtmlCollectionsTrait;
 	public function __construct($autoCompile=true) {
 		parent::__construct($autoCompile=true);
 	}

@@ -74,4 +74,12 @@ class HtmlLabel extends HtmlSemDoubleElement {
 		$this->addContent($div);
 		return $div;
 	}
+
+	public function asRibbon(){
+		return $this->addToPropertyCtrl("class", "ribbon", array("ribbon"));
+	}
+
+	public static function ribbon($identifier,$caption){
+		return (new HtmlLabel($identifier,$caption))->asRibbon();
+	}
 }

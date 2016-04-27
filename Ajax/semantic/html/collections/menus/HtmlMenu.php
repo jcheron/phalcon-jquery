@@ -44,24 +44,39 @@ class HtmlMenu extends HtmlSemCollection {
 		}
 		return $this;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 * @see \Ajax\common\html\html5\HtmlCollection::addItem()
-	 */
-	public function addItem($item){
-		if($item instanceof HtmlInput || $item instanceof HtmlImg){
+	private function getItemToInsert($item){
+		if($item instanceof HtmlInput || $item instanceof HtmlImg || $item instanceof HtmlIcon){
 			$itemO=new HtmlSemDoubleElement("item-".$this->identifier,"div","");
 			$itemO->setContent($item);
 			$item=$itemO;
 		}
-		$item=parent::addItem($item);
+		return $item;
+	}
+
+	private function afterInsert($item){
 		if(!$item instanceof HtmlMenu)
 			$item->addToPropertyCtrl("class", "item",array("item"));
 		else{
 			$this->setSecondary();
 		}
 		return $item;
+	}
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\html5\HtmlCollection::addItem()
+	 */
+	public function addItem($item){
+		$item=parent::addItem($this->getItemToInsert($item));
+		return $this->afterInsert($item);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @see \Ajax\common\html\HtmlCollection::insertItem()
+	 */
+	public function insertItem($item,$position=0){
+		$item=parent::insertItem($this->getItemToInsert($item),$position);
+		return $this->afterInsert($item);
 	}
 
 	public function generateMenuAsItem($menu,$header=null){

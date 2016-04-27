@@ -14,8 +14,6 @@ use Ajax\semantic\html\elements\HtmlLabel;
 use Ajax\semantic\html\elements\HtmlList;
 use Ajax\semantic\html\elements\HtmlSegment;
 use Ajax\semantic\html\elements\HtmlSegmentGroups;
-use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
-use Ajax\semantic\html\base\constants\CheckboxType;
 use Ajax\semantic\html\elements\HtmlReveal;
 use Ajax\semantic\html\base\constants\RevealType;
 use Ajax\semantic\html\base\constants\Direction;
@@ -157,16 +155,6 @@ trait SemanticHtmlElementsTrait {
 	 */
 	public function htmlSegmentGroups($identifier, $items=array()){
 		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier,$items));
-	}
-
-	/**
-	 * @param string $identifier
-	 * @param string $label
-	 * @param mixed $value
-	 * @param CheckboxType $type
-	 */
-	public function htmlCheckbox($identifier, $label=NULL,$value=NULL,$type=NULL){
-		return $this->addHtmlComponent(new HtmlFormCheckbox($identifier,$label,$value,$type));
 	}
 
 	/**
