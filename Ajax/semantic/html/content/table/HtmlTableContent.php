@@ -105,6 +105,27 @@ class HtmlTableContent extends HtmlSemCollection{
 			$row=$this->content[$i];
 			$row->setValues($values[$i]);
 		}
+		return $this;
+	}
+
+	public function setColValues($colIndex,$values=array()){
+		$count=$this->count();
+		if(\is_array($values)===false){
+			$values=\array_fill(0, $count, $values);
+		}
+		$count=\min(\sizeof($values),$count);
+		for ($i=0;$i<$count;$i++){
+			$this->getCell($i, $colIndex)->setValue($values[$i]);
+		}
+		return $this;
+	}
+
+	public function colCenter($colIndex){
+		$count=$this->count();
+		for ($i=0;$i<$count;$i++){
+			$this->getCell($i, $colIndex)->textCenterAligned();
+		}
+		return $this;
 	}
 
 	/**
@@ -143,5 +164,15 @@ class HtmlTableContent extends HtmlSemCollection{
 		}
 		return $this;
 	}
+
+	public function mergeCol($rowIndex=0,$colIndex=0){
+		return $this->getItem($rowIndex)->mergeCol($colIndex);
+	}
+
+	public function mergeRow($rowIndex=0,$colIndex=0){
+		return $this->getItem($rowIndex)->mergeRow($colIndex);
+	}
+
+
 
 }

@@ -79,4 +79,12 @@ class HtmlTR extends HtmlSemCollection{
 		$this->removeItem($index);
 		return $this;
 	}
+
+	public function mergeCol($colIndex=0){
+		return $this->getItem($colIndex)->mergeCol();
+	}
+
+	public function mergeRow($colIndex=0){
+		return $this->getItem($colIndex)->mergeRow();
+	}
 }

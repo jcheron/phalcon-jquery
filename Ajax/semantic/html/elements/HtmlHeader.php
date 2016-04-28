@@ -5,8 +5,10 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Size;
 use Ajax\common\html\HtmlDoubleElement;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 class HtmlHeader extends HtmlSemDoubleElement {
+	use TextAlignmentTrait;
 	protected $image;
 	public function __construct($identifier, $niveau=1,$content=NULL,$type="page") {
 		parent::__construct($identifier, "div","ui header");

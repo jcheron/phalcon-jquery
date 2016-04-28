@@ -13,4 +13,20 @@ trait TextAlignmentTrait {
 	public function setTextAlignment($value=TextAlignment::LEFT){
 		return $this->addToPropertyCtrl("class", $value,TextAlignment::getConstants());
 	}
+
+	public function textCenterAligned(){
+		return $this->setTextAlignment(TextAlignment::CENTER);
+	}
+
+	public function textJustified(){
+		return $this->setTextAlignment(TextAlignment::JUSTIFIED);
+	}
+
+	public function textRightAligned(){
+		return $this->setTextAlignment(TextAlignment::RIGHT);
+	}
+
+	public function textLeftAligned(){
+		return $this->setTextAlignment();
+	}
 }

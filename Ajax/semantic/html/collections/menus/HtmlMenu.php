@@ -153,6 +153,18 @@ class HtmlMenu extends HtmlSemCollection {
 			return $this->addToProperty("class", "pagination");
 	}
 
+	public function setFloated($direction="right"){
+		return $this->addToPropertyCtrl("class", $direction." floated", Direction::getConstantValues("floated"));
+	}
+
+	public function floatRight(){
+		return $this->setFloated();
+	}
+
+	public function floatLeft(){
+		return $this->setFloated("left");
+	}
+
 	public function setFixed(){
 		return $this->addToProperty("class", "fixed");
 	}

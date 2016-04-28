@@ -3,8 +3,10 @@
 namespace Ajax\semantic\html\content\table;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
+use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 
 class HtmlTD extends HtmlSemDoubleElement {
+	use TextAlignmentTrait;
 	private $_container;
 	private $_row;
 	private $_col;
@@ -37,11 +39,11 @@ class HtmlTD extends HtmlSemDoubleElement {
 		return $this->_container;
 	}
 
-	public function rowMerge(){
+	public function mergeRow(){
 		return $this->setRowspan($this->_container->count());
 	}
 
-	public function colMerge(){
+	public function mergeCol(){
 		return $this->setColspan($this->_container->getRow($this->_row)->count());
 	}
 
