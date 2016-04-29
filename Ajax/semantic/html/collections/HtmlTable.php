@@ -95,6 +95,14 @@ class HtmlTable extends HtmlSemDoubleElement {
 		return $this;
 	}
 
+	public function setHeaderValues($values=array()) {
+		return $this->getHeader()->setValues($values);
+	}
+
+	public function setFooterValues($values=array()) {
+		return $this->getFooter()->setValues($values);
+	}
+
 	public function setColValues($colIndex, $values=array()) {
 		$this->getBody()->setColValues($colIndex, $values);
 		return $this;
@@ -131,5 +139,9 @@ class HtmlTable extends HtmlSemDoubleElement {
 
 	public function setCollapsing() {
 		return $this->addToProperty("class", "collapsing");
+	}
+
+	public function setDefinition() {
+		return $this->addToProperty("class", "definition");
 	}
 }
