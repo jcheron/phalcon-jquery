@@ -20,9 +20,12 @@ use Ajax\semantic\traits\SemanticComponentsTrait;
 use Ajax\semantic\traits\SemanticHtmlElementsTrait;
 use Ajax\semantic\html\modules\HtmlSticky;
 use Ajax\semantic\traits\SemanticHtmlCollectionsTrait;
+use Ajax\semantic\traits\SemanticHtmlModulesTrait;
 
 class Semantic extends BaseGui {
-	use SemanticComponentsTrait,SemanticHtmlElementsTrait,SemanticHtmlCollectionsTrait;
+	use SemanticComponentsTrait,SemanticHtmlElementsTrait,SemanticHtmlCollectionsTrait,
+	SemanticHtmlModulesTrait;
+
 	public function __construct($autoCompile=true) {
 		parent::__construct($autoCompile=true);
 	}

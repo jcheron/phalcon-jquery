@@ -3,39 +3,41 @@
 namespace Ajax\semantic\html\content\table;
 
 use Ajax\semantic\html\base\HtmlSemCollection;
+use Ajax\service\JArray;
 
 /**
  * a table content (thead, tbody or tfoot)
  * @author jc
  *
  */
-class HtmlTableContent extends HtmlSemCollection{
-
-	protected $_tdTagNames=["thead"=>"th","tbody"=>"td","tfoot"=>"th"];
+class HtmlTableContent extends HtmlSemCollection {
+	protected $_tdTagNames=[ "thead" => "th","tbody" => "td","tfoot" => "th" ];
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string $tagName
 	 * @param int $rowCount
 	 * @param int $colCount
 	 */
-	public function __construct( $identifier,$tagName="tbody",$rowCount=NULL,$colCount=NULL){
-		parent::__construct( $identifier, $tagName, "");
-		if(isset($rowCount) && isset($colCount))
+	public function __construct($identifier, $tagName="tbody", $rowCount=NULL, $colCount=NULL) {
+		parent::__construct($identifier, $tagName, "");
+		if (isset($rowCount)&&isset($colCount))
 			$this->setRowCount($rowCount, $colCount);
 	}
 
 	/**
+	 *
 	 * @param int $rowCount
 	 * @param int $colCount
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function setRowCount($rowCount,$colCount){
+	public function setRowCount($rowCount, $colCount) {
 		$count=$this->count();
-		for($i=$count;$i<$rowCount;$i++){
+		for($i=$count; $i<$rowCount; $i++) {
 			$this->addItem($colCount);
 		}
-		for($i=0;$i<$rowCount;$i++){
+		for($i=0; $i<$rowCount; $i++) {
 			$item=$this->content[$i];
 			$item->setTdTagName($this->_tdTagNames[$this->tagName]);
 			$this->content[$i]->setColCount($colCount);
@@ -44,12 +46,14 @@ class HtmlTableContent extends HtmlSemCollection{
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
+	 *
 	 * @see \Ajax\common\html\HtmlCollection::createItem()
 	 */
-	protected function createItem($value){
+	protected function createItem($value) {
 		$count=$this->count();
-		$tr= new HtmlTR("", $value);
+		$tr=new HtmlTR("", $value);
 		$tr->setContainer($this, $count);
 		return $tr;
 	}
@@ -60,31 +64,33 @@ class HtmlTableContent extends HtmlSemCollection{
 	 * @param int $col
 	 * @return \Ajax\semantic\html\content\HtmlTD
 	 */
-	public function getCell($row,$col){
+	public function getCell($row, $col) {
 		$row=$this->getItem($row);
-		if(isset($row)){
+		if (isset($row)) {
 			$col=$row->getItem($col);
 		}
 		return $col;
 	}
 
 	/**
+	 *
 	 * @param int $index
 	 * @return \Ajax\semantic\html\content\HtmlTR
 	 */
-	public function getRow($index){
+	public function getRow($index) {
 		return $this->getItem($index);
 	}
 
 	/**
+	 *
 	 * @param int $row
 	 * @param int $col
 	 * @param mixed $value
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function setCellValue($row,$col,$value=""){
+	public function setCellValue($row, $col, $value="") {
 		$cell=$this->getCell($row, $col);
-		if(isset($cell)===true){
+		if (isset($cell)===true) {
 			$cell->setValue($value);
 		}
 		return $this;
@@ -94,36 +100,58 @@ class HtmlTableContent extends HtmlSemCollection{
 	 * Sets the cells values
 	 * @param mixed $values
 	 */
-	public function setValues($values=array()){
+	public function setValues($values=array()) {
 		$count=$this->count();
-		if(\is_array($values)===false){
+		$isArray=true;
+		if (\is_array($values)===false) {
 			$values=\array_fill(0, $count, $values);
+			$isArray=false;
 		}
-		$count=\min(\sizeof($values),$count);
-
-		for ($i=0;$i<$count;$i++){
+		if (JArray::dimension($values)==1&&$isArray)
+			$values=[ $values ];
+		
+		$count=\min(\sizeof($values), $count);
+		
+		for($i=0; $i<$count; $i++) {
 			$row=$this->content[$i];
 			$row->setValues($values[$i]);
 		}
 		return $this;
 	}
 
-	public function setColValues($colIndex,$values=array()){
+	public function setColValues($colIndex, $values=array()) {
 		$count=$this->count();
-		if(\is_array($values)===false){
+		if (\is_array($values)===false) {
 			$values=\array_fill(0, $count, $values);
 		}
-		$count=\min(\sizeof($values),$count);
-		for ($i=0;$i<$count;$i++){
+		$count=\min(\sizeof($values), $count);
+		for($i=0; $i<$count; $i++) {
 			$this->getCell($i, $colIndex)->setValue($values[$i]);
 		}
 		return $this;
 	}
 
-	public function colCenter($colIndex){
+	public function setRowValues($rowIndex, $values=array()) {
 		$count=$this->count();
-		for ($i=0;$i<$count;$i++){
+		if (\is_array($values)===false) {
+			$values=\array_fill(0, $count, $values);
+		}
+		$this->getItem($rowIndex)->setValues($values);
+		return $this;
+	}
+
+	public function colCenter($colIndex) {
+		$count=$this->count();
+		for($i=0; $i<$count; $i++) {
 			$this->getCell($i, $colIndex)->textCenterAligned();
+		}
+		return $this;
+	}
+
+	public function colRight($colIndex) {
+		$count=$this->count();
+		for($i=0; $i<$count; $i++) {
+			$this->getCell($i, $colIndex)->textRightAligned();
 		}
 		return $this;
 	}
@@ -132,7 +160,7 @@ class HtmlTableContent extends HtmlSemCollection{
 	 * Returns the number of rows (TR)
 	 * @return int
 	 */
-	public function getRowCount(){
+	public function getRowCount() {
 		return $this->count();
 	}
 
@@ -140,9 +168,9 @@ class HtmlTableContent extends HtmlSemCollection{
 	 * Returns the number of columns (TD)
 	 * @return int
 	 */
-	public function getColCount(){
+	public function getColCount() {
 		$result=0;
-		if($this->count()>0)
+		if ($this->count()>0)
 			$result=$this->getItem(0)->getColCount();
 		return $result;
 	}
@@ -153,26 +181,23 @@ class HtmlTableContent extends HtmlSemCollection{
 	 * @param int $colIndex
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function delete($rowIndex,$colIndex=NULL){
-		if(isset($colIndex)){
+	public function delete($rowIndex, $colIndex=NULL) {
+		if (isset($colIndex)) {
 			$row=$this->getItem($rowIndex);
-			if(isset($row)===true){
+			if (isset($row)===true) {
 				$row->delete($colIndex);
 			}
-		}else{
+		} else {
 			$this->removeItem($rowIndex);
 		}
 		return $this;
 	}
 
-	public function mergeCol($rowIndex=0,$colIndex=0){
+	public function mergeCol($rowIndex=0, $colIndex=0) {
 		return $this->getItem($rowIndex)->mergeCol($colIndex);
 	}
 
-	public function mergeRow($rowIndex=0,$colIndex=0){
+	public function mergeRow($rowIndex=0, $colIndex=0) {
 		return $this->getItem($rowIndex)->mergeRow($colIndex);
 	}
-
-
-
 }

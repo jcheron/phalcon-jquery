@@ -13,11 +13,12 @@ use Ajax\semantic\html\base\constants\Variation;
  */
 class HtmlTable extends HtmlSemDoubleElement {
 	private $_colCount;
+
 	public function __construct($identifier, $rowCount, $colCount) {
 		parent::__construct($identifier, "table", "ui table");
-		$this->content=array();
+		$this->content=array ();
 		$this->setRowCount($rowCount, $colCount);
-		$this->_variations=[Variation::CELLED,Variation::PADDED];
+		$this->_variations=[ Variation::CELLED,Variation::PADDED ];
 	}
 
 	/**
@@ -25,10 +26,10 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * @param string $key
 	 * @return HtmlTableContent
 	 */
-	private function getPart($key){
-		if(\array_key_exists($key, $this->content)===false){
-			$this->content[$key]=new HtmlTableContent("",$key);
-			if($key!=="tbody"){
+	private function getPart($key) {
+		if (\array_key_exists($key, $this->content)===false) {
+			$this->content[$key]=new HtmlTableContent("", $key);
+			if ($key!=="tbody") {
 				$this->content[$key]->setRowCount(1, $this->_colCount);
 			}
 		}
@@ -39,7 +40,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * Returns/create eventually the body of the table
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function getBody(){
+	public function getBody() {
 		return $this->getPart("tbody");
 	}
 
@@ -47,7 +48,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * Returns/create eventually the header of the table
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function getHeader(){
+	public function getHeader() {
 		return $this->getPart("thead");
 	}
 
@@ -55,7 +56,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * Returns/create eventually the footer of the table
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
-	public function getFooter(){
+	public function getFooter() {
 		return $this->getPart("tfoot");
 	}
 
@@ -64,18 +65,19 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * @param string $key
 	 * @return boolean
 	 */
-	public function hasPart($key){
+	public function hasPart($key) {
 		return \array_key_exists($key, $this->content)===true;
 	}
 
 	/**
+	 *
 	 * @param int $rowCount
 	 * @param int $colCount
 	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
 	 */
 	public function setRowCount($rowCount, $colCount) {
 		$this->_colCount=$colCount;
-		return $this->getBody()->setRowCount($rowCount,$colCount);
+		return $this->getBody()->setRowCount($rowCount, $colCount);
 	}
 
 	/**
@@ -84,28 +86,50 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * @param int $col
 	 * @return \Ajax\semantic\html\content\HtmlTD
 	 */
-	public function getCell($row,$col){
-		return $this->getBody()->getCell($row,$col);
+	public function getCell($row, $col) {
+		return $this->getBody()->getCell($row, $col);
 	}
 
-	public function setValues($values=array()){
+	public function setValues($values=array()) {
 		$this->getBody()->setValues($values);
 		return $this;
 	}
 
-	public function setColValues($colIndex,$values=array()){
-		$this->getBody()->setColValues($colIndex,$values);
+	public function setColValues($colIndex, $values=array()) {
+		$this->getBody()->setColValues($colIndex, $values);
 		return $this;
 	}
 
-	public function colCenter($colIndex){
-		if($this->hasPart("thead"))
+	public function setRowValues($rowIndex, $values=array()) {
+		$this->getBody()->setRowValues($rowIndex, $values);
+		return $this;
+	}
+
+	public function colCenter($colIndex) {
+		if ($this->hasPart("thead"))
 			$this->getHeader()->colCenter($colIndex);
 		$this->getBody()->colCenter($colIndex);
 		return $this;
 	}
 
-	public function setCelled(){
+	public function colRight($colIndex) {
+		if ($this->hasPart("thead"))
+			$this->getHeader()->colRight($colIndex);
+		$this->getBody()->colRight($colIndex);
+		return $this;
+	}
+
+	public function setCelled() {
 		return $this->addToProperty("class", "celled");
+	}
+
+	public function setBasic($very=false) {
+		if ($very)
+			$this->addToPropertyCtrl("class", "very", array ("very" ));
+		return $this->addToPropertyCtrl("class", "basic", array ("basic" ));
+	}
+
+	public function setCollapsing() {
+		return $this->addToProperty("class", "collapsing");
 	}
 }

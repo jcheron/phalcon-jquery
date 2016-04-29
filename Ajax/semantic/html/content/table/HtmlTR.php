@@ -34,7 +34,7 @@ class HtmlTR extends HtmlSemCollection{
 	 */
 	protected function createItem($value){
 		$count=$this->count();
-		$td=new HtmlTD("",$this->_container,$value,$this->_tdTagName);
+		$td=new HtmlTD("",$value,$this->_tdTagName);
 		$td->setContainer($this->_container, $this->_row, $count);
 		return $td;
 	}
