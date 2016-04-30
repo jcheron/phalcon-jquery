@@ -15,6 +15,7 @@ use Ajax\semantic\html\base\constants\Social;
  */
 class HtmlButton extends HtmlSemDoubleElement {
 	use LabeledIconTrait;
+
 	/**
 	 * Constructs an HTML Semantic button
 	 * @param string $identifier HTML id
@@ -23,7 +24,7 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * @param string $onClick JS Code for click event
 	 */
 	public function __construct($identifier, $value="", $cssStyle=null, $onClick=null) {
-		parent::__construct($identifier, "button","ui button");
+		parent::__construct($identifier, "button", "ui button");
 		$this->content=$value;
 		if (isset($cssStyle)) {
 			$this->setStyle($cssStyle);
@@ -49,47 +50,48 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * @return \Ajax\semantic\html\HtmlButton default : ""
 	 */
 	public function setStyle($cssStyle) {
-		return $this->addToProperty("class",$cssStyle);
+		return $this->addToProperty("class", $cssStyle);
 	}
 
-	public function setFocusable($value=true){
-		if($value===true)
+	public function setFocusable($value=true) {
+		if ($value === true)
 			$this->setProperty("tabindex", "0");
-		else{
+		else {
 			$this->removeProperty("tabindex");
 		}
 		return $this;
 	}
 
-	public function setAnimated($content,$animation=""){
+	public function setAnimated($content, $animation="") {
 		$this->setTagName("div");
-		$this->addToProperty("class", "animated ".$animation);
-		$visible=new HtmlSemDoubleElement("visible-".$this->identifier,"div");
+		$this->addToProperty("class", "animated " . $animation);
+		$visible=new HtmlSemDoubleElement("visible-" . $this->identifier, "div");
 		$visible->setClass("visible content");
 		$visible->setContent($this->content);
-		$hidden=new HtmlSemDoubleElement("hidden-".$this->identifier,"div");
+		$hidden=new HtmlSemDoubleElement("hidden-" . $this->identifier, "div");
 		$hidden->setClass("hidden content");
 		$hidden->setContent($content);
-		$this->content=array($visible,$hidden);
+		$this->content=array ($visible,$hidden );
 		return $hidden;
 	}
 
 	/**
+	 *
 	 * @param string|HtmlIcon $icon
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function asIcon($icon){
+	public function asIcon($icon) {
 		$iconO=$icon;
-		if(\is_string($icon)){
-			$iconO=new HtmlIcon("icon-".$this->identifier, $icon);
+		if (\is_string($icon)) {
+			$iconO=new HtmlIcon("icon-" . $this->identifier, $icon);
 		}
 		$this->addToProperty("class", "icon");
 		$this->content=$iconO;
 		return $this;
 	}
 
-	public function asSubmit(){
-		$this->setProperty("type","submit");
+	public function asSubmit() {
+		$this->setProperty("type", "submit");
 		return $this->setTagName("button");
 	}
 
@@ -99,16 +101,17 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * @param string $before
 	 * @return \Ajax\semantic\html\elements\HtmlLabel
 	 */
-	public function addLabel($caption,$before=false){
+	public function addLabel($caption, $before=false) {
 		$this->tagName="div";
 		$this->addToProperty("class", "labeled");
-		$this->content=new HtmlButton("button-".$this->identifier,$this->content);
+		$this->content=new HtmlButton("button-" . $this->identifier, $this->content);
 		$this->content->setTagName("div");
-		$label=new HtmlLabel("label-".$this->identifier,$caption,"a");
+		$label=new HtmlLabel("label-" . $this->identifier, $caption, "a");
 		$label->setBasic();
-		$this->addContent($label,$before);
+		$this->addContent($label, $before);
 		return $label;
 	}
+
 	/*
 	 * (non-PHPdoc)
 	 * @see \Ajax\common\html\BaseHtml::fromArray()
@@ -122,10 +125,10 @@ class HtmlButton extends HtmlSemDoubleElement {
 	}
 
 	/**
-	 *  show it is currently the active user selection
+	 * show it is currently the active user selection
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setActive(){
+	public function setActive() {
 		return $this->addToProperty("class", "active");
 	}
 
@@ -133,7 +136,7 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * hint towards a positive consequence
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setPositive(){
+	public function setPositive() {
 		return $this->addToProperty("class", "positive");
 	}
 
@@ -141,7 +144,7 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * hint towards a negative consequence
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setNegative(){
+	public function setNegative() {
 		return $this->addToProperty("class", "negative");
 	}
 
@@ -149,38 +152,45 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * formatted to toggle on/off
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setToggle(){
+	public function setToggle() {
 		return $this->addToProperty("class", "toggle");
 	}
 
 	/**
+	 *
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setCircular(){
+	public function setCircular() {
 		return $this->addToProperty("class", "circular");
 	}
 
 	/**
-	 *  button is less pronounced
+	 * button is less pronounced
 	 * @return \Ajax\semantic\html\elements\HtmlButton
 	 */
-	public function setBasic(){
+	public function setBasic() {
 		return $this->addToProperty("class", "basic");
 	}
 
-	public function setEmphasis($value){
+	public function setEmphasis($value) {
 		return $this->addToPropertyCtrl("class", $value, Emphasis::getConstants());
 	}
 
-	public function setLoading(){
+	public function setLoading() {
 		return $this->addToProperty("class", "loading");
 	}
 
-	public static function getSocial($identifier,$social,$value=NULL){
-		if($value===NULL)
+	public static function social($identifier, $social, $value=NULL) {
+		if ($value === NULL)
 			$value=\ucfirst($social);
-		$return=new HtmlButton($identifier,$value);
+		$return=new HtmlButton($identifier, $value);
 		$return->addIcon($social);
 		return $return->addToPropertyCtrl("class", $social, Social::getConstants());
+	}
+
+	public static function labeled($identifier, $value, $icon, $before=true) {
+		$result=new HtmlButton($identifier, $value);
+		$result->addIcon($icon, $before, true);
+		return $result;
 	}
 }

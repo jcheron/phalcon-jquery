@@ -19,8 +19,8 @@ abstract class BaseHtml extends BaseWidget {
 	protected $tagName;
 	protected $properties=array ();
 	protected $_events=array ();
-	protected $_wrapBefore=array();
-	protected $_wrapAfter=array();
+	protected $_wrapBefore=array ();
+	protected $_wrapAfter=array ();
 	protected $_bsComponent;
 
 	public function getBsComponent() {
@@ -33,7 +33,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	protected function getTemplate(JsUtils $js=NULL) {
-		return PropertyWrapper::wrap($this->_wrapBefore, $js).$this->_template.PropertyWrapper::wrap($this->_wrapAfter, $js);
+		return PropertyWrapper::wrap($this->_wrapBefore, $js) . $this->_template . PropertyWrapper::wrap($this->_wrapAfter, $js);
 	}
 
 	public function getProperties() {
@@ -52,17 +52,20 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function getProperty($name) {
 		if (array_key_exists($name, $this->properties))
-			return $this->properties [$name];
+			return $this->properties[$name];
 	}
 
 	public function addToProperty($name, $value, $separator=" ") {
-		$v=@$this->properties[$name];
-		if (isset($v)&&$v!=="")
-			$v=$v.$separator.$value;
-		else
-			$v=$value;
-
-		return $this->setProperty($name, $v);
+		if ($value !== "" && $this->propertyContains($name, $value) === false) {
+			$v=@$this->properties[$name];
+			if (isset($v) && $v !== "")
+				$v=$v . $separator . $value;
+			else
+				$v=$value;
+			
+			return $this->setProperty($name, $v);
+		}
+		return $this;
 	}
 
 	public function addProperties($properties) {
@@ -73,24 +76,24 @@ abstract class BaseHtml extends BaseWidget {
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
 		$result=$this->getTemplate($js);
 		foreach ( $this as $key => $value ) {
-			if (PhalconUtils::startsWith($key, "_")===false&&$key!=="events") {
+			if (PhalconUtils::startsWith($key, "_") === false && $key !== "events") {
 				if (is_array($value)) {
 					$v=PropertyWrapper::wrap($value, $js);
 				} else {
 					$v=$value;
 				}
-				$result=str_ireplace("%".$key."%", $v, $result);
+				$result=str_ireplace("%" . $key . "%", $v, $result);
 			}
 		}
 		if (isset($js)) {
 			$this->run($js);
 		}
-		if (isset($view)===true) {
+		if (isset($view) === true) {
 			$controls=$view->getVar("q");
-			if (isset($controls)===false) {
+			if (isset($controls) === false) {
 				$controls=array ();
 			}
-			$controls [$this->identifier]=$result;
+			$controls[$this->identifier]=$result;
 			$view->setVar("q", $controls);
 		}
 		return $result;
@@ -98,33 +101,33 @@ abstract class BaseHtml extends BaseWidget {
 
 	protected function ctrl($name, $value, $typeCtrl) {
 		if (is_array($typeCtrl)) {
-			if (array_search($value, $typeCtrl)===false) {
-				throw new \Exception("La valeur passée a propriété `".$name."` ne fait pas partie des valeurs possibles : {".implode(",", $typeCtrl)."}");
+			if (array_search($value, $typeCtrl) === false) {
+				throw new \Exception("La valeur passée a propriété `" . $name . "` ne fait pas partie des valeurs possibles : {" . implode(",", $typeCtrl) . "}");
 			}
 		} else {
 			if (!$typeCtrl($value)) {
-				throw new \Exception("La fonction ".$typeCtrl." a retourné faux pour l'affectation de la propriété ".$name);
+				throw new \Exception("La fonction " . $typeCtrl . " a retourné faux pour l'affectation de la propriété " . $name);
 			}
 		}
 		return true;
 	}
 
-	protected function propertyContains($propertyName,$value){
+	protected function propertyContains($propertyName, $value) {
 		$values=$this->getProperty($propertyName);
-		if(isset($values)){
+		if (isset($values)) {
 			return JString::contains($values, $value);
 		}
 		return false;
 	}
 
 	protected function setPropertyCtrl($name, $value, $typeCtrl) {
-		if ($this->ctrl($name, $value, $typeCtrl)===true)
+		if ($this->ctrl($name, $value, $typeCtrl) === true)
 			return $this->setProperty($name, $value);
 		return $this;
 	}
 
 	protected function setMemberCtrl(&$name, $value, $typeCtrl) {
-		if ($this->ctrl($name, $value, $typeCtrl)===true) {
+		if ($this->ctrl($name, $value, $typeCtrl) === true) {
 			return $name=$value;
 		}
 		return $this;
@@ -133,39 +136,39 @@ abstract class BaseHtml extends BaseWidget {
 	protected function addToMemberUnique(&$name, $value, $typeCtrl, $separator=" ") {
 		if (is_array($typeCtrl)) {
 			$this->removeOldValues($name, $typeCtrl);
-			$name.=$separator.$value;
+			$name.=$separator . $value;
 		}
 		return $this;
 	}
 
-	protected function removePropertyValue($name,$value){
+	protected function removePropertyValue($name, $value) {
 		$this->properties[$name]=\str_replace($value, "", $this->properties[$name]);
 		return $this;
 	}
 
-	protected function removePropertyValues($name,$values){
+	protected function removePropertyValues($name, $values) {
 		$this->removeOldValues($this->properties[$name], $values);
 		return $this;
 	}
 
-	protected function removeProperty($name){
-		if(\array_key_exists($name, $this->properties))
+	protected function removeProperty($name) {
+		if (\array_key_exists($name, $this->properties))
 			unset($this->properties[$name]);
 		return $this;
 	}
 
 	protected function addToMemberCtrl(&$name, $value, $typeCtrl, $separator=" ") {
-		if ($this->ctrl($name, $value, $typeCtrl)===true) {
+		if ($this->ctrl($name, $value, $typeCtrl) === true) {
 			if (is_array($typeCtrl)) {
 				$this->removeOldValues($name, $typeCtrl);
 			}
-			$name.=$separator.$value;
+			$name.=$separator . $value;
 		}
 		return $this;
 	}
 
 	protected function addToMember(&$name, $value, $separator=" ") {
-		$name=str_ireplace($value, "", $name).$separator.$value;
+		$name=str_ireplace($value, "", $name) . $separator . $value;
 		return $this;
 	}
 
@@ -173,16 +176,20 @@ abstract class BaseHtml extends BaseWidget {
 		if (@class_exists($typeCtrl, true))
 			$typeCtrl=$typeCtrl::getConstants();
 		if (is_array($typeCtrl)) {
-			$this->removeOldValues($this->properties [$name], $typeCtrl);
+			$this->removeOldValues($this->properties[$name], $typeCtrl);
 		}
 		return $this->addToProperty($name, $value);
 	}
 
 	public function addToPropertyCtrl($name, $value, $typeCtrl) {
-		// if($this->ctrl($name, $value, $typeCtrl)===true){
 		return $this->addToPropertyUnique($name, $value, $typeCtrl);
-		// }
-		//return $this;
+	}
+
+	public function addToPropertyCtrlCheck($name, $value, $typeCtrl) {
+		if ($this->ctrl($name, $value, $typeCtrl) === true) {
+			return $this->addToProperty($name, $value);
+		}
+		return $this;
 	}
 
 	protected function removeOldValues(&$oldValue, $allValues) {
@@ -191,6 +198,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	/**
+	 *
 	 * @param JsUtils $js
 	 * @return SimpleExtComponent
 	 */
@@ -208,25 +216,25 @@ abstract class BaseHtml extends BaseWidget {
 	public function fromArray($array) {
 		foreach ( $this as $key => $value ) {
 			if (array_key_exists($key, $array) && !PhalconUtils::startsWith($key, "_")) {
-					$setter="set".ucfirst($key);
-					$this->$setter($array [$key]);
-				unset($array [$key]);
+				$setter="set" . ucfirst($key);
+				$this->$setter($array[$key]);
+				unset($array[$key]);
 			}
 		}
 		foreach ( $array as $key => $value ) {
 			if (method_exists($this, $key)) {
 				try {
 					$this->$key($value);
-					unset($array [$key]);
+					unset($array[$key]);
 				} catch ( \Exception $e ) {
 					// Nothing to do
 				}
 			} else {
-				$setter="set".ucfirst($key);
+				$setter="set" . ucfirst($key);
 				if (method_exists($this, $setter)) {
 					try {
 						$this->$setter($value);
-						unset($array [$key]);
+						unset($array[$key]);
 					} catch ( \Exception $e ) {
 						// Nothing to do
 					}
@@ -236,21 +244,20 @@ abstract class BaseHtml extends BaseWidget {
 		return $array;
 	}
 
-	public function fromDatabaseObjects($objects,$function) {
-		if(isset($objects)){
-			foreach ($objects as $object){
-				$this->fromDatabaseObject($object,$function);
+	public function fromDatabaseObjects($objects, $function) {
+		if (isset($objects)) {
+			foreach ( $objects as $object ) {
+				$this->fromDatabaseObject($object, $function);
 			}
 		}
 		return $this;
 	}
 
-	public function fromDatabaseObject($object,$function){
-
+	public function fromDatabaseObject($object, $function) {
 	}
 
 	public function wrap($before, $after="") {
-		if(isset($before)){
+		if (isset($before)) {
 			$this->_wrapBefore[]=$before;
 		}
 		$this->_wrapAfter[]=$after;
@@ -258,27 +265,24 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function addEvent($event, $jsCode, $stopPropagation=false, $preventDefault=false) {
-		if ($stopPropagation===true) {
-			$jsCode="event.stopPropagation();".$jsCode;
+		if ($stopPropagation === true) {
+			$jsCode="event.stopPropagation();" . $jsCode;
 		}
-		if ($preventDefault===true) {
-			$jsCode="event.preventDefault();".$jsCode;
+		if ($preventDefault === true) {
+			$jsCode="event.preventDefault();" . $jsCode;
 		}
 		return $this->_addEvent($event, $jsCode);
 	}
 
 	public function _addEvent($event, $jsCode) {
 		if (array_key_exists($event, $this->_events)) {
-			if (is_array($this->_events [$event])) {
-				$this->_events [$event] []=$jsCode;
+			if (is_array($this->_events[$event])) {
+				$this->_events[$event][]=$jsCode;
 			} else {
-				$this->_events [$event]=array (
-						$this->_events [$event],
-						$jsCode
-				);
+				$this->_events[$event]=array ($this->_events[$event],$jsCode );
 			}
 		} else {
-			$this->_events [$event]=$jsCode;
+			$this->_events[$event]=$jsCode;
 		}
 		return $this;
 	}
@@ -303,9 +307,9 @@ abstract class BaseHtml extends BaseWidget {
 					$code="";
 					foreach ( $jsCode as $jsC ) {
 						if ($jsC instanceof AjaxCall) {
-							$code.="\n".$jsC->compile($js);
+							$code.="\n" . $jsC->compile($js);
 						} else {
-							$code.="\n".$jsC;
+							$code.="\n" . $jsC;
 						}
 					}
 				} elseif ($jsCode instanceof AjaxCall) {
@@ -313,15 +317,12 @@ abstract class BaseHtml extends BaseWidget {
 				}
 				$this->_bsComponent->addEvent($event, $code);
 			}
-			$this->_events=array();
+			$this->_events=array ();
 		}
 	}
 
 	public function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
-		$params=array (
-				"url" => $url,
-				"responseElement" => $responseElement
-		);
+		$params=array ("url" => $url,"responseElement" => $responseElement );
 		$params=array_merge($params, $parameters);
 		$this->_addEvent($event, new AjaxCall($operation, $params));
 		return $this;
@@ -336,7 +337,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postOn($event, $url, $params="{}", $responseElement="", $parameters=array()) {
-		$parameters ["params"]=$params;
+		$parameters["params"]=$params;
 		return $this->_ajaxOn("post", $event, $url, $responseElement, $parameters);
 	}
 
@@ -345,7 +346,7 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function postFormOn($event, $url, $form, $responseElement="", $parameters=array()) {
-		$parameters ["form"]=$form;
+		$parameters["form"]=$form;
 		return $this->_ajaxOn("postForm", $event, $url, $responseElement, $parameters);
 	}
 
@@ -357,21 +358,21 @@ abstract class BaseHtml extends BaseWidget {
 		if (is_array($elements)) {
 			$flag=false;
 			$index=0;
-			while ( !$flag&&$index<sizeof($elements) ) {
-				if ($elements [$index] instanceof BaseHtml)
-					$flag=($elements [$index]->getIdentifier()===$identifier);
+			while ( !$flag && $index < sizeof($elements) ) {
+				if ($elements[$index] instanceof BaseHtml)
+					$flag=($elements[$index]->getIdentifier() === $identifier);
 				$index++;
 			}
-			if ($flag===true)
-				return $elements [$index-1];
+			if ($flag === true)
+				return $elements[$index - 1];
 		} elseif ($elements instanceof BaseHtml) {
-			if ($elements->getIdentifier()===$identifier)
+			if ($elements->getIdentifier() === $identifier)
 				return $elements;
 		}
 		return null;
 	}
 
-	public function __toString(){
+	public function __toString() {
 		return $this->compile();
 	}
 
@@ -387,29 +388,29 @@ abstract class BaseHtml extends BaseWidget {
 		if (is_array($value)) {
 			$value=implode(",", $value);
 		}
-		if (strrpos($value, 'this')===false&&strrpos($value, 'event')===false) {
-			$value='"'.$value.'"';
+		if (strrpos($value, 'this') === false && strrpos($value, 'event') === false) {
+			$value='"' . $value . '"';
 		}
 		return $value;
 	}
 
-	public function jsDoJquery($jqueryCall, $param=""){
-		return "$('#".$this->identifier."').".$jqueryCall."(".$this->_prep_value($param).");";
+	public function jsDoJquery($jqueryCall, $param="") {
+		return "$('#" . $this->identifier . "')." . $jqueryCall . "(" . $this->_prep_value($param) . ");";
 	}
 
-	public function executeOnRun($jsCode){
+	public function executeOnRun($jsCode) {
 		return $this->_addEvent("execute", $jsCode);
 	}
 
-	public function jsHtml($content=""){
-		return $this->jsDoJquery("html",$content);
+	public function jsHtml($content="") {
+		return $this->jsDoJquery("html", $content);
 	}
 
-	public function jsShow(){
+	public function jsShow() {
 		return $this->jsDoJquery("show");
 	}
 
-	public function jsHide(){
+	public function jsHide() {
 		return $this->jsDoJquery("hide");
 	}
 
@@ -422,5 +423,4 @@ abstract class BaseHtml extends BaseWidget {
 		$this->_wrapAfter=$wrapAfter;
 		return $this;
 	}
-
 }

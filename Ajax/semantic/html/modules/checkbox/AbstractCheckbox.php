@@ -95,4 +95,8 @@ abstract class AbstractCheckbox extends HtmlSemDoubleElement {
 		}
 		return $this;
 	}
+
+	public function setFitted() {
+		return $this->addToProperty("class", "fitted");
+	}
 }

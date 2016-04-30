@@ -13,12 +13,13 @@ use Ajax\semantic\html\base\constants\Direction;
  * @author jc
  * @version 1.001
  */
-class HtmlGridCol extends HtmlSemDoubleElement{
+class HtmlGridCol extends HtmlSemDoubleElement {
 	use TextAlignmentTrait;
-	public function __construct($identifier,$width=NULL){
-		parent::__construct($identifier,"div");
+
+	public function __construct($identifier, $width=NULL) {
+		parent::__construct($identifier, "div");
 		$this->setClass("column");
-		if(isset($width))
+		if (isset($width))
 			$this->setWidth($width);
 	}
 
@@ -27,30 +28,20 @@ class HtmlGridCol extends HtmlSemDoubleElement{
 	 * @param int $width
 	 * @return \Ajax\semantic\html\content\HtmlGridCol
 	 */
-	public function setWidth($width){
-		if(\is_int($width)){
-			$width=Wide::getConstants()["W".$width];
+	public function setWidth($width) {
+		if (\is_int($width)) {
+			$width=Wide::getConstants()["W" . $width];
 		}
 		$this->addToPropertyCtrl("class", $width, Wide::getConstants());
-		return $this->addToPropertyCtrl("class", "wide",array("wide"));
+		return $this->addToPropertyCtrl("class", "wide", array ("wide" ));
 	}
 
-	/**
-	 * Defines the coll floating
-	 * @param Direction $value left or right
-	 * @return \Ajax\semantic\html\content\HtmlGridCol
-	 */
-	public function setFloated($value="left"){
-		return $this->addToPropertyCtrl("class", $value." floated",Direction::getConstantValues("floated"));
-	}
-
-
-	public function setValue($value){
+	public function setValue($value) {
 		$this->content=$value;
 		return $this;
 	}
 
-	public function setValues($value){
+	public function setValues($value) {
 		return $this->setValue($value);
 	}
 }

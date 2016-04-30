@@ -18,7 +18,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 		parent::__construct($identifier, "table", "ui table");
 		$this->content=array ();
 		$this->setRowCount($rowCount, $colCount);
-		$this->_variations=[ Variation::CELLED,Variation::PADDED ];
+		$this->_variations=[ Variation::CELLED,Variation::PADDED,Variation::COMPACT,Variation::DEFINITION ];
 	}
 
 	/**
@@ -111,6 +111,10 @@ class HtmlTable extends HtmlSemDoubleElement {
 	public function setRowValues($rowIndex, $values=array()) {
 		$this->getBody()->setRowValues($rowIndex, $values);
 		return $this;
+	}
+
+	public function addColVariations($colIndex, $variations=array()) {
+		return $this->getBody()->addColVariations($colIndex, $variations);
 	}
 
 	public function colCenter($colIndex) {

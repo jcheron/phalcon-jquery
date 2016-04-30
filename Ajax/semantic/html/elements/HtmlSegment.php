@@ -18,10 +18,11 @@ use Ajax\semantic\html\base\traits\TextAlignmentTrait;
  */
 class HtmlSegment extends HtmlSemDoubleElement {
 	use AttachedTrait,TextAlignmentTrait;
+
 	public function __construct($identifier, $content="") {
-		parent::__construct($identifier, "div","ui segment");
-		$this->_variations=\array_merge($this->_variations,[Variation::PADDED,Variation::COMPACT]);
-		$this->_states=\array_merge($this->_states,[State::LOADING]);
+		parent::__construct($identifier, "div", "ui segment");
+		$this->_variations=\array_merge($this->_variations, [ Variation::PADDED,Variation::COMPACT ]);
+		$this->_states=\array_merge($this->_states, [ State::LOADING ]);
 		$this->content=$content;
 	}
 
@@ -30,37 +31,31 @@ class HtmlSegment extends HtmlSemDoubleElement {
 	 * @param string $type one of "raised","stacked","piled" default : ""
 	 * @return \Ajax\semantic\html\elements\HtmlSegment
 	 */
-	public function setType($type){
+	public function setType($type) {
 		return $this->addToPropertyCtrl("class", $type, SegmentType::getConstants());
 	}
 
-	public function setSens($sens="vertical"){
-		return $this->addToPropertyCtrl("class", $sens, array("vertical","horizontal"));
+	public function setSens($sens="vertical") {
+		return $this->addToPropertyCtrl("class", $sens, array ("vertical","horizontal" ));
 	}
 
-
-	public function setEmphasis($value=Emphasis::SECONDARY){
+	public function setEmphasis($value=Emphasis::SECONDARY) {
 		return $this->addToPropertyCtrl("class", $value, Emphasis::getConstants());
 	}
 
-	public function setCircular(){
+	public function setCircular() {
 		return $this->addToProperty("class", "circular");
 	}
 
-	public function clear(){
+	public function clear() {
 		return $this->addToProperty("class", "clearing");
 	}
 
-	public function setFloating($value="left"){
-		return $this->addToPropertyCtrl("class", "floated ".$value,array("floated right","floated left"));
-	}
-
-	public function setCompact(){
+	public function setCompact() {
 		return $this->addToProperty("class", "compact");
 	}
 
-	public function setBasic(){
+	public function setBasic() {
 		return $this->setProperty("class", "ui basic segment");
 	}
-
 }

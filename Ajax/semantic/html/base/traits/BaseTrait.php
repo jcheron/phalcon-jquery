@@ -4,6 +4,7 @@ namespace Ajax\semantic\html\base\traits;
 
 use Ajax\semantic\html\base\constants\Size;
 use Ajax\semantic\html\base\constants\Color;
+use Ajax\semantic\html\base\constants\Direction;
 
 trait BaseTrait {
 	protected $_variations=[ ];
@@ -14,14 +15,16 @@ trait BaseTrait {
 
 	protected abstract function addToPropertyCtrl($name, $value, $typeCtrl);
 
+	protected abstract function addToPropertyCtrlCheck($name, $value, $typeCtrl);
+
 	public abstract function addToProperty($name, $value, $separator=" ");
 
 	public function addVariation($variation) {
-		return $this->addToPropertyCtrl("class", $variation, $this->_variations);
+		return $this->addToPropertyCtrlCheck("class", $variation, $this->_variations);
 	}
 
 	public function addState($state) {
-		return $this->addToPropertyCtrl("class", $state, $this->_states);
+		return $this->addToPropertyCtrlCheck("class", $state, $this->_states);
 	}
 
 	public function setVariation($variation) {
@@ -34,16 +37,20 @@ trait BaseTrait {
 		return $this->addToProperty("class", $this->_baseClass);
 	}
 
-	public function setVariations($variations=array()) {
+	public function addVariations($variations=array()) {
+		if (\is_string($variations))
+			$variations=\explode(" ", $variations);
 		foreach ( $variations as $variation ) {
-			$this->setVariation($variation);
+			$this->addVariation($variation);
 		}
 		return $this;
 	}
 
-	public function setStates($states=array()) {
+	public function addStates($states=array()) {
+		if (\is_string($states))
+			$states=\explode(" ", $states);
 		foreach ( $states as $state ) {
-			$this->setState($state);
+			$this->addState($state);
 		}
 		return $this;
 	}
@@ -92,5 +99,17 @@ trait BaseTrait {
 
 	public function setCircular() {
 		return $this->addToProperty("class", "circular");
+	}
+
+	public function setFloated($direction="right") {
+		return $this->addToPropertyCtrl("class", $direction . " floated", Direction::getConstantValues("floated"));
+	}
+
+	public function floatRight() {
+		return $this->setFloated();
+	}
+
+	public function floatLeft() {
+		return $this->setFloated("left");
 	}
 }
