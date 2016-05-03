@@ -193,4 +193,10 @@ class HtmlButton extends HtmlSemDoubleElement {
 		$result->addIcon($icon, $before, true);
 		return $result;
 	}
+
+	public static function icon($identifier, $icon) {
+		$result=new HtmlButton($identifier);
+		$result->asIcon($icon);
+		return $result;
+	}
 }

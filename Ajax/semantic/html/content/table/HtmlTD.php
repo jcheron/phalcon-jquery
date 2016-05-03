@@ -5,9 +5,12 @@ namespace Ajax\semantic\html\content\table;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 use Ajax\semantic\html\base\constants\Variation;
+use Ajax\semantic\html\base\constants\State;
+use Ajax\semantic\html\base\traits\TableElementTrait;
+use Ajax\semantic\html\elements\html5\HtmlLink;
 
 class HtmlTD extends HtmlSemDoubleElement {
-	use TextAlignmentTrait;
+	use TextAlignmentTrait,TableElementTrait;
 	private $_container;
 	private $_row;
 	private $_col;
@@ -21,6 +24,7 @@ class HtmlTD extends HtmlSemDoubleElement {
 	public function __construct($identifier, $content=NULL, $tagName="td") {
 		parent::__construct($identifier, $tagName, "", $content);
 		$this->_variations=[ Variation::COLLAPSING ];
+		$this->_states=[ State::ACTIVE,State::POSITIVE,State::NEGATIVE,State::WARNING,State::ERROR,State::DISABLED ];
 	}
 
 	public function setContainer($container, $row, $col) {
@@ -35,9 +39,9 @@ class HtmlTD extends HtmlSemDoubleElement {
 	}
 
 	public function setRowspan($rowspan) {
-		$to=min($this->_container->count(), $this->_row+$rowspan-1);
-		for($i=$to; $i>$this->_row; $i--) {
-			$this->_container->delete($this->_row+1, $this->_col);
+		$to=min($this->_container->count(), $this->_row + $rowspan - 1);
+		for($i=$to; $i > $this->_row; $i--) {
+			$this->_container->delete($i, $this->_col);
 		}
 		$this->setProperty("rowspan", $rowspan);
 		return $this->_container;
@@ -52,11 +56,44 @@ class HtmlTD extends HtmlSemDoubleElement {
 	}
 
 	public function setColspan($colspan) {
-		$to=min($this->_container->getRow($this->_row)->count(), $this->_col+$colspan-1);
-		for($i=$to; $i>$this->_col; $i--) {
-			$this->_container->delete($this->_row, $this->_col+1);
+		$to=min($this->_container->getRow($this->_row)->count(), $this->_col + $colspan - 1);
+		for($i=$to; $i > $this->_col; $i--) {
+			$this->_container->delete($this->_row, $this->_col + 1);
 		}
 		$this->setProperty("colspan", $colspan);
 		return $this->_container;
+	}
+
+	public function getColspan() {
+		$colspan=1;
+		if (\array_key_exists("colspan", $this->properties))
+			$colspan=$this->getProperty("colspan");
+		return $colspan;
+	}
+
+	public function getRowspan() {
+		$rowspan=1;
+		if (\array_key_exists("rowspan", $this->properties))
+			$rowspan=$this->getProperty("rowspan");
+		return $rowspan;
+	}
+
+	public function conditionalCellFormat($callback, $format) {
+		if ($callback($this)) {
+			$this->addToProperty("class", $format);
+		}
+		return $this;
+	}
+
+	public function apply($callback) {
+		$callback($this);
+		return $this;
+	}
+
+	public function setSelectable($href="#") {
+		if (\is_string($this->content)) {
+			$this->content=new HtmlLink("", $href, $this->content);
+		}
+		return $this->addToProperty("class", "selectable");
 	}
 }

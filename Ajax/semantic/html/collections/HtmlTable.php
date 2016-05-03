@@ -5,6 +5,9 @@ namespace Ajax\semantic\html\collections;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\content\table\HtmlTableContent;
 use Ajax\semantic\html\base\constants\Variation;
+use Ajax\JsUtils;
+use Phalcon\Mvc\View;
+use Ajax\service\JArray;
 
 /**
  * Semantic HTML Table component
@@ -18,7 +21,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 		parent::__construct($identifier, "table", "ui table");
 		$this->content=array ();
 		$this->setRowCount($rowCount, $colCount);
-		$this->_variations=[ Variation::CELLED,Variation::PADDED,Variation::COMPACT,Variation::DEFINITION ];
+		$this->_variations=[ Variation::CELLED,Variation::PADDED,Variation::COMPACT ];
 	}
 
 	/**
@@ -27,9 +30,9 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * @return HtmlTableContent
 	 */
 	private function getPart($key) {
-		if (\array_key_exists($key, $this->content)===false) {
+		if (\array_key_exists($key, $this->content) === false) {
 			$this->content[$key]=new HtmlTableContent("", $key);
-			if ($key!=="tbody") {
+			if ($key !== "tbody") {
 				$this->content[$key]->setRowCount(1, $this->_colCount);
 			}
 		}
@@ -66,7 +69,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 * @return boolean
 	 */
 	public function hasPart($key) {
-		return \array_key_exists($key, $this->content)===true;
+		return \array_key_exists($key, $this->content) === true;
 	}
 
 	/**
@@ -88,6 +91,20 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 */
 	public function getCell($row, $col) {
 		return $this->getBody()->getCell($row, $col);
+	}
+
+	public function getRow($rowIndex) {
+		return $this->getBody()->getRow($rowIndex);
+	}
+
+	public function addRow($values=array()) {
+		$row=$this->getBody()->addRow($this->_colCount);
+		$row->setValues(\array_values($values));
+		return $this;
+	}
+
+	public function newRow() {
+		return $this->getBody()->newRow($this->_colCount);
 	}
 
 	public function setValues($values=array()) {
@@ -118,16 +135,28 @@ class HtmlTable extends HtmlSemDoubleElement {
 	}
 
 	public function colCenter($colIndex) {
-		if ($this->hasPart("thead"))
-			$this->getHeader()->colCenter($colIndex);
-		$this->getBody()->colCenter($colIndex);
-		return $this;
+		return $this->colAlign($colIndex, "colCenter");
 	}
 
 	public function colRight($colIndex) {
-		if ($this->hasPart("thead"))
-			$this->getHeader()->colRight($colIndex);
-		$this->getBody()->colRight($colIndex);
+		return $this->colAlign($colIndex, "colRight");
+	}
+
+	public function colLeft($colIndex) {
+		return $this->colAlign($colIndex, "colLeft");
+	}
+
+	private function colAlign($colIndex, $function) {
+		if (\is_array($colIndex)) {
+			foreach ( $colIndex as $cIndex ) {
+				$this->colAlign($cIndex, $function);
+			}
+		} else {
+			if ($this->hasPart("thead")) {
+				$this->getHeader()->$function($colIndex);
+			}
+			$this->getBody()->$function($colIndex);
+		}
 		return $this;
 	}
 
@@ -147,5 +176,77 @@ class HtmlTable extends HtmlSemDoubleElement {
 
 	public function setDefinition() {
 		return $this->addToProperty("class", "definition");
+	}
+
+	public function setStructured() {
+		return $this->addToProperty("class", "structured");
+	}
+
+	public function setSortable($colIndex=NULL) {
+		if (isset($colIndex) && $this->hasPart("thead")) {
+			$this->getHeader()->sort($colIndex);
+		}
+		return $this->addToProperty("class", "sortable");
+	}
+
+	public function setSingleLine() {
+		return $this->addToProperty("class", "single line");
+	}
+
+	public function setFixed() {
+		return $this->addToProperty("class", "fixed");
+	}
+
+	public function conditionalCellFormat($callback, $format) {
+		$this->getBody()->conditionalCellFormat($callback, $format);
+		return $this;
+	}
+
+	public function conditionalRowFormat($callback, $format) {
+		$this->getBody()->conditionalRowFormat($callback, $format);
+		return $this;
+	}
+
+	public function applyCells($callback) {
+		$this->getBody()->applyCells($callback);
+		return $this;
+	}
+
+	public function applyRows($callback) {
+		$this->getBody()->applyRows($callback);
+		return $this;
+	}
+
+	public function setSelectable() {
+		return $this->addToProperty("class", "selectable");
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
+	 */
+	public function compile(JsUtils $js=NULL, View $view=NULL) {
+		$this->content=JArray::sortAssociative($this->content, [ "thead","tbody","tfoot" ]);
+		if ($this->propertyContains("class", "sortable")) {
+			$this->addEvent("execute", "$('#" . $this->identifier . "').tablesort();");
+		}
+		return parent::compile($js, $view);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see \Ajax\common\html\BaseHtml::fromDatabaseObject()
+	 */
+	public function fromDatabaseObject($object, $function) {
+		$result=$function($object);
+		if (\is_array($result)) {
+			return $this->addRow($function($object));
+		} else {
+			return $this->getBody()->_addRow($result);
+		}
 	}
 }

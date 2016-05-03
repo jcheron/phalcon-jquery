@@ -32,6 +32,16 @@ trait BaseTrait {
 		return $this->addToProperty("class", $this->_baseClass);
 	}
 
+	public function setVariations($variations) {
+		$this->setProperty("class", $this->_baseClass);
+		if (\is_string($variations))
+			$variations=\explode(" ", $variations);
+		foreach ( $variations as $variation ) {
+			$this->addVariation($variation);
+		}
+		return $this;
+	}
+
 	public function setState($state) {
 		$this->setPropertyCtrl("class", $state, $this->_states);
 		return $this->addToProperty("class", $this->_baseClass);
@@ -47,6 +57,16 @@ trait BaseTrait {
 	}
 
 	public function addStates($states=array()) {
+		if (\is_string($states))
+			$states=\explode(" ", $states);
+		foreach ( $states as $state ) {
+			$this->addState($state);
+		}
+		return $this;
+	}
+
+	public function setStates($states) {
+		$this->setProperty("class", $this->_baseClass);
 		if (\is_string($states))
 			$states=\explode(" ", $states);
 		foreach ( $states as $state ) {
@@ -111,5 +131,9 @@ trait BaseTrait {
 
 	public function floatLeft() {
 		return $this->setFloated("left");
+	}
+
+	public function getBaseClass() {
+		return $this->_baseClass;
 	}
 }

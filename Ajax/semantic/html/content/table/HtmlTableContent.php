@@ -35,13 +35,15 @@ class HtmlTableContent extends HtmlSemCollection {
 	public function setRowCount($rowCount, $colCount) {
 		$count=$this->count();
 		for($i=$count; $i < $rowCount; $i++) {
-			$this->addItem(NULL);
+			$this->addItem($colCount);
 		}
-		for($i=0; $i < $rowCount; $i++) {
-			$item=$this->content[$i];
-			$item->setTdTagName($this->_tdTagNames[$this->tagName]);
-			$this->content[$i]->setColCount($colCount);
-		}
+		/*
+		 * for($i=0; $i < $rowCount; $i++) {
+		 * $item=$this->content[$i];
+		 * $item->setTdTagName($this->_tdTagNames[$this->tagName]);
+		 * $this->content[$i]->setColCount($colCount);
+		 * }
+		 */
 		return $this;
 	}
 
@@ -66,8 +68,16 @@ class HtmlTableContent extends HtmlSemCollection {
 		return $tr;
 	}
 
+	public function newRow($value) {
+		return $this->createItem($value);
+	}
+
 	public function addRow($colCount) {
 		return $this->addItem($colCount);
+	}
+
+	public function _addRow($row) {
+		$this->addItem($row);
 	}
 
 	/**
@@ -121,9 +131,9 @@ class HtmlTableContent extends HtmlSemCollection {
 		}
 		if (JArray::dimension($values) == 1 && $isArray)
 			$values=[ $values ];
-		
+
 		$count=\min(\sizeof($values), $count);
-		
+
 		for($i=0; $i < $count; $i++) {
 			$row=$this->content[$i];
 			$row->setValues($values[$i]);
@@ -160,20 +170,26 @@ class HtmlTableContent extends HtmlSemCollection {
 		return $this;
 	}
 
-	public function colCenter($colIndex) {
+	private function colAlign($colIndex, $function) {
 		$count=$this->count();
 		for($i=0; $i < $count; $i++) {
-			$this->getCell($i, $colIndex)->textCenterAligned();
+			$index=$this->content[$i]->getColPosition($colIndex);
+			if ($index !== NULL)
+				$this->getCell($i, $index)->$function();
 		}
 		return $this;
 	}
 
+	public function colCenter($colIndex) {
+		return $this->colAlign($colIndex, "textCenterAligned");
+	}
+
 	public function colRight($colIndex) {
-		$count=$this->count();
-		for($i=0; $i < $count; $i++) {
-			$this->getCell($i, $colIndex)->textRightAligned();
-		}
-		return $this;
+		return $this->colAlign($colIndex, "textRightAligned");
+	}
+
+	public function colLeft($colIndex) {
+		return $this->colAlign($colIndex, "textLeftAligned");
 	}
 
 	/**
@@ -223,5 +239,59 @@ class HtmlTableContent extends HtmlSemCollection {
 
 	public function setFullWidth() {
 		return $this->addToProperty("class", "full-width");
+	}
+
+	public function sort($colIndex) {
+		$this->content[0]->getItem($colIndex)->addToProperty("class", "sorted ascending");
+	}
+
+	/**
+	 * @param mixed $callback
+	 * @param string $format
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
+	public function conditionalCellFormat($callback, $format) {
+		$rows=$this->content;
+		foreach ( $rows as $row ) {
+			$row->conditionalCellFormat($callback, $format);
+		}
+		return $this;
+	}
+
+	/**
+	 * @param mixed $callback
+	 * @param string $format
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
+	public function conditionalRowFormat($callback, $format) {
+		$rows=$this->content;
+		foreach ( $rows as $row ) {
+			$row->conditionalRowFormat($callback, $format);
+		}
+		return $this;
+	}
+
+	/**
+	 * @param mixed $callback
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
+	public function applyCells($callback) {
+		$rows=$this->content;
+		foreach ( $rows as $row ) {
+			$row->applyCells($callback);
+		}
+		return $this;
+	}
+
+	/**
+	 * @param mixed $callback
+	 * @return \Ajax\semantic\html\content\table\HtmlTableContent
+	 */
+	public function applyRows($callback) {
+		$rows=$this->content;
+		foreach ( $rows as $row ) {
+			$row->apply($callback);
+		}
+		return $this;
 	}
 }

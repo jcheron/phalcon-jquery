@@ -1,6 +1,7 @@
 <?php
 
 namespace Ajax\semantic\traits;
+
 use Ajax\common\components\GenericComponent;
 use Ajax\semantic\components\Popup;
 use Ajax\semantic\components\Dropdown;
@@ -9,9 +10,12 @@ use Ajax\common\components\SimpleComponent;
 use Ajax\semantic\components\Sticky;
 use Ajax\semantic\components\Checkbox;
 use Ajax\semantic\components\Rating;
+use Ajax\semantic\components\Progress;
+
 trait SemanticComponentsTrait {
 
 	public abstract function addComponent(SimpleComponent $component, $attachTo, $params);
+
 	/**
 	 *
 	 * @param string $attachTo
@@ -21,6 +25,7 @@ trait SemanticComponentsTrait {
 	public function generic($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new GenericComponent($this->js), $attachTo, $params);
 	}
+
 	/**
 	 *
 	 * @param string $attachTo
@@ -32,6 +37,7 @@ trait SemanticComponentsTrait {
 	}
 
 	/**
+	 *
 	 * @param string $attachTo
 	 * @param string|array $params
 	 * @return Dropdown
@@ -41,6 +47,7 @@ trait SemanticComponentsTrait {
 	}
 
 	/**
+	 *
 	 * @param string $attachTo
 	 * @param string|array $params
 	 * @return Accordion
@@ -61,4 +68,7 @@ trait SemanticComponentsTrait {
 		return $this->addComponent(new Rating($this->js), $attachTo, $params);
 	}
 
+	public function progress($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Progress($this->js), $attachTo, $params);
+	}
 }
