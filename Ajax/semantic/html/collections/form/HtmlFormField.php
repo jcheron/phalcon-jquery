@@ -11,7 +11,7 @@ class HtmlFormField extends HtmlSemDoubleElement {
 	public function __construct($identifier, $field,$label=NULL) {
 		parent::__construct($identifier, "div","field");
 		$this->content=array();
-		$this->_states=[State::ERROR,State::DISABLED];
+		self::$_states=[State::ERROR,State::DISABLED];
 		if(isset($label))
 			$this->setLabel($label);
 		$this->setField($field);

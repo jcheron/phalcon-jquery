@@ -56,7 +56,11 @@ abstract class BaseHtml extends BaseWidget {
 	}
 
 	public function addToProperty($name, $value, $separator=" ") {
-		if ($value !== "" && $this->propertyContains($name, $value) === false) {
+		if (\is_array($value)) {
+			foreach ( $value as $v ) {
+				$this->addToProperty($name, $v, $separator);
+			}
+		} else if ($value !== "" && $this->propertyContains($name, $value) === false) {
 			$v=@$this->properties[$name];
 			if (isset($v) && $v !== "")
 				$v=$v . $separator . $value;

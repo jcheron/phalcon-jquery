@@ -7,8 +7,8 @@ use Ajax\semantic\html\base\constants\Color;
 use Ajax\semantic\html\base\constants\Direction;
 
 trait BaseTrait {
-	protected $_variations=[ ];
-	protected $_states=[ ];
+	protected static $_variations=[ ];
+	protected static $_states=[ ];
 	protected $_baseClass;
 
 	protected abstract function setPropertyCtrl($name, $value, $typeCtrl);
@@ -20,15 +20,15 @@ trait BaseTrait {
 	public abstract function addToProperty($name, $value, $separator=" ");
 
 	public function addVariation($variation) {
-		return $this->addToPropertyCtrlCheck("class", $variation, $this->_variations);
+		return $this->addToPropertyCtrlCheck("class", $variation, self::$_variations);
 	}
 
 	public function addState($state) {
-		return $this->addToPropertyCtrlCheck("class", $state, $this->_states);
+		return $this->addToPropertyCtrlCheck("class", $state, self::$_states);
 	}
 
 	public function setVariation($variation) {
-		$this->setPropertyCtrl("class", $variation, $this->_variations);
+		$this->setPropertyCtrl("class", $variation, self::$_variations);
 		return $this->addToProperty("class", $this->_baseClass);
 	}
 
@@ -43,7 +43,7 @@ trait BaseTrait {
 	}
 
 	public function setState($state) {
-		$this->setPropertyCtrl("class", $state, $this->_states);
+		$this->setPropertyCtrl("class", $state, self::$_states);
 		return $this->addToProperty("class", $this->_baseClass);
 	}
 

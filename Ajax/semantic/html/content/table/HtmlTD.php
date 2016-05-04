@@ -23,8 +23,8 @@ class HtmlTD extends HtmlSemDoubleElement {
 	 */
 	public function __construct($identifier, $content=NULL, $tagName="td") {
 		parent::__construct($identifier, $tagName, "", $content);
-		$this->_variations=[ Variation::COLLAPSING ];
-		$this->_states=[ State::ACTIVE,State::POSITIVE,State::NEGATIVE,State::WARNING,State::ERROR,State::DISABLED ];
+		self::$_variations=[ Variation::COLLAPSING ];
+		self::$_states=[ State::ACTIVE,State::POSITIVE,State::NEGATIVE,State::WARNING,State::ERROR,State::DISABLED ];
 	}
 
 	public function setContainer($container, $row, $col) {

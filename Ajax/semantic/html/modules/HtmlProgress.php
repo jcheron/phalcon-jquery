@@ -6,17 +6,20 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\JsUtils;
 use Ajax\service\JArray;
 use Phalcon\Mvc\View;
+use Ajax\semantic\html\base\constants\State;
 
 class HtmlProgress extends HtmlSemDoubleElement {
 	private $_params=array ();
 
-	public function __construct($identifier, $value=NULL, $label=NULL) {
+	public function __construct($identifier, $value=NULL, $label=NULL, $attributes=array()) {
 		parent::__construct($identifier, "div", "ui progress");
 		if (isset($value) === true)
 			$this->setProperty("data-percent", $value);
 		$this->createBar();
 		if (isset($label) === true)
 			$this->setLabel($label);
+		self::$_states=[ State::SUCCESS,State::WARNING,State::ERROR,State::ACTIVE,State::DISABLED ];
+		$this->addToProperty("class", $attributes);
 	}
 
 	public function setLabel($label) {
@@ -30,12 +33,32 @@ class HtmlProgress extends HtmlSemDoubleElement {
 		return $this;
 	}
 
+	public function setTotal($value) {
+		return $this->setProperty("data-total", $value);
+	}
+
+	public function setValue($value) {
+		return $this->setProperty("data-value", $value);
+	}
+
+	public function setPercent($value) {
+		return $this->setProperty("data-percent", $value);
+	}
+
 	public function setIndicating() {
 		return $this->addToProperty("class", "indicating");
 	}
 
 	public function setActive() {
 		return $this->addToProperty("class", "active");
+	}
+
+	public function setWarning() {
+		return $this->addToProperty("class", "warning");
+	}
+
+	public function setError() {
+		return $this->addToProperty("class", "error");
 	}
 
 	/**
@@ -97,5 +120,9 @@ class HtmlProgress extends HtmlSemDoubleElement {
 			$this->_bsComponent=$js->semantic()->progress("#" . $this->identifier, $this->_params);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
+	}
+
+	public static function create($identifier, $value=NULL, $label=NULL, $attributes=array()) {
+		return new HtmlProgress($identifier, $value, $label, $attributes);
 	}
 }
