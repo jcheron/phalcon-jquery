@@ -20,7 +20,7 @@ class HtmlTR extends HtmlSemCollection {
 
 	public function __construct($identifier) {
 		parent::__construct($identifier, "tr", "");
-		self::$_states=[ State::ACTIVE,State::POSITIVE,State::NEGATIVE,State::WARNING,State::ERROR,State::DISABLED ];
+		$this->_states=[ State::ACTIVE,State::POSITIVE,State::NEGATIVE,State::WARNING,State::ERROR,State::DISABLED ];
 	}
 
 	public function setColCount($colCount) {

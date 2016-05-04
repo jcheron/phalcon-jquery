@@ -62,7 +62,7 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 	 * public function __call($name, $arguments){
 	 * $type=\substr($name, 0,3);
 	 * $name=\strtolower(\substr($name, 3));
-	 * $names=\array_merge(self::$_variations,self::$_states);
+	 * $names=\array_merge($this->_variations,$this->_states);
 	 * $argument=@$arguments[0];
 	 * if(\array_search($name, $names)!==FALSE){
 	 * switch ($type){

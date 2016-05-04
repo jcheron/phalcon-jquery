@@ -21,7 +21,7 @@ class HtmlForm extends HtmlSemCollection {
 
 	public function __construct($identifier, $elements=array()) {
 		parent::__construct($identifier, "form", "ui form");
-		self::$_states=[ State::ERROR,State::SUCCESS,State::WARNING,State::DISABLED ];
+		$this->_states=[ State::ERROR,State::SUCCESS,State::WARNING,State::DISABLED ];
 		$this->setProperty("name", $this->identifier);
 		$this->_fields=array ();
 		$this->addItems($elements);

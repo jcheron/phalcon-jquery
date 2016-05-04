@@ -21,8 +21,8 @@ class HtmlSegment extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $content="") {
 		parent::__construct($identifier, "div", "ui segment");
-		self::$_variations=\array_merge(self::$_variations, [ Variation::PADDED,Variation::COMPACT ]);
-		self::$_states=\array_merge(self::$_states, [ State::LOADING ]);
+		$this->_variations=\array_merge($this->_variations, [ Variation::PADDED,Variation::COMPACT ]);
+		$this->_states=\array_merge($this->_states, [ State::LOADING ]);
 		$this->content=$content;
 	}
 

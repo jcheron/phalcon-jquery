@@ -18,7 +18,7 @@ class HtmlProgress extends HtmlSemDoubleElement {
 		$this->createBar();
 		if (isset($label) === true)
 			$this->setLabel($label);
-		self::$_states=[ State::SUCCESS,State::WARNING,State::ERROR,State::ACTIVE,State::DISABLED ];
+		$this->_states=[ State::SUCCESS,State::WARNING,State::ERROR,State::ACTIVE,State::DISABLED ];
 		$this->addToProperty("class", $attributes);
 	}
 
