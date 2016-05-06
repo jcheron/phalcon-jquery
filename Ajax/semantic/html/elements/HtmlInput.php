@@ -13,7 +13,7 @@ class HtmlInput extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $type="text", $value="", $placeholder="") {
 		parent::__construct("div-" . $identifier, "div", "ui input");
-		$this->content=new \Ajax\common\html\html5\HtmlInput($identifier, $type, $value, $placeholder);
+		$this->content=[ "field" => new \Ajax\common\html\html5\HtmlInput($identifier, $type, $value, $placeholder) ];
 		$this->_states=[ State::DISABLED,State::FOCUS,State::ERROR ];
 		$this->_variations=[ Variation::TRANSPARENT ];
 	}
@@ -57,5 +57,14 @@ class HtmlInput extends HtmlSemDoubleElement {
 		$this->addToProperty("class", $direction . " action");
 		$this->addContent($actionO, \strstr($direction, Direction::LEFT) !== false);
 		return $actionO;
+	}
+
+	public function getField() {
+		return $this->content["field"];
+	}
+
+	public function setPlaceholder($value) {
+		$this->getField()->setPlaceholder($value);
+		return $this;
 	}
 }

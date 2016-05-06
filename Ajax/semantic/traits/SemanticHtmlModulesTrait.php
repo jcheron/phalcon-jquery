@@ -6,6 +6,7 @@ use Ajax\semantic\html\collections\form\HtmlFormCheckbox;
 use Ajax\semantic\html\base\constants\CheckboxType;
 use Ajax\semantic\html\modules\HtmlRating;
 use Ajax\semantic\html\modules\HtmlProgress;
+use Ajax\semantic\html\modules\HtmlSearch;
 
 trait SemanticHtmlModulesTrait {
 
@@ -40,5 +41,14 @@ trait SemanticHtmlModulesTrait {
 	 */
 	public function htmlProgress($identifier, $value=0, $label=NULL) {
 		return $this->addHtmlComponent(new HtmlProgress($identifier, $value, $label));
+	}
+
+	/**
+	 *
+	 * @param string $identifier
+	 * @param string $placeholder
+	 */
+	public function htmlSearch($identifier, $placeholder=NULL, $icon=NULL) {
+		return $this->addHtmlComponent(new HtmlSearch($identifier, $placeholder, $icon));
 	}
 }

@@ -23,8 +23,10 @@ abstract class SimpleComponent extends BaseComponent {
 		foreach ( $this->events as $event => $jsCode ) {
 			if($event=="execute"){
 				$this->jquery_code_for_compile []=$jsCode;
+			}else if($event=="beforeExecute"){
+				\array_unshift($this->jquery_code_for_compile, $jsCode);
 			}else
-			$this->jquery_code_for_compile []="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function( event, data ) {".$jsCode."});";
+				$this->jquery_code_for_compile []="$( \"".$this->attachTo."\" ).on(\"".$event."\" , function( event, data ) {".$jsCode."});";
 		}
 	}
 
