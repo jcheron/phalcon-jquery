@@ -2,7 +2,7 @@
 
 namespace Ajax\semantic\components\search;
 
-class SearchCategory {
+class SearchCategory implements ISearch {
 	private $id;
 	private $name;
 	private $results;
@@ -61,5 +61,9 @@ class SearchCategory {
 			return new SearchCategory($this->id, $this->name, $result);
 		}
 		return false;
+	}
+
+	public function getResponse() {
+		return $this->__toString();
 	}
 }

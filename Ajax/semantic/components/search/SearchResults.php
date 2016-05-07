@@ -4,7 +4,7 @@ namespace Ajax\semantic\components\search;
 
 use Ajax\service\JArray;
 
-class SearchResults {
+class SearchResults extends AbstractSearchResult implements ISearch {
 	private $elements;
 
 	public function __construct($objects=NULL) {
@@ -19,11 +19,17 @@ class SearchResults {
 	}
 
 	public function addResult($object) {
-		$this->elements[]=$object;
+		if (\is_array($object) === false) {
+			$object=[ "title" => $object ];
+		}
+		$this->elements[]=new SearchResult($object);
 		return $this;
 	}
 
 	public function addResults($objects) {
+		if (\is_array($objects) === false) {
+			return $this->addResult($objects);
+		}
 		if (JArray::dimension($objects) === 1) {
 			foreach ( $objects as $object ) {
 				$this->addResult([ "title" => $object ]);
@@ -58,7 +64,20 @@ class SearchResults {
 		return \sizeof($this->elements);
 	}
 
-	public function getStandard() {
+	public function getResponse() {
 		return "{" . $this . "}";
+	}
+
+	/**
+	 * Loads results from a collection of DB objects
+	 * @param array $objects the collection of objects
+	 * @param callable $function return an array or an instance of SearchResult
+	 */
+	public function fromDatabaseObjects($objects, $function) {
+		parent::fromDatabaseObjects($objects, $function);
+	}
+
+	protected function fromDatabaseObject($object, $function) {
+		$this->addResult($function($object));
 	}
 }

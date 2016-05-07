@@ -11,6 +11,7 @@ class HtmlSearch extends HtmlSemDoubleElement {
 	private $_elements=array ();
 	private $_params=array ();
 	private $_searchFields=array ("title" );
+	private $_local=false;
 
 	public function __construct($identifier, $placeholder=NULL, $icon=NULL) {
 		parent::__construct("search-" . $identifier, "div", "ui search", array ());
@@ -36,11 +37,13 @@ class HtmlSearch extends HtmlSemDoubleElement {
 	}
 
 	public function addResult($object) {
+		$this->_local=true;
 		$this->_elements[]=$object;
 		return $this;
 	}
 
 	public function addResults($objects) {
+		$this->_local=true;
 		$this->_elements=\array_merge($this->_elements, $objects);
 		return $this;
 	}
@@ -64,17 +67,26 @@ class HtmlSearch extends HtmlSemDoubleElement {
 		return $result;
 	}
 
+	public function setLocal() {
+		$this->_local=true;
+	}
+
 	public function run(JsUtils $js) {
 		$searchFields=\json_encode($this->_searchFields);
 		$searchFields=str_ireplace("\"", "%quote%", $searchFields);
 		$this->_params["searchFields"]="%" . $searchFields . "%";
-		if ($this->getType() === "standard")
+		if ($this->_local === true) {
 			$this->_params["source"]="%content%";
-		$this->addEvent("beforeExecute", "var content=" . $this->resultsToJson() . ";");
+			$this->addEvent("beforeExecute", "var content=" . $this->resultsToJson() . ";");
+		}
 		if (isset($this->_bsComponent) === false) {
 			$this->_bsComponent=$js->semantic()->search("#" . $this->identifier, $this->_params);
 		}
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
+	}
+
+	public function setFluid() {
+		return $this->addToProperty("class", "fluid");
 	}
 }
