@@ -56,7 +56,7 @@ class SearchCategory implements ISearch {
 	}
 
 	public function search($query, $field="title") {
-		$result=$this->results->search($query, $field);
+		$result=$this->results->_search($query, $field);
 		if ($result !== false) {
 			return new SearchCategory($this->id, $this->name, $result);
 		}

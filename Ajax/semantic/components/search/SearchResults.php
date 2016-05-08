@@ -19,6 +19,10 @@ class SearchResults extends AbstractSearchResult implements ISearch {
 	}
 
 	public function addResult($object) {
+		if ($object instanceof SearchResult) {
+			$this->elements[]=$object;
+			return $this;
+		}
 		if (\is_array($object) === false) {
 			$object=[ "title" => $object ];
 		}
@@ -39,13 +43,18 @@ class SearchResults extends AbstractSearchResult implements ISearch {
 		return $this;
 	}
 
-	public function search($query, $field="title") {
+	public function _search($query, $field="title") {
 		$result=array ();
 		foreach ( $this->elements as $element ) {
-			if (\array_key_exists($field, $element)) {
-				$value=$element[$field];
-				if (\stripos($value, $query) !== false) {
-					$result[]=$element;
+			if ($element instanceof SearchResult) {
+				if ($element->search($query, $field) !== false)
+					$result[]=$element->asArray();
+			} else {
+				if (\array_key_exists($field, $element)) {
+					$value=$element[$field];
+					if (\stripos($value, $query) !== false) {
+						$result[]=$element;
+					}
 				}
 			}
 		}
@@ -53,6 +62,13 @@ class SearchResults extends AbstractSearchResult implements ISearch {
 			return $result;
 		}
 		return false;
+	}
+
+	public function search($query, $field="title") {
+		$result=$this->_search($query, $field);
+		if ($result === false)
+			$result=NULL;
+		return new SearchResults($result);
 	}
 
 	public function __toString() {

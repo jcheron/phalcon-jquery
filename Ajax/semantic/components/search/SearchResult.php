@@ -73,6 +73,10 @@ class SearchResult implements \JsonSerializable {
 		return $this;
 	}
 
+	public function asArray() {
+		return $this->JsonSerialize();
+	}
+
 	public function JsonSerialize() {
 		$vars=get_object_vars($this);
 		$result=array ();
@@ -81,5 +85,10 @@ class SearchResult implements \JsonSerializable {
 				$result[$k]=$v;
 		}
 		return $result;
+	}
+
+	public function search($query, $field="title") {
+		$value=$this->$field;
+		return \stripos($value, $query) !== false;
 	}
 }
