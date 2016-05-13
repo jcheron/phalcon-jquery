@@ -7,6 +7,7 @@ use Ajax\JsUtils;
 use Ajax\semantic\html\content\InternalPopup;
 use Phalcon\Mvc\View;
 use Ajax\semantic\html\base\traits\BaseTrait;
+use Ajax\semantic\html\modules\HtmlDimmer;
 
 /**
  * Base class for Semantic double elements
@@ -16,6 +17,7 @@ use Ajax\semantic\html\base\traits\BaseTrait;
 class HtmlSemDoubleElement extends HtmlDoubleElement {
 	use BaseTrait;
 	protected $_popup=NULL;
+	protected $_dimmer=NULL;
 
 	public function __construct($identifier, $tagName="p", $baseClass="ui", $content=NULL) {
 		parent::__construct($identifier, $tagName);
@@ -41,6 +43,19 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		$this->_popup->setHtml($html);
 		$this->_popup->setAttributes($variation, $params);
 		return $this;
+	}
+
+	public function addDimmer($content=NULL) {
+		$dimmer=new HtmlDimmer("dimmer-" . $this->identifier, $content);
+		$this->addContent($dimmer);
+		return $dimmer;
+	}
+
+	public function jsShowDimmer($show=true) {
+		$status="hide";
+		if ($show === true)
+			$status="show";
+		return '$("#.' . $this->identifier . ').dimmer("' . $status . '");';
 	}
 
 	public function compile(JsUtils $js=NULL, View $view=NULL) {

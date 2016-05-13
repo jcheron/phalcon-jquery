@@ -12,6 +12,7 @@ use Ajax\semantic\components\Checkbox;
 use Ajax\semantic\components\Rating;
 use Ajax\semantic\components\Progress;
 use Ajax\semantic\components\Search;
+use Ajax\semantic\components\Dimmer;
 
 trait SemanticComponentsTrait {
 
@@ -75,5 +76,9 @@ trait SemanticComponentsTrait {
 
 	public function search($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Search($this->js), $attachTo, $params);
+	}
+
+	public function dimmer($attachTo=NULL, $params=NULL) {
+		return $this->addComponent(new Dimmer($this->js), $attachTo, $params);
 	}
 }

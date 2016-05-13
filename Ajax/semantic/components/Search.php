@@ -31,6 +31,11 @@ class Search extends SimpleExtComponent {
 		$this->params["apiSettings"]=$value;
 		return $this;
 	}
-	
+
+	public function setOnSelect($jsCode) {
+		$this->params["onSelect"]=$jsCode;
+		return $this;
+	}
+
 	// TODO other events implementation
 }

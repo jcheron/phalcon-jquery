@@ -93,16 +93,30 @@ class HtmlTable extends HtmlSemDoubleElement {
 		return $this->getBody()->getCell($row, $col);
 	}
 
+	/**
+	 * Retuns the row at $rowIndex
+	 * @param int $rowIndex
+	 * @return \Ajax\semantic\html\content\HtmlTR
+	 */
 	public function getRow($rowIndex) {
 		return $this->getBody()->getRow($rowIndex);
 	}
 
+	/**
+	 * Adds a new row and sets $values to his cols
+	 * @param array $values
+	 * @return \Ajax\semantic\html\collections\HtmlTable
+	 */
 	public function addRow($values=array()) {
 		$row=$this->getBody()->addRow($this->_colCount);
 		$row->setValues(\array_values($values));
 		return $this;
 	}
 
+	/**
+	 * adds and returns a new row
+	 * @return \Ajax\semantic\html\content\table\HtmlTR
+	 */
 	public function newRow() {
 		return $this->getBody()->newRow($this->_colCount);
 	}
@@ -120,11 +134,23 @@ class HtmlTable extends HtmlSemDoubleElement {
 		return $this->getFooter()->setValues($values);
 	}
 
+	/**
+	 * Sets values to the col at index $colIndex
+	 * @param int $colIndex
+	 * @param array $values
+	 * @return \Ajax\semantic\html\collections\HtmlTable
+	 */
 	public function setColValues($colIndex, $values=array()) {
 		$this->getBody()->setColValues($colIndex, $values);
 		return $this;
 	}
 
+	/**
+	 * Sets values to the row at index $rowIndex
+	 * @param int $rowIndex
+	 * @param array $values
+	 * @return \Ajax\semantic\html\collections\HtmlTable
+	 */
 	public function setRowValues($rowIndex, $values=array()) {
 		$this->getBody()->setRowValues($rowIndex, $values);
 		return $this;

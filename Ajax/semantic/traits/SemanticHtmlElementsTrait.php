@@ -1,4 +1,5 @@
 <?php
+
 namespace Ajax\semantic\traits;
 
 use Ajax\service\JArray;
@@ -18,7 +19,7 @@ use Ajax\semantic\html\elements\HtmlReveal;
 use Ajax\semantic\html\base\constants\RevealType;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\elements\HtmlStep;
-
+use Ajax\semantic\html\elements\HtmlFlag;
 
 trait SemanticHtmlElementsTrait {
 
@@ -37,13 +38,14 @@ trait SemanticHtmlElementsTrait {
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param array $elements
 	 * @param boolean $asIcons
 	 * @return HtmlButtonGroups
 	 */
-	public function htmlButtonGroups($identifier,$elements=array(),$asIcons=false){
-		return $this->addHtmlComponent(new HtmlButtonGroups($identifier, $elements,$asIcons));
+	public function htmlButtonGroups($identifier, $elements=array(), $asIcons=false) {
+		return $this->addHtmlComponent(new HtmlButtonGroups($identifier, $elements, $asIcons));
 	}
 
 	/**
@@ -52,53 +54,57 @@ trait SemanticHtmlElementsTrait {
 	 * @param string $content
 	 * @return HtmlContainer
 	 */
-	public function htmlContainer($identifier,$content=""){
+	public function htmlContainer($identifier, $content="") {
 		return $this->addHtmlComponent(new HtmlContainer($identifier, $content));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string $content
 	 * @return HtmlDivider
 	 */
-	public function htmlDivider($identifier,$content="",$tagName="div"){
-		return $this->addHtmlComponent(new HtmlDivider($identifier, $content,$tagName));
+	public function htmlDivider($identifier, $content="", $tagName="div") {
+		return $this->addHtmlComponent(new HtmlDivider($identifier, $content, $tagName));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param number $niveau
 	 * @param mixed $content
 	 * @param string $type
 	 * @return HtmlHeader
 	 */
-	public function htmlHeader($identifier,$niveau=1,$content=NULL,$type="page"){
-		return $this->addHtmlComponent(new HtmlHeader($identifier,$niveau,$content,$type));
+	public function htmlHeader($identifier, $niveau=1, $content=NULL, $type="page") {
+		return $this->addHtmlComponent(new HtmlHeader($identifier, $niveau, $content, $type));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string $icon
 	 * @return HtmlIcon
 	 */
-	public function htmlIcon($identifier,$icon){
+	public function htmlIcon($identifier, $icon) {
 		return $this->addHtmlComponent(new HtmlIcon($identifier, $icon));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string $size
 	 * @param array $icons
 	 * @return HtmlIconGroups
 	 */
-	public function htmlIconGroups($identifier,$size="",$icons=array()){
-		$group=new HtmlIconGroups($identifier,$size);
-		if(JArray::isAssociative($icons)){
-			foreach ($icons as $icon=>$size){
-				$group->add($icon,$size);
+	public function htmlIconGroups($identifier, $size="", $icons=array()) {
+		$group=new HtmlIconGroups($identifier, $size);
+		if (JArray::isAssociative($icons)) {
+			foreach ( $icons as $icon => $size ) {
+				$group->add($icon, $size);
 			}
-		}else{
-			foreach ($icons as $icon){
+		} else {
+			foreach ( $icons as $icon ) {
 				$group->add($icon);
 			}
 		}
@@ -113,18 +119,19 @@ trait SemanticHtmlElementsTrait {
 	 * @param string $placeholder
 	 * @return HtmlInput
 	 */
-	public function htmlInput($identifier,$type="text",$value="",$placeholder=""){
-		return $this->addHtmlComponent(new HtmlInput($identifier,$type,$value,$placeholder));
+	public function htmlInput($identifier, $type="text", $value="", $placeholder="") {
+		return $this->addHtmlComponent(new HtmlInput($identifier, $type, $value, $placeholder));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string $content
 	 * @param string $tagName
 	 * @return HtmlLabel
 	 */
-	public function htmlLabel($identifier,$content="",$tagName="div"){
-		return $this->addHtmlComponent(new HtmlLabel($identifier, $content,$tagName));
+	public function htmlLabel($identifier, $content="", $tagName="div") {
+		return $this->addHtmlComponent(new HtmlLabel($identifier, $content, $tagName));
 	}
 
 	/**
@@ -133,8 +140,8 @@ trait SemanticHtmlElementsTrait {
 	 * @param array $items
 	 * @return HtmlList
 	 */
-	public function htmlList($identifier,$items=array()){
-		return $this->addHtmlComponent(new HtmlList($identifier,$items));
+	public function htmlList($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlList($identifier, $items));
 	}
 
 	/**
@@ -143,8 +150,8 @@ trait SemanticHtmlElementsTrait {
 	 * @param string $content
 	 * @return HtmlSegment
 	 */
-	public function htmlSegment($identifier, $content=""){
-		return $this->addHtmlComponent(new HtmlSegment($identifier,$content));
+	public function htmlSegment($identifier, $content="") {
+		return $this->addHtmlComponent(new HtmlSegment($identifier, $content));
 	}
 
 	/**
@@ -153,22 +160,27 @@ trait SemanticHtmlElementsTrait {
 	 * @param array $items the segments
 	 * @return HtmlSegmentGroups
 	 */
-	public function htmlSegmentGroups($identifier, $items=array()){
-		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier,$items));
+	public function htmlSegmentGroups($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlSegmentGroups($identifier, $items));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param string|HtmlSemDoubleElement $visibleContent
 	 * @param string|HtmlSemDoubleElement $hiddenContent
 	 * @param RevealType|string $type
 	 * @param Direction|string $attributeType
 	 */
-	public function htmlReveal($identifier, $visibleContent,$hiddenContent,$type=RevealType::FADE,$attributeType=NULL){
-		return $this->addHtmlComponent(new HtmlReveal($identifier,$visibleContent,$hiddenContent,$type,$attributeType));
+	public function htmlReveal($identifier, $visibleContent, $hiddenContent, $type=RevealType::FADE, $attributeType=NULL) {
+		return $this->addHtmlComponent(new HtmlReveal($identifier, $visibleContent, $hiddenContent, $type, $attributeType));
 	}
 
-	public function htmlStep($identifier, $steps=array()){
-		return $this->addHtmlComponent(new HtmlStep($identifier,$steps));
+	public function htmlStep($identifier, $steps=array()) {
+		return $this->addHtmlComponent(new HtmlStep($identifier, $steps));
+	}
+
+	public function htmlFlag($identifier, $flag) {
+		return $this->addHtmlComponent(new HtmlFlag($identifier, $flag));
 	}
 }

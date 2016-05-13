@@ -7,6 +7,7 @@ use Ajax\semantic\html\base\constants\CheckboxType;
 use Ajax\semantic\html\modules\HtmlRating;
 use Ajax\semantic\html\modules\HtmlProgress;
 use Ajax\semantic\html\modules\HtmlSearch;
+use Ajax\semantic\html\modules\HtmlDimmer;
 
 trait SemanticHtmlModulesTrait {
 
@@ -50,5 +51,14 @@ trait SemanticHtmlModulesTrait {
 	 */
 	public function htmlSearch($identifier, $placeholder=NULL, $icon=NULL) {
 		return $this->addHtmlComponent(new HtmlSearch($identifier, $placeholder, $icon));
+	}
+
+	/**
+	 *
+	 * @param string $identifier
+	 * @param mixed $content
+	 */
+	public function htmlDimmer($identifier, $content=NULL) {
+		return $this->addHtmlComponent(new HtmlDimmer($identifier, $content));
 	}
 }

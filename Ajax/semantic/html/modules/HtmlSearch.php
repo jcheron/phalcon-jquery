@@ -72,6 +72,7 @@ class HtmlSearch extends HtmlSemDoubleElement {
 	}
 
 	public function run(JsUtils $js) {
+		$this->_params["onSelect"]='%function(result,response){$(%quote%#' . $this->identifier . '%quote%).trigger(%quote%onSelect%quote%, {%quote%result%quote%: result, %quote%response%quote%:response} );}%';
 		$searchFields=\json_encode($this->_searchFields);
 		$searchFields=str_ireplace("\"", "%quote%", $searchFields);
 		$this->_params["searchFields"]="%" . $searchFields . "%";
@@ -88,5 +89,23 @@ class HtmlSearch extends HtmlSemDoubleElement {
 
 	public function setFluid() {
 		return $this->addToProperty("class", "fluid");
+	}
+
+	public function onSelect($jsCode) {
+		$this->addEvent("onSelect", $jsCode);
+	}
+
+	private function _opOnSelect($operation, $url, $responseElement="", $parameters=array()) {
+		return $this->_ajaxOn($operation, "onSelect", $url, $responseElement, $parameters);
+	}
+
+	public function getOnSelect($url, $responseElement="", $parameters=array()) {
+		$parameters["params"]="data.result";
+		return $this->_opOnSelect("get", $url, $responseElement, $parameters);
+	}
+
+	public function postOnSelect($url, $responseElement="", $parameters=array()) {
+		$parameters["params"]="data.result";
+		return $this->_opOnSelect("post", $url, $responseElement, $parameters);
 	}
 }

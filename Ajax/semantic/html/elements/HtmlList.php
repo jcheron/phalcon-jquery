@@ -19,15 +19,17 @@ class HtmlList extends HtmlSemCollection {
 	protected function createItem($value) {
 		$count=$this->count();
 		if (\is_array($value)) {
-			$item=new HtmlListItem("item-".$this->identifier."-".$count, $value[0]);
+			$item=new HtmlListItem("item-" . $this->identifier . "-" . $count, $value[0]);
 			$item->addIcon($value[1]);
 		} else
-			$item=new HtmlListItem("item-".$this->identifier."-".$count, $value);
+			$item=new HtmlListItem("item-" . $this->identifier . "-" . $count, $value);
 		return $item;
 	}
 
 	public function addHeader($niveau, $content) {
-		return $this->wrap(new HtmlHeader("header-".$this->identifier, $niveau, $content, "page"));
+		$header=new HtmlHeader("header-" . $this->identifier, $niveau, $content, "page");
+		$this->wrap($header);
+		return $header;
 	}
 
 	public function itemsAs($tagName) {
@@ -50,9 +52,9 @@ class HtmlList extends HtmlSemCollection {
 	}
 
 	public function run(JsUtils $js) {
-		if ($this->_hasCheckedList===true) {
-			$jsCode=include dirname(__FILE__).'/../../components/jsTemplates/tplCheckedList.php';
-			$jsCode=\str_replace("%identifier%", "#".$this->identifier, $jsCode);
+		if ($this->_hasCheckedList === true) {
+			$jsCode=include dirname(__FILE__) . '/../../components/jsTemplates/tplCheckedList.php';
+			$jsCode=\str_replace("%identifier%", "#" . $this->identifier, $jsCode);
 			$this->executeOnRun($jsCode);
 		}
 		return parent::run($js);
@@ -62,11 +64,15 @@ class HtmlList extends HtmlSemCollection {
 		return $this->addToProperty("class", "relaxed");
 	}
 
+	public function setDivided() {
+		return $this->addToProperty("class", "divided");
+	}
+
 	public function addCheckedList($items=array(), $masterItem=NULL, $values=array()) {
 		$count=$this->count();
-		$identifier=$this->identifier."-".$count;
+		$identifier=$this->identifier . "-" . $count;
 		if (isset($masterItem)) {
-			$masterO=new HtmlFormCheckbox("master-".$identifier, $masterItem);
+			$masterO=new HtmlFormCheckbox("master-" . $identifier, $masterItem);
 			$masterO->getField()->addToProperty("class", "master");
 			$masterO->setClass("item");
 			$this->addItem($masterO);
@@ -74,14 +80,14 @@ class HtmlList extends HtmlSemCollection {
 		$fields=array ();
 		$i=0;
 		foreach ( $items as $val => $caption ) {
-			$itemO=new HtmlFormCheckbox($identifier."-".$i++, $caption, $val, "child");
-			if (\array_search($val, $values)!==false) {
+			$itemO=new HtmlFormCheckbox($identifier . "-" . $i++, $caption, $val, "child");
+			if (\array_search($val, $values) !== false) {
 				$itemO->getField()->getField()->setProperty("checked", "");
 			}
 			$itemO->setClass("item");
 			$fields[]=$itemO;
 		}
-		if (isset($masterO)===true) {
+		if (isset($masterO) === true) {
 			$list=new HtmlList("", $fields);
 			$list->setClass("list");
 			$masterO->addContent($list);
