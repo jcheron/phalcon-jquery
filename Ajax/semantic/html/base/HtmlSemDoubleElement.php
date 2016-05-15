@@ -45,8 +45,10 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return $this;
 	}
 
-	public function addDimmer($content=NULL) {
+	public function addDimmer($params=array(), $content=NULL) {
 		$dimmer=new HtmlDimmer("dimmer-" . $this->identifier, $content);
+		$dimmer->setParams($params);
+		$dimmer->setContainer($this);
 		$this->addContent($dimmer);
 		return $dimmer;
 	}

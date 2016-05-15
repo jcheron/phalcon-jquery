@@ -55,4 +55,14 @@ class HtmlDimmer extends HtmlSemDoubleElement {
 	public function setBlurring() {
 		return $this->addToProperty("class", "blurring");
 	}
+
+	public function setParams($_params) {
+		$this->_params=$_params;
+		return $this;
+	}
+
+	public function setContainer($_container) {
+		$this->_container=$_container;
+		return $this;
+	}
 }

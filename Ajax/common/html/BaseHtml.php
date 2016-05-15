@@ -262,7 +262,8 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function wrap($before, $after="") {
 		if (isset($before)) {
-			$this->_wrapBefore[]=$before;
+			array_unshift($this->_wrapBefore, $before);
+			// $this->_wrapBefore[]=$before;
 		}
 		$this->_wrapAfter[]=$after;
 		return $this;

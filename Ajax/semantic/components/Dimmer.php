@@ -11,4 +11,8 @@ class Dimmer extends SimpleExtComponent {
 		parent::__construct($js);
 		$this->uiName="dimmer";
 	}
+
+	public function setOn($value=false) {
+		$this->params["on"]=$value;
+	}
 }

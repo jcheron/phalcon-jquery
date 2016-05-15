@@ -8,12 +8,12 @@ use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\common\html\html5\HtmlImg;
-use Ajax\bootstrap\html\HtmlInput;
 use Ajax\semantic\html\modules\HtmlDropdown;
 use Ajax\common\html\BaseHtml;
 use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\semantic\html\elements\html5\HtmlLink;
+use Ajax\semantic\html\elements\HtmlInput;
 
 /**
  * Semantic Menu component
@@ -22,6 +22,7 @@ use Ajax\semantic\html\elements\html5\HtmlLink;
  * @version 1.001
  */
 class HtmlMenu extends HtmlSemCollection {
+	private $_itemHeader;
 
 	public function __construct($identifier, $items=array()) {
 		parent::__construct($identifier, "div", "ui menu");
@@ -92,6 +93,7 @@ class HtmlMenu extends HtmlSemCollection {
 			$headerItem=new HtmlSemDoubleElement("item-header-" . $this->identifier . "-" . $count, "div", "header");
 			$headerItem->setContent($header);
 			$item->addContent($headerItem);
+			$this->_itemHeader=$headerItem;
 		}
 		$menu->setClass("menu");
 		$item->addContent($menu);
@@ -210,5 +212,9 @@ class HtmlMenu extends HtmlSemCollection {
 
 	public static function vertical($identifier, $items=array()) {
 		return (new HtmlMenu($identifier, $items))->setVertical();
+	}
+
+	public function getItemHeader() {
+		return $this->_itemHeader;
 	}
 }
