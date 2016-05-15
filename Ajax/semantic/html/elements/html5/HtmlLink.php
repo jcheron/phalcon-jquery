@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements\html5;
 use Ajax\JsUtils;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlLinkTrait;
+use Ajax\semantic\html\elements\HtmlIcon;
 
 class HtmlLink extends HtmlSemDoubleElement {
 	use HtmlLinkTrait;
@@ -23,6 +24,15 @@ class HtmlLink extends HtmlSemDoubleElement {
 		$this->_bsComponent=$js->semantic()->generic("#" . $this->identifier);
 		$this->addEventsOnRun($js);
 		return $this->_bsComponent;
+	}
+
+	public function addIcon($icon){
+		return $this->addContent(new HtmlIcon("icon-".$this->identifier, $icon),true);
+	}
+
+	public static function icon($identifier,$icon,$href="#",$label=NULL){
+		$result=new HtmlLink($identifier,$href,$label);
+		return $result->addIcon($icon);
 	}
 	// TODO use Class Tag
 }

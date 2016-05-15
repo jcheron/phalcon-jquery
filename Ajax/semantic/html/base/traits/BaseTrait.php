@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\base\traits;
 use Ajax\semantic\html\base\constants\Size;
 use Ajax\semantic\html\base\constants\Color;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\elements\HtmlIcon;
 
 trait BaseTrait {
 	protected $_variations=[ ];
@@ -73,6 +74,10 @@ trait BaseTrait {
 			$this->addState($state);
 		}
 		return $this;
+	}
+
+	public function addIcon($icon, $before=true) {
+		return $this->addContent(new HtmlIcon("icon-" . $this->identifier, $icon), $before);
 	}
 
 	/**

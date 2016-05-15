@@ -67,4 +67,15 @@ class HtmlInput extends HtmlSemDoubleElement {
 		$this->getField()->setPlaceholder($value);
 		return $this;
 	}
+
+	public function setTransparent() {
+		return $this->addToProperty("class", "transparent");
+	}
+
+	public static function outline($identifier, $icon, $value="", $placeholder="") {
+		$result=new HtmlInput($identifier, "text", $value, $placeholder);
+		$result->addToProperty("class", "transparent");
+		$result->addIcon($icon)->setOutline();
+		return $result;
+	}
 }

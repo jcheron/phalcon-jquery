@@ -21,48 +21,52 @@ use Ajax\semantic\traits\SemanticHtmlElementsTrait;
 use Ajax\semantic\html\modules\HtmlSticky;
 use Ajax\semantic\traits\SemanticHtmlCollectionsTrait;
 use Ajax\semantic\traits\SemanticHtmlModulesTrait;
+use Ajax\semantic\traits\SemanticHtmlViewsTrait;
 
 class Semantic extends BaseGui {
 	use SemanticComponentsTrait,SemanticHtmlElementsTrait,SemanticHtmlCollectionsTrait,
-	SemanticHtmlModulesTrait;
+	SemanticHtmlModulesTrait,SemanticHtmlViewsTrait;
 
 	public function __construct($autoCompile=true) {
 		parent::__construct($autoCompile=true);
 	}
 
-
 	/**
+	 *
 	 * @param string $identifier
 	 * @param array $items
 	 * @return Ajax\semantic\html\collections\HtmlMenu
 	 */
-	public function htmlMenu($identifier,$items=array()){
-		return $this->addHtmlComponent(new HtmlMenu($identifier,$items));
-	}
-
-	/**Adds an icon menu
-	 * @param string $identifier
-	 * @param array $items icons
-	 */
-	public function htmlIconMenu($identifier,$items=array()){
-		return $this->addHtmlComponent(new HtmlIconMenu($identifier,$items));
-	}
-
-	/**Adds an labeled icon menu
-	 * @param string $identifier
-	 * @param array $items icons
-	 */
-	public function htmlLabeledIconMenu($identifier,$items=array()){
-		return $this->addHtmlComponent(new HtmlLabeledIconMenu($identifier,$items));
+	public function htmlMenu($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlMenu($identifier, $items));
 	}
 
 	/**
+	 * Adds an icon menu
+	 * @param string $identifier
+	 * @param array $items icons
+	 */
+	public function htmlIconMenu($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlIconMenu($identifier, $items));
+	}
+
+	/**
+	 * Adds an labeled icon menu
+	 * @param string $identifier
+	 * @param array $items icons
+	 */
+	public function htmlLabeledIconMenu($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlLabeledIconMenu($identifier, $items));
+	}
+
+	/**
+	 *
 	 * @param string $identifier
 	 * @param string $value
 	 * @param array $items
 	 */
-	public function htmlDropdown($identifier, $value="", $items=array()){
-		return $this->addHtmlComponent(new HtmlDropdown($identifier,$value,$items));
+	public function htmlDropdown($identifier, $value="", $items=array()) {
+		return $this->addHtmlComponent(new HtmlDropdown($identifier, $value, $items));
 	}
 
 	/**
@@ -70,30 +74,30 @@ class Semantic extends BaseGui {
 	 * @param string $identifier
 	 * @param string $content
 	 */
-	public function htmlMessage($identifier, $content=""){
-		return $this->addHtmlComponent(new HtmlMessage($identifier,$content));
+	public function htmlMessage($identifier, $content="") {
+		return $this->addHtmlComponent(new HtmlMessage($identifier, $content));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param mixed $content
 	 */
-	public function htmlPopup(BaseHtml $container,$identifier,$content){
-		return $this->addHtmlComponent(new HtmlPopup($container,$identifier,$content));
+	public function htmlPopup(BaseHtml $container, $identifier, $content) {
+		return $this->addHtmlComponent(new HtmlPopup($container, $identifier, $content));
 	}
 
 	/**
+	 *
 	 * @param string $identifier
 	 * @param int $numRows
 	 * @param int $numCols
 	 * @param boolean $createCols
 	 * @param boolean $implicitRows
 	 */
-	public function htmlGrid($identifier,$numRows=1,$numCols=NULL,$createCols=true,$implicitRows=false){
-		return $this->addHtmlComponent(new HtmlGrid($identifier,$numRows,$numCols,$createCols,$implicitRows));
+	public function htmlGrid($identifier, $numRows=1, $numCols=NULL, $createCols=true, $implicitRows=false) {
+		return $this->addHtmlComponent(new HtmlGrid($identifier, $numRows, $numCols, $createCols, $implicitRows));
 	}
-
-
 
 	/**
 	 * Returns a new Semantic Html Breadcrumb
@@ -103,8 +107,8 @@ class Semantic extends BaseGui {
 	 * @param function $hrefFunction the function who generates the href elements. default : function($e){return $e->getContent()}
 	 * @return HtmlBreadcrumb
 	 */
-	public function htmlBreadcrumb( $identifier,$items=array(),$autoActive=true,$startIndex=0,$hrefFunction=NULL){
-		return $this->addHtmlComponent(new HtmlBreadcrumb($identifier,$items,$autoActive,$startIndex,$hrefFunction));
+	public function htmlBreadcrumb($identifier, $items=array(), $autoActive=true, $startIndex=0, $hrefFunction=NULL) {
+		return $this->addHtmlComponent(new HtmlBreadcrumb($identifier, $items, $autoActive, $startIndex, $hrefFunction));
 	}
 
 	/**
@@ -121,8 +125,8 @@ class Semantic extends BaseGui {
 	 * @param string $identifier
 	 * @return HtmlAccordion
 	 */
-	public function htmlAccordionMenu($identifier,$items=array()) {
-		return $this->addHtmlComponent(new HtmlAccordionMenu($identifier,$items));
+	public function htmlAccordionMenu($identifier, $items=array()) {
+		return $this->addHtmlComponent(new HtmlAccordionMenu($identifier, $items));
 	}
 
 	/**
@@ -130,11 +134,11 @@ class Semantic extends BaseGui {
 	 * @param string $identifier
 	 * @param array $elements
 	 */
-	public function htmlForm($identifier,$elements=array()) {
-		return $this->addHtmlComponent(new HtmlForm($identifier,$elements));
+	public function htmlForm($identifier, $elements=array()) {
+		return $this->addHtmlComponent(new HtmlForm($identifier, $elements));
 	}
 
-	public function htmlSticky($identifier,$content=array()) {
-		return $this->addHtmlComponent(new HtmlSticky($identifier,$content));
+	public function htmlSticky($identifier, $content=array()) {
+		return $this->addHtmlComponent(new HtmlSticky($identifier, $content));
 	}
 }

@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\common\html\HtmlSingleElement;
 use Ajax\semantic\html\base\constants\Size;
 use Ajax\semantic\html\base\constants\Color;
+
 /**
  * Semantic Icon component
  * @see http://semantic-ui.com/elements/icon.html
@@ -17,7 +18,7 @@ class HtmlIcon extends HtmlSingleElement {
 	protected $attributes;
 	protected $color;
 
-	public function __construct($identifier,$icon) {
+	public function __construct($identifier, $icon) {
 		parent::__construct($identifier, "i");
 		$this->icon=$icon;
 		$this->_template='<i class="%icon% icon %size% %attributes% %color%"></i>';
@@ -46,25 +47,26 @@ class HtmlIcon extends HtmlSingleElement {
 		return $this->addToMember($this->icon, $icon);
 	}
 
-
 	/**
+	 *
 	 * {@inheritDoc}
+	 *
 	 * @see \Ajax\common\html\HtmlSingleElement::setSize()
 	 */
 	public function setSize($size) {
-		$this->setMemberCtrl($this->size, $size,Size::getConstants());
+		$this->setMemberCtrl($this->size, $size, Size::getConstants());
 		return $this;
 	}
 
-	public function setDisabled(){
+	public function setDisabled() {
 		return $this->addToMember($this->attributes, "disabled");
 	}
 
 	/**
-	 *  Icon used as a simple loader
+	 * Icon used as a simple loader
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function asLoader(){
+	public function asLoader() {
 		return $this->addToMember($this->attributes, "loading");
 	}
 
@@ -72,71 +74,94 @@ class HtmlIcon extends HtmlSingleElement {
 	 * An icon can be fitted, without any space to the left or right of it.
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function setFitted(){
+	public function setFitted() {
 		return $this->addToMember($this->attributes, "fitted");
 	}
 
 	/**
+	 *
 	 * @param string $sens horizontally or vertically
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function setFlipped($sens="horizontally"){
-		return $this->addToMember($this->attributes, "flipped ".$sens);
+	public function setFlipped($sens="horizontally") {
+		return $this->addToMember($this->attributes, "flipped " . $sens);
 	}
 
 	/**
+	 *
 	 * @param string $sens clockwise or counterclockwise
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function setRotated($sens="clockwise"){
-		return $this->addToMember($this->attributes, "rotated ".$sens);
+	public function setRotated($sens="clockwise") {
+		return $this->addToMember($this->attributes, "rotated " . $sens);
 	}
 
 	/**
 	 * icon formatted as a link
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function asLink(){
+	public function asLink($href=NULL) {
+		if (isset($href)) {
+			$this->wrap("<a href='" . $href . "'>", "</a>");
+		}
 		return $this->addToMember($this->attributes, "link");
 	}
 
-	public function setCircular($inverted=false){
+	public function setCircular($inverted=false) {
 		$invertedStr="";
-		if($inverted!==false)
+		if ($inverted !== false)
 			$invertedStr=" inverted";
-		return $this->addToMember($this->attributes, "circular".$invertedStr);
+		return $this->addToMember($this->attributes, "circular" . $invertedStr);
 	}
 
 	/**
+	 *
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function setInverted(){
+	public function setInverted() {
 		return $this->addToMember($this->attributes, "inverted");
 	}
 
-	/**
-	 * @param string $inverted
-	 * @return \Ajax\semantic\html\HtmlIcon
-	 */
-	public function setBordered($inverted=false){
-		$invertedStr="";
-		if($inverted!==false)
-			$invertedStr=" inverted";
-			return $this->addToMember($this->attributes, "bordered".$invertedStr);
+	public function setOutline() {
+		return $this->addToMember($this->attributes, "outline");
 	}
 
 	/**
+	 *
+	 * @param string $inverted
+	 * @return \Ajax\semantic\html\HtmlIcon
+	 */
+	public function setBordered($inverted=false) {
+		$invertedStr="";
+		if ($inverted !== false)
+			$invertedStr=" inverted";
+		return $this->addToMember($this->attributes, "bordered" . $invertedStr);
+	}
+
+	/**
+	 *
 	 * @param string $color
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function setColor($color){
+	public function setColor($color) {
 		return $this->setMemberCtrl($this->color, $color, Color::getConstants());
 	}
 
 	/**
+	 *
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
-	public function toCorner(){
+	public function toCorner() {
 		return $this->addToMember($this->attributes, "corner");
+	}
+
+	public function addLabel($label) {
+		$this->wrap("", $label);
+		return $this;
+	}
+
+	public static function label($identifier, $icon, $label) {
+		$result=new HtmlIcon($identifier, $icon);
+		return $result->addLabel($label);
 	}
 }
