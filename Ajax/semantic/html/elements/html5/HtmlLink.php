@@ -26,12 +26,12 @@ class HtmlLink extends HtmlSemDoubleElement {
 		return $this->_bsComponent;
 	}
 
-	public function addIcon($icon){
-		return $this->addContent(new HtmlIcon("icon-".$this->identifier, $icon),true);
+	public function addIcon($icon, $before=true) {
+		return $this->addContent(new HtmlIcon("icon-" . $this->identifier, $icon), $before);
 	}
 
-	public static function icon($identifier,$icon,$href="#",$label=NULL){
-		$result=new HtmlLink($identifier,$href,$label);
+	public static function icon($identifier, $icon, $href="#", $label=NULL) {
+		$result=new HtmlLink($identifier, $href, $label);
 		return $result->addIcon($icon);
 	}
 	// TODO use Class Tag
