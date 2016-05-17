@@ -65,7 +65,7 @@ class HtmlCard extends HtmlSemDoubleElement {
 		return $this->addElementInContent("content", $reveal);
 	}
 
-	public function addExtraContent($content) {
+	public function addExtraContent($content=array()) {
 		return $this->addElementInContent("extra-content", $this->createContent($content, "extra content"));
 	}
 
@@ -86,6 +86,10 @@ class HtmlCard extends HtmlSemDoubleElement {
 		return $this->addElementInContent("content", new HtmlCardContent("content-" . $count . "-" . $this->identifier, $content));
 	}
 
+	public function getCardContent($index){
+		return $this->content["content"][$index];
+	}
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -95,5 +99,13 @@ class HtmlCard extends HtmlSemDoubleElement {
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
 		$this->content=JArray::sortAssociative($this->content, [ "header","image","content","extra-content" ]);
 		return parent::compile($js, $view);
+	}
+
+	public function asLink($href="") {
+		$this->addToProperty("class", "link");
+		if ($href !== "") {
+			$this->setProperty("href", $href);
+		}
+		return $this;
 	}
 }

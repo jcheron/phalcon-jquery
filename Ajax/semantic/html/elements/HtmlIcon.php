@@ -5,6 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\common\html\HtmlSingleElement;
 use Ajax\semantic\html\base\constants\Size;
 use Ajax\semantic\html\base\constants\Color;
+use Ajax\semantic\html\base\constants\Direction;
 
 /**
  * Semantic Icon component
@@ -94,6 +95,10 @@ class HtmlIcon extends HtmlSingleElement {
 	 */
 	public function setRotated($sens="clockwise") {
 		return $this->addToMember($this->attributes, "rotated " . $sens);
+	}
+
+	public function setFloated($direction="right") {
+		return $this->addToMemberCtrl($this->attributes, $direction . " floated", Direction::getConstantValues("floated"));
 	}
 
 	/**

@@ -2,9 +2,9 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\html5\HtmlImg;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Size;
+use Ajax\semantic\html\elements\html5\HtmlImg;
 
 class HtmlImage extends HtmlSemDoubleElement {
 

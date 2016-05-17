@@ -106,7 +106,7 @@ abstract class BaseHtml extends BaseWidget {
 	protected function ctrl($name, $value, $typeCtrl) {
 		if (is_array($typeCtrl)) {
 			if (array_search($value, $typeCtrl) === false) {
-				throw new \Exception("La valeur passée a propriété `" . $name . "` ne fait pas partie des valeurs possibles : {" . implode(",", $typeCtrl) . "}");
+				throw new \Exception("La valeur passée `" . $value . "` à la propriété `" . $name . "` ne fait pas partie des valeurs possibles : {" . implode(",", $typeCtrl) . "}");
 			}
 		} else {
 			if (!$typeCtrl($value)) {

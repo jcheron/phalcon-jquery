@@ -14,12 +14,7 @@ class HtmlCardHeaderContent extends HtmlCardContent {
 		if (isset($header)) {
 			$this->setHeader($header);
 		}
-		if (\is_array($metas)) {
-			foreach ( $metas as $meta ) {
-				$this->addMeta($meta);
-			}
-		} else
-			$this->addMeta($metas);
+		$this->addMetas($metas);
 		if (isset($description)) {
 			$this->setDescription($description);
 		}
@@ -40,7 +35,7 @@ class HtmlCardHeaderContent extends HtmlCardContent {
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
 	 */
 	public function compile(JsUtils $js=NULL, View $view=NULL) {
-		$this->content=JArray::sortAssociative($this->content, [ "header","meta","description" ]);
+		$this->content=JArray::sortAssociative($this->content, [ "image","header","meta","description" ]);
 		return parent::compile($js, $view);
 	}
 }

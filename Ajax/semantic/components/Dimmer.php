@@ -15,4 +15,8 @@ class Dimmer extends SimpleExtComponent {
 	public function setOn($value=false) {
 		$this->params["on"]=$value;
 	}
+
+	public function setOpacity($value) {
+		$this->params["opacity"]=$value;
+	}
 }

@@ -20,6 +20,7 @@ use Ajax\semantic\html\base\constants\RevealType;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\elements\HtmlStep;
 use Ajax\semantic\html\elements\HtmlFlag;
+use Ajax\semantic\html\elements\HtmlImage;
 
 trait SemanticHtmlElementsTrait {
 
@@ -88,6 +89,10 @@ trait SemanticHtmlElementsTrait {
 	 */
 	public function htmlIcon($identifier, $icon) {
 		return $this->addHtmlComponent(new HtmlIcon($identifier, $icon));
+	}
+
+	public function htmlImage($identifier, $src="", $alt="", $size=NULL) {
+		return $this->addHtmlComponent(new HtmlImage($identifier, $src, $alt, $size));
 	}
 
 	/**
