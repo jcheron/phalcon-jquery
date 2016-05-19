@@ -98,22 +98,12 @@ trait SemanticHtmlElementsTrait {
 	/**
 	 *
 	 * @param string $identifier
-	 * @param string $size
 	 * @param array $icons
+	 * @param string $size
 	 * @return HtmlIconGroups
 	 */
-	public function htmlIconGroups($identifier, $size="", $icons=array()) {
-		$group=new HtmlIconGroups($identifier, $size);
-		if (JArray::isAssociative($icons)) {
-			foreach ( $icons as $icon => $size ) {
-				$group->add($icon, $size);
-			}
-		} else {
-			foreach ( $icons as $icon ) {
-				$group->add($icon);
-			}
-		}
-		return $this->addHtmlComponent($group);
+	public function htmlIconGroups($identifier, $icons=array(), $size="") {
+		return $this->addHtmlComponent(new HtmlIconGroups($identifier, $icons, $size));
 	}
 
 	/**

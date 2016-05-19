@@ -34,6 +34,15 @@ class HtmlCard extends HtmlSemDoubleElement {
 		return $element;
 	}
 
+	private function getPart($part, $index=NULL) {
+		if (\array_key_exists($part, $this->content)) {
+			if (isset($index))
+				return $this->content[$part][$index];
+			return $this->content[$part];
+		}
+		return NULL;
+	}
+
 	public function addHeader($header, $niveau=4, $type="page") {
 		if (!$header instanceof HtmlHeader) {
 			$header=new HtmlHeader("header-" . $this->identifier, $niveau, $header, $type);
@@ -86,8 +95,20 @@ class HtmlCard extends HtmlSemDoubleElement {
 		return $this->addElementInContent("content", new HtmlCardContent("content-" . $count . "-" . $this->identifier, $content));
 	}
 
-	public function getCardContent($index){
-		return $this->content["content"][$index];
+	public function getCardContent($index=NULL) {
+		return $this->getPart("content", $index);
+	}
+
+	public function getCardExtraContent() {
+		return $this->getPart("extra-content");
+	}
+
+	public function getCardImage() {
+		return $this->getPart("image");
+	}
+
+	public function getCardHeader() {
+		return $this->getPart("header");
 	}
 
 	/**

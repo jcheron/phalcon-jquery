@@ -68,6 +68,16 @@ class HtmlCardContent extends HtmlSemDoubleElement {
 		return $result;
 	}
 
+	public function addContentText($caption, $direction=Direction::LEFT) {
+		if ($direction === Direction::RIGHT) {
+			$result=new HtmlSemDoubleElement("", "span", "", $caption);
+			$this->addContent($result);
+			$result->setFloated($direction);
+		} else
+			$result=$this->addContent($caption);
+		return $result;
+	}
+
 	public function addContentIcons($icons, $direction=Direction::LEFT) {
 		foreach ( $icons as $icon ) {
 			$this->addContentIcon($icon, NULL, $direction);
