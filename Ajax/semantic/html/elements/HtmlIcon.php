@@ -2,10 +2,7 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\HtmlSingleElement;
-use Ajax\semantic\html\base\constants\Size;
-use Ajax\semantic\html\base\constants\Color;
-use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\base\HtmlSemSingleElement;
 
 /**
  * Semantic Icon component
@@ -13,20 +10,16 @@ use Ajax\semantic\html\base\constants\Direction;
  * @author jc
  * @version 1.001
  */
-class HtmlIcon extends HtmlSingleElement {
-	protected $icon;
-	protected $size;
-	protected $attributes;
-	protected $color;
+class HtmlIcon extends HtmlSemSingleElement {
+	protected $_icon;
 
 	public function __construct($identifier, $icon) {
-		parent::__construct($identifier, "i");
-		$this->icon=$icon;
-		$this->_template='<i class="%icon% icon %size% %attributes% %color%"></i>';
+		parent::__construct($identifier, "i", "icon");
+		$this->setIcon($icon);
 	}
 
 	public function getIcon() {
-		return $this->icon;
+		return $this->_icon;
 	}
 
 	/**
@@ -35,7 +28,11 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function setIcon($icon) {
-		$this->icon=$icon;
+		if (isset($this->_icon)) {
+			$this->removePropertyValue("class", $this->_icon);
+		}
+		$this->_icon=$icon;
+		$this->addToProperty("class", $icon);
 		return $this;
 	}
 
@@ -45,22 +42,8 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function addToIcon($icon) {
-		return $this->addToMember($this->icon, $icon);
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see \Ajax\common\html\HtmlSingleElement::setSize()
-	 */
-	public function setSize($size) {
-		$this->setMemberCtrl($this->size, $size, Size::getConstants());
-		return $this;
-	}
-
-	public function setDisabled() {
-		return $this->addToMember($this->attributes, "disabled");
+		$this->addToProperty("class", $icon);
+		return $this->addToMember($this->_icon, $icon);
 	}
 
 	/**
@@ -68,7 +51,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function asLoader() {
-		return $this->addToMember($this->attributes, "loading");
+		return $this->addToProperty("class", "loading");
 	}
 
 	/**
@@ -76,7 +59,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function setFitted() {
-		return $this->addToMember($this->attributes, "fitted");
+		return $this->addToProperty("class", "fitted");
 	}
 
 	/**
@@ -85,7 +68,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function setFlipped($sens="horizontally") {
-		return $this->addToMember($this->attributes, "flipped " . $sens);
+		return $this->addToProperty("class", "flipped " . $sens);
 	}
 
 	/**
@@ -94,11 +77,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function setRotated($sens="clockwise") {
-		return $this->addToMember($this->attributes, "rotated " . $sens);
-	}
-
-	public function setFloated($direction="right") {
-		return $this->addToMemberCtrl($this->attributes, $direction . " floated", Direction::getConstantValues("floated"));
+		return $this->addToProperty("class", "rotated " . $sens);
 	}
 
 	/**
@@ -109,26 +88,11 @@ class HtmlIcon extends HtmlSingleElement {
 		if (isset($href)) {
 			$this->wrap("<a href='" . $href . "'>", "</a>");
 		}
-		return $this->addToMember($this->attributes, "link");
-	}
-
-	public function setCircular($inverted=false) {
-		$invertedStr="";
-		if ($inverted !== false)
-			$invertedStr=" inverted";
-		return $this->addToMember($this->attributes, "circular" . $invertedStr);
-	}
-
-	/**
-	 *
-	 * @return \Ajax\semantic\html\HtmlIcon
-	 */
-	public function setInverted() {
-		return $this->addToMember($this->attributes, "inverted");
+		return $this->addToProperty("class", "link");
 	}
 
 	public function setOutline() {
-		return $this->addToMember($this->attributes, "outline");
+		return $this->addToProperty("class", "outline");
 	}
 
 	/**
@@ -140,16 +104,7 @@ class HtmlIcon extends HtmlSingleElement {
 		$invertedStr="";
 		if ($inverted !== false)
 			$invertedStr=" inverted";
-		return $this->addToMember($this->attributes, "bordered" . $invertedStr);
-	}
-
-	/**
-	 *
-	 * @param string $color
-	 * @return \Ajax\semantic\html\HtmlIcon
-	 */
-	public function setColor($color) {
-		return $this->setMemberCtrl($this->color, $color, Color::getConstants());
+		return $this->addToProperty("class", "bordered" . $invertedStr);
 	}
 
 	/**
@@ -157,7 +112,7 @@ class HtmlIcon extends HtmlSingleElement {
 	 * @return \Ajax\semantic\html\HtmlIcon
 	 */
 	public function toCorner() {
-		return $this->addToMember($this->attributes, "corner");
+		return $this->addToProperty("class", "corner");
 	}
 
 	public function addLabel($label) {

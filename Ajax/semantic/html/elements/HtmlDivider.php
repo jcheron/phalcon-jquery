@@ -2,17 +2,18 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\common\html\HtmlDoubleElement;
+use Ajax\semantic\html\base\HtmlSemDoubleElement;
+
 /**
  * Semantic UI divider component
  * @see http://semantic-ui.com/elements/divider.html
  * @author jc
  * @version 1.001
  */
-class HtmlDivider extends HtmlDoubleElement {
+class HtmlDivider extends HtmlSemDoubleElement {
 
-	public function __construct($identifier, $content="",$tagName="div") {
-		parent::__construct($identifier, $tagName,"ui divider");
+	public function __construct($identifier, $content="", $tagName="div") {
+		parent::__construct($identifier, $tagName, "ui divider");
 		$this->content=$content;
 	}
 
@@ -20,23 +21,23 @@ class HtmlDivider extends HtmlDoubleElement {
 	 * vertical divider
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function setVertical(){
-		return $this->addToPropertyUnique("class", "vertical", array("vertical","horizontal"));
+	public function setVertical() {
+		return $this->addToPropertyCtrl("class", "vertical", array ("vertical","horizontal" ));
 	}
 
 	/**
 	 * horizontal divider
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function setHorizontal(){
-		return $this->addToPropertyUnique("class", "horizontal", array("vertical","horizontal"));
+	public function setHorizontal() {
+		return $this->addToPropertyCtrl("class", "horizontal", array ("vertical","horizontal" ));
 	}
 
 	/**
 	 * hide the divider
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function setHidden(){
+	public function setHidden() {
 		return $this->addToProperty("class", "hidden");
 	}
 
@@ -44,14 +45,15 @@ class HtmlDivider extends HtmlDoubleElement {
 	 * fitted, without any space above or below it
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function setFitted(){
+	public function setFitted() {
 		return $this->addToProperty("class", "fitted");
 	}
 
 	/**
+	 *
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function asHeader(){
+	public function asHeader() {
 		return $this->addToProperty("class", "header");
 	}
 
@@ -59,7 +61,7 @@ class HtmlDivider extends HtmlDoubleElement {
 	 * inverts the divider colors
 	 * @return \Ajax\semantic\html\elements\HtmlDivider
 	 */
-	public function setInverted(){
+	public function setInverted() {
 		return $this->addToProperty("class", "inverted");
 	}
 }

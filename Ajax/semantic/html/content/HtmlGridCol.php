@@ -6,6 +6,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\elements\HtmlDivider;
 
 /**
  * A col in the Semantic Grid component
@@ -43,5 +44,15 @@ class HtmlGridCol extends HtmlSemDoubleElement {
 
 	public function setValues($value) {
 		return $this->setValue($value);
+	}
+
+	public function addDivider($vertical=true, $content=NULL) {
+		$divider=new HtmlDivider("", $content);
+		if ($vertical)
+			$divider->setVertical();
+		else
+			$divider->setHorizontal();
+		$this->wrap("", $divider);
+		return $divider;
 	}
 }

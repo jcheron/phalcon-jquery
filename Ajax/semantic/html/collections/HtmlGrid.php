@@ -9,6 +9,7 @@ use Ajax\semantic\html\base\constants\VerticalAlignment;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 use Ajax\semantic\html\content\HtmlGridCol;
+use Ajax\semantic\html\elements\HtmlDivider;
 
 /**
  * Semantic Grid component
@@ -297,5 +298,10 @@ class HtmlGrid extends HtmlSemCollection {
 	 */
 	public function setStretched() {
 		return $this->addToProperty("class", "stretched");
+	}
+
+	public function addDivider($afterColIndex, $vertical=true, $content=NULL) {
+		$col=$this->getCell(0, $afterColIndex);
+		return $col->addDivider($vertical, $content);
 	}
 }

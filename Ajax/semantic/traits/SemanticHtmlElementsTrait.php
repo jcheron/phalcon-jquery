@@ -2,7 +2,6 @@
 
 namespace Ajax\semantic\traits;
 
-use Ajax\service\JArray;
 use Ajax\semantic\html\elements\HtmlButtonGroups;
 use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\elements\HtmlContainer;
@@ -21,10 +20,15 @@ use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\elements\HtmlStep;
 use Ajax\semantic\html\elements\HtmlFlag;
 use Ajax\semantic\html\elements\HtmlImage;
+use Ajax\semantic\html\base\constants\State;
 
 trait SemanticHtmlElementsTrait {
 
 	public abstract function addHtmlComponent($htmlComponent);
+
+	public function addState($state, $elements) {
+		State::add($state, $elements);
+	}
 
 	/**
 	 * Return a new Semantic Html Button
