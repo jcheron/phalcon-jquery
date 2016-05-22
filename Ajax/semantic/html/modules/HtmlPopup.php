@@ -27,7 +27,8 @@ class HtmlPopup extends HtmlSemDoubleElement {
 		$grid=$this->content;
 
 		$colCount=$grid->colCount();
-		$grid->setColsCount(++$colCount);
+		$colCount++;
+		$grid->setColsCount($colCount);
 
 		$list=new HtmlList("",$items);
 		$list->asLink();

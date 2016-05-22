@@ -10,6 +10,7 @@ class HtmlImage extends HtmlSemDoubleElement {
 
 	public function __construct($identifier, $src="", $alt="", $size=NULL) {
 		$image=new HtmlImg("img-", $src, $alt);
+		$image->setClass("");
 		parent::__construct($identifier, "div", "ui image", $image);
 		if (isset($size))
 			$this->setSize($size);

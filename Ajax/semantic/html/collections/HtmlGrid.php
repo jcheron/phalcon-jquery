@@ -9,7 +9,6 @@ use Ajax\semantic\html\base\constants\VerticalAlignment;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 use Ajax\semantic\html\content\HtmlGridCol;
-use Ajax\semantic\html\elements\HtmlDivider;
 
 /**
  * Semantic Grid component
@@ -38,6 +37,10 @@ class HtmlGrid extends HtmlSemCollection {
 
 	public function asSegment() {
 		return $this->addToPropertyCtrl("class", "segment", array ("segment" ));
+	}
+
+	public function asContainer() {
+		return $this->addToPropertyCtrl("class", "container", array ("container" ));
 	}
 
 	/**
@@ -134,7 +137,7 @@ class HtmlGrid extends HtmlSemCollection {
 	 * @return \Ajax\semantic\html\collections\HtmlGrid
 	 */
 	public function setColsCount($numCols, $toCreate=true, $width=NULL) {
-		if (isset($width)) {
+		if (isset($width)==false) {
 			$this->setWide($numCols);
 		}
 		if ($toCreate == true) {

@@ -9,6 +9,7 @@ use Ajax\semantic\html\base\constants\State;
 use Ajax\semantic\html\base\constants\Variation;
 use Ajax\semantic\html\base\constants\Emphasis;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
+use Ajax\semantic\html\collections\HtmlGrid;
 
 /**
  * Semantic Segment element
@@ -57,5 +58,15 @@ class HtmlSegment extends HtmlSemDoubleElement {
 
 	public function setBasic() {
 		return $this->setProperty("class", "ui basic segment");
+	}
+
+	public function asContainer() {
+		return $this->addToPropertyCtrl("class", "container", array ("container" ));
+	}
+
+	public function addGrid($numRows=1, $numCols=NULL){
+		$grid=new HtmlGrid("Grid-".$this->identifier,$numRows,$numCols);
+		$this->content=$grid;
+		return $grid;
 	}
 }

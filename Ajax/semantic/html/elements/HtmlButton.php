@@ -6,6 +6,7 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\traits\LabeledIconTrait;
 use Ajax\semantic\html\base\constants\Emphasis;
 use Ajax\semantic\html\base\constants\Social;
+use Ajax\semantic\html\elements\html5\HtmlLink;
 
 /**
  * Semantic Button component
@@ -198,5 +199,11 @@ class HtmlButton extends HtmlSemDoubleElement {
 		$result=new HtmlButton($identifier);
 		$result->asIcon($icon);
 		return $result;
+	}
+
+	public function asLink($href=NULL) {
+		$lnk=new HtmlLink("lnk-".$this->identifier,$href,$this->content);
+		$this->content=$lnk;
+		return $this;
 	}
 }

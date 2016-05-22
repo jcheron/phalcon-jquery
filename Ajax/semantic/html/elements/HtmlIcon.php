@@ -2,7 +2,7 @@
 
 namespace Ajax\semantic\html\elements;
 
-use Ajax\semantic\html\base\HtmlSemSingleElement;
+use Ajax\semantic\html\base\HtmlSemDoubleElement;
 
 /**
  * Semantic Icon component
@@ -10,11 +10,11 @@ use Ajax\semantic\html\base\HtmlSemSingleElement;
  * @author jc
  * @version 1.001
  */
-class HtmlIcon extends HtmlSemSingleElement {
+class HtmlIcon extends HtmlSemDoubleElement {
 	protected $_icon;
 
 	public function __construct($identifier, $icon) {
-		parent::__construct($identifier, "i", "icon");
+		parent::__construct($identifier, "i", "icon", NULL);
 		$this->setIcon($icon);
 	}
 
