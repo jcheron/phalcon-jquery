@@ -5,6 +5,8 @@ namespace Ajax\semantic\html\collections\form;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\semantic\html\base\constants\State;
+use Ajax\semantic\html\base\constants\Direction;
+use Ajax\semantic\html\elements\HtmlLabel;
 
 class HtmlFormField extends HtmlSemDoubleElement {
 	protected $_container;
@@ -15,6 +17,13 @@ class HtmlFormField extends HtmlSemDoubleElement {
 		if(isset($label))
 			$this->setLabel($label);
 		$this->setField($field);
+	}
+
+	public function addPointingLabel($label,$pointing=Direction::NONE){
+		$labelO=new HtmlLabel("",$label);
+		$labelO->setPointing($pointing);
+		$this->addContent($labelO,$pointing==="below" || $pointing==="right");
+		return $labelO;
 	}
 
 	public function setLabel($label){
@@ -79,6 +88,10 @@ class HtmlFormField extends HtmlSemDoubleElement {
 	 */
 	public function setError(){
 		return $this->addToProperty("class", "error");
+	}
+
+	public function setInline(){
+		return $this->addToProperty("class", "inline");
 	}
 
 	public function jsState($state){

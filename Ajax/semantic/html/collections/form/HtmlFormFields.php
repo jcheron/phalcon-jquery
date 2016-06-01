@@ -5,7 +5,7 @@ namespace Ajax\semantic\html\collections\form;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\collections\form\traits\FieldsTrait;
 
@@ -61,7 +61,7 @@ class HtmlFormFields extends HtmlSemCollection {
 		return $item;
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if ($this->_equalWidth) {
 			$count=$this->count();
 			$this->addToProperty("class", Wide::getConstants()["W".$count]." fields");

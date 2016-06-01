@@ -115,8 +115,13 @@ class HtmlIcon extends HtmlSemDoubleElement {
 		return $this->addToProperty("class", "corner");
 	}
 
-	public function addLabel($label) {
-		$this->wrap("", $label);
+	public function addLabel($label, $before=false, $icon=NULL) {
+		if($before)
+			$this->wrap($label);
+		else
+			$this->wrap("", $label);
+		if(isset($icon))
+			$this->addToIcon($icon);
 		return $this;
 	}
 

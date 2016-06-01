@@ -2,10 +2,10 @@
 
 namespace Ajax\semantic\html\elements\html5;
 
-use Ajax\JsUtils;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\common\html\html5\HtmlLinkTrait;
 use Ajax\semantic\html\elements\HtmlIcon;
+use Ajax\JsUtils;
 
 class HtmlLink extends HtmlSemDoubleElement {
 	use HtmlLinkTrait;

@@ -5,7 +5,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
 use Ajax\bootstrap\html\base\CssRef;
-use Phalcon\Mvc\View;
+
 
 /**
  * Twitter Bootstrap Alert component
@@ -78,7 +78,7 @@ class HtmlAlert extends HtmlBsDoubleElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if ($this->closeable&&$this->button==="") {
 			$this->addCloseButton();
 		}

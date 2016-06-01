@@ -4,8 +4,7 @@ namespace Ajax\bootstrap\html;
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\HtmlLink;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\Dispatcher;
+
 use Ajax\bootstrap\html\base\HtmlNavElement;
 /**
  * Twitter Bootstrap Breadcrumbs component
@@ -124,7 +123,7 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if($this->autoActive){
 			$this->setActive();
 		}
@@ -194,22 +193,13 @@ class HtmlBreadcrumbs extends HtmlNavElement {
 
 	/**
 	 * Add new elements in breadcrumbs corresponding to request dispatcher : controllerName, actionName, parameters
+	 * @param JsUtils $js
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
 	 */
-	public function fromDispatcher($dispatcher,$startIndex=0){
+	public function fromDispatcher(JsUtils $js,$dispatcher,$startIndex=0){
 		$this->startIndex=$startIndex;
-		$params=$dispatcher->getParams();
-		$action=$dispatcher->getActionName();
-		$items=array($dispatcher->getControllerName());
-		if(\sizeof($params)>0 || \strtolower($action)!="index" ){
-			$items[]=$action;
-			foreach ($params as $p){
-				if(\is_object($p)===false)
-				$items[]=$p;
-			}
-		}
-		return $this->addElements($items);
+		return $this->addElements($js->fromDispatcher($dispatcher));
 	}
 
 

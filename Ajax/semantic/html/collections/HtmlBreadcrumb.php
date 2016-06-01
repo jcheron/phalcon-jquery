@@ -4,9 +4,9 @@ namespace Ajax\semantic\html\collections;
 
 use Ajax\semantic\html\base\HtmlSemNavElement;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
-use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\elements\HtmlIcon;
+use Ajax\JsUtils;
 
 /**
  * Semantic UI Breadcrumb component
@@ -26,13 +26,13 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 	 * @var boolean $autoActive sets the last element's class to <b>active</b> if true
 	 */
 	protected $autoActive;
-	
+
 	/**
 	 *
 	 * @var boolean if set to true, the path of the elements is absolute
 	 */
 	protected $absolutePaths;
-	
+
 	/**
 	 *
 	 * @var object<Closure> the function who generates the href elements. default : function($e){return $e->getContent()}
@@ -151,7 +151,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if ($this->autoActive) {
 			$this->setActive();
 		}

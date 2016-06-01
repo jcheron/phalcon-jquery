@@ -2,8 +2,8 @@
 
 namespace Ajax\service;
 
-use Ajax\JsUtils;
 
+use Ajax\JsUtils;
 class AjaxCall {
 	private $method;
 	private $parameters;

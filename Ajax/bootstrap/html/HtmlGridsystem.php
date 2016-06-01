@@ -5,7 +5,7 @@ use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlGridRow;
 use Ajax\bootstrap\html\content\HtmlGridCol;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 
 /**
  * Composant Twitter Bootstrap Grid system
@@ -90,7 +90,7 @@ class HtmlGridSystem extends HtmlBsDoubleElement {
 		return $col;
 	}
 	
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		foreach ($this->rows as $row){
 			$this->addContent($row);
 		}

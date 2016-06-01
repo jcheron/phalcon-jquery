@@ -47,7 +47,7 @@ class HtmlSelect extends HtmlDoubleElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$this->content=array();
 		if(isset($this->default)){
 			$default=new HtmlOption("", $this->default);

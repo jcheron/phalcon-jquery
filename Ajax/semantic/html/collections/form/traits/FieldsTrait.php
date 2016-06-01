@@ -47,6 +47,10 @@ trait FieldsTrait {
 		return $this->addItem(new HtmlFormInput($identifier,$label,$type,$value,$placeholder));
 	}
 
+	public function addPassword($identifier, $label=NULL){
+		return $this->addItem(new HtmlFormInput($identifier,$label,"password","",""));
+	}
+
 	public function addButton($identifier,$value,$cssStyle=NULL,$onClick=NULL){
 		return $this->addItem(new HtmlButton($identifier,$value,$cssStyle,$onClick));
 	}

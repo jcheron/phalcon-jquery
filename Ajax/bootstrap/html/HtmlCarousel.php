@@ -7,7 +7,7 @@ use Ajax\bootstrap\html\content\HtmlCarouselControl;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\bootstrap\html\content\HtmlCarouselItem;
-use Phalcon\Mvc\View;
+
 use Ajax\common\html\BaseHtml;
 /**
  * Composant Twitter Bootstrap Carousel
@@ -141,7 +141,7 @@ class HtmlCarousel extends BaseHtml {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$this->slides [0]->setClass("item active");
 		$this->indicators [0]->setClass("active");
 		$this->createControls();

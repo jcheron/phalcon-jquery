@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\common\html\html5\HtmlSelect;
 
 class HtmlForm extends HtmlBsDoubleElement {
@@ -23,7 +23,7 @@ class HtmlForm extends HtmlBsDoubleElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if (isset($js)) {
 			$this->formElementsPrefix=$js->config()->getVar("formElementsPrefix");
 			foreach ( $this->futureElements as $futureElement ) {

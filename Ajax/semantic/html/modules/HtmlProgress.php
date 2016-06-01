@@ -5,7 +5,7 @@ namespace Ajax\semantic\html\modules;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\JsUtils;
 use Ajax\service\JArray;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\base\constants\State;
 
 class HtmlProgress extends HtmlSemDoubleElement {
@@ -67,7 +67,7 @@ class HtmlProgress extends HtmlSemDoubleElement {
 	 *
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$this->content=JArray::sortAssociative($this->content, [ "bar","label" ]);
 		return parent::compile($js, $view);
 	}

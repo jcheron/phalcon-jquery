@@ -18,7 +18,6 @@ use Ajax\common\traits\JqueryActionsTrait;
  */
 class Jquery {
 	use JqueryEventsTrait,JqueryAjaxTrait,JqueryActionsTrait;
-	protected $_di;
 	protected $_ui;
 	protected $_bootstrap;
 	protected $_semantic;
@@ -29,14 +28,11 @@ class Jquery {
 	protected $jquery_corner_active=FALSE;
 	protected $jquery_table_sorter_active=FALSE;
 	protected $jquery_table_sorter_pager_active=FALSE;
+	protected $jsUtils;
 
 	protected $jquery_events=array (
 			"bind","blur","change","click","dblclick","delegate","die","error","focus","focusin","focusout","hover","keydown","keypress","keyup","live","load","mousedown","mousseenter","mouseleave","mousemove","mouseout","mouseover","mouseup","off","on","one","ready","resize","scroll","select","submit","toggle","trigger","triggerHandler","undind","undelegate","unload"
 	);
-
-	public function setDi($di) {
-		$this->_di=$di;
-	}
 
 	public function ui($ui=NULL) {
 		if ($ui!==NULL) {
@@ -59,13 +55,13 @@ class Jquery {
 		return $this->_semantic;
 	}
 
-	public function __construct($params) {
+	public function __construct($params,$jsUtils) {
 		$this->params=array();
 		foreach ( $params as $key => $val ) {
 				$this->params[$key]=$params[$key];
 		}
+		$this->jsUtils=$jsUtils;
 	}
-
 
 	/**
 	 * Inline
@@ -110,12 +106,6 @@ class Jquery {
 	 */
 	private function _close_script($extra="\n") {
 		return "</script>{$extra}";
-	}
-
-	public function getLibraryScript() {
-		$assets=$this->_di->get('assets');
-		$assets->addJs($this->libraryFile);
-		return $assets->outputJs();
 	}
 
 	public function setLibraryFile($name) {

@@ -100,14 +100,17 @@ class HtmlButton extends HtmlSemDoubleElement {
 	 * Add and return a button label
 	 * @param string $caption
 	 * @param string $before
+	 * @param string $icon
 	 * @return \Ajax\semantic\html\elements\HtmlLabel
 	 */
-	public function addLabel($caption, $before=false) {
+	public function addLabel($label, $before=false, $icon=NULL) {
 		$this->tagName="div";
 		$this->addToProperty("class", "labeled");
 		$this->content=new HtmlButton("button-" . $this->identifier, $this->content);
 		$this->content->setTagName("div");
-		$label=new HtmlLabel("label-" . $this->identifier, $caption, "a");
+		$label=new HtmlLabel("label-" . $this->identifier, $label, "a");
+		if(isset($icon))
+			$label->addIcon($icon);
 		$label->setBasic();
 		$this->addContent($label, $before);
 		return $label;

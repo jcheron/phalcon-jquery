@@ -5,7 +5,7 @@ namespace Ajax\semantic\html\elements;
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\content\HtmlStepItem;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\common\html\HtmlDoubleElement;
 use Ajax\semantic\html\base\constants\Side;
 
@@ -71,7 +71,7 @@ class HtmlStep extends HtmlSemCollection{
 		return $this;
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if(isset($this->_activeStep)===true && \is_numeric($this->_activeStep))
 			$this->defineActiveStep();
 		return parent::compile($js,$view);

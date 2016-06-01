@@ -26,6 +26,10 @@ class HtmlInput extends HtmlSingleElement {
 	}
 
 	public function setPlaceholder($value){
+		if(JString::isNull($value)){
+			if(JString::isNotNull($this->identifier))
+				$value=\ucfirst($this->identifier);
+		}
 		if(JString::isNotNull($value))
 			$this->setProperty("placeholder", $value);
 		return $this;

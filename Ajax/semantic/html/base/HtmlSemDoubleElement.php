@@ -3,11 +3,13 @@
 namespace Ajax\semantic\html\base;
 
 use Ajax\common\html\HtmlDoubleElement;
-use Ajax\JsUtils;
 use Ajax\semantic\html\content\InternalPopup;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\base\traits\BaseTrait;
 use Ajax\semantic\html\modules\HtmlDimmer;
+use Ajax\semantic\html\elements\HtmlLabel;
+use Ajax\semantic\html\base\constants\Direction;
+use Ajax\JsUtils;
 
 /**
  * Base class for Semantic double elements
@@ -53,6 +55,35 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return $dimmer;
 	}
 
+	public function addLabel($label, $before=false, $icon=NULL) {
+		$labelO=$label;
+		if (\is_object($label) === false) {
+			$labelO=new HtmlLabel("label-" . $this->identifier, $label);
+			if (isset($icon))
+				$labelO->addIcon($icon);
+		} else {
+			$labelO->addToPropertyCtrl("class", "label", array ("label" ));
+		}
+		$this->addContent($labelO, $before);
+		return $labelO;
+	}
+
+	public function attachLabel($label,$side,$direction=Direction::NONE,$icon=NULL){
+		$label=$this->addLabel($label,true,$icon);
+		$label->setAttached($side,$direction);
+		return $this;
+	}
+
+	/**
+	 *
+	 * @return \Ajax\semantic\html\base\HtmlSemDoubleElement
+	 */
+	public function asLink($href=NULL) {
+		if (isset($href))
+			$this->setProperty("href", $href);
+		return $this->setTagName("a");
+	}
+
 	public function jsShowDimmer($show=true) {
 		$status="hide";
 		if ($show === true)
@@ -60,7 +91,7 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return '$("#.' . $this->identifier . ').dimmer("' . $status . '");';
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		if (isset($this->_popup))
 			$this->_popup->compile();
 		return parent::compile($js, $view);

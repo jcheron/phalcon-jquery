@@ -3,9 +3,8 @@
 namespace Ajax\bootstrap\html\phalcon;
 
 use Phalcon\Forms\Element;
-use Ajax\common\html\HtmlSingleElement;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 
 abstract class PhBsElement extends Element {
 	/**
@@ -27,7 +26,7 @@ abstract class PhBsElement extends Element {
 		$this->renderer->setName($name);
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		return $this->renderer->compile($js, $view);
 	}
 

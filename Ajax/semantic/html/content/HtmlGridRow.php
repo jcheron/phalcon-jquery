@@ -5,7 +5,7 @@ namespace Ajax\semantic\html\content;
 use Ajax\semantic\html\base\constants\Wide;
 use Ajax\semantic\html\base\constants\Color;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\base\HtmlSemCollection;
 use Ajax\semantic\html\base\traits\TextAlignmentTrait;
 

@@ -2,8 +2,8 @@
 
 namespace Ajax\common\html;
 
-use Ajax\JsUtils;
 
+use Ajax\JsUtils;
 class HtmlDoubleElement extends HtmlSingleElement {
 	/**
 	 *

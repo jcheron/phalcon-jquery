@@ -6,7 +6,7 @@ use Ajax\bootstrap\html\base\CssRef;
 use Ajax\bootstrap\html\base\HtmlElementAsContent;
 use Ajax\service\JArray;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\service\PhalconUtils;
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
@@ -54,7 +54,7 @@ class HtmlListgroupItem extends HtmlElementAsContent {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		return $this->element->compile($js, $view);
 	}
 

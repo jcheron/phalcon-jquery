@@ -3,7 +3,7 @@ namespace Ajax\bootstrap\html\content;
 
 use Ajax\bootstrap\html\base\CssSize;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 
 /**
@@ -36,7 +36,7 @@ class HtmlGridCol extends HtmlBsDoubleElement {
 		return implode(" ", $result);
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$this->setProperty("class", $this->_generateClass());
 		return parent::compile($js,$view);
 	}

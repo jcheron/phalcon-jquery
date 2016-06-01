@@ -18,11 +18,7 @@ class HtmlList extends HtmlSemCollection {
 
 	protected function createItem($value) {
 		$count=$this->count();
-		if (\is_array($value)) {
-			$item=new HtmlListItem("item-" . $this->identifier . "-" . $count, $value[0]);
-			$item->addIcon($value[1]);
-		} else
-			$item=new HtmlListItem("item-" . $this->identifier . "-" . $count, $value);
+		$item=new HtmlListItem("item-" . $this->identifier . "-" . $count, $value);
 		return $item;
 	}
 
@@ -30,6 +26,10 @@ class HtmlList extends HtmlSemCollection {
 		$header=new HtmlHeader("header-" . $this->identifier, $niveau, $content, "page");
 		$this->wrap($header);
 		return $header;
+	}
+
+	public function getItemPart($index,$partName="header"){
+		return $this->getItem($index)->getPart($partName);
 	}
 
 	public function itemsAs($tagName) {
@@ -51,6 +51,14 @@ class HtmlList extends HtmlSemCollection {
 		return $this->addToProperty("class", "celled");
 	}
 
+	public function setBulleted() {
+		return $this->addToProperty("class", "bulleted");
+	}
+
+	public function setOrdered() {
+		return $this->addToProperty("class", "ordered");
+	}
+
 	public function run(JsUtils $js) {
 		if ($this->_hasCheckedList === true) {
 			$jsCode=include dirname(__FILE__) . '/../../components/jsTemplates/tplCheckedList.php';
@@ -64,8 +72,16 @@ class HtmlList extends HtmlSemCollection {
 		return $this->addToProperty("class", "relaxed");
 	}
 
+	public function setSelection() {
+		return $this->addToProperty("class", "selection");
+	}
+
 	public function setDivided() {
 		return $this->addToProperty("class", "divided");
+	}
+
+	public function setHorizontal() {
+		return $this->addToProperty("class", "horizontal");
 	}
 
 	public function addCheckedList($items=array(), $masterItem=NULL, $values=array()) {

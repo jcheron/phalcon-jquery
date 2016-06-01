@@ -2,7 +2,7 @@
 
 namespace Ajax\bootstrap\html;
 
-use Phalcon\Mvc\View;
+
 use Ajax\JsUtils;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Controller;
@@ -111,16 +111,14 @@ class HtmlModal extends BaseHtml {
 
 	/**
 	 * render the content of an existing view : $controller/$action and set the response to the modal content
+	 * @param Controller $initialController
 	 * @param View $view
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
 	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContent($view, $controller, $action, $params=NULL) {
-		$template=$view->getRender($controller, $action, $params, function ($view) {
-			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-		});
-		$this->content=$template;
+	public function renderContent($initialController,$view, $controller, $action, $params=NULL) {
+		$this->content=$initialController->jquery->renderContent($view, $controller, $action,$params);
 	}
 
 	/**
@@ -130,14 +128,7 @@ class HtmlModal extends BaseHtml {
 	 * @param string $action a Phalcon action
 	 */
 	public function forward($initialController,$controller,$action){
-		$dispatcher = $initialController->dispatcher;
-		$dispatcher->setControllerName($controller);
-		$dispatcher->setActionName($action);
-		$dispatcher->dispatch();
-		$template=$initialController->view->getRender($dispatcher->getControllerName(), $dispatcher->getActionName(),$dispatcher->getParams(), function ($view) {
-			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-		});
-		$this->content=$template;
+		$this->content=$initialController->jquery->forward($initialController, $controller, $action);
 	}
 
 	/*

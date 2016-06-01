@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 
 /**
  * Composant Twitter Bootstrap Accordion
@@ -40,16 +40,14 @@ class HtmlAccordion extends HtmlBsDoubleElement {
 	/**
 	 * render the content of an existing view : $controller/$action and set the response to a new panel
 	 * @param string $title The panel title
+	 * @param Controller $initialController
 	 * @param View $view
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
 	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContentPanel($title,$view, $controller, $action, $params=NULL) {
-		$template=$view->getRender($controller, $action, $params, function ($view) {
-			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-		});
-		return $this->addPanel($title, $template);
+	public function renderContentPanel($title,JsUtils $js,$view, $controller, $action, $params=NULL) {
+		return $this->addPanel($title, $initialController->jquery->renderContent($view, $controller, $action,$params));
 	}
 
 	/**
@@ -60,14 +58,7 @@ class HtmlAccordion extends HtmlBsDoubleElement {
 	 * @param string $action a Phalcon action
 	 */
 	public function forwardPanel($title,$initialController,$controller,$action){
-		$dispatcher = $initialController->dispatcher;
-		$dispatcher->setControllerName($controller);
-		$dispatcher->setActionName($action);
-		$dispatcher->dispatch();
-		$template=$initialController->view->getRender($dispatcher->getControllerName(), $dispatcher->getActionName(),$dispatcher->getParams(), function ($view) {
-			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-		});
-		return $this->addPanel($title, $template);
+		return $this->addPanel($title, $initialController->jquery->forward($initialController, $controller, $action));
 	}
 
 	public function run(JsUtils $js) {

@@ -7,27 +7,24 @@ use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNCoreCss;
-use Phalcon\DiInterface;
 use Phalcon\Version;
-use Phalcon\Di\InjectionAwareInterface;
 use Ajax\common\traits\JsUtilsEventsTrait;
 use Ajax\common\traits\JsUtilsActionsTrait;
 use Ajax\common\traits\JsUtilsAjaxTrait;
 
 /**
- * JQuery Phalcon library
+ * JQuery PHP library
  *
  * @author jcheron
- * @version 1.003
+ * @version 1.004
  * @license Apache 2 http://www.apache.org/licenses/
  */
 /**
- * JsUtils Class : Phalcon service to be injected
+ * JsUtils Class : Service to be injected
  */
-abstract class _JsUtils implements InjectionAwareInterface {
+abstract class JsUtils{
 	use JsUtilsEventsTrait,JsUtilsActionsTrait,JsUtilsAjaxTrait;
 
-	protected $_di;
 	protected $js;
 	protected $cdns;
 	/**
@@ -53,10 +50,34 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	protected $config;
 
 	protected function _setDi($di) {
-		$this->_di=$di;
 		if ($this->js!=null&&$di!=null)
 			$this->js->setDi($di);
 	}
+
+	public abstract function getUrl($url);
+	public abstract function addViewElement($identifier,$content,$view);
+	/**
+	 * render the content of $controller::$action and set the response to the modal content
+	 * @param Controller $initialController
+	 * @param string $controller a Phalcon controller
+	 * @param string $action a Phalcon action
+	 */
+	public abstract function forward($initialController,$controller,$action);
+	/**
+	 * render the content of an existing view : $controller/$action and set the response to the modal content
+	 * @param View $view
+	 * @param string $controller a Phalcon controller
+	 * @param string $action a Phalcon action
+	 * @param $params The parameters to pass to the view
+	 */
+	public abstract function renderContent($view, $controller, $action, $params=NULL);
+
+	/**
+	 * Collect url parts from the request dispatcher : controllerName, actionName, parameters
+	 * @param mixed $dispatcher
+	 * @return array
+	 */
+	public abstract function fromDispatcher($dispatcher);
 
 	/**
 	 *
@@ -140,12 +161,6 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		return $this->config;
 	}
 
-	public function getDi() {
-		return $this->_di;
-	}
-
-
-
 	public function __construct($params=array()) {
 		$defaults=array (
 				'driver' => 'Jquery',
@@ -157,7 +172,7 @@ abstract class _JsUtils implements InjectionAwareInterface {
 			}
 		}
 		extract($defaults);
-		$this->js=new Jquery($defaults);
+		$this->js=new Jquery($defaults,$this);
 		$this->cdns=array ();
 	}
 
@@ -212,19 +227,6 @@ abstract class _JsUtils implements InjectionAwareInterface {
 	 */
 	public function clear_compile() {
 		$this->js->_clear_compile();
-	}
-
-	/**
-	 * Outputs a <script> tag with the source as an external js file
-	 *
-	 * @param string $external_file
-	 * @param boolean $relative
-	 * @return string
-	 */
-	public function external($external_file='', $relative=FALSE) {
-		$assets=$this->_di->get('assets');
-		$assets->addJs($external_file);
-		return $assets->outputJs();
 	}
 
 	/**
@@ -397,20 +399,5 @@ abstract class _JsUtils implements InjectionAwareInterface {
 		}
 		ksort($result);
 		return implode("\n", $result);
-	}
-}
-if (Version::get()==="1.3.4") {
-	class JsUtils extends _JsUtils {
-
-		public function setDi($di) {
-			$this->_setDi($di);
-		}
-	}
-} else {
-	class JsUtils extends _JsUtils {
-
-		public function setDi(DiInterface $di) {
-			$this->_setDi($di);
-		}
 	}
 }

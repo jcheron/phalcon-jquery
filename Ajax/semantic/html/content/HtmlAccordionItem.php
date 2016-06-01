@@ -5,7 +5,7 @@ namespace Ajax\semantic\html\content;
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 
 
 class HtmlAccordionItem extends HtmlSemDoubleElement {
@@ -36,7 +36,7 @@ class HtmlAccordionItem extends HtmlSemDoubleElement {
 		return $element;
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL){
+	public function compile(JsUtils $js=NULL, $view=NULL){
 		$this->titleElement=$this->createTitleElement();
 		return parent::compile($js,$view);
 	}

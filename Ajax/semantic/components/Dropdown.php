@@ -2,8 +2,8 @@
 
 namespace Ajax\semantic\components;
 
-use Ajax\JsUtils;
 use Ajax\common\components\SimpleExtComponent;
+use Ajax\JsUtils;
 
 class Dropdown extends SimpleExtComponent {
 

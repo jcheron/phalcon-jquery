@@ -4,7 +4,7 @@ namespace Ajax\semantic\html\content\card;
 
 use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\service\JArray;
 
 class HtmlCardHeaderContent extends HtmlCardContent {
@@ -34,7 +34,7 @@ class HtmlCardHeaderContent extends HtmlCardContent {
 	 *
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$this->content=JArray::sortAssociative($this->content, [ "image","header","meta","description" ]);
 		return parent::compile($js, $view);
 	}

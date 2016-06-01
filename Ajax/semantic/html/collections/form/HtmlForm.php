@@ -7,6 +7,7 @@ use Ajax\semantic\html\elements\HtmlHeader;
 use Ajax\semantic\html\collections\HtmlMessage;
 use Ajax\semantic\html\base\constants\State;
 use Ajax\semantic\html\collections\form\traits\FieldsTrait;
+use Ajax\semantic\html\elements\HtmlDivider;
 
 /**
  * Semantic Form component
@@ -15,7 +16,7 @@ use Ajax\semantic\html\collections\form\traits\FieldsTrait;
  * @version 1.001
  */
 class HtmlForm extends HtmlSemCollection {
-	
+
 	use FieldsTrait;
 	protected $_fields;
 
@@ -32,6 +33,10 @@ class HtmlForm extends HtmlSemCollection {
 		if ($dividing)
 			$header->setDividing();
 		return $this->addItem($header);
+	}
+
+	public function addDivider($caption=NULL){
+		return $this->addContent(new HtmlDivider("",$caption));
 	}
 
 	public function addFields($fields=NULL, $label=NULL) {

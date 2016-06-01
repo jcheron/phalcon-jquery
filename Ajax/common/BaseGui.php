@@ -2,9 +2,9 @@
 
 namespace Ajax\common;
 
-use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\common\components\SimpleComponent;
+use Ajax\JsUtils;
 
 /**
  * BaseGui Phalcon library
@@ -16,7 +16,6 @@ use Ajax\common\components\SimpleComponent;
  * BaseGui
  */
 class BaseGui {
-	protected $_di;
 	protected $autoCompile;
 	protected $components;
 	protected $htmlComponents;
@@ -51,7 +50,6 @@ class BaseGui {
 
 	public function setJs(JsUtils $js) {
 		$this->js=$js;
-		$this->_di=$js->getDi();
 	}
 
 	public function addComponent(SimpleComponent $component, $attachTo, $params) {
@@ -70,7 +68,7 @@ class BaseGui {
 		return $htmlComponent;
 	}
 
-	public function compileHtml(JsUtils $js=NULL, View $view=NULL) {
+	public function compileHtml(JsUtils $js=NULL, $view=NULL) {
 		foreach ( $this->htmlComponents as $htmlComponent ) {
 			$htmlComponent->compile($js, $view);
 		}

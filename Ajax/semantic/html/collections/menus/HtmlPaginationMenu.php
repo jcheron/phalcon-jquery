@@ -4,7 +4,7 @@ namespace Ajax\semantic\html\collections\menus;
 
 use Ajax\semantic\html\collections\menus\HtmlMenu;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\semantic\html\elements\HtmlIcon;
 
 class HtmlPaginationMenu extends HtmlMenu{
@@ -16,7 +16,7 @@ class HtmlPaginationMenu extends HtmlMenu{
 	 * {@inheritDoc}
 	 * @see \Ajax\common\html\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL,View $view=NULL){
+	public function compile(JsUtils $js=NULL,$view=NULL){
 		$this->insertItem(new HtmlIcon("", "left chevron"));
 		$this->addItem(new HtmlIcon("", "right chevron"));
 		$this->asPagination();

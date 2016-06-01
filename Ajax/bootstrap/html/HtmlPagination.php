@@ -6,6 +6,7 @@ use Ajax\bootstrap\html\base\HtmlNavElement;
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\service\PhalconUtils;
 use Ajax\common\html\BaseHtml;
+use Ajax\JsUtils;
 
 /**
  * Twitter Bootstrap Pagination component
@@ -112,12 +113,12 @@ class HtmlPagination extends HtmlNavElement {
 	}
 	/**
 	 * set the active page corresponding to request dispatcher : controllerName, actionName, parameters and $urlMask
+	 * @param JsUtils $js
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlPagination
 	 */
-	public function fromDispatcher($dispatcher,$startIndex=0){
-		$items=array($dispatcher->getControllerName(),$dispatcher->getActionName());
-		$items=array_merge($items,$dispatcher->getParams());
+	public function fromDispatcher(JsUtils $js,$dispatcher,$startIndex=0){
+		$items=$js->fromDispatcher($dispatcher);
 		$url=implode("/", $items);
 		if($this->urlMask==="%page%"){
 			$this->urlMask=preg_replace("/[0-9]/", "%page%", $url);

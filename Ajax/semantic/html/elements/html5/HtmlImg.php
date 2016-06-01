@@ -12,4 +12,10 @@ class HtmlImg extends \Ajax\common\html\html5\HtmlImg {
 		$this->_baseClass="ui image";
 		$this->setClass($this->_baseClass);
 	}
+
+	public function asAvatar($caption=NULL) {
+		if (isset($caption))
+			$this->wrap("", $caption);
+			return $this->addToProperty("class", "avatar");
+	}
 }

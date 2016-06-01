@@ -7,6 +7,7 @@ use Ajax\semantic\html\base\constants\State;
 use Ajax\semantic\html\base\constants\Direction;
 use Ajax\semantic\html\base\constants\Variation;
 use Ajax\semantic\html\base\traits\IconTrait;
+use Ajax\semantic\html\modules\HtmlDropdown;
 
 class HtmlInput extends HtmlSemDoubleElement {
 	use IconTrait;
@@ -30,24 +31,16 @@ class HtmlInput extends HtmlSemDoubleElement {
 	}
 
 	public function labeled($label, $direction=Direction::LEFT, $icon=NULL) {
-		$labelO=$label;
-		if (\is_object($label) === false) {
-			$labelO=new HtmlLabel("label-" . $this->identifier, $label);
-			if (isset($icon))
-				$labelO->addIcon($icon);
-		} else {
-			$labelO->addToPropertyCtrl("class", "label", array ("label" ));
-		}
+		$labelO=$this->addLabel($label,$direction===Direction::LEFT,$icon);
 		$this->addToProperty("class", $direction . " labeled");
-		$this->addContent($labelO, \strstr($direction, Direction::LEFT) !== false);
 		return $labelO;
 	}
 
-	public function labeledToCorner($label, $direction=Direction::LEFT, $icon=NULL) {
-		return $this->labeled($label, $direction . " corner", $icon)->toCorner($direction);
+	public function labeledToCorner($icon, $direction=Direction::LEFT) {
+		return $this->labeled("", $direction . " corner", $icon)->toCorner($direction);
 	}
 
-	public function addAction($action, $direction=Direction::LEFT, $icon=NULL, $labeled=false) {
+	public function addAction($action, $direction=Direction::RIGHT, $icon=NULL, $labeled=false) {
 		$actionO=$action;
 		if (\is_object($action) === false) {
 			$actionO=new HtmlButton("action-" . $this->identifier, $action);
@@ -57,6 +50,12 @@ class HtmlInput extends HtmlSemDoubleElement {
 		$this->addToProperty("class", $direction . " action");
 		$this->addContent($actionO, \strstr($direction, Direction::LEFT) !== false);
 		return $actionO;
+	}
+
+	public function addDropdown($label="", $items=array(),$direction=Direction::RIGHT){
+		$labelO=new HtmlDropdown("dd-".$this->identifier,$label,$items);
+		$labelO->asSelect("select-".$this->identifier,false,true);
+		return $this->labeled($labelO,$direction);
 	}
 
 	public function getField() {

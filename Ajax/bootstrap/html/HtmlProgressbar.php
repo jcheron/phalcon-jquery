@@ -4,7 +4,7 @@ namespace Ajax\bootstrap\html;
 
 use Ajax\bootstrap\html\base\HtmlBsDoubleElement;
 use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\bootstrap\html\base\CssRef;
 use Ajax\service\JArray;
 
@@ -132,7 +132,7 @@ class HtmlProgressbar extends HtmlBsDoubleElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$actualStyle=$this->style;
 		if(isset($this->styleLimits)&& JArray::isAssociative($this->styleLimits)){
 			foreach ($this->styleLimits as $k=>$v){

@@ -2,12 +2,11 @@
 
 namespace Ajax\common\html;
 
-use Ajax\JsUtils;
-use Phalcon\Mvc\View;
+
 use Ajax\service\AjaxCall;
-use Ajax\service\PhalconUtils;
 use Ajax\service\JString;
 use Ajax\common\components\SimpleExtComponent;
+use Ajax\JsUtils;
 
 /**
  * BaseHtml for HTML components
@@ -66,7 +65,7 @@ abstract class BaseHtml extends BaseWidget {
 				$v=$v . $separator . $value;
 			else
 				$v=$value;
-			
+
 			return $this->setProperty($name, $v);
 		}
 		return $this;
@@ -77,10 +76,10 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	public function compile(JsUtils $js=NULL, View $view=NULL) {
+	public function compile(JsUtils $js=NULL, $view=NULL) {
 		$result=$this->getTemplate($js);
 		foreach ( $this as $key => $value ) {
-			if (PhalconUtils::startsWith($key, "_") === false && $key !== "events") {
+			if (JString::startswith($key, "_") === false && $key !== "events") {
 				if (is_array($value)) {
 					$v=PropertyWrapper::wrap($value, $js);
 				} else {
@@ -89,16 +88,11 @@ abstract class BaseHtml extends BaseWidget {
 				$result=str_ireplace("%" . $key . "%", $v, $result);
 			}
 		}
-		if (isset($js)) {
+		if (isset($js)===true) {
 			$this->run($js);
-		}
-		if (isset($view) === true) {
-			$controls=$view->getVar("q");
-			if (isset($controls) === false) {
-				$controls=array ();
+			if (isset($view) === true) {
+				$js->addViewElement($this->identifier, $result, $view);
 			}
-			$controls[$this->identifier]=$result;
-			$view->setVar("q", $controls);
 		}
 		return $result;
 	}
@@ -219,7 +213,7 @@ abstract class BaseHtml extends BaseWidget {
 
 	public function fromArray($array) {
 		foreach ( $this as $key => $value ) {
-			if (array_key_exists($key, $array) && !PhalconUtils::startsWith($key, "_")) {
+			if (array_key_exists($key, $array) && !JString::startswith($key, "_")) {
 				$setter="set" . ucfirst($key);
 				$this->$setter($array[$key]);
 				unset($array[$key]);
@@ -372,6 +366,24 @@ abstract class BaseHtml extends BaseWidget {
 				return $elements[$index - 1];
 		} elseif ($elements instanceof BaseHtml) {
 			if ($elements->getIdentifier() === $identifier)
+				return $elements;
+		}
+		return null;
+	}
+
+	protected function getElementByPropertyValue($propertyName,$value, $elements) {
+		if (is_array($elements)) {
+			$flag=false;
+			$index=0;
+			while ( !$flag && $index < sizeof($elements) ) {
+				if ($elements[$index] instanceof BaseHtml)
+					$flag=($elements[$index]->propertyContains($propertyName, $value) === true);
+					$index++;
+			}
+			if ($flag === true)
+				return $elements[$index - 1];
+		} elseif ($elements instanceof BaseHtml) {
+			if ($elements->propertyContains($propertyName, $value) === true)
 				return $elements;
 		}
 		return null;
