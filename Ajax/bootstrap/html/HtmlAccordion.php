@@ -46,7 +46,7 @@ class HtmlAccordion extends HtmlBsDoubleElement {
 	 * @param string $action a Phalcon action
 	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContentPanel($title,JsUtils $js,$view, $controller, $action, $params=NULL) {
+	public function renderContentPanel($title,$initialController,$view, $controller, $action, $params=NULL) {
 		return $this->addPanel($title, $initialController->jquery->renderContent($view, $controller, $action,$params));
 	}
 

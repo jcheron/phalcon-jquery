@@ -94,7 +94,7 @@ class HtmlLabel extends HtmlSemDoubleElement {
 	*  Adds an image
 	* @param string $src
 	* @param string $alt
-	* @param string $before
+	* @param boolean $before
 	* @return \Ajax\semantic\html\elements\html5\HtmlImg
 	*/
 	public function addImage($src, $alt="", $before=true) {

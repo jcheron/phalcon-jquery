@@ -21,7 +21,7 @@ class BaseGui {
 	protected $htmlComponents;
 	/**
 	 *
-	 * @var Ajax\JsUtils
+	 * @var \Ajax\JsUtils
 	 */
 	protected $js;
 
