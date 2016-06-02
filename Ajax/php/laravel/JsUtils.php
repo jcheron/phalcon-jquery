@@ -1,38 +1,23 @@
 <?php
 
-namespace Ajax\php\phalcon;
+namespace Ajax\php\laravel;
 
-use Phalcon\DiInterface;
-use Phalcon\Di\InjectionAwareInterface;
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\Controller;
 
-class JsUtils extends \Ajax\JsUtils implements InjectionAwareInterface{
-	protected $_di;
-	public function setDi(DiInterface $di) {
-		$this->_di=$di;
-		//$this->_setDi($di);
-	}
-
-	public function getDi() {
-		return $this->_di;
-	}
-
+class JsUtils extends \Ajax\JsUtils{
 	public function getUrl($url){
-		return $this->_di->get("url")->get($url);
+		return $url;
 	}
-
 	public function addViewElement($identifier,$content,$view){
-		$controls=$view->getVar("q");
+		$controls=$view->__get("q");
 		if (isset($controls) === false) {
 			$controls=array ();
 		}
 		$controls[$identifier]=$content;
-		$view->setVar("q", $controls);
+		$view->__set("q", $controls);
 	}
 
 	public function createScriptVariable($view,$view_var, $output){
-		$view->setVar($view_var,$output);
+		$view->__set($view_var,$output);
 	}
 
 	public function forward($initialController,$controller,$action){

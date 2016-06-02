@@ -287,7 +287,7 @@ class Jquery {
 		$output=($script_tags===FALSE) ? $script : $this->inline($script);
 
 		if ($view!=NULL)
-			$view->setVar($view_var, $output);
+			$this->jsUtils->createScriptVariable($view,$view_var, $output);
 		return $output;
 	}
 
