@@ -7,7 +7,6 @@ use Ajax\config\Config;
 use Ajax\lib\CDNJQuery;
 use Ajax\lib\CDNGuiGen;
 use Ajax\lib\CDNCoreCss;
-use Phalcon\Version;
 use Ajax\common\traits\JsUtilsEventsTrait;
 use Ajax\common\traits\JsUtilsActionsTrait;
 use Ajax\common\traits\JsUtilsAjaxTrait;

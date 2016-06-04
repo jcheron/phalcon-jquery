@@ -89,22 +89,12 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 
 	/**
 	 * Add new elements in breadcrumbs corresponding to request dispatcher : controllerName, actionName, parameters
+	 * @param JsUtils $js
 	 * @param Dispatcher $dispatcher the request dispatcher
 	 * @return \Ajax\bootstrap\html\HtmlBreadcrumbs
 	 */
-	public function fromDispatcher($dispatcher, $startIndex=0) {
-		$this->startIndex=$startIndex;
-		$params=$dispatcher->getParams();
-		$action=$dispatcher->getActionName();
-		$items=array ($dispatcher->getControllerName() );
-		if (\sizeof($params) > 0 || \strtolower($action) != "index") {
-			$items[]=$action;
-			foreach ( $params as $p ) {
-				if (\is_object($p) === false)
-					$items[]=$p;
-			}
-		}
-		return $this->addItems($items);
+	public function fromDispatcher(JsUtils $js,$dispatcher, $startIndex=0) {
+		return $this->addItems($js->fromDispatcher($dispatcher));
 	}
 
 	/**
@@ -194,7 +184,6 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 			$itemO->fromArray($value);
 		else {
 			$itemO->setContent($value);
-			$itemO->setProperty($this->attr, $this->getHref($count));
 		}
 		return $itemO;
 	}
@@ -208,8 +197,10 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 	}
 
 	public function addItem($item) {
+		$count=$this->count();
 		$itemO=parent::addItem($item);
 		$this->addToPropertyCtrl("class", "section", array ("section" ));
+		$itemO->setProperty($this->attr, $this->getHref($count));
 		return $itemO;
 	}
 

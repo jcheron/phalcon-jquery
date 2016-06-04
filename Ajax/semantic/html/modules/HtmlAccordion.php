@@ -29,6 +29,22 @@ class HtmlAccordion extends HtmlSemCollection{
 		return ($value instanceof HtmlAccordionItem)===false;
 	}
 
+	public function addPanel($title,$content){
+		return $this->addItem([$title,$content]);
+	}
+
+	/**
+	 * render the content of $controller::$action and set the response to a new panel
+	 * @param JsUtils $js
+	 * @param string $title The panel title
+	 * @param Controller $initialController
+	 * @param string $controller a Phalcon controller
+	 * @param string $action a Phalcon action
+	 */
+	public function forwardPanel(JsUtils $js,$title,$initialController,$controller,$action){
+		return $this->addPanel($title, $js->forward($initialController, $controller, $action));
+	}
+
 	/*
 	 * (non-PHPdoc)
 	 * @see BaseHtml::run()

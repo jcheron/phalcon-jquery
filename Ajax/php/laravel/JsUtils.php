@@ -2,10 +2,12 @@
 
 namespace Ajax\php\laravel;
 
-
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 class JsUtils extends \Ajax\JsUtils{
 	public function getUrl($url){
-		return $url;
+		return \url($url);
 	}
 	public function addViewElement($identifier,$content,$view){
 		$controls=$view->__get("q");
@@ -21,14 +23,14 @@ class JsUtils extends \Ajax\JsUtils{
 	}
 
 	public function forward($initialController,$controller,$action){
-		$dispatcher = $initialController->dispatcher;
-		$dispatcher->setControllerName($controller);
-		$dispatcher->setActionName($action);
-		$dispatcher->dispatch();
-		$template=$initialController->view->getRender($dispatcher->getControllerName(), $dispatcher->getActionName(),$dispatcher->getParams(), function ($view) {
-			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-		});
-		return $template;
+		//\request()->attributes->all()
+		$url=\action($controller.'@'.$action, [],false);
+		$request = Request::create($url, 'GET');
+		// handle the response
+		return Route::dispatch($request)->getContent();
+		//return App::make($controller)->{$action}(\request()->attributes->all());
+		//return "Accordion content";//
+		//return \redirect()->action($controller.'@'.$action,\request()->attributes->all())->getContent();
 	}
 
 	public function renderContent($view, $controller, $action, $params=NULL) {
@@ -39,16 +41,6 @@ class JsUtils extends \Ajax\JsUtils{
 	}
 
 	public function fromDispatcher($dispatcher){
-		$params=$dispatcher->getParams();
-		$action=$dispatcher->getActionName();
-		$items=array($dispatcher->getControllerName());
-		if(\sizeof($params)>0 || \strtolower($action)!="index" ){
-			$items[]=$action;
-			foreach ($params as $p){
-				if(\is_object($p)===false)
-					$items[]=$p;
-			}
-		}
-		return $items;
+		return $dispatcher->segments();
 	}
 }

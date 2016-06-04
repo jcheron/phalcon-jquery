@@ -124,17 +124,6 @@ abstract class HtmlCollection extends HtmlDoubleElement {
 		return \is_object($value)===false;
 	}
 
-	/*
-	 * (non-PHPdoc)
-	 * @see \Ajax\bootstrap\html\base\HtmlSingleElement::run()
-	 */
-	public function run(JsUtils $js) {
-		parent::run($js);
-		$this->_bsComponent=$js->bootstrap()->generic("#".$this->identifier);
-		$this->addEventsOnRun($js);
-		return $this->_bsComponent;
-	}
-
 	protected function contentAs($tagName){
 		foreach ($this->content as $item){
 			$item->setTagName($tagName);
