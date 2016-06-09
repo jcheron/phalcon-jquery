@@ -49,15 +49,15 @@ trait JqueryAjaxTrait {
 		$url=$this->_correctAjaxUrl($url);
 		$retour="url='".$url."';\n";
 		$slash="/";
-		if(PhalconUtils::endsWith($url, "/"))
+		if(PhalconUtils::endsWith($url, "/")===true)
 			$slash="";
-			if(JString::isNotNull($attr)){
-				if ($attr=="value")
-					$retour.="url=url+'".$slash."'+$(this).val();\n";
-					else if($attr!=null && $attr!=="")
-						$retour.="url=url+'".$slash."'+($(this).attr('".$attr."')||'');\n";
-			}
-			return $retour;
+		if(JString::isNotNull($attr)){
+			if ($attr=="value")
+				$retour.="url=url+'".$slash."'+$(this).val();\n";
+				else if($attr!=null && $attr!=="")
+					$retour.="url=url+'".$slash."'+($(this).attr('".$attr."')||'');\n";
+		}
+		return $retour;
 	}
 
 	protected function _getOnAjaxDone($responseElement,$jsCallback){
@@ -77,12 +77,12 @@ trait JqueryAjaxTrait {
 	}
 
 	protected function _correctAjaxUrl($url) {
-		if (PhalconUtils::endsWith($url, "/"))
+		if ($url!=="/" && JString::endsWith($url, "/")===true)
 			$url=substr($url, 0, strlen($url)-1);
-			if (strncmp($url, 'http://', 7)!=0&&strncmp($url, 'https://', 8)!=0) {
-				$url=$this->jsUtils->getUrl($url);
-			}
-			return $url;
+		if (strncmp($url, 'http://', 7)!=0&&strncmp($url, 'https://', 8)!=0) {
+			$url=$this->jsUtils->getUrl($url);
+		}
+		return $url;
 	}
 
 	/**
