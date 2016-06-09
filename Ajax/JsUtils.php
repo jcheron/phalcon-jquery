@@ -63,13 +63,12 @@ abstract class JsUtils{
 	 */
 	public abstract function forward($initialController,$controller,$action);
 	/**
-	 * render the content of an existing view : $controller/$action and set the response to the modal content
-	 * @param View $view
-	 * @param string $controller a Phalcon controller
-	 * @param string $action a Phalcon action
+	 * render the content of an existing view : $viewName and set the response to the modal content
+ 	 * @param Controller $initialControllerInstance
+	 * @param View $viewName
 	 * @param $params The parameters to pass to the view
 	 */
-	public abstract function renderContent($view, $controller, $action, $params=NULL);
+	public abstract function renderContent($initialControllerInstance,$viewName, $params=NULL);
 
 	/**
 	 * Collect url parts from the request dispatcher : controllerName, actionName, parameters
@@ -173,6 +172,22 @@ abstract class JsUtils{
 		extract($defaults);
 		$this->js=new Jquery($defaults,$this);
 		$this->cdns=array ();
+	}
+
+	public function __set($property, $value){
+		switch ($property){
+			case "bootstrap":
+				$this->bootstrap($value);
+				break;
+			case "semantic":
+				$this->semantic(value);
+				break;
+			case "ui":
+				$this->ui($value);
+				break;
+			default:
+				throw new \Exception('Unknown property !');
+		}
 	}
 
 	public function addToCompile($jsScript) {
