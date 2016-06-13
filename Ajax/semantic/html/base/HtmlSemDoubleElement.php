@@ -91,7 +91,7 @@ class HtmlSemDoubleElement extends HtmlDoubleElement {
 		return '$("#.' . $this->identifier . ').dimmer("' . $status . '");';
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		if (isset($this->_popup))
 			$this->_popup->compile();
 		return parent::compile($js, $view);

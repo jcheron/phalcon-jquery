@@ -39,26 +39,27 @@ class HtmlAccordion extends HtmlBsDoubleElement {
 
 	/**
 	 * render the content of an existing view : $controller/$action and set the response to a new panel
+	 * @param JsUtils $js
 	 * @param string $title The panel title
 	 * @param Controller $initialController
-	 * @param View $view
-	 * @param string $controller a Phalcon controller
-	 * @param string $action a Phalcon action
+	 * @param string $viewName
 	 * @param $params The parameters to pass to the view
 	 */
-	public function renderContentPanel($title,$initialController,$view, $controller, $action, $params=NULL) {
-		return $this->addPanel($title, $initialController->jquery->renderContent($view, $controller, $action,$params));
+	public function renderViewPanel(JsUtils $js,$title,$initialController, $viewName, $params=array()) {
+		return $this->addPanel($title, $js->renderContent($initialController, $viewName,$params));
 	}
 
-	/**
+		/**
 	 * render the content of $controller::$action and set the response to a new panel
+	 * @param JsUtils $js
 	 * @param string $title The panel title
 	 * @param Controller $initialController
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
+	 * @param array $params
 	 */
-	public function forwardPanel($title,$initialController,$controller,$action){
-		return $this->addPanel($title, $initialController->jquery->forward($initialController, $controller, $action));
+	public function forwardPanel(JsUtils $js,$title,$initialController,$controller,$action,$params=array()){
+		return $this->addPanel($title, $js->forward($initialController, $controller, $action,$params));
 	}
 
 	public function run(JsUtils $js) {

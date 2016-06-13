@@ -71,7 +71,7 @@ class HtmlStep extends HtmlSemCollection{
 		return $this;
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		if(isset($this->_activeStep)===true && \is_numeric($this->_activeStep))
 			$this->defineActiveStep();
 		return parent::compile($js,$view);

@@ -27,7 +27,7 @@ class PhBsForm extends Form {
 		parent::add($element, $postion, $type);
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		$result="";
 		foreach ( $this->_elements as $element ) {
 			if ($element instanceof PhBsElement)

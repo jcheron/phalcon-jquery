@@ -13,6 +13,7 @@ use Ajax\semantic\components\Rating;
 use Ajax\semantic\components\Progress;
 use Ajax\semantic\components\Search;
 use Ajax\semantic\components\Dimmer;
+use Ajax\semantic\components\Modal;
 
 trait SemanticComponentsTrait {
 
@@ -80,5 +81,11 @@ trait SemanticComponentsTrait {
 
 	public function dimmer($attachTo=NULL, $params=NULL) {
 		return $this->addComponent(new Dimmer($this->js), $attachTo, $params);
+	}
+
+	public function modal($attachTo=NULL, $params=NULL,$paramsParts=NULL) {
+		$result= $this->addComponent(new Modal($this->js), $attachTo, $params);
+		$result->setParamParts($paramsParts);
+		return $result;
 	}
 }

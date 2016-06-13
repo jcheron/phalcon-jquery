@@ -11,7 +11,7 @@ class JsUtils extends \Ajax\JsUtils{
 		return Url::toRoute($url);
 	}
 
-	public function addViewElement($identifier,$content,$view){
+	public function addViewElement($identifier,$content,&$view){
 		$params=$view->params;
 		if (\array_key_exists("q", $params)==false) {
 			$view->params["q"]=array();
@@ -19,11 +19,11 @@ class JsUtils extends \Ajax\JsUtils{
 		$view->params["q"][$identifier]=$content;
 	}
 
-	public function createScriptVariable($view,$view_var, $output){
+	public function createScriptVariable(&$view,$view_var, $output){
 		$view->params[$view_var]=$output;
 	}
 
-	public function forward($initialControllerInstance,$controllerName,$actionName,$params=NULL){
+	public function forward($initialControllerInstance,$controllerName,$actionName,$params=array()){
 		\ob_start();
 		$ctrInfo=\yii::$app->createController($controllerName."/".$actionName);
 		$ctrInfo[0]->{$ctrInfo[1]}($params);

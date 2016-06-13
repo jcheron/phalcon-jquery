@@ -36,7 +36,7 @@ class PhBsRenderer {
 		$this->htmlElement->setProperty("name", $name);
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		return $this->htmlElement->compile($js, $view);
 	}
 

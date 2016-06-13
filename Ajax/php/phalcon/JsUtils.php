@@ -22,7 +22,7 @@ class JsUtils extends \Ajax\JsUtils implements InjectionAwareInterface{
 		return $this->_di->get("url")->get($url);
 	}
 
-	public function addViewElement($identifier,$content,$view){
+	public function addViewElement($identifier,$content,&$view){
 		$controls=$view->getVar("q");
 		if (isset($controls) === false) {
 			$controls=array ();
@@ -31,11 +31,11 @@ class JsUtils extends \Ajax\JsUtils implements InjectionAwareInterface{
 		$view->setVar("q", $controls);
 	}
 
-	public function createScriptVariable($view,$view_var, $output){
+	public function createScriptVariable(&$view,$view_var, $output){
 		$view->setVar($view_var,$output);
 	}
 
-	public function forward($initialController,$controller,$action){
+	public function forward($initialController,$controller,$action,$params=array()){
 		$dispatcher = $initialController->dispatcher;
 		$dispatcher->setControllerName($controller);
 		$dispatcher->setActionName($action);
@@ -46,8 +46,9 @@ class JsUtils extends \Ajax\JsUtils implements InjectionAwareInterface{
 		return $template;
 	}
 
-	public function renderContent($view, $controller, $action, $params=NULL) {
-		$template=$view->getRender($controller, $action, $params, function ($view) {
+	public function renderContent($initialControllerInstance,$viewName, $params=NULL) {
+		list($controller,$action)=\explode("@", $viewName);
+		$template=$initialControllerInstance->view->getRender($controller, $action, $params, function ($view) {
 			$view->setRenderLevel(View::LEVEL_ACTION_VIEW);
 		});
 		return $template;

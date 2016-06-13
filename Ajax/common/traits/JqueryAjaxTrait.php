@@ -4,6 +4,7 @@ namespace Ajax\common\traits;
 
 use Ajax\service\JString;
 use Ajax\service\PhalconUtils;
+use Symfony\Component\Config\Definition\Exception\Exception;
 trait JqueryAjaxTrait {
 
 	protected $ajaxLoader='<span></span><span></span><span></span><span></span><span></span>';
@@ -49,7 +50,7 @@ trait JqueryAjaxTrait {
 		$url=$this->_correctAjaxUrl($url);
 		$retour="url='".$url."';\n";
 		$slash="/";
-		if(PhalconUtils::endsWith($url, "/")===true)
+		if(JString::endswith($url, "/")===true)
 			$slash="";
 		if(JString::isNotNull($attr)){
 			if ($attr=="value")

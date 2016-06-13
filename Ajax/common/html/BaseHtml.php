@@ -76,7 +76,7 @@ abstract class BaseHtml extends BaseWidget {
 		return $this;
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		$result=$this->getTemplate($js);
 		foreach ( $this as $key => $value ) {
 			if (JString::startswith($key, "_") === false && $key !== "events") {

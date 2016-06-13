@@ -26,7 +26,7 @@ abstract class PhBsElement extends Element {
 		$this->renderer->setName($name);
 	}
 
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		return $this->renderer->compile($js, $view);
 	}
 

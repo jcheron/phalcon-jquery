@@ -26,6 +26,8 @@ abstract class JsUtils{
 
 	protected $js;
 	protected $cdns;
+	protected $params;
+	protected $injected;
 	/**
 	 *
 	 * @var JqueryUI
@@ -54,14 +56,16 @@ abstract class JsUtils{
 	}
 
 	public abstract function getUrl($url);
-	public abstract function addViewElement($identifier,$content,$view);
+	public abstract function addViewElement($identifier,$content,&$view);
+	public abstract function createScriptVariable(&$view,$view_var, $output);
 	/**
 	 * render the content of $controller::$action and set the response to the modal content
 	 * @param Controller $initialController
 	 * @param string $controller a Phalcon controller
 	 * @param string $action a Phalcon action
+	 * @param array $params
 	 */
-	public abstract function forward($initialController,$controller,$action);
+	public abstract function forward($initialController,$controller,$action,$params);
 	/**
 	 * render the content of an existing view : $viewName and set the response to the modal content
  	 * @param Controller $initialControllerInstance
@@ -159,19 +163,24 @@ abstract class JsUtils{
 		return $this->config;
 	}
 
-	public function __construct($params=array()) {
+	public function __construct($params=array(),$injected=NULL) {
 		$defaults=array (
 				'driver' => 'Jquery',
 				'debug' => true
 		);
 		foreach ( $defaults as $key => $val ) {
-			if (isset($params[$key])&&$params[$key]!=="") {
-				$defaults[$key]=$params[$key];
+			if (isset($params[$key])===false || $params[$key]==="") {
+				$params[$key]=$defaults[$key];
 			}
 		}
-		extract($defaults);
-		$this->js=new Jquery($defaults,$this);
+		$this->js=new Jquery($params,$this);
+
+		if(\array_key_exists("semantic", $params)){
+			$this->semantic(new Semantic());
+		}
 		$this->cdns=array ();
+		$this->params=$params;
+		$this->injected=$injected;
 	}
 
 	public function __set($property, $value){
@@ -188,6 +197,10 @@ abstract class JsUtils{
 			default:
 				throw new \Exception('Unknown property !');
 		}
+	}
+
+	public function getParam($key){
+		return $this->params[$key];
 	}
 
 	public function addToCompile($jsScript) {
@@ -222,7 +235,7 @@ abstract class JsUtils{
 	 * @param $script_tags
 	 * @return string
 	 */
-	public function compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
+	public function compile(&$view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		$bs=$this->_bootstrap;
 		if (isset($bs)&&isset($view)) {
 			$bs->compileHtml($this, $view);
@@ -414,4 +427,9 @@ abstract class JsUtils{
 		ksort($result);
 		return implode("\n", $result);
 	}
+
+	public function getInjected() {
+		return $this->injected;
+	}
+
 }

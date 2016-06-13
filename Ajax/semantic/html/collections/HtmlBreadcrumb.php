@@ -141,7 +141,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		if ($this->autoActive) {
 			$this->setActive();
 		}
@@ -165,8 +165,9 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 
 	public function _ajaxOn($operation, $event, $url, $responseElement="", $parameters=array()) {
 		foreach ( $this->content as $element ) {
-			if ($element->getProperty($this->attr) != NULL)
+			if ($element->getProperty($this->attr) != NULL){
 				$element->_ajaxOn($operation, $event, $url, $responseElement, $parameters);
+			}
 		}
 		return $this;
 	}

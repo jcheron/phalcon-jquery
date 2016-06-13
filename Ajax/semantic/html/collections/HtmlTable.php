@@ -253,7 +253,7 @@ class HtmlTable extends HtmlSemDoubleElement {
 	 *
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
 	 */
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		$this->content=JArray::sortAssociative($this->content, [ "thead","tbody","tfoot" ]);
 		if ($this->propertyContains("class", "sortable")) {
 			$this->addEvent("execute", "$('#" . $this->identifier . "').tablesort();");

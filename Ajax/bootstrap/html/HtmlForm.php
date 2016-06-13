@@ -23,7 +23,7 @@ class HtmlForm extends HtmlBsDoubleElement {
 	 * (non-PHPdoc)
 	 * @see \Ajax\bootstrap\html\base\BaseHtml::compile()
 	 */
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		if (isset($js)) {
 			$this->formElementsPrefix=$js->config()->getVar("formElementsPrefix");
 			foreach ( $this->futureElements as $futureElement ) {

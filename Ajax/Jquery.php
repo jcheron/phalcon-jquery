@@ -239,7 +239,7 @@ class Jquery {
 	 * @param boolean $script_tags
 	 * @return string
 	 */
-	public function _compile($view=NULL, $view_var='script_foot', $script_tags=TRUE) {
+	public function _compile(&$view=NULL, $view_var='script_foot', $script_tags=TRUE) {
 		// Components UI
 		$ui=$this->ui();
 		if ($this->ui()!=NULL) {
@@ -286,8 +286,9 @@ class Jquery {
 		}
 		$output=($script_tags===FALSE) ? $script : $this->inline($script);
 
-		if ($view!=NULL)
+		if ($view!==NULL){
 			$this->jsUtils->createScriptVariable($view,$view_var, $output);
+		}
 		return $output;
 	}
 

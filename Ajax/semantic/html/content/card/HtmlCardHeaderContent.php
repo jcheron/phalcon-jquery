@@ -34,7 +34,7 @@ class HtmlCardHeaderContent extends HtmlCardContent {
 	 *
 	 * @see \Ajax\semantic\html\base\HtmlSemDoubleElement::compile()
 	 */
-	public function compile(JsUtils $js=NULL, $view=NULL) {
+	public function compile(JsUtils $js=NULL, &$view=NULL) {
 		$this->content=JArray::sortAssociative($this->content, [ "image","header","meta","description" ]);
 		return parent::compile($js, $view);
 	}
