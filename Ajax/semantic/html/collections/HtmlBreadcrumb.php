@@ -31,7 +31,7 @@ class HtmlBreadcrumb extends HtmlSemNavElement {
 	 *
 	 * @var boolean if set to true, the path of the elements is absolute
 	 */
-	protected $absolutePaths;
+	protected $absolutePaths=true;
 
 	/**
 	 *

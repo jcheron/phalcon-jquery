@@ -61,6 +61,11 @@ class HtmlDropdown extends HtmlSemDoubleElement {
 
 	protected function beforeAddItem($item,$value=NULL,$image=NULL){
 		$itemO=$item;
+		if(\is_array($item)){
+			$value=JArray::getValue($item, "value", 1);
+			$image=JArray::getValue($item, "image", 2);
+			$item=JArray::getValue($item, "item", 0);
+		}
 		if(!$item instanceof HtmlDropdownItem){
 			$itemO=new HtmlDropdownItem("dd-item-".$this->identifier."-".\sizeof($this->items),$item,$value,$image);
 		}elseif($itemO instanceof HtmlDropdownItem){

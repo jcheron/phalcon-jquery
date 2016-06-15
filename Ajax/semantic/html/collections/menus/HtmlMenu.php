@@ -14,6 +14,7 @@ use Ajax\semantic\html\modules\HtmlPopup;
 use Ajax\semantic\html\elements\HtmlIcon;
 use Ajax\semantic\html\elements\html5\HtmlLink;
 use Ajax\semantic\html\elements\HtmlInput;
+use Ajax\semantic\html\elements\HtmlButton;
 
 /**
  * Semantic Menu component
@@ -47,7 +48,7 @@ class HtmlMenu extends HtmlSemCollection {
 	}
 
 	private function getItemToInsert($item) {
-		if ($item instanceof HtmlInput || $item instanceof HtmlImg || $item instanceof HtmlIcon) {
+		if ($item instanceof HtmlInput || $item instanceof HtmlImg || $item instanceof HtmlIcon || $item instanceof HtmlButton || ($item instanceof HtmlDropdown && $this->propertyContains("class", "vertical")===false)) {
 			$itemO=new HtmlSemDoubleElement("item-" . $this->identifier, "div", "");
 			$itemO->setContent($item);
 			$item=$itemO;
