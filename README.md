@@ -10,6 +10,7 @@
 <a href="http://phalconist.com/jcheron/phalcon-jquery" target="_blank">
 ![Phalcon-jQuery](http://phalconist.com/jcheron/phalcon-jquery/default.svg)
 </a>
+[![codecov](https://codecov.io/gh/jcheron/phalcon-jquery-tests-suite/branch/master/graph/badge.svg)](https://codecov.io/gh/jcheron/phalcon-jquery-tests-suite)
 
 ##What's new ?
 Phalcon-JQuery becomes phpMv-UI and supports several php frameworks.
