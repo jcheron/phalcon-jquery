@@ -12,7 +12,7 @@
 </a>
 [![codecov](https://codecov.io/gh/jcheron/phalcon-jquery-tests-suite/branch/master/graph/badge.svg)](https://codecov.io/gh/jcheron/phalcon-jquery-tests-suite)
 
-##What's new ?
+## What's new ?
 Phalcon-JQuery becomes phpMv-UI and supports several php frameworks.
 
 see https://github.com/phpMv/phpMv-UI
